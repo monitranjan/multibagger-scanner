@@ -18,6 +18,10 @@ import time
 import numpy as np
 import pandas as pd
 import yfinance as yf
+try:
+    yf.set_tz_cache_location("logs/yfinance_cache")
+except Exception:
+    pass
 import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook, load_workbook

@@ -34,6 +34,10 @@ import logging
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import yfinance as yf
+try:
+    yf.set_tz_cache_location("logs/yfinance_cache")
+except Exception:
+    pass
 
 # ─── LOGGING ──────────────────────────────────────────────────────────────────
 logging.basicConfig(
