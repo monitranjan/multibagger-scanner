@@ -8,6 +8,19 @@ Capital: ₹10 lakhs | Max positions: 20-25 | Exchange: NSE + BSE
 """
 
 import os
+def load_dotenv():
+    """Load variables from .env file into os.environ if it exists."""
+    from pathlib import Path
+    env_path = Path(".env")
+    if env_path.exists():
+        with open(env_path, "r") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, val = line.split("=", 1)
+                    os.environ[key.strip()] = val.strip().strip('"').strip("'")
+
+load_dotenv()
 import requests
 import pandas as pd
 import numpy as np
@@ -412,16 +425,24 @@ def send_telegram(plain: str):
         log.warning("Telegram not configured — skipping")
         return
     try:
+        # Support multiple comma-separated Telegram Chat IDs
+        chat_ids = [c.strip() for c in str(TELEGRAM_CHAT).split(",") if c.strip()]
+        if not chat_ids:
+            log.warning("No valid Telegram Chat IDs found")
+            return
+
         # Telegram has 4096 char limit — split if needed
         chunks = [plain[i:i+4000] for i in range(0, len(plain), 4000)]
-        for chunk in chunks:
-            r = requests.post(
-                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                json={"chat_id": TELEGRAM_CHAT, "text": chunk, "parse_mode": ""},
-                timeout=15,
-            )
-            r.raise_for_status()
-        log.info("Telegram sent ✅")
+        for chat_id in chat_ids:
+            log.info(f"Sending Telegram alert to chat: {chat_id}...")
+            for chunk in chunks:
+                r = requests.post(
+                    f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                    json={"chat_id": chat_id, "text": chunk, "parse_mode": ""},
+                    timeout=15,
+                )
+                r.raise_for_status()
+        log.info("Telegram sent to all chat IDs ✅")
     except Exception as e:
         log.error(f"Telegram failed: {e}")
 

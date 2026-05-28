@@ -29,6 +29,22 @@ import sqlite3
 
 
 
+import os
+def load_dotenv():
+    """Load variables from .env file into os.environ if it exists."""
+    from pathlib import Path
+    env_path = Path(".env")
+    if env_path.exists():
+        with open(env_path, "r") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, val = line.split("=", 1)
+                    os.environ[key.strip()] = val.strip().strip('"').strip("'")
+
+load_dotenv()
+
+
 DEFAULT_TEMPLATE = (
     Path("SOIC Ranking Sheet.xlsx")
     if Path("SOIC Ranking Sheet.xlsx").exists()
@@ -2427,24 +2443,30 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         
     # Send Telegram Document
     if tg_token and tg_chat:
-        print("📨 Sending Excel sheet via Telegram...")
-        url = f"https://api.telegram.org/bot{tg_token}/sendDocument"
-        try:
-            with open(str(excel_path), "rb") as f:
-                files = {"document": f}
-                data = {
-                    "chat_id": tg_chat,
-                    "caption": f"🏆 *Daily Multibagger Watchlist — {today_str}*\n\n" \
-                               f"• Scored & Ranked: {universe_len} companies\n" \
-                               f"• Database: Updated and synced\n\n" \
-                               f"Your daily workbook is attached above! 📈",
-                    "parse_mode": "Markdown"
-                }
-                r = requests.post(url, data=data, files=files, timeout=30)
-                r.raise_for_status()
-            print("✅ Telegram document sent successfully.")
-        except Exception as e:
-            print(f"❌ Telegram document delivery failed: {e}")
+        # Support multiple comma-separated Telegram Chat IDs
+        tg_chat_ids = [c.strip() for c in str(tg_chat).split(",") if c.strip()]
+        if not tg_chat_ids:
+            print("⚠️ No valid Telegram Chat IDs found inside TELEGRAM_CHAT_ID.")
+        else:
+            print(f"📨 Sending Excel sheet via Telegram to {len(tg_chat_ids)} chats...")
+            url = f"https://api.telegram.org/bot{tg_token}/sendDocument"
+            for chat_id in tg_chat_ids:
+                try:
+                    with open(str(excel_path), "rb") as f:
+                        files = {"document": f}
+                        data = {
+                            "chat_id": chat_id,
+                            "caption": f"🏆 *Daily Multibagger Watchlist — {today_str}*\n\n" \
+                                       f"• Scored & Ranked: {universe_len} companies\n" \
+                                       f"• Database: Updated and synced\n\n" \
+                                       f"Your daily workbook is attached above! 📈",
+                            "parse_mode": "Markdown"
+                        }
+                        r = requests.post(url, data=data, files=files, timeout=30)
+                        r.raise_for_status()
+                    print(f"✅ Telegram document sent successfully to chat: {chat_id}.")
+                except Exception as e:
+                    print(f"❌ Telegram document delivery failed for chat {chat_id}: {e}")
     else:
         print("ℹ️ Telegram credentials not configured in environment — skipping telegram alert.")
 

@@ -31,9 +31,11 @@ venv.bak/
 .env.test.local
 .env.production.local
 
-# Daily generated Watchlist Excel workbooks (saves repository storage space)
+# Daily generated Watchlist Excel workbooks & spreadsheets (saves repository storage space)
 outputs/
 *.xlsx
+*.csv
+scan_match_report.md
 # But DO NOT ignore your master ranking template!
 !SOIC Ranking Sheet.xlsx
 

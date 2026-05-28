@@ -123,6 +123,17 @@ We have successfully rebranded the entire Excel workbook and mathematical pipeli
 2. **Confluence Sorting**:
    * **Primary**: Sorted by `Common Count` descending (highest confluence first).
    * **Secondary**: Sorted by `Total Score` descending (highest SOIC quality score first).
+
+---
+
+## 🛠️ Local Testing & Telegram Diagnostic Suite
+
+We have added support to run and verify your Telegram Bot, Twilio, and Email alerts locally before syncing them to your automated GitHub repository cloud server!
+
+1. **Integrated Native `.env` Loader**: Enabled native, zero-dependency environment variable loading inside **both** `scanner.py` and `monit_ranker.py`. They will now automatically read credentials from a local `.env` file without throwing import errors!
+2. **Created `.env` Template**: Created a standard `.env` configuration file at your workspace root with clear placeholders for your credentials.
+3. **Created `test_telegram.py` Diagnostic Tool**: Added a robust, executable test script `test_telegram.py` at your workspace root. Run it locally to instantly verify if your bot credentials are valid and troubleshoot common errors like invalid tokens, incorrect usernames, or missing `/start` configurations!
+
    
 
 
