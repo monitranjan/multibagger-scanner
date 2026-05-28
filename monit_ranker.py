@@ -2520,10 +2520,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                 msg["From"] = gmail_user
                 msg["To"] = ", ".join(recipients)
                 
-                alternative = MIMEMultipart("alternative")
-                alternative.attach(MIMEText(plain_text, "plain"))
-                alternative.attach(MIMEText(html_text, "html"))
-                msg.attach(alternative)
+                msg.attach(MIMEText(html_text, "html"))
                 
                 # Attach compiled Excel workbook
                 with open(str(excel_path), "rb") as f:
