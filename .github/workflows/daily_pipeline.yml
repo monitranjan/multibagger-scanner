@@ -53,4 +53,4 @@ jobs:
         # Force add database file
         git add logs/backtest.db
         # Commit only if changes exist
-        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync backtest database [skip ci]" && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync backtest database [skip ci]" && git pull --rebase origin main && git push)
