@@ -1,0 +1,49 @@
+# ==========================================
+# Git Ignore Configuration - Monit Momentum
+# ==========================================
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Python compiled bytecode & runtime caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.mypy_cache/
+
+# Environment secrets (keeps your tokens/cookies safe from public exposure!)
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Daily generated Watchlist Excel workbooks (saves repository storage space)
+outputs/
+*.xlsx
+# But DO NOT ignore your master ranking template!
+!SOIC Ranking Sheet.xlsx
+
+# Project log files & temporary runs
+logs/*
+# But DO NOT ignore your persistent SQLite backtest database! (Required for Cloud Sync)
+!logs/backtest.db
+
+# Temporary browser scrape cache & IDE files
+.idea/
+.vscode/
+*.log
+scan_matched_data.json
