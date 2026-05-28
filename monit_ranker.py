@@ -2375,7 +2375,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     from email.mime.application import MIMEApplication
     from datetime import date
     
-    # Fetch credentials from environment
+    # 1. Fetch credentials from environment
     gmail_user = os.environ.get("GMAIL_USER", "")
     gmail_app_pass = os.environ.get("GMAIL_APP_PASS", "")
     alert_email = os.environ.get("ALERT_EMAIL", gmail_user)
@@ -2386,36 +2386,135 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     today_str = date.today().strftime("%d %b %Y")
     filename = excel_path.name
     
-    plain_text = f"🏆 Daily Multibagger Research Sheet — {today_str}\n\n" \
-                 f"The automated ranking pipeline has completed successfully.\n" \
-                 f"• Scored & Ranked: {universe_len} companies\n" \
-                 f"• Local SQLite database updated and synced.\n\n" \
-                 f"Your daily watchlist Excel workbook is attached to this message.\n\n" \
-                 f"Best regards,\nAntigravity Research Engine"
-                 
-    html_text = f"""
-    <html><body style="font-family:sans-serif;max-width:600px;margin:auto">
-    <h2 style="color:#1B365D">🏆 Daily Multibagger Research Sheet — {today_str}</h2>
-    <p>The automated ranking pipeline has completed successfully today.</p>
-    <ul>
-      <li><b>Scored & Ranked:</b> {universe_len} companies</li>
-      <li><b>Local Database:</b> Updated and synced (screener history ledger + rollup analytics)</li>
-    </ul>
-    <p>Your premium watchlist Excel workbook <b>{filename}</b> has been compiled and is attached below.</p>
-    <br>
-    <p style="color:#555;font-size:12px">⚠️ This is an automated scan alert. Always verify charts on TradingView before investing.</p>
-    </body></html>
-    """
-    
-    # Send Email with Attachment
+    # 2. Attempt to load today's screener signals from the CSV logged by scanner.py
+    signals_file = Path(f"logs/signals_{date.today()}.csv")
+    signals_df = pd.DataFrame()
+    if signals_file.exists():
+        try:
+            signals_df = pd.read_csv(signals_file)
+        except Exception:
+            pass
+
+    has_signals = not signals_df.empty and len(signals_df) > 0
+    ENTRY_EMOJI = {"EMA Crossover": "🟢", "52W Breakout": "🟡", "ATH Momentum": "🔵"}
+    TOTAL_CAPITAL = 1_000_000
+
+    # 3. Format unified Plain Text and HTML signal summaries
+    if has_signals:
+        n_cross = len(signals_df[signals_df["entry"] == "EMA Crossover"])
+        n_new   = len(signals_df[signals_df["entry"] == "52W Breakout"])
+        n_run   = len(signals_df[signals_df["entry"] == "ATH Momentum"])
+        total_deployed = signals_df["alloc_inr"].sum()
+        
+        # Build plain text watchlist lines
+        sig_lines = []
+        for _, row in signals_df.iterrows():
+            e = ENTRY_EMOJI.get(row["entry"], "⚪")
+            sig_lines.append(
+                f"{e} {row['ticker']:12s} | ₹{row['close']:>8.2f} | "
+                f"RSI {row['rsi']:4.1f} | {row['pct_ath']:4.1f}% from ATH | "
+                f"{row['entry']:13s} | Alloc ₹{row['alloc_inr']:>7,} ({row['qty']} qty)"
+            )
+        signals_plain_list = "\n".join(sig_lines)
+        
+        plain_text = f"🏆 Daily Monit Multibagger Watchlist — {today_str}\n\n" \
+                     f"The automated ranking pipeline has completed successfully.\n" \
+                     f"• Scored & Ranked: {universe_len} companies\n" \
+                     f"• Local SQLite database updated and synced.\n\n" \
+                     f"📊 Today's Screener Signals:\n" \
+                     f"🟢 EMA Crossover: {n_cross}  🟡 52W Breakout: {n_new}  🔵 ATH Momentum: {n_run}\n" \
+                     f"Capital deployed: ₹{total_deployed:,.0f} / ₹{TOTAL_CAPITAL:,.0f}\n" \
+                     f"────────────────────────────────────────────────────────────\n" \
+                     f"{signals_plain_list}\n" \
+                     f"────────────────────────────────────────────────────────────\n\n" \
+                     f"Your premium daily Excel workbook is attached to this email.\n\n" \
+                     f"Best regards,\nAntigravity Research Engine"
+
+        # Build HTML table for Gmail
+        rows_html = ""
+        for _, row in signals_df.iterrows():
+            e = ENTRY_EMOJI.get(row["entry"], "⚪")
+            bg = {"EMA Crossover": "#e6ffe6", "52W Breakout": "#fffbe6", "ATH Momentum": "#e6f0ff"}.get(row["entry"], "#fff")
+            rows_html += f"""
+            <tr style="background:{bg}">
+              <td style="padding:8px;font-weight:bold">{e} {row['ticker']}</td>
+              <td style="padding:8px;text-align:right">₹{row['close']:,.2f}</td>
+              <td style="padding:8px;text-align:right">{row['rsi']}</td>
+              <td style="padding:8px;text-align:right">{row['pct_ath']}%</td>
+              <td style="padding:8px;font-weight:bold;color:{'#1a7a1a' if row['entry']=='EMA Crossover' else '#7a6a00' if row['entry']=='52W Breakout' else '#003e7a'}">{row['entry']}</td>
+              <td style="padding:8px;text-align:right">₹{row['alloc_inr']:,}</td>
+              <td style="padding:8px;text-align:right">{row['qty']}</td>
+            </tr>"""
+
+        html_text = f"""
+        <html><body style="font-family:sans-serif;max-width:850px;margin:auto">
+        <h2 style="color:#1B365D">🏆 Daily Monit Multibagger Watchlist — {today_str}</h2>
+        <p>The automated ranking pipeline has completed successfully today.</p>
+        <ul>
+          <li><b>Scored & Ranked:</b> {universe_len} companies</li>
+          <li><b>Local Database:</b> Updated and synced (screener history ledger + rollup analytics)</li>
+        </ul>
+        <br>
+        <h3 style="color:#1a1a2e">📊 Screener Signals Generated Today:</h3>
+        <p>
+          <b style="color:#1a7a1a">🟢 EMA Crossover: {n_cross}</b> &nbsp;
+          <b style="color:#7a6a00">🟡 52W Breakout: {n_new}</b> &nbsp;
+          <b style="color:#003e7a">🔵 ATH Momentum: {n_run}</b> &nbsp;&nbsp;|&nbsp;&nbsp;
+          Capital deployed: <b>₹{total_deployed:,.0f}</b> of ₹{TOTAL_CAPITAL:,.0f}
+        </p>
+        <table border="1" cellspacing="0" style="border-collapse:collapse;width:100%">
+          <thead style="background:#1a1a2e;color:white">
+            <tr>
+              <th style="padding:8px">Stock</th>
+              <th style="padding:8px">Close</th>
+              <th style="padding:8px">RSI</th>
+              <th style="padding:8px">% from ATH</th>
+              <th style="padding:8px">Entry</th>
+              <th style="padding:8px">Alloc (₹)</th>
+              <th style="padding:8px">Qty</th>
+            </tr>
+          </thead>
+          <tbody>{rows_html}</tbody>
+        </table>
+        <br>
+        <p>Your premium daily watchlist Excel workbook <b>{filename}</b> has been compiled and is attached below.</p>
+        <br>
+        <p style="color:#555;font-size:12px">⚠️ This is an automated scan alert. Always verify charts on TradingView before investing.</p>
+        </body></html>
+        """
+    else:
+        plain_text = f"🏆 Daily Monit Multibagger Watchlist — {today_str}\n\n" \
+                     f"The automated ranking pipeline has completed successfully.\n" \
+                     f"• Scored & Ranked: {universe_len} companies\n" \
+                     f"• Local SQLite database updated and synced.\n\n" \
+                     f"ℹ️ No active screener signals were generated by the Pine Script engine today.\n\n" \
+                     f"Your daily premium Excel workbook is attached to this email.\n\n" \
+                     f"Best regards,\nAntigravity Research Engine"
+                     
+        html_text = f"""
+        <html><body style="font-family:sans-serif;max-width:600px;margin:auto">
+        <h2 style="color:#1B365D">🏆 Daily Monit Multibagger Watchlist — {today_str}</h2>
+        <p>The automated ranking pipeline has completed successfully today.</p>
+        <ul>
+          <li><b>Scored & Ranked:</b> {universe_len} companies</li>
+          <li><b>Local Database:</b> Updated and synced (screener history ledger + rollup analytics)</li>
+        </ul>
+        <br>
+        <p><b>ℹ️ No active screener signals were generated by the Pine Script engine today.</b></p>
+        <p>Your premium watchlist Excel workbook <b>{filename}</b> has been compiled and is attached below.</p>
+        <br>
+        <p style="color:#555;font-size:12px">⚠️ This is an automated scan alert. Always verify charts on TradingView before investing.</p>
+        </body></html>
+        """
+
+    # 4. Send the Unified Email with Workbook Attached
     if gmail_user and gmail_app_pass:
         try:
-            # Support multiple comma-separated emails
             recipients = [e.strip() for e in alert_email.split(",") if e.strip()]
             if not recipients:
                 print("⚠️ No valid email recipients found inside ALERT_EMAIL.")
             else:
-                print(f"📧 Sending Excel sheet via Email to: {', '.join(recipients)}...")
+                print(f"📧 Sending Unified Daily Watchlist Email to: {', '.join(recipients)}...")
                 msg = MIMEMultipart("mixed")
                 msg["Subject"] = f"🏆 Daily Monit Multibagger Watchlist — {today_str}"
                 msg["From"] = gmail_user
@@ -2426,7 +2525,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                 alternative.attach(MIMEText(html_text, "html"))
                 msg.attach(alternative)
                 
-                # Attach Excel
+                # Attach compiled Excel workbook
                 with open(str(excel_path), "rb") as f:
                     part = MIMEApplication(f.read(), Name=filename)
                     part['Content-Disposition'] = f'attachment; filename="{filename}"'
@@ -2435,40 +2534,90 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                 with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
                     s.login(gmail_user, gmail_app_pass)
                     s.sendmail(gmail_user, recipients, msg.as_string())
-                print("✅ Email sent successfully.")
+                print("✅ Unified Email sent successfully.")
         except Exception as e:
             print(f"❌ Email delivery failed: {e}")
     else:
         print("ℹ️ Email credentials not configured in environment — skipping email alert.")
         
-    # Send Telegram Document
+    # 5. Send Unified Telegram Messages
     if tg_token and tg_chat:
-        # Support multiple comma-separated Telegram Chat IDs
         tg_chat_ids = [c.strip() for c in str(tg_chat).split(",") if c.strip()]
         if not tg_chat_ids:
             print("⚠️ No valid Telegram Chat IDs found inside TELEGRAM_CHAT_ID.")
         else:
-            print(f"📨 Sending Excel sheet via Telegram to {len(tg_chat_ids)} chats...")
-            url = f"https://api.telegram.org/bot{tg_token}/sendDocument"
+            print(f"📨 Sending Workbook & Alerts to {len(tg_chat_ids)} Telegram chat(s)...")
+            doc_url = f"https://api.telegram.org/bot{tg_token}/sendDocument"
+            msg_url = f"https://api.telegram.org/bot{tg_token}/sendMessage"
+            
             for chat_id in tg_chat_ids:
                 try:
+                    # A. Send Workbook Document first
                     with open(str(excel_path), "rb") as f:
                         files = {"document": f}
                         data = {
                             "chat_id": chat_id,
-                            "caption": f"🏆 *Daily Multibagger Watchlist — {today_str}*\n\n" \
+                            "caption": f"🏆 *Daily Monit Multibagger Watchlist — {today_str}*\n\n" \
                                        f"• Scored & Ranked: {universe_len} companies\n" \
-                                       f"• Database: Updated and synced\n\n" \
-                                       f"Your daily workbook is attached above! 📈",
+                                       f"• Database: Updated & Synced\n\n" \
+                                       f"Your daily watchlist workbook is attached above! 📈",
                             "parse_mode": "Markdown"
                         }
-                        r = requests.post(url, data=data, files=files, timeout=30)
+                        r = requests.post(doc_url, data=data, files=files, timeout=30)
                         r.raise_for_status()
-                    print(f"✅ Telegram document sent successfully to chat: {chat_id}.")
+                    print(f"   ✅ Workbook successfully delivered to chat: {chat_id}")
+                    
+                    # B. Send screened signals list immediately after in the same chat
+                    if has_signals:
+                        chunks = [plain_text[i:i+4000] for i in range(0, len(plain_text), 4000)]
+                        for chunk in chunks:
+                            r = requests.post(
+                                msg_url,
+                                json={"chat_id": chat_id, "text": chunk, "parse_mode": ""},
+                                timeout=15
+                            )
+                            r.raise_for_status()
+                        print(f"   ✅ Screener signals list sent to chat: {chat_id}")
                 except Exception as e:
-                    print(f"❌ Telegram document delivery failed for chat {chat_id}: {e}")
+                    print(f"   ❌ Telegram delivery failed for chat {chat_id}: {e}")
     else:
         print("ℹ️ Telegram credentials not configured in environment — skipping telegram alert.")
+
+    # 6. Send Twilio WhatsApp Alert
+    twilio_sid = os.environ.get("TWILIO_SID", "")
+    twilio_token = os.environ.get("TWILIO_TOKEN", "")
+    twilio_from = os.environ.get("TWILIO_WHATSAPP_FROM", "whatsapp:+14155238886")
+    twilio_to = os.environ.get("TWILIO_WHATSAPP_TO", "")
+
+    if twilio_sid and twilio_token and twilio_to:
+        print("📨 Sending WhatsApp alert via Twilio...")
+        try:
+            from twilio.rest import Client
+            client = Client(twilio_sid, twilio_token)
+            wa_text = f"🏆 *Daily Monit Watchlist — {today_str}*\n\n" \
+                      f"• Scored & Ranked: {universe_len} companies\n" \
+                      f"• Database: Updated & Synced\n\n"
+            if has_signals:
+                n_cross = len(signals_df[signals_df["entry"] == "EMA Crossover"])
+                n_new   = len(signals_df[signals_df["entry"] == "52W Breakout"])
+                n_run   = len(signals_df[signals_df["entry"] == "ATH Momentum"])
+                wa_text += f"📊 *Signals Today:*\n" \
+                           f"🟢 EMA Crossover: {n_cross}\n" \
+                           f"🟡 52W Breakout: {n_new}\n" \
+                           f"🔵 ATH Momentum: {n_run}\n\n" \
+                           f"Your premium daily Excel workbook has been delivered to your Email and Telegram! 🚀"
+            else:
+                wa_text += "ℹ️ No active screener signals were generated today.\n\n" \
+                           "Your premium daily Excel workbook has been delivered to your Email and Telegram!"
+            
+            client.messages.create(
+                body=wa_text,
+                from_=twilio_from,
+                to=twilio_to
+            )
+            print("✅ WhatsApp alert sent successfully.")
+        except Exception as e:
+            print(f"❌ WhatsApp delivery failed: {e}")
 
 
 def main() -> None:

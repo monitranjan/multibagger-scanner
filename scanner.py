@@ -495,10 +495,10 @@ def main():
     plain, html = format_report(results_df)
     print("\n" + plain)
 
-    # 5. Send alerts
-    send_email(plain, html)
-    send_telegram(plain)
-    send_whatsapp(plain)
+    # 5. Send alerts (Disabled here to prevent duplicate alerts - they are combined at the end of the pipeline inside monit_ranker.py)
+    # send_email(plain, html)
+    # send_telegram(plain)
+    # send_whatsapp(plain)
 
     log.info("Done. ✅")
 
