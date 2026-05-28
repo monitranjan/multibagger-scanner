@@ -2393,28 +2393,33 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     
     # Send Email with Attachment
     if gmail_user and gmail_app_pass:
-        print(f"📧 Sending Excel sheet via Email to {alert_email}...")
         try:
-            msg = MIMEMultipart("mixed")
-            msg["Subject"] = f"🏆 Daily Multibagger Watchlist — {today_str}"
-            msg["From"] = gmail_user
-            msg["To"] = alert_email
-            
-            alternative = MIMEMultipart("alternative")
-            alternative.attach(MIMEText(plain_text, "plain"))
-            alternative.attach(MIMEText(html_text, "html"))
-            msg.attach(alternative)
-            
-            # Attach Excel
-            with open(str(excel_path), "rb") as f:
-                part = MIMEApplication(f.read(), Name=filename)
-                part['Content-Disposition'] = f'attachment; filename="{filename}"'
-                msg.attach(part)
+            # Support multiple comma-separated emails
+            recipients = [e.strip() for e in alert_email.split(",") if e.strip()]
+            if not recipients:
+                print("⚠️ No valid email recipients found inside ALERT_EMAIL.")
+            else:
+                print(f"📧 Sending Excel sheet via Email to: {', '.join(recipients)}...")
+                msg = MIMEMultipart("mixed")
+                msg["Subject"] = f"🏆 Daily Monit Multibagger Watchlist — {today_str}"
+                msg["From"] = gmail_user
+                msg["To"] = ", ".join(recipients)
                 
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
-                s.login(gmail_user, gmail_app_pass)
-                s.send_message(msg)
-            print("✅ Email sent successfully.")
+                alternative = MIMEMultipart("alternative")
+                alternative.attach(MIMEText(plain_text, "plain"))
+                alternative.attach(MIMEText(html_text, "html"))
+                msg.attach(alternative)
+                
+                # Attach Excel
+                with open(str(excel_path), "rb") as f:
+                    part = MIMEApplication(f.read(), Name=filename)
+                    part['Content-Disposition'] = f'attachment; filename="{filename}"'
+                    msg.attach(part)
+                    
+                with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
+                    s.login(gmail_user, gmail_app_pass)
+                    s.sendmail(gmail_user, recipients, msg.as_string())
+                print("✅ Email sent successfully.")
         except Exception as e:
             print(f"❌ Email delivery failed: {e}")
     else:

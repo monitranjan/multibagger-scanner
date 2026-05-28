@@ -387,15 +387,21 @@ def send_email(plain: str, html: str):
         log.warning("Email not configured — skipping")
         return
     try:
+        # Support multiple comma-separated emails
+        recipients = [e.strip() for e in ALERT_EMAIL.split(",") if e.strip()]
+        if not recipients:
+            log.warning("No valid email recipients found")
+            return
+
         msg = MIMEMultipart("alternative")
         msg["Subject"] = f"📊 Multibagger Signals — {date.today().strftime('%d %b %Y')}"
         msg["From"]    = GMAIL_USER
-        msg["To"]      = ALERT_EMAIL
+        msg["To"]      = ", ".join(recipients)
         msg.attach(MIMEText(plain, "plain"))
         msg.attach(MIMEText(html,  "html"))
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(GMAIL_USER, GMAIL_APP_PASS)
-            s.send_message(msg)
+            s.sendmail(GMAIL_USER, recipients, msg.as_string())
         log.info("Email sent ✅")
     except Exception as e:
         log.error(f"Email failed: {e}")
