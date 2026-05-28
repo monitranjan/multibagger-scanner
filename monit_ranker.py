@@ -1806,13 +1806,14 @@ def write_readme(ws) -> None:
         ws.cell(3, col).border = Border(bottom=Side(style="medium", color="1B365D"))
         
     # Quick Navigation / How to use section
-    ws.cell(5, 1, "📖 QUICK REFERENCE GUIDE").font = Font(name="Segoe UI", size=12, bold=True, color="1B365D")
+    ws.cell(5, 1, "📖 QUICK REFERENCE RUNBOOK & SYSTEM FLOW").font = Font(name="Segoe UI", size=12, bold=True, color="1B365D")
     
     how_to_rows = [
-        ("Step 1: Check Leaderboard (Tab 2)", "This dashboard compiles the top momentum compounds in the market using historical scanner persistence."),
-        ("Step 2: Fundamental Checklist", "Navigate to 'Monit Non Financial' or 'Monit Banks NBFC' to fill out qualitative fundamental metrics for target companies."),
-        ("Step 3: Analyze Confluence Overlap", "Review 'Confluence Overlap' which highlights high-conviction companies appearing across multiple stock scan strategies."),
-        ("Note on Judgment", "While Chartink metadata and technicals are fully automated, qualitative checklist items still require your analyst discretion."),
+        ("Step 1: Reference this Read Me", "Understand terms, formulas, and underlying investment theses directly in this glossary dashboard."),
+        ("Step 2: Check Leaderboard Tab", "Locate long-term compounders with high Persistence Scores and streaks (institutional accumulation footprint)."),
+        ("Step 3: Analyze Confluence Overlap", "Review the ultimate high-conviction candidates intersecting our scanner signals and StockScans overlaps."),
+        ("Step 4: Scoring Monit Tabs", "Open 'Monit Non Financial' or 'Monit Banks NBFC' to fill out your qualitative checks (Tailwinds, Promoters, Triggers)."),
+        ("Step 5: Track Scan Matches", "Confirm consensus using 'Scan Match' tabs which score companies by total appearances across allStockScans."),
     ]
     
     r = 6
@@ -1827,11 +1828,11 @@ def write_readme(ws) -> None:
     r += 2
     
     # ─── THE NEW COMPREHENSIVE GLOSSARY & METHODOLOGY SECTION ───
-    ws.cell(r, 1, "📊 RESEARCH ENGINE GLOSSARY & METHODOLOGY").font = Font(name="Segoe UI", size=14, bold=True, color="1B365D")
+    ws.cell(r, 1, "📊 RESEARCH ENGINE GLOSSARY, METRICS & THESES").font = Font(name="Segoe UI", size=14, bold=True, color="1B365D")
     r += 2
     
     # Glossary Headers
-    headers = ["Metric Term", "Practical Meaning & Strategic Utility", "Automated DB Query / Logic"]
+    headers = ["Metric Term / Tab Name", "Practical Meaning & Underlying Investment Thesis", "Automated DB Query / Logic & Excel Formula"]
     for c_idx, h in enumerate(headers, 1):
         cell = ws.cell(r, c_idx, h)
         cell.font = Font(name="Segoe UI", size=11, bold=True, color="FFFFFF")
@@ -1844,29 +1845,59 @@ def write_readme(ws) -> None:
     
     glossary_data = [
         (
-            "Persistence Score (30D)",
-            "The count of times a stock has appeared in the daily momentum screener within a rolling 30-day window. Represents persistent institutional accumulation/buying pressure. High scores indicate high-conviction momentum compounding rather than random one-day spikes.",
-            "Queries the local SQLite database (`logs/backtest.db`) to sum the total number of distinct dates the ticker symbol appeared on the screener during the last 30 active trading days.\nFormula: COUNT(DISTINCT date)"
+            "EMA Crossover\n(Birth of a Trend)",
+            "An entry signal triggered when price crosses above its 200-day EMA.\n\n[THESIS]: Represents the birth of a new long-term uptrend. Buying here provides maximum asymmetrical risk-to-reward because the entry is close to the logical stop-loss (the EMA itself).",
+            "pine_signal == 'EMA Crossover'\nSized at 7% capital allocation (~₹70,000 per position)."
         ),
         (
-            "Consecutive Streak Days",
-            "The number of consecutive trading days that the stock has appeared in the daily momentum scanner up to the most recent run date. Helps detect when a stock is in an extremely strong, uninterrupted runaway trend.",
-            "Checks the sorted chronological sequence of scanner dates in SQLite starting from the most recent run date and counting backward. The streak increments for every contiguous date the ticker appears, and terminates at the first missing date."
+            "52W Breakout\n(Momentum Confirmation)",
+            "A momentum signal triggered when a stock above its 200-day EMA breaks out to fresh 52-week highs.\n\n[THESIS]: Represents a confirmed breakout where institutional buying pressure clears all historical supply. High momentum outperformance.",
+            "pine_signal == '52W Breakout'\nSized at 5% capital allocation (~₹50,000 per position)."
         ),
         (
-            "Sector Momentum Velocity WoW",
-            "Measures early sector rotation by comparing the volume of signals in a sector over the last 5 trading days (Week 1) against the previous 5 trading days (Week 2). A positive surge warns you of capital flowing aggressively into a specific industry.",
+            "ATH Momentum\n(Runaway Leader)",
+            "An established trend signal triggered when the price is actively running near its All-Time Highs.\n\n[THESIS]: Identifies the strongest runaway leaders in the market. Ideal for high-velocity momentum trading where price experiences immediate continuation.",
+            "pine_signal == 'ATH Momentum'\nSized at 4% capital allocation (~₹40,000 per position)."
+        ),
+        (
+            "Persistence Score (30D)\n(Accumulation Footprint)",
+            "The count of times a stock has appeared in the daily screener during the last 30 active trading days.\n\n[THESIS]: Represents persistent institutional buying. Random spikes appear 1-2 times, but compounders appear 10+ times as institutions accumulate.",
+            "Queries the local SQLite database (`logs/backtest.db`) to sum the total number of distinct dates the ticker appeared on the screener during the last 30 active trading days.\nFormula: COUNT(DISTINCT date)"
+        ),
+        (
+            "Consecutive Streak Days\n(Uninterrupted Trend)",
+            "The number of consecutive trading days that the stock has appeared in the screener up to today.\n\n[THESIS]: High streaks indicate an exceptionally strong, uninterrupted runaway trend with heavy daily buying pressure.",
+            "Checks the chronological sequence of scanner dates in SQLite starting from the most recent run date and counting backward. The streak increments for every contiguous date the ticker appears."
+        ),
+        (
+            "Sector Velocity WoW\n(Early Sector Rotation)",
+            "Compares the volume of screener signals in a sector over the last 5 trading days (W1) against the previous 5 trading days (W2).\n\n[THESIS]: Detects early sector rotation. A sudden positive surge warns you of capital flowing aggressively into a specific theme.",
             "Counts appearances of all tickers categorized by their sector. Formula:\nW1_Count = COUNT(records WHERE date IN last 5 trading days)\nW2_Count = COUNT(records WHERE date IN days -10 to -5)\nVelocity % = ((W1_Count - W2_Count) / W2_Count) * 100"
         ),
         (
-            "Emerging Leaders (Expansion)",
-            "Identifies hidden gem breakout stocks that are experiencing a sudden momentum expansion. These are stocks with a high concentration of appearances recently but almost zero history in the preceding months.",
+            "Emerging Leaders\n(Momentum Expansion)",
+            "Identifies breakout stocks experiencing a sudden momentum expansion.\n\n[THESIS]: Finds stocks with a high concentration of appearances recently but almost zero history in the preceding months. Represents new institutional entries.",
             "Finds stocks with at least 5 appearances in the last 10 trading days, but less than or equal to 3 appearances in the prior 50 trading days (i.e. trading days -60 to -10).\nFormula: COUNT(recent) >= 5 AND COUNT(historical) <= 3"
         ),
         (
-            "Confluence Overlap",
-            "Displays high-conviction watchlist candidates that appear in at least two of the following sources: (1) Chartink Universe raw momentum scan, (2) Scanner Portfolio Signals, and (3) StockScans Top 100 Scanned Overlaps. Concentrates your research focus on institutional overlap.",
-            "Calculates the mathematical intersection of the three sets:\nIn_Universe + In_Scanner + In_StockScans >= 2\nSingle-strategy matches are automatically filtered out to eliminate market noise."
+            "Tab: Confluence Overlap\n(The Ultimate Overlap)",
+            "This sheet displays the absolute highest conviction watchlist candidates intersecting multiple strategies.\n\n[THESIS]: Filters out market noise by only displaying stocks appearing in at least two out of three major momentum dimensions: (1) Chartink screener universe, (2) Active scanner signals, and (3) StockScans overlap list.",
+            "Calculates the mathematical intersection of the three sets:\nIn_Universe + In_Scanner + In_StockScans >= 2\nSingle-dimension matches are automatically filtered out to eliminate market noise."
+        ),
+        (
+            "Tab: Monit Non Financial\n(CHECKLIST SHEET)",
+            "Your main watchlist scoring sheet for non-financial companies.\n\n[THESIS]: Keeps watchlist scoring fully formula-driven using Excel formulas. It combines automated metrics (RSI, ADX, V-stop, Persistence) with your qualitative scores (Promoter Buying, Near-Term Trigger, Headwind/Tailwind).",
+            "Uses relative index-matching formulas to populate automated close prices, RSI, ADX, V-stop, and Persistence from the SQLite and Chartink universe sheets.\nFormula: INDEX-MATCH left-lookup."
+        ),
+        (
+            "Tab: Monit Banks NBFC\n(BANKING CHECKLIST)",
+            "Your main watchlist scoring sheet for banking and NBFC companies.\n\n[THESIS]: Tailored specifically for banking structures, incorporating specialized metrics like Net Interest Margins (NIM) and Credit Costs alongside technical indicators.",
+            "Features banking-specific checklist criteria to ensure qualitative analyst inputs align with bank metrics."
+        ),
+        (
+            "Tab: Scan Match tabs\n(StockScans Confluence)",
+            "Displays the top 100 stocks appearing across all StockScans screeners.\n\n[THESIS]: Scores stocks qualitatively by scan volume. Stocks appearing in >20 scans receive a premium 10-point bonus, proving market-wide momentum consensus.",
+            "Applies a nested Excel IF formula: `=IF(D8>20,10,IF(D8>=10,5,2))`\nScores: >20 scans = 10 pts; 10-20 scans = 5 pts; <10 scans = 2 pts."
         )
     ]
     
@@ -1900,7 +1931,7 @@ def write_readme(ws) -> None:
         
         # Set line height adaptively
         max_lines = max(len(term.split('\n')), len(meaning.split('\n')), len(formula.split('\n')))
-        ws.row_dimensions[r].height = max(45, max_lines * 15 + 10)
+        ws.row_dimensions[r].height = max(55, max_lines * 16 + 12)
         
         r += 1
         
