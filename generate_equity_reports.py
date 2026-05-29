@@ -84,8 +84,8 @@ YOUR RATING: BUY
 12M TARGET: Rs. {cmp * 1.35:.2f} (derived 12-month target with +35% upside)
 """
     
-    # Dynamic model from environment - default to the stable, open gemini-flash-latest
-    model = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
+    # Dynamic model from environment - default to the stable, open gemini-2.5-flash-lite
+    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
     
@@ -245,18 +245,16 @@ Here is the Valuation context established in Part 2 for consistency:
         raise RuntimeError("Failed to generate Stage 3 report.")
     part3_text = res_json3["candidates"][0]["content"]["parts"][0]["text"].strip()
     
-    # Fully merge the 3 parts into a pristine, unified report
     full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text
     return full_report
 
 
 def send_report_email(symbol: str, company: str, report_md: str) -> None:
-    """Send the newly generated research report as a separate, dedicated premium email alert with the MD file attached."""
+    """Send the newly generated research report as a beautifully rendered, inline HTML email body directly in Gmail (no attachments)."""
     import smtplib
+    import re
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
-    from email.mime.base import MIMEBase
-    from email import encoders
     
     gmail_user = os.environ.get("GMAIL_USER", "")
     gmail_app_pass = os.environ.get("GMAIL_APP_PASS", "")
@@ -271,40 +269,165 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
         print("⚠️  No valid recipients in ALERT_EMAIL. Skipping email.")
         return
         
-    print(f"📧 Sending Dedicated Research Report Email for {symbol} to: {', '.join(recipients)}...")
+    print(f"📧 Sending Beautiful Inline Research Report Email for {symbol} to: {', '.join(recipients)}...")
     today_str = date.today().strftime("%d %b %Y")
+    
+    def markdown_to_html(md_text: str) -> str:
+        # Pre-process bold, links, and code blocks
+        md_text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", md_text)
+        md_text = re.sub(
+            r"\[(.*?)\]\((.*?)\)",
+            r'<a href="\2" style="color: #1b365d; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #1b365d;">\1</a>',
+            md_text
+        )
+        md_text = re.sub(
+            r"`(.*?)`",
+            r'<code style="background-color: #f4f6f9; color: #d63384; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 90%; font-weight: bold;">\1</code>',
+            md_text
+        )
+
+        html_lines = []
+        in_table = False
+        table_headers = []
+        table_rows = []
+        in_list = False
+
+        def format_html_table(headers, rows) -> str:
+            if not headers:
+                return ""
+            header_html = "".join([f'<th style="border: 1px solid #e2e8f0; padding: 10px 12px; background-color: #1b365d; color: white; font-weight: bold; text-align: left; font-size: 13px;">{h}</th>' for h in headers])
+            
+            row_html_list = []
+            for idx, r in enumerate(rows):
+                bg_color = "#f8f9fa" if idx % 2 == 1 else "#ffffff"
+                cells_html = []
+                for c in r:
+                    # Align numeric cells to right
+                    align = "right" if re.match(r"^[\d\.,₹\(\)\-\%x\s\:\/]+$", c.strip().replace("Rs.", "").replace("Rs", "")) else "left"
+                    cells_html.append(f'<td style="border: 1px solid #e2e8f0; padding: 8px 12px; background-color: {bg_color}; font-size: 12.5px; text-align: {align}; color: #2d3748;">{c}</td>')
+                row_html_list.append(f'<tr>{"".join(cells_html)}</tr>')
+                
+            return f"""
+            <div style="overflow-x: auto; margin: 15px 0;">
+              <table style="border-collapse: collapse; width: 100%; border: 1px solid #e2e8f0; font-family: sans-serif;">
+                <thead>
+                  <tr>{header_html}</tr>
+                </thead>
+                <tbody>
+                  {"".join(row_html_list)}
+                </tbody>
+              </table>
+            </div>
+            """
+
+        lines = md_text.splitlines()
+        for line in lines:
+            line_strip = line.strip()
+            
+            # Close list if no longer in list
+            if in_list and not (line_strip.startswith("* ") or line_strip.startswith("- ")):
+                html_lines.append("</ul>")
+                in_list = False
+                
+            # 1. Handle dividers
+            if line_strip == "---" or line_strip == "──────────────────":
+                if in_table:
+                    html_lines.append(format_html_table(table_headers, table_rows))
+                    in_table = False
+                    table_headers, table_rows = [], []
+                html_lines.append('<hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 25px 0;">')
+                continue
+                
+            # 2. Handle headers
+            if line_strip.startswith("####"):
+                if in_table:
+                    html_lines.append(format_html_table(table_headers, table_rows))
+                    in_table = False
+                    table_headers, table_rows = [], []
+                h_text = line_strip.lstrip("#").strip()
+                html_lines.append(f'<h4 style="color: #2d3748; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #1b365d; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
+                continue
+            elif line_strip.startswith("###"):
+                if in_table:
+                    html_lines.append(format_html_table(table_headers, table_rows))
+                    in_table = False
+                    table_headers, table_rows = [], []
+                h_text = line_strip.lstrip("#").strip()
+                html_lines.append(f'<h3 style="color: #1b365d; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
+                continue
+            elif line_strip.startswith("##"):
+                if in_table:
+                    html_lines.append(format_html_table(table_headers, table_rows))
+                    in_table = False
+                    table_headers, table_rows = [], []
+                h_text = line_strip.lstrip("#").strip()
+                html_lines.append(f'<h3 style="color: #1b365d; font-size: 19px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
+                continue
+            elif line_strip.startswith("#"):
+                if in_table:
+                    html_lines.append(format_html_table(table_headers, table_rows))
+                    in_table = False
+                    table_headers, table_rows = [], []
+                h_text = line_strip.lstrip("#").strip()
+                html_lines.append(f'<h2 style="color: #1b365d; font-size: 22px; border-bottom: 3px solid #1b365d; padding-bottom: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif; text-align: center;">{h_text}</h2>')
+                continue
+                
+            # 3. Handle tables
+            if line_strip.startswith("|") and line_strip.endswith("|"):
+                if ":---" in line_strip or "---:" in line_strip or "-|-" in line_strip:
+                    continue
+                cells = [c.strip() for c in line_strip.split("|")[1:-1]]
+                if not in_table:
+                    in_table = True
+                    table_headers = cells
+                    table_rows = []
+                else:
+                    table_rows.append(cells)
+                continue
+            else:
+                if in_table:
+                    html_lines.append(format_html_table(table_headers, table_rows))
+                    in_table = False
+                    table_headers, table_rows = [], []
+                    
+            # 4. Handle lists
+            if line_strip.startswith("* ") or line_strip.startswith("- "):
+                if not in_list:
+                    html_lines.append('<ul style="margin: 10px 0; padding-left: 20px; font-family: sans-serif;">')
+                    in_list = True
+                item_text = line_strip[2:].strip()
+                html_lines.append(f'<li style="margin-bottom: 6px; line-height: 1.6; color: #4a5568; font-size: 14px;">{item_text}</li>')
+                continue
+                
+            # 5. Handle paragraphs
+            if line_strip:
+                if "Overall Earnings Quality Rating:" in line_strip or "CALL GRADE:" in line_strip:
+                    html_lines.append(f'<div style="background-color: #f4f6f9; border-left: 4px solid #1b365d; padding: 12px; margin: 15px 0; border-radius: 4px; font-weight: bold; color: #1b365d; font-family: sans-serif;">{line_strip}</div>')
+                elif line_strip.startswith("COMPANY:") or line_strip.startswith("NSE TICKER:") or line_strip.startswith("SECTOR:"):
+                    html_lines.append(f'<p style="line-height: 1.5; margin: 4px 0; color: #2d3748; font-size: 13.5px; font-family: sans-serif;">{line_strip}</p>')
+                else:
+                    html_lines.append(f'<p style="line-height: 1.6; margin: 10px 0; color: #4a5568; font-size: 14px; font-family: sans-serif;">{line_strip}</p>')
+                
+        if in_table:
+            html_lines.append(format_html_table(table_headers, table_rows))
+        if in_list:
+            html_lines.append("</ul>")
+            
+        return "\n".join(html_lines)
+
+    html_content = markdown_to_html(report_md)
     
     html_body = f"""
     <html>
-      <body style="font-family: sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fcfcfc;">
-        <div style="background-color: #1b365d; color: white; padding: 15px; border-radius: 6px 6px 0 0; text-align: center;">
-          <h2 style="margin: 0;">🏆 MONIT PREMIUM INSTITUTIONAL RESEARCH</h2>
-          <p style="margin: 5px 0 0 0; font-size: 14px;">Dedicated Equity Analysis & Target Valuation</p>
+      <body style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fcfcfc;">
+        <div style="background-color: #1b365d; color: white; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;">
+          <h2 style="margin: 0; letter-spacing: 1px;">🏆 MONIT PREMIUM INSTITUTIONAL RESEARCH</h2>
+          <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">Dedicated Equity Analysis & Target Valuation</p>
         </div>
-        <div style="padding: 20px; line-height: 1.6; background-color: white;">
-          <p>Dear Investor,</p>
-          <p>Our automated deep equity research engine has compiled a new comprehensive, institutional-grade Wheels-style report for <b>{company} ({symbol})</b>, which entered the high-conviction triple-confluence watchlist today.</p>
-          
-          <div style="background-color: #f4f6f9; padding: 15px; border-radius: 6px; border-left: 4px solid #1b365d; margin: 20px 0;">
-            <h4 style="margin: 0 0 10px 0; color: #1b365d;">📋 Report Summary & Delivery Status:</h4>
-            <ul style="margin: 0; padding-left: 20px;">
-              <li><b>Ticker:</b> {symbol} (NSE)</li>
-              <li><b>Company:</b> {company}</li>
-              <li><b>Research Rating:</b> BUY</li>
-              <li><b>Format:</b> Institutional-Grade Markdown (.md) Document</li>
-              <li><b>Attachment:</b> <code>{symbol}_equity_report_{date.today().strftime('%Y-%m-%d')}.md</code></li>
-            </ul>
-          </div>
-          
-          <p>👉 <b>Please find the complete, full-form report attached to this email as a markdown file.</b> You can open and view it in any markdown reader, text editor, or IDE for deep verifiability and clickable Screener.in audit links.</p>
-          
-          <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-          
-          <p style="font-size: 12px; color: #777; font-style: italic;">
-            ⚠️ This is an automated brokerage-grade scan report. Always verify charts on TradingView and consult a SEBI-registered advisor before investing.
-          </p>
+        <div style="padding: 20px; background-color: white;">
+          {html_content}
         </div>
-        <div style="background-color: #eee; text-align: center; padding: 10px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px;">
+        <div style="background-color: #f4f6f9; text-align: center; padding: 15px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px; border-top: 1px solid #e2e8f0;">
           Generated on {today_str} | Monit Multibagger Research Desk
         </div>
       </body>
@@ -312,33 +435,20 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
     """
     
     try:
-        # Create the root message container (mixed to support attachments)
-        msg = MIMEMultipart("mixed")
+        # Create standard alternative message (no attachments)
+        msg = MIMEMultipart("alternative")
         msg["Subject"] = f"🏆 New Monit Institutional Research Report — {symbol} ({company})"
         msg["From"] = gmail_user
         msg["To"] = ", ".join(recipients)
         
-        # Plain text and HTML parts (alternative container)
-        msg_alternative = MIMEMultipart("alternative")
-        msg_alternative.attach(MIMEText(f"Our automated deep equity research engine has compiled a new comprehensive Wheels-style report for {company} ({symbol}). Please find the attached markdown file for the full report.", "plain"))
-        msg_alternative.attach(MIMEText(html_body, "html"))
-        msg.attach(msg_alternative)
-        
-        # Create the attachment
-        filename = f"{symbol}_equity_report_{date.today().strftime('%Y-%m-%d')}.md"
-        part = MIMEBase("application", "octet-stream")
-        part.set_payload(report_md.encode("utf-8"))
-        encoders.encode_base64(part)
-        part.add_header(
-            "Content-Disposition",
-            f"attachment; filename={filename}",
-        )
-        msg.attach(part)
+        # Plain text and HTML parts
+        msg.attach(MIMEText(f"Our automated deep equity research engine has compiled a new comprehensive Wheels-style report for {company} ({symbol}).\n\n{report_md}", "plain"))
+        msg.attach(MIMEText(html_body, "html"))
         
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(gmail_user, gmail_app_pass)
             s.sendmail(gmail_user, recipients, msg.as_string())
-        print(f"✅ Dedicated Research Report Email sent successfully for {symbol} with MD file attached.")
+        print(f"✅ Dedicated Inline Research Report Email sent successfully for {symbol}!")
     except Exception as e:
         print(f"❌ Failed to deliver dedicated report email for {symbol}: {e}")
 
