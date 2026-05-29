@@ -1,0 +1,46 @@
+name: Automated Deep Equity Reports Pipeline
+
+on:
+  schedule:
+    # Run daily at 12:30 PM UTC (which is 6:00 PM IST, 30 minutes after the main pipeline at 12:00 PM UTC)
+    - cron: '30 12 * * *'
+  workflow_dispatch: # Allows you to trigger it manually from GitHub website with 1 click
+
+jobs:
+  run-report-pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: true
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Generate Deep Equity Research Reports
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: |
+        # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports
+        python generate_equity_reports.py
+
+    - name: Commit and Push Newly Compiled Reports
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        # Add only the generated reports directory
+        git add outputs/reports/
+        # Commit only if changes exist
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-publish newly compiled equity reports [skip ci]" && git pull --rebase origin main && git push)

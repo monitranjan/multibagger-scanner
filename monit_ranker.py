@@ -906,6 +906,9 @@ def get_stockscans_common_stocks_data() -> dict:
 CONFLUENCE_EMERGING_REPORT = ""
 CONFLUENCE_EMERGING_HTML = ""
 
+
+
+
 def generate_automated_reports(
     universe: pd.DataFrame,
     scanner_symbols: list[str],
@@ -917,9 +920,31 @@ def generate_automated_reports(
 ) -> None:
     """Generate Markdown and HTML reports for High-Conviction Confluences (Count=3) and Emerging Leaders."""
     global CONFLUENCE_EMERGING_REPORT, CONFLUENCE_EMERGING_HTML
-    from datetime import date
+    from datetime import date, datetime
+    from pathlib import Path
     import json
     
+    # Scan for existing research reports in outputs/reports/ to highlight compilation dates
+    reports_dir = Path("outputs") / "reports"
+    existing_reports = {}
+    if reports_dir.exists():
+        for filepath in reports_dir.glob("*_equity_report_*.md"):
+            filename = filepath.name
+            try:
+                parts = filename.replace(".md", "").split("_equity_report_")
+                if len(parts) == 2:
+                    sym = parts[0]
+                    date_part = parts[1]
+                    dt = datetime.strptime(date_part, "%Y-%m-%d")
+                    formatted_date = dt.strftime("%d-%b-%Y")
+                    if sym not in existing_reports or dt > datetime.strptime(existing_reports[sym]["raw_date"], "%Y-%m-%d"):
+                        existing_reports[sym] = {
+                            "formatted": formatted_date,
+                            "raw_date": date_part
+                        }
+            except Exception:
+                pass
+                
     today_str = date.today().strftime("%d %b %Y")
     
     # 1. Collect Common Count = 3 stocks
@@ -1030,11 +1055,15 @@ def generate_automated_reports(
     md.append(f"\nTotal triple-confluence candidates: **{len(confluence_3_rows)}**\n")
     
     if confluence_3_rows:
-        md.append("| Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Active Signal | Scans Count |")
-        md.append("|---|---|---|---|---|---|---|---|")
+        md.append("| Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Active Signal | Scans Count | Deep Research Report |")
+        md.append("|---|---|---|---|---|---|---|---|---|")
         for r in confluence_3_rows:
+            report_status = "_Pending separate pipeline run_"
+            if r['symbol'] in existing_reports:
+                report_status = f"📝 **Sent on {existing_reports[r['symbol']]['formatted']}**"
+                
             md.append(
-                f"| `{r['symbol']}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['return_1d']}% | {r['mcap_cr']:,.1f} | **{r['signal']}** | **{r['scans_count']}** |"
+                f"| `{r['symbol']}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['return_1d']}% | {r['mcap_cr']:,.1f} | **{r['signal']}** | **{r['scans_count']}** | {report_status} |"
             )
     else:
         md.append("_No triple-confluence candidates detected in today's run._")
@@ -1067,10 +1096,23 @@ def generate_automated_reports(
     except Exception as e:
         print(f"⚠️ Error saving report to file: {e}")
         
+    # Save the confluences list to a JSON file for the separate report pipeline
+    try:
+        confl_json_path = Path("outputs") / "today_confluences.json"
+        with open(confl_json_path, "w") as f:
+            json.dump(confluence_3_rows, f, indent=2)
+        print(f"✅ Saved today's confluences list to: {confl_json_path}")
+    except Exception as e:
+        print(f"⚠️ Error saving today's confluences list JSON: {e}")
+        
     # 4. Format the HTML report content for Gmail
     html_confl_rows = ""
     if confluence_3_rows:
         for r in confluence_3_rows:
+            report_status = '<span style="color:#777;font-style:italic">Pending separate pipeline</span>'
+            if r['symbol'] in existing_reports:
+                report_status = f'<b style="color:#2e7d32">📝 Sent on {existing_reports[r["symbol"]]["formatted"]}</b>'
+                
             html_confl_rows += f"""
             <tr style="background-color:#fffbee">
               <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🏆 `{r['symbol']}`</td>
@@ -1081,9 +1123,10 @@ def generate_automated_reports(
               <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['mcap_cr']:,.1f}</td>
               <td style="padding:8px;font-weight:bold;border:1px solid #ddd;color:#b25900">{r['signal']}</td>
               <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd;background-color:#ffe8cc">{r['scans_count']}</td>
+              <td style="padding:8px;text-align:center;border:1px solid #ddd;font-size:12px">{report_status}</td>
             </tr>"""
     else:
-        html_confl_rows = """<tr><td colspan="8" style="padding:10px;text-align:center;font-style:italic">No triple-confluence candidates detected today.</td></tr>"""
+        html_confl_rows = """<tr><td colspan="9" style="padding:10px;text-align:center;font-style:italic">No triple-confluence candidates detected today.</td></tr>"""
         
     html_emg_rows = ""
     if emerging_rows:
@@ -1116,6 +1159,7 @@ def generate_automated_reports(
             <th style="padding:8px">Mcap Cr</th>
             <th style="padding:8px">Scanner Signal</th>
             <th style="padding:8px">Scans</th>
+            <th style="padding:8px">Deep Research Report</th>
           </tr>
         </thead>
         <tbody>

@@ -47,11 +47,11 @@ jobs:
         # 2. Run ranker to compute database analytics, send documents, and compile the Excel sheet
         python monit_ranker.py
 
-    - name: Commit and Push Database Changes
+    - name: Commit and Push Database and Generated Reports
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        # Force add database file
-        git add logs/backtest.db
+        # Force add database file and newly generated reports/markdowns
+        git add logs/backtest.db outputs/
         # Commit only if changes exist
-        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync backtest database [skip ci]" && git pull --rebase origin main && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync database and confluence reports [skip ci]" && git pull --rebase origin main && git push)
