@@ -903,6 +903,250 @@ def get_stockscans_common_stocks_data() -> dict:
     return {}
 
 
+CONFLUENCE_EMERGING_REPORT = ""
+CONFLUENCE_EMERGING_HTML = ""
+
+def generate_automated_reports(
+    universe: pd.DataFrame,
+    scanner_symbols: list[str],
+    scan_matched_symbols: list[str],
+    yfinance_data: dict[str, dict],
+    scans_dict: dict[str, int],
+    industry_dict: dict[str, str],
+    signals_dict: dict[str, dict]
+) -> None:
+    """Generate Markdown and HTML reports for High-Conviction Confluences (Count=3) and Emerging Leaders."""
+    global CONFLUENCE_EMERGING_REPORT, CONFLUENCE_EMERGING_HTML
+    from datetime import date
+    import json
+    
+    today_str = date.today().strftime("%d %b %Y")
+    
+    # 1. Collect Common Count = 3 stocks
+    set_universe = set(universe["symbol"].dropna().unique())
+    set_scanner = set(scanner_symbols)
+    set_scan_match = set(scan_matched_symbols)
+    
+    confluence_3_rows = []
+    union_symbols = set_universe | set_scanner | set_scan_match
+    for sym in union_symbols:
+        in_univ = sym in set_universe
+        in_scan = sym in set_scanner
+        in_match = sym in set_scan_match
+        
+        if in_univ and in_scan and in_match:
+            company_name = sym
+            sector = "unknown"
+            mcap_cr = 0.0
+            close = 0.0
+            ret1d = 0.0
+            
+            univ_match = universe[universe["symbol"] == sym]
+            if not univ_match.empty:
+                company_name = univ_match.iloc[0]["company"]
+                sector = univ_match.iloc[0]["sector"]
+                mcap_cr = univ_match.iloc[0].get("marketcap_cr", 0.0)
+                close = univ_match.iloc[0].get("close", 0.0)
+                ret1d = univ_match.iloc[0].get("today_return_pct", 0.0)
+            elif sym in yfinance_data:
+                info = yfinance_data[sym].get("info", {})
+                company_name = info.get("longName") or sym
+                sector = info.get("sector") or "unknown"
+                mcap_cr = info.get("marketCap", 0.0) / 10000000.0 if info.get("marketCap") else 0.0
+                close = info.get("previousClose") or 0.0
+                
+            sig_name = signals_dict.get(sym, {}).get("entry", "Active Signal")
+            scans_cnt = scans_dict.get(sym, 0)
+            ind_name = industry_dict.get(sym, sector)
+            
+            confluence_3_rows.append({
+                "symbol": sym,
+                "company": company_name,
+                "industry": ind_name,
+                "close": close,
+                "return_1d": ret1d,
+                "mcap_cr": mcap_cr,
+                "signal": sig_name,
+                "scans_count": scans_cnt
+            })
+            
+    confluence_3_rows = sorted(confluence_3_rows, key=lambda x: x["scans_count"], reverse=True)
+    
+    # 2. Collect Emerging Leaders
+    emerging_rows = []
+    backtest_df = load_backtest_df()
+    if not backtest_df.empty:
+        emerging_leaders = detect_emerging_leaders(backtest_df)
+        
+        # Calculate recent counts in last 10 dates
+        unique_dates = sorted(backtest_df["parsed_date"].unique())
+        recent_dates = unique_dates[-10:] if len(unique_dates) >= 10 else unique_dates
+        df_recent = backtest_df[backtest_df["parsed_date"].isin(recent_dates)]
+        recent_counts = df_recent["symbol"].value_counts().to_dict()
+        
+        for sym in emerging_leaders:
+            company_name = sym
+            sector = "unknown"
+            mcap_cr = 0.0
+            close = 0.0
+            
+            univ_match = universe[universe["symbol"] == sym]
+            if not univ_match.empty:
+                company_name = univ_match.iloc[0]["company"]
+                sector = univ_match.iloc[0]["sector"]
+                mcap_cr = univ_match.iloc[0].get("marketcap_cr", 0.0)
+                close = univ_match.iloc[0].get("close", 0.0)
+            elif sym in yfinance_data:
+                info = yfinance_data[sym].get("info", {})
+                company_name = info.get("longName") or sym
+                sector = info.get("sector") or "unknown"
+                mcap_cr = info.get("marketCap", 0.0) / 10000000.0 if info.get("marketCap") else 0.0
+                close = info.get("previousClose") or 0.0
+                
+            r_count = recent_counts.get(sym, 0)
+            ind_name = industry_dict.get(sym, sector)
+            
+            emerging_rows.append({
+                "symbol": sym,
+                "company": company_name,
+                "industry": ind_name,
+                "close": close,
+                "mcap_cr": mcap_cr,
+                "persistence": r_count
+            })
+            
+    emerging_rows = sorted(emerging_rows, key=lambda x: x["persistence"], reverse=True)
+    
+    # 3. Format the Markdown report content
+    md = []
+    md.append(f"# 📊 Monit High-Conviction Confluences & Emerging Leaders Report")
+    md.append(f"Generated on **{today_str}** | Premium Quantitative Watchlist Analysis\n")
+    
+    md.append(f"## 🏆 1. High-Conviction Confluences (Common Count = 3)")
+    md.append(f"These stocks are at the absolute intersection of all three major momentum dimensions:")
+    md.append(f"1. **Chartink screener universe** (bullish base)")
+    md.append(f"2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)")
+    md.append(f"3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)")
+    md.append(f"\nTotal triple-confluence candidates: **{len(confluence_3_rows)}**\n")
+    
+    if confluence_3_rows:
+        md.append("| Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Active Signal | Scans Count |")
+        md.append("|---|---|---|---|---|---|---|---|")
+        for r in confluence_3_rows:
+            md.append(
+                f"| `{r['symbol']}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['return_1d']}% | {r['mcap_cr']:,.1f} | **{r['signal']}** | **{r['scans_count']}** |"
+            )
+    else:
+        md.append("_No triple-confluence candidates detected in today's run._")
+        
+    md.append(f"\n---\n")
+    
+    md.append(f"## 🚀 2. Emerging Multibagger Leaders (Fresh Momentum Expansion)")
+    md.append(f"These stocks show a fresh institutional footprint. They have minimal historical appearances (`<= 2` counts over the prior months) but have erupted recently (`>= 3` appearances in the last 10 days). This highlights **early stage-2 momentum expansion** before they double!")
+    md.append(f"\nTotal emerging leaders: **{len(emerging_rows)}**\n")
+    
+    if emerging_rows:
+        md.append("| Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Persistence (Last 10D) |")
+        md.append("|---|---|---|---|---|---|---|")
+        for idx, r in enumerate(emerging_rows, start=1):
+            md.append(
+                f"| {idx} | `{r['symbol']}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['mcap_cr']:,.1f} | **{r['persistence']}/10 days** |"
+            )
+    else:
+        md.append("_No emerging leaders detected in today's run._")
+        
+    CONFLUENCE_EMERGING_REPORT = "\n".join(md)
+    
+    # Save the report to outputs directory
+    try:
+        report_path = Path("outputs") / "emerging_and_confluence_report.md"
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(report_path, "w") as f:
+            f.write(CONFLUENCE_EMERGING_REPORT)
+        print(f"✅ Saved automated report to: {report_path}")
+    except Exception as e:
+        print(f"⚠️ Error saving report to file: {e}")
+        
+    # 4. Format the HTML report content for Gmail
+    html_confl_rows = ""
+    if confluence_3_rows:
+        for r in confluence_3_rows:
+            html_confl_rows += f"""
+            <tr style="background-color:#fffbee">
+              <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🏆 `{r['symbol']}`</td>
+              <td style="padding:8px;border:1px solid #ddd">{r['company']}</td>
+              <td style="padding:8px;border:1px solid #ddd">{r['industry']}</td>
+              <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['close']:,.2f}</td>
+              <td style="padding:8px;text-align:right;border:1px solid #ddd;color:{'#1a7a1a' if r['return_1d']>=0 else '#cc0000'}">{r['return_1d']}%</td>
+              <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['mcap_cr']:,.1f}</td>
+              <td style="padding:8px;font-weight:bold;border:1px solid #ddd;color:#b25900">{r['signal']}</td>
+              <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd;background-color:#ffe8cc">{r['scans_count']}</td>
+            </tr>"""
+    else:
+        html_confl_rows = """<tr><td colspan="8" style="padding:10px;text-align:center;font-style:italic">No triple-confluence candidates detected today.</td></tr>"""
+        
+    html_emg_rows = ""
+    if emerging_rows:
+        for idx, r in enumerate(emerging_rows, start=1):
+            html_emg_rows += f"""
+            <tr style="background-color:#f6f9ff">
+              <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd">{idx}</td>
+              <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🚀 `{r['symbol']}`</td>
+              <td style="padding:8px;border:1px solid #ddd">{r['company']}</td>
+              <td style="padding:8px;border:1px solid #ddd">{r['industry']}</td>
+              <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['close']:,.2f}</td>
+              <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['mcap_cr']:,.1f}</td>
+              <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd;background-color:#d0e1fd;color:#004085">{r['persistence']}/10 days</td>
+            </tr>"""
+    else:
+        html_emg_rows = """<tr><td colspan="7" style="padding:10px;text-align:center;font-style:italic">No emerging leaders detected today.</td></tr>"""
+        
+    CONFLUENCE_EMERGING_HTML = f"""
+    <div style="margin-top:25px;border:1px solid #ffe4cc;background-color:#fffaf5;padding:15px;border-radius:6px;font-family:sans-serif">
+      <h3 style="color:#c55a11;margin-top:0">🏆 Monit High-Conviction Confluences (Common Count = 3)</h3>
+      <p style="font-size:14px;color:#555">These stocks intersect all three core momentum dimensions (Chartink universe + Active scanner signal + StockScans overlap list).</p>
+      <table border="1" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px;border-color:#ddd">
+        <thead style="background-color:#c55a11;color:white">
+          <tr>
+            <th style="padding:8px">Symbol</th>
+            <th style="padding:8px">Company</th>
+            <th style="padding:8px">Industry</th>
+            <th style="padding:8px">Close</th>
+            <th style="padding:8px">1D Ret</th>
+            <th style="padding:8px">Mcap Cr</th>
+            <th style="padding:8px">Scanner Signal</th>
+            <th style="padding:8px">Scans</th>
+          </tr>
+        </thead>
+        <tbody>
+          {html_confl_rows}
+        </tbody>
+      </table>
+    </div>
+    
+    <div style="margin-top:25px;border:1px solid #d0e1fd;background-color:#fcfdfe;padding:15px;border-radius:6px;font-family:sans-serif">
+      <h3 style="color:#2f5597;margin-top:0">🚀 Emerging Multibagger Leaders (Fresh Momentum Expansion)</h3>
+      <p style="font-size:14px;color:#555">Stocks with fresh institutional footprint (low historical counts, high recent frequency in the last 10 days). Catching them early before they double!</p>
+      <table border="1" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px;border-color:#ddd">
+        <thead style="background-color:#2f5597;color:white">
+          <tr>
+            <th style="padding:8px;width:50px">Rank</th>
+            <th style="padding:8px">Symbol</th>
+            <th style="padding:8px">Company</th>
+            <th style="padding:8px">Industry</th>
+            <th style="padding:8px">Close</th>
+            <th style="padding:8px">Mcap Cr</th>
+            <th style="padding:8px">Persistence (10D)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {html_emg_rows}
+        </tbody>
+      </table>
+    </div>
+    """
+
+
 def load_scan_matched_symbols() -> list[str]:
     """Read symbols from StockScans live common-stocks data."""
     data = get_stockscans_common_stocks_data()
@@ -1171,6 +1415,20 @@ def build_workbook(
         rebuild_stock_analytics_table(yfinance_data, scans_dict, industry_dict)
     except Exception as e:
         print(f"⚠️ Error compiling stock analytics: {e}")
+
+    # Automatically generate the Confluence Overlap (Count=3) and Emerging Leaders reports
+    try:
+        generate_automated_reports(
+            universe,
+            scanner_symbols,
+            scan_matched_symbols,
+            yfinance_data,
+            scans_dict,
+            industry_dict,
+            signals_dict
+        )
+    except Exception as e:
+        print(f"⚠️ Error generating automated confluence & emerging report: {e}")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(output_path)
@@ -2481,7 +2739,7 @@ def add_score_conditional_format(ws, col: int, start_row: int, end_row: int) -> 
 
 def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     """Send daily Excel workbook and summary report via Email and Telegram."""
-    global STOCKSCANS_STATUS
+    global STOCKSCANS_STATUS, CONFLUENCE_EMERGING_REPORT, CONFLUENCE_EMERGING_HTML
     import os
     import smtplib
     from email.mime.multipart import MIMEMultipart
@@ -2567,9 +2825,14 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                      f"Capital deployed: ₹{total_deployed:,.0f} / ₹{TOTAL_CAPITAL:,.0f}\n" \
                      f"────────────────────────────────────────────────────────────\n" \
                      f"{signals_plain_list}\n" \
-                     f"────────────────────────────────────────────────────────────\n\n" \
-                     f"Your premium daily Excel workbook is attached to this email.\n\n" \
-                     f"Best regards,\nMonit Research Desk"
+                     f"────────────────────────────────────────────────────────────\n\n"
+                     
+        if CONFLUENCE_EMERGING_REPORT:
+            plain_text += f"{CONFLUENCE_EMERGING_REPORT}\n" \
+                          f"────────────────────────────────────────────────────────────\n\n"
+                          
+        plain_text += f"Your premium daily Excel workbook is attached to this email.\n\n" \
+                      f"Best regards,\nMonit Research Desk"
         
         # Build HTML table for Gmail
         rows_html = ""
@@ -2618,6 +2881,9 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
           </thead>
           <tbody>{rows_html}</tbody>
         </table>
+        
+        {CONFLUENCE_EMERGING_HTML}
+        
         <br>
         <p>Your premium daily watchlist Excel workbook <b>{filename}</b> has been compiled and is attached below.</p>
         <br>
@@ -2630,12 +2896,17 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                      f"The automated ranking pipeline has completed successfully.\n" \
                      f"• Scored & Ranked: {universe_len} companies\n" \
                      f"• Local SQLite database updated and synced.\n\n" \
-                     f"ℹ️ No active screener signals were generated by the Pine Script engine today.\n\n" \
-                     f"Your daily premium Excel workbook is attached to this email.\n\n" \
-                     f"Best regards,\nMonit Research Desk"
+                     f"ℹ️ No active screener signals were generated by the Pine Script engine today.\n\n"
+                     
+        if CONFLUENCE_EMERGING_REPORT:
+            plain_text += f"{CONFLUENCE_EMERGING_REPORT}\n" \
+                          f"────────────────────────────────────────────────────────────\n\n"
+                          
+        plain_text += f"Your daily premium Excel workbook is attached to this email.\n\n" \
+                      f"Best regards,\nMonit Research Desk"
                      
         html_text = f"""
-        <html><body style="font-family:sans-serif;max-width:600px;margin:auto">
+        <html><body style="font-family:sans-serif;max-width:850px;margin:auto">
         <h2 style="color:#1B365D">🏆 Daily Monit Multibagger Watchlist — {today_str}</h2>
         {warning_html}
         <p>The automated ranking pipeline has completed successfully today.</p>
@@ -2645,6 +2916,10 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         </ul>
         <br>
         <p><b>ℹ️ No active screener signals were generated by the Pine Script engine today.</b></p>
+        
+        {CONFLUENCE_EMERGING_HTML}
+        
+        <br>
         <p>Your premium watchlist Excel workbook <b>{filename}</b> has been compiled and is attached below.</p>
         <br>
         <p style="color:#555;font-size:12px">⚠️ This is an automated scan alert. Always verify charts on TradingView before investing.</p>
@@ -2708,8 +2983,8 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                         r.raise_for_status()
                     print(f"   ✅ Workbook successfully delivered to chat: {chat_id}")
                     
-                    # B. Send screened signals list immediately after in the same chat
-                    if has_signals:
+                    # B. Send screened signals list and confluence/emerging report immediately after in the same chat
+                    if has_signals or CONFLUENCE_EMERGING_REPORT:
                         chunks = [plain_text[i:i+4000] for i in range(0, len(plain_text), 4000)]
                         for chunk in chunks:
                             r = requests.post(
@@ -2718,7 +2993,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                                 timeout=15
                             )
                             r.raise_for_status()
-                        print(f"   ✅ Screener signals list sent to chat: {chat_id}")
+                        print(f"   ✅ Watchlist details and report sent to chat: {chat_id}")
                 except Exception as e:
                     print(f"   ❌ Telegram delivery failed for chat {chat_id}: {e}")
     else:
