@@ -48,4 +48,3 @@ logs/*
 .idea/
 .vscode/
 *.log
-scan_matched_data.json

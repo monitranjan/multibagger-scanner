@@ -40,6 +40,7 @@ jobs:
         TWILIO_TOKEN: ${{ secrets.TWILIO_TOKEN }}
         TWILIO_WHATSAPP_FROM: ${{ secrets.TWILIO_WHATSAPP_FROM }}
         TWILIO_WHATSAPP_TO: ${{ secrets.TWILIO_WHATSAPP_TO }}
+        STOCKSCANS_COOKIE: ${{ secrets.STOCKSCANS_COOKIE }}
       run: |
         # 1. Run scanner to fetch active signals
         python scanner.py

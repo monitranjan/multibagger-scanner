@@ -771,9 +771,13 @@ def load_scanner_symbols() -> list[str]:
 
 def fetch_single_stockscans_details(symbol: str) -> tuple[str, dict]:
     """Fetch StockScans search-company data dynamically using your authtoken."""
+    cookie = os.environ.get(
+        "STOCKSCANS_COOKIE", 
+        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
+    )
     headers = {
         "accept": "application/json",
-        "cookie": "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA",
+        "cookie": cookie,
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/148.0.0.0 Safari/537.36"
     }
     # Gentle wait to avoid rate limit
@@ -809,70 +813,144 @@ def fetch_all_stockscans_details(symbols: list[str]) -> dict[str, dict]:
     return results
 
 
+STOCKSCANS_STATUS = {"status": "success", "message": "", "fetched_live": False}
+
+def get_stockscans_common_stocks_data() -> dict:
+    """Fetch live StockScans common-stocks (scan matches) list dynamically or fallback to local JSON file."""
+    global STOCKSCANS_STATUS
+    import json
+    
+    cookie = os.environ.get(
+        "STOCKSCANS_COOKIE", 
+        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
+    )
+    
+    # 1. Attempt to fetch dynamically from API
+    try:
+        url = "https://www.stockscans.in/api/user/saved-scans/common-stocks"
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "cookie": cookie,
+            "origin": "https://www.stockscans.in",
+            "referer": "https://www.stockscans.in/scan-match",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/148.0.0.0 Safari/537.36"
+        }
+        payload = {"includePopular": True}
+        print("Attempting to fetch live StockScans common stocks (scan matches)...")
+        r = requests.post(url, headers=headers, json=payload, timeout=20)
+        
+        if r.status_code == 200:
+            data = r.json()
+            if "companies" in data and len(data["companies"]) > 0:
+                print(f"Successfully fetched {len(data['companies'])} live StockScans companies!")
+                STOCKSCANS_STATUS["status"] = "success"
+                STOCKSCANS_STATUS["fetched_live"] = True
+                STOCKSCANS_STATUS["message"] = "Fetched live successfully"
+                
+                # Cache locally in workspace for convenience and resilience
+                try:
+                    cache_paths = [
+                        Path("scan_matched_data.json"),
+                        Path("/Users/monitranjan/.gemini/antigravity/scratch/scan_matched_data.json")
+                    ]
+                    for cp in cache_paths:
+                        try:
+                            cp.parent.mkdir(parents=True, exist_ok=True)
+                            with open(cp, "w") as f:
+                                json.dump(data, f, indent=2)
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
+                return data
+            else:
+                print("Live response loaded but companies list was empty.")
+                STOCKSCANS_STATUS["status"] = "empty_response"
+                STOCKSCANS_STATUS["message"] = "Response returned empty companies list."
+        else:
+            print(f"Live API request failed with status code: {r.status_code}")
+            if r.status_code in [401, 403]:
+                STOCKSCANS_STATUS["status"] = "expired"
+                STOCKSCANS_STATUS["message"] = f"StockScans session expired (HTTP {r.status_code}). Please update cookie."
+            else:
+                STOCKSCANS_STATUS["status"] = "failed"
+                STOCKSCANS_STATUS["message"] = f"API returned error status code: {r.status_code}"
+    except Exception as e:
+        print(f"Error fetching live StockScans common stocks API: {e}")
+        STOCKSCANS_STATUS["status"] = "failed"
+        STOCKSCANS_STATUS["message"] = f"Connection error: {str(e)}"
+        
+    # 2. Fallback to reading the local cached file
+    print("Falling back to local cached scan_matched_data.json file...")
+    paths_to_try = [
+        Path("scan_matched_data.json"),
+        Path("/Users/monitranjan/.gemini/antigravity/scratch/scan_matched_data.json")
+    ]
+    
+    for path in paths_to_try:
+        if path.exists():
+            try:
+                with open(path, "r") as f:
+                    data = json.load(f)
+                if "companies" in data:
+                    print(f"Successfully loaded {len(data.get('companies', []))} companies from fallback: {path}")
+                    return data
+            except Exception as e:
+                print(f"Error reading fallback file {path}: {e}")
+                
+    print("WARNING: No StockScans data fetched or loaded from fallback caches. Returning empty structure.")
+    return {}
+
+
 def load_scan_matched_symbols() -> list[str]:
     """Read symbols from StockScans live common-stocks data."""
-    json_path = Path("/Users/monitranjan/.gemini/antigravity/scratch/scan_matched_data.json")
-    if not json_path.exists():
-        return []
-    try:
-        import json
-        with open(json_path, "r") as f:
-            data = json.load(f)
-        companies = data.get("companies", [])
-        symbols = []
-        for c in companies:
-            comp_id = c.get("companyId", "")
-            symbol = comp_id.split(":")[1] if ":" in comp_id else comp_id
-            if symbol:
-                symbols.append(symbol.strip())
-        return list(set(symbols))
-    except Exception:
-        return []
+    data = get_stockscans_common_stocks_data()
+    companies = data.get("companies", [])
+    symbols = []
+    for c in companies:
+        comp_id = c.get("companyId", "")
+        symbol = comp_id.split(":")[1] if ":" in comp_id else comp_id
+        if symbol:
+            symbols.append(symbol.strip())
+    return list(set(symbols))
 
 
 def load_scan_matched_df(universe: pd.DataFrame, yfinance_data: dict[str, dict]) -> pd.DataFrame:
     """Load StockScans live common-stocks as a normalized DataFrame and enrich sector from Chartink or Yahoo Finance."""
-    json_path = Path("/Users/monitranjan/.gemini/antigravity/scratch/scan_matched_data.json")
-    if not json_path.exists():
-        return pd.DataFrame()
-    try:
-        import json
-        with open(json_path, "r") as f:
-            data = json.load(f)
-        companies = data.get("companies", [])
-        rows = []
-        for c in companies:
-            comp_id = c.get("companyId", "")
-            symbol = comp_id.split(":")[1] if ":" in comp_id else comp_id
-            
-            # 1. Try to get sector from Chartink universe first
-            sector = "unknown"
-            univ_match = universe[universe["symbol"] == symbol]
-            if not univ_match.empty and pd.notna(univ_match.iloc[0].get("sector")):
-                sector = univ_match.iloc[0]["sector"]
-            
-            # 2. Try to get sector from Yahoo Finance info second
-            if sector == "unknown" or not sector:
-                details = yfinance_data.get(symbol, {})
-                info = details.get("info", {})
-                if info and info.get("sector"):
-                    sector = info.get("sector")
-                    
-            rows.append({
-                "symbol": symbol,
-                "company": c.get("Name", ""),
-                "sector": sector or "unknown",
-                "industry": c.get("Industry", ""),
-                "marketcap_bucket": "smallcap" if c.get("Market Capitalization", 0) < 5000 else "midcap" if c.get("Market Capitalization", 0) < 20000 else "largecap",
-                "marketcap_cr": c.get("Market Capitalization", 0.0),
-                "close": c.get("Close Price", 0.0),
-                "today_return_pct": c.get("Returns 1D", 0.0),
-                "volume": 0.0,
-                "Scans": c.get("Scans", 0)
-            })
-        return pd.DataFrame(rows)
-    except Exception:
-        return pd.DataFrame()
+    data = get_stockscans_common_stocks_data()
+    companies = data.get("companies", [])
+    rows = []
+    for c in companies:
+        comp_id = c.get("companyId", "")
+        symbol = comp_id.split(":")[1] if ":" in comp_id else comp_id
+        
+        # 1. Try to get sector from Chartink universe first
+        sector = "unknown"
+        univ_match = universe[universe["symbol"] == symbol]
+        if not univ_match.empty and pd.notna(univ_match.iloc[0].get("sector")):
+            sector = univ_match.iloc[0]["sector"]
+        
+        # 2. Try to get sector from Yahoo Finance info second
+        if sector == "unknown" or not sector:
+            details = yfinance_data.get(symbol, {})
+            info = details.get("info", {})
+            if info and info.get("sector"):
+                sector = info.get("sector")
+                
+        rows.append({
+            "symbol": symbol,
+            "company": c.get("Name", ""),
+            "sector": sector or "unknown",
+            "industry": c.get("Industry", ""),
+            "marketcap_bucket": "smallcap" if c.get("Market Capitalization", 0) < 5000 else "midcap" if c.get("Market Capitalization", 0) < 20000 else "largecap",
+            "marketcap_cr": c.get("Market Capitalization", 0.0),
+            "close": c.get("Close Price", 0.0),
+            "today_return_pct": c.get("Returns 1D", 0.0),
+            "volume": 0.0,
+            "Scans": c.get("Scans", 0)
+        })
+    return pd.DataFrame(rows)
 
 
 def build_workbook(
@@ -2403,6 +2481,7 @@ def add_score_conditional_format(ws, col: int, start_row: int, end_row: int) -> 
 
 def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     """Send daily Excel workbook and summary report via Email and Telegram."""
+    global STOCKSCANS_STATUS
     import os
     import smtplib
     from email.mime.multipart import MIMEMultipart
@@ -2420,6 +2499,32 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     
     today_str = date.today().strftime("%d %b %Y")
     filename = excel_path.name
+
+    # Check StockScans API Connection Status for warnings
+    warning_text = ""
+    warning_html = ""
+    warning_tg = ""
+    warning_wa = ""
+    
+    if not STOCKSCANS_STATUS.get("fetched_live", False):
+        reason = STOCKSCANS_STATUS.get("message", "Cookie failed or expired.")
+        warning_text = f"⚠️ [STOCKSCANS ALERT]: The live StockScans.in connection failed or cookie has EXPIRED.\n" \
+                       f"Reason: {reason}\n" \
+                       f"The system fell back to the committed cache. Please update the 'STOCKSCANS_COOKIE' repository secret on GitHub settings to restore live confluences!\n" \
+                       f"────────────────────────────────────────────────────────────\n\n"
+                       
+        warning_html = f"""
+        <div style="background-color:#fff2f2;border-left:4px solid #ff4d4d;padding:12px;margin-bottom:15px;border-radius:4px;font-family:sans-serif">
+          <b style="color:#cc0000">⚠️ Live StockScans Connection Failed / Cookie Expired</b><br>
+          The automated cloud runner failed to establish an authenticated connection to StockScans.in (Reason: {reason}).<br>
+          The system successfully fell back to your committed offline cache file so sheets compiled successfully.<br>
+          <span style="font-size:12px;color:#555">👉 Please inspect headers on StockScans, copy your new cookie, and update the <b>STOCKSCANS_COOKIE</b> secret in your GitHub repository settings to restore live confluences.</span>
+        </div>
+        """
+        
+        warning_tg = "⚠️ *StockScans Cookie Expired/Invalid* — fell back to cache. Please update the `STOCKSCANS_COOKIE` secret on GitHub settings!\n\n"
+        
+        warning_wa = "⚠️ *StockScans Cookie Expired/Invalid* — fell back to offline cache. Please update the `STOCKSCANS_COOKIE` secret on GitHub settings!\n\n"
     
     # 2. Attempt to load today's screener signals from the CSV logged by scanner.py
     signals_file = Path(f"logs/signals_{date.today()}.csv")
@@ -2452,7 +2557,8 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
             )
         signals_plain_list = "\n".join(sig_lines)
         
-        plain_text = f"🏆 Daily Monit Multibagger Watchlist — {today_str}\n\n" \
+        plain_text = warning_text + \
+                     f"🏆 Daily Monit Multibagger Watchlist — {today_str}\n\n" \
                      f"The automated ranking pipeline has completed successfully.\n" \
                      f"• Scored & Ranked: {universe_len} companies\n" \
                      f"• Local SQLite database updated and synced.\n\n" \
@@ -2463,8 +2569,8 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                      f"{signals_plain_list}\n" \
                      f"────────────────────────────────────────────────────────────\n\n" \
                      f"Your premium daily Excel workbook is attached to this email.\n\n" \
-                     f"Best regards,\nMonit esearch"
-
+                     f"Best regards,\nMonit Research Desk"
+        
         # Build HTML table for Gmail
         rows_html = ""
         for _, row in signals_df.iterrows():
@@ -2484,6 +2590,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         html_text = f"""
         <html><body style="font-family:sans-serif;max-width:850px;margin:auto">
         <h2 style="color:#1B365D">🏆 Daily Monit Multibagger Watchlist — {today_str}</h2>
+        {warning_html}
         <p>The automated ranking pipeline has completed successfully today.</p>
         <ul>
           <li><b>Scored & Ranked:</b> {universe_len} companies</li>
@@ -2518,7 +2625,8 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         </body></html>
         """
     else:
-        plain_text = f"🏆 Daily Monit Multibagger Watchlist — {today_str}\n\n" \
+        plain_text = warning_text + \
+                     f"🏆 Daily Monit Multibagger Watchlist — {today_str}\n\n" \
                      f"The automated ranking pipeline has completed successfully.\n" \
                      f"• Scored & Ranked: {universe_len} companies\n" \
                      f"• Local SQLite database updated and synced.\n\n" \
@@ -2529,6 +2637,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         html_text = f"""
         <html><body style="font-family:sans-serif;max-width:600px;margin:auto">
         <h2 style="color:#1B365D">🏆 Daily Monit Multibagger Watchlist — {today_str}</h2>
+        {warning_html}
         <p>The automated ranking pipeline has completed successfully today.</p>
         <ul>
           <li><b>Scored & Ranked:</b> {universe_len} companies</li>
@@ -2589,7 +2698,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
                         files = {"document": f}
                         data = {
                             "chat_id": chat_id,
-                            "caption": f"🏆 *Daily Monit Multibagger Watchlist — {today_str}*\n\n" \
+                            "caption": f"{warning_tg}🏆 *Daily Monit Multibagger Watchlist — {today_str}*\n\n" \
                                        f"• Scored & Ranked: {universe_len} companies\n" \
                                        f"• Database: Updated & Synced\n\n" \
                                        f"Your daily watchlist workbook is attached above! 📈",
@@ -2626,7 +2735,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         try:
             from twilio.rest import Client
             client = Client(twilio_sid, twilio_token)
-            wa_text = f"🏆 *Daily Monit Watchlist — {today_str}*\n\n" \
+            wa_text = f"{warning_wa}🏆 *Daily Monit Watchlist — {today_str}*\n\n" \
                       f"• Scored & Ranked: {universe_len} companies\n" \
                       f"• Database: Updated & Synced\n\n"
             if has_signals:
