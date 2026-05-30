@@ -7,22 +7,25 @@ These stocks are at the absolute intersection of all three major momentum dimens
 2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)
 3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)
 
-Total triple-confluence candidates: **13**
+Total triple-confluence candidates: **16**
 
 | Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Active Signal | Scans Count | Deep Research Report |
 |---|---|---|---|---|---|---|---|---|
-| `SIGMAADV` | Sigma Advanced System Ltd | Aerospace & Defence - Equipments | ₹424.80 | 4.99% | 7,486.7 | **52W Breakout** | **32** | _Pending separate pipeline run_ |
-| `VENUSREM` | Venus Remedies Limited | Pharmaceuticals - I V Fluids | ₹1,280.05 | 5.0% | 1,711.0 | **52W Breakout** | **26** | _Pending separate pipeline run_ |
-| `RRKABEL` | R R Kabel Ltd | Cables - Power | ₹2,056.30 | 5.4% | 23,257.9 | **52W Breakout** | **25** | _Pending separate pipeline run_ |
+| `SUPRIYA` | Supriya Lifescience Ltd | Pharma - API & CRAMS | ₹968.70 | 20.0% | 7,796.4 | **52W Breakout** | **30** | _Pending separate pipeline run_ |
+| `ACUTAAS` | Acutaas Chemicals Ltd | Pharma - API & CRAMS | ₹3,132.50 | 4.4% | 25,646.1 | **52W Breakout** | **27** | _Pending separate pipeline run_ |
+| `VENUSREM` | Venus Remedies Limited | Pharmaceuticals - I V Fluids | ₹1,280.05 | 5.0% | 1,711.0 | **52W Breakout** | **26** | 📝 **Sent on 30-May-2026** |
+| `RRKABEL` | R R Kabel Ltd | Cables - Power | ₹2,056.30 | 5.4% | 23,257.9 | **52W Breakout** | **25** | 📝 **Sent on 30-May-2026** |
+| `BLISSGVS` | Bliss Gvs Pharma Limited | Pharma - Formulators | ₹425.30 | 7.17% | 4,499.2 | **52W Breakout** | **25** | _Pending separate pipeline run_ |
+| `WOCKPHARMA` | Wockhardt Limited | Pharma - Formulators | ₹2,031.40 | 14.7% | 33,008.7 | **52W Breakout** | **24** | _Pending separate pipeline run_ |
 | `AVALON` | Avalon Technologies Ltd | Consumer Electronics - EMS | ₹1,520.50 | 1.56% | 10,151.8 | **52W Breakout** | **24** | _Pending separate pipeline run_ |
 | `CEMPRO` | Cemindia Projects Ltd | Infra - Construction & Contracting | ₹1,071.15 | 7.88% | 18,401.0 | **52W Breakout** | **23** | _Pending separate pipeline run_ |
-| `POWERINDIA` | Hitachi Energy India Ltd | Electrical Equipments/HVDC | ₹38,445.00 | 2.38% | 171,358.5 | **52W Breakout** | **22** | _Pending separate pipeline run_ |
 | `GVT&D` | GE Vernova T&D India Ltd | Electrical Equipments/HVDC | ₹5,148.60 | 1.0% | 131,828.1 | **52W Breakout** | **22** | _Pending separate pipeline run_ |
-| `INDOBORAX` | Indo Borax & Chemicals Ltd | Chemicals - Inorganic | ₹344.20 | 3.97% | 1,104.5 | **52W Breakout** | **21** | _Pending separate pipeline run_ |
-| `ASTRAMICRO` | Astra Microwave Products Limited | Aerospace & Defence - Equipments | ₹1,401.70 | 0.31% | 13,308.4 | **52W Breakout** | **21** | _Pending separate pipeline run_ |
+| `POWERINDIA` | Hitachi Energy India Ltd | Electrical Equipments/HVDC | ₹38,445.00 | 2.38% | 171,358.5 | **52W Breakout** | **22** | _Pending separate pipeline run_ |
 | `GVPIL` | GE Power India Ltd | Infra - General | ₹865.15 | 4.72% | 5,816.2 | **52W Breakout** | **21** | _Pending separate pipeline run_ |
-| `NETWEB` | Netweb Technologies India Ltd | Data Centre | ₹4,670.70 | 14.7% | 26,595.3 | **52W Breakout** | **20** | _Pending separate pipeline run_ |
+| `ASTRAMICRO` | Astra Microwave Products Limited | Aerospace & Defence - Equipments | ₹1,401.70 | 0.31% | 13,308.4 | **52W Breakout** | **21** | _Pending separate pipeline run_ |
+| `INDOBORAX` | Indo Borax & Chemicals Ltd | Chemicals - Inorganic | ₹344.20 | 3.97% | 1,104.5 | **52W Breakout** | **21** | _Pending separate pipeline run_ |
 | `STLTECH` | Sterlite Technologies Limited | Cables - Telecom | ₹536.15 | 4.99% | 26,171.2 | **52W Breakout** | **20** | _Pending separate pipeline run_ |
+| `NETWEB` | Netweb Technologies India Ltd | Data Centre | ₹4,670.70 | 14.7% | 26,595.3 | **52W Breakout** | **20** | _Pending separate pipeline run_ |
 | `SJS` | S J S Enterprises Ltd | Auto Ancillaries - Diversified | ₹2,105.20 | 3.25% | 6,736.0 | **52W Breakout** | **19** | _Pending separate pipeline run_ |
 
 ---

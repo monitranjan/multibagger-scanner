@@ -1,13 +1,23 @@
 [
   {
-    "symbol": "SIGMAADV",
-    "company": "Sigma Advanced System Ltd",
-    "industry": "Aerospace & Defence - Equipments",
-    "close": 424.8,
-    "return_1d": 4.99,
-    "mcap_cr": 7486.66,
+    "symbol": "SUPRIYA",
+    "company": "Supriya Lifescience Ltd",
+    "industry": "Pharma - API & CRAMS",
+    "close": 968.7,
+    "return_1d": 20.0,
+    "mcap_cr": 7796.37,
     "signal": "52W Breakout",
-    "scans_count": 32
+    "scans_count": 30
+  },
+  {
+    "symbol": "ACUTAAS",
+    "company": "Acutaas Chemicals Ltd",
+    "industry": "Pharma - API & CRAMS",
+    "close": 3132.5,
+    "return_1d": 4.4,
+    "mcap_cr": 25646.13,
+    "signal": "52W Breakout",
+    "scans_count": 27
   },
   {
     "symbol": "VENUSREM",
@@ -30,6 +40,26 @@
     "scans_count": 25
   },
   {
+    "symbol": "BLISSGVS",
+    "company": "Bliss Gvs Pharma Limited",
+    "industry": "Pharma - Formulators",
+    "close": 425.3,
+    "return_1d": 7.17,
+    "mcap_cr": 4499.21,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "WOCKPHARMA",
+    "company": "Wockhardt Limited",
+    "industry": "Pharma - Formulators",
+    "close": 2031.4,
+    "return_1d": 14.7,
+    "mcap_cr": 33008.66,
+    "signal": "52W Breakout",
+    "scans_count": 24
+  },
+  {
     "symbol": "AVALON",
     "company": "Avalon Technologies Ltd",
     "industry": "Consumer Electronics - EMS",
@@ -50,16 +80,6 @@
     "scans_count": 23
   },
   {
-    "symbol": "POWERINDIA",
-    "company": "Hitachi Energy India Ltd",
-    "industry": "Electrical Equipments/HVDC",
-    "close": 38445.0,
-    "return_1d": 2.38,
-    "mcap_cr": 171358.45,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
     "symbol": "GVT&D",
     "company": "GE Vernova T&D India Ltd",
     "industry": "Electrical Equipments/HVDC",
@@ -70,12 +90,22 @@
     "scans_count": 22
   },
   {
-    "symbol": "INDOBORAX",
-    "company": "Indo Borax & Chemicals Ltd",
-    "industry": "Chemicals - Inorganic",
-    "close": 344.2,
-    "return_1d": 3.97,
-    "mcap_cr": 1104.54,
+    "symbol": "POWERINDIA",
+    "company": "Hitachi Energy India Ltd",
+    "industry": "Electrical Equipments/HVDC",
+    "close": 38445.0,
+    "return_1d": 2.38,
+    "mcap_cr": 171358.45,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "GVPIL",
+    "company": "GE Power India Ltd",
+    "industry": "Infra - General",
+    "close": 865.15,
+    "return_1d": 4.72,
+    "mcap_cr": 5816.18,
     "signal": "52W Breakout",
     "scans_count": 21
   },
@@ -90,24 +120,14 @@
     "scans_count": 21
   },
   {
-    "symbol": "GVPIL",
-    "company": "GE Power India Ltd",
-    "industry": "Infra - General",
-    "close": 865.15,
-    "return_1d": 4.72,
-    "mcap_cr": 5816.18,
+    "symbol": "INDOBORAX",
+    "company": "Indo Borax & Chemicals Ltd",
+    "industry": "Chemicals - Inorganic",
+    "close": 344.2,
+    "return_1d": 3.97,
+    "mcap_cr": 1104.54,
     "signal": "52W Breakout",
     "scans_count": 21
-  },
-  {
-    "symbol": "NETWEB",
-    "company": "Netweb Technologies India Ltd",
-    "industry": "Data Centre",
-    "close": 4670.7,
-    "return_1d": 14.7,
-    "mcap_cr": 26595.29,
-    "signal": "52W Breakout",
-    "scans_count": 20
   },
   {
     "symbol": "STLTECH",
@@ -116,6 +136,16 @@
     "close": 536.15,
     "return_1d": 4.99,
     "mcap_cr": 26171.23,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "NETWEB",
+    "company": "Netweb Technologies India Ltd",
+    "industry": "Data Centre",
+    "close": 4670.7,
+    "return_1d": 14.7,
+    "mcap_cr": 26595.29,
     "signal": "52W Breakout",
     "scans_count": 20
   },
