@@ -97,7 +97,7 @@ YOUR RATING: BUY
         "in the Gemini text generation engine and crash the process. Make every table row compact, with exactly one space on each side of the text."
     )
     
-    def call_gemini_with_retry(payload, max_retries=5, initial_delay=5):
+    def call_gemini_with_retry(payload, max_retries=8, initial_delay=12):
         delay = initial_delay
         for attempt in range(1, max_retries + 1):
             try:
@@ -154,8 +154,8 @@ YOUR RATING: BUY
         raise RuntimeError("Failed to generate Stage 1 report.")
     part1_text = res_json1["candidates"][0]["content"]["parts"][0]["text"].strip()
     
-    # Space requests to protect free tier limits
-    time.sleep(5)
+    # Space requests to protect free tier limits (increased to 12s to prevent RPM limits)
+    time.sleep(12)
     
     # --- STAGE 2: SECTIONS 7 TO 10B ---
     print(f"🚀 [STAGE 2/3] Compiling valuations, risks & weekly technical setup (Sections 7-10B) for {symbol}...")
@@ -212,8 +212,8 @@ Here are the exact financial numbers established in Part 1 for consistency:
         raise RuntimeError("Failed to generate Stage 2 report.")
     part2_text = res_json2["candidates"][0]["content"]["parts"][0]["text"].strip()
     
-    # Space requests to protect free tier limits
-    time.sleep(5)
+    # Space requests to protect free tier limits (increased to 12s to prevent RPM limits)
+    time.sleep(12)
     
     # --- STAGE 3: APPENDIX (CONCALL BRIEF) & DISCLAIMER ---
     print(f"🚀 [STAGE 3/3] Compiling quarterly earnings concall appendix & disclaimer for {symbol}...")
@@ -553,11 +553,11 @@ def main() -> None:
             
         print(f"✍️  [COMPILING] No report found for {symbol} in the current calendar quarter.")
         
-        # Add a 35-second delay between consecutive compiles to safely stay under the Free Tier rate limit of 2 RPM
+        # Add a 45-second delay between consecutive compiles to safely stay under the Free Tier rate limit of 2 RPM
         if reports_compiled > 0:
             import time
-            print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (35s delay)...")
-            time.sleep(35)
+            print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (45s delay)...")
+            time.sleep(45)
             
         print(f"Requesting Gemini AI to generate full Wheels-style equity research report...")
         reports_compiled += 1
@@ -609,8 +609,8 @@ def main() -> None:
                 
                 if reports_compiled > 0:
                     import time
-                    print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (35s delay)...")
-                    time.sleep(35)
+                    print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (45s delay)...")
+                    time.sleep(45)
                     
                 reports_compiled += 1
                 
