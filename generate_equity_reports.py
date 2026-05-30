@@ -502,11 +502,11 @@ def main() -> None:
     today_str = today.strftime("%d %b %Y")
     date_suffix = today.strftime("%Y-%m-%d")
     
-    print(f"Found {len(confluence_3_rows)} triple-confluence candidates. Processing top 3 confluences...")
+    print(f"Found {len(confluence_3_rows)} triple-confluence candidates. Processing all candidates...")
     
-    # Process top 3 confluences to keep speed high and costs optimal
+    # Process all confluences to keep speed high and costs optimal
     reports_compiled = 0
-    for r in confluence_3_rows[:3]:
+    for r in confluence_3_rows:
         symbol = r["symbol"]
         company = r["company"]
         
@@ -547,6 +547,62 @@ def main() -> None:
         except Exception as e:
             print(f"❌ [FAILED] Error generating report for {symbol}: {e}")
             
+    # Load and process emerging leaders (save file & output to log ONLY, no emails)
+    emerg_json_path = Path("outputs") / "today_emerging.json"
+    if emerg_json_path.exists():
+        try:
+            with open(emerg_json_path, "r") as f:
+                emerging_rows = json.load(f)
+        except Exception as e:
+            print(f"⚠️ Error loading emerging leaders list: {e}")
+            emerging_rows = []
+            
+        if emerging_rows:
+            print("\n" + "="*80)
+            print(f"🚀 Found {len(emerging_rows)} emerging leaders. Processing and logging reports...")
+            print("="*80)
+            
+            for r in emerging_rows:
+                symbol = r["symbol"]
+                company = r["company"]
+                
+                print(f"\n🔍 Checking report status for Emerging Leader: `{symbol}` ({company})...")
+                
+                exists, quarter_info = check_existing_quarter_report(symbol, reports_dir, today)
+                if exists:
+                    print(f"⏭️  [SKIPPED] A report for emerging leader {symbol} exists in current quarter: {quarter_info}.")
+                    continue
+                    
+                print(f"✍️  [COMPILING] Compiling report for emerging leader {symbol}...")
+                
+                if reports_compiled > 0:
+                    import time
+                    print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (35s delay)...")
+                    time.sleep(35)
+                    
+                reports_compiled += 1
+                
+                try:
+                    report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str)
+                    report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
+                    
+                    with open(report_file, "w") as f:
+                        f.write(report_text)
+                        
+                    print(f"✅ [SUCCESS] Saved report to file: {report_file}")
+                    
+                    # Output the full report to console/log
+                    print(f"\n" + "="*80)
+                    print(f"📄 [EMERGING LEADER REPORT LOG] {symbol} ({company})")
+                    print(f"="*80)
+                    print(report_text)
+                    print(f"="*80 + "\n")
+                    
+                except Exception as e:
+                    print(f"❌ [FAILED] Error generating report for emerging leader {symbol}: {e}")
+    else:
+        print("\nℹ️ No emerging leaders list found at outputs/today_emerging.json. Skipping.")
+
     print("\n" + "="*80)
     print("🏆 Deep Equity Research Report compilation process complete!")
     print("="*80)

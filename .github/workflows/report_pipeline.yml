@@ -32,6 +32,9 @@ jobs:
     - name: Generate Deep Equity Research Reports
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GMAIL_USER: ${{ secrets.GMAIL_USER }}
+        GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+        ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports
         python generate_equity_reports.py

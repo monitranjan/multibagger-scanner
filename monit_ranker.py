@@ -1104,6 +1104,15 @@ def generate_automated_reports(
         print(f"✅ Saved today's confluences list to: {confl_json_path}")
     except Exception as e:
         print(f"⚠️ Error saving today's confluences list JSON: {e}")
+
+    # Save the emerging leaders list to a JSON file for the separate report pipeline
+    try:
+        emerg_json_path = Path("outputs") / "today_emerging.json"
+        with open(emerg_json_path, "w") as f:
+            json.dump(emerging_rows, f, indent=2)
+        print(f"✅ Saved today's emerging leaders list to: {emerg_json_path}")
+    except Exception as e:
+        print(f"⚠️ Error saving today's emerging leaders list JSON: {e}")
         
     # 4. Format the HTML report content for Gmail
     html_confl_rows = ""
