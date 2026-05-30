@@ -48,6 +48,7 @@ jobs:
         python -u monit_ranker.py
 
     - name: Commit and Push Database and Generated Reports
+      if: always()
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"

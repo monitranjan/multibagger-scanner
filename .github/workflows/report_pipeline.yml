@@ -40,6 +40,7 @@ jobs:
         python -u generate_equity_reports.py
 
     - name: Commit and Push Newly Compiled Reports
+      if: always()
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
