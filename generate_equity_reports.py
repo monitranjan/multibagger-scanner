@@ -565,6 +565,7 @@ def main() -> None:
     
     # Process all confluences to keep speed high and costs optimal
     reports_compiled = 0
+    consecutive_failures = 0
     for r in confluence_3_rows:
         symbol = r["symbol"]
         company = r["company"]
@@ -601,6 +602,9 @@ def main() -> None:
             # Commit and push immediately to preserve progress
             git_commit_and_push(symbol, report_file)
             
+            # Reset consecutive failure counter on success
+            consecutive_failures = 0
+            
             # Send separate dedicated email with the report
             try:
                 send_report_email(symbol, company, report_text)
@@ -608,6 +612,10 @@ def main() -> None:
                 print(f"⚠️  Error sending separate email for {symbol}: {mail_err}")
         except Exception as e:
             print(f"❌ [FAILED] Error generating report for {symbol}: {e}")
+            consecutive_failures += 1
+            if consecutive_failures >= 3:
+                print("\n❌ [CRITICAL] 3 consecutive report generation failures occurred. Terminating pipeline to protect API quota.")
+                sys.exit(1)
             
     # Load and process emerging leaders (save file & output to log ONLY, no emails)
     emerg_json_path = Path("outputs") / "today_emerging.json"
@@ -656,6 +664,9 @@ def main() -> None:
                     # Commit and push immediately to preserve progress
                     git_commit_and_push(symbol, report_file)
                     
+                    # Reset consecutive failure counter on success
+                    consecutive_failures = 0
+                    
                     # Output the full report to console/log
                     print(f"\n" + "="*80)
                     print(f"📄 [EMERGING LEADER REPORT LOG] {symbol} ({company})")
@@ -665,6 +676,10 @@ def main() -> None:
                     
                 except Exception as e:
                     print(f"❌ [FAILED] Error generating report for emerging leader {symbol}: {e}")
+                    consecutive_failures += 1
+                    if consecutive_failures >= 3:
+                        print("\n❌ [CRITICAL] 3 consecutive report generation failures occurred. Terminating pipeline to protect API quota.")
+                        sys.exit(1)
     else:
         print("\nℹ️ No emerging leaders list found at outputs/today_emerging.json. Skipping.")
 
