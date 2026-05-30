@@ -40,7 +40,7 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        # Add only the generated reports directory
-        git add outputs/reports/
+        # Force add newly generated reports/markdowns if they exist, bypassing .gitignore
+        [ -d "outputs/reports" ] && git add -f outputs/reports/ || echo "No reports directory found to sync"
         # Commit only if changes exist
         git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-publish newly compiled equity reports [skip ci]" && git pull --rebase origin main && git push)
