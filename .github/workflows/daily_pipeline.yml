@@ -43,9 +43,9 @@ jobs:
         STOCKSCANS_COOKIE: ${{ secrets.STOCKSCANS_COOKIE }}
       run: |
         # 1. Run scanner to fetch active signals
-        python scanner.py
+        python -u scanner.py
         # 2. Run ranker to compute database analytics, send documents, and compile the Excel sheet
-        python monit_ranker.py
+        python -u monit_ranker.py
 
     - name: Commit and Push Database and Generated Reports
       run: |

@@ -84,10 +84,18 @@ YOUR RATING: BUY
 12M TARGET: Rs. {cmp * 1.35:.2f} (derived 12-month target with +35% upside)
 """
     
-    # Dynamic model from environment - default to the stable, open gemini-2.5-flash-lite
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
+    # Dynamic model from environment - default to the stable, open gemini-2.5-flash
+    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
+
+    # Define a strict instruction to eradicate space repetition loops in tables
+    whitespace_rule = (
+        "CRITICAL WHITESPACE RULE: You MUST write all markdown tables in a single, highly compact line per row "
+        "(e.g., | Particulars | FY24A |). Absolutely DO NOT pad cells with multiple space characters or insert tabs to align the pipe "
+        "characters ('|') vertically. Trailing or leading spaces inside table cells are strictly forbidden as they trigger infinite loops "
+        "in the Gemini text generation engine and crash the process. Make every table row compact, with exactly one space on each side of the text."
+    )
     
     def call_gemini_with_retry(payload, max_retries=5, initial_delay=5):
         delay = initial_delay
@@ -122,7 +130,8 @@ YOUR RATING: BUY
         f"   - SECTION 5 — MANAGEMENT QUALITY & CAPITAL ALLOCATION\n"
         f"   - SECTION 6 — FINANCIAL DEEP-DIVE (Income Statement, Balance Sheet, Cash Flow tables with commentary)\n"
         f"2. STOP IMMEDIATELY after completing SECTION 6. Do NOT write anything for Section 7, 8, 9, 10, 10B, or the Appendix.\n"
-        f"3. Apply all style rules. For all financial tables, place clickable Screener.in verification links directly BELOW the table. Keep table cells compact.\n\n"
+        f"3. Apply all style rules. For all financial tables, place clickable Screener.in verification links directly BELOW the table. Keep table cells compact.\n"
+        f"4. {whitespace_rule}\n\n"
         f"Apply the above structure and guidelines to produce PART 1 of the equity research report for the following company:\n\n"
         f"{metadata}"
     )
@@ -141,17 +150,19 @@ YOUR RATING: BUY
     # --- STAGE 2: SECTIONS 7 TO 10B ---
     print(f"🚀 [STAGE 2/3] Compiling valuations, risks & weekly technical setup (Sections 7-10B) for {symbol}...")
     
-    # Extract compact context from Part 1
+    # Extract compact context from Part 1 with robust continuity guards
     lines = part1_text.splitlines()
     header_lines = []
     for line in lines:
-        if "SECTION 2" in line:
+        if "SECTION 2" in line or ("### SECTION" in line and "HEADER" not in line):
             break
         header_lines.append(line)
     header_context = "\n".join(header_lines).strip()
-    
+    if not header_context:
+        header_context = metadata.strip()
+        
     table1_match = re.search(r"(\*\*TABLE 1 — Income Statement\*\*.*?(?=\*\*TABLE 2|$))", part1_text, re.DOTALL)
-    table1_context = table1_match.group(1).strip() if table1_match else ""
+    table1_context = table1_match.group(1).strip() if table1_match else "Income statement data was truncated in part 1. Please generate earnings checklist and valuation based on general sector metrics and stock metadata."
     
     compact_context = f"""
 {header_context}
@@ -174,7 +185,8 @@ Here are the exact financial numbers established in Part 1 for consistency:
         f"3. START DIRECTLY with the header '### SECTION 7 — EARNINGS QUALITY CHECKLIST'. Do NOT repeat any header, metadata, or content from PART 1.\n"
         f"4. STOP IMMEDIATELY after completing SECTION 10B. Do NOT write anything for the Appendix.\n"
         f"5. Maintain absolute consistency with the numbers, estimates, and ratings established in PART 1.\n"
-        f"6. Apply all style rules. Keep table columns compact and do not pad with trailing spaces.\n\n"
+        f"6. Apply all style rules. Keep table columns compact and do not pad with trailing spaces.\n"
+        f"7. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 for consistency:\n"
         f"--- START OF PART 1 CONTEXT ---\n"
         f"{compact_context}\n"
@@ -202,11 +214,13 @@ Here are the exact financial numbers established in Part 1 for consistency:
     for line in part2_lines:
         if "### SECTION 8 — VALUATION" in line or "SECTION 8" in line:
             capture = True
-        if "### SECTION 9" in line:
+        if "### SECTION 9" in line or "SECTION 9" in line:
             capture = False
         if capture:
             valuation_lines.append(line)
     valuation_context = "\n".join(valuation_lines).strip()
+    if not valuation_context:
+        valuation_context = "Valuation metrics were truncated in part 2. Please establish the concall signals and final analyst verdict in consistency with a standard BUY rating."
     
     compact_context_part3 = f"""
 {header_context}
@@ -220,6 +234,12 @@ Here is the Valuation context established in Part 2 for consistency:
 {valuation_context}
 """
     
+    concall_constraint = (
+        "CRITICAL VOLUME CONSTRAINT: Keep the APPENDIX — LATEST CONCALL BRIEF extremely dense, fact-focused, and concise. "
+        "The entire Part 3 (including the concall appendix and global disclaimer) MUST be under 800 words total. Summarize each of "
+        "the 10 sub-sections in 1-2 punchy sentences. Do not use filler words. This is mandatory to prevent truncation."
+    )
+
     part3_prompt = (
         f"{prompt_template}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR PART 3:\n"
@@ -229,7 +249,9 @@ Here is the Valuation context established in Part 2 for consistency:
         f"   - GLOBAL STYLE RULES & DISCLAIMER\n"
         f"3. START DIRECTLY with the header '### APPENDIX — LATEST CONCALL BRIEF'. Do NOT repeat any header, metadata, or content from PART 1 or PART 2.\n"
         f"4. Maintain absolute consistency with the numbers, estimates, valuations, and ratings established in PART 1 and PART 2.\n"
-        f"5. Apply all style rules. Keep table columns compact.\n\n"
+        f"5. Apply all style rules. Keep table columns compact.\n"
+        f"6. {whitespace_rule}\n"
+        f"7. {concall_constraint}\n\n"
         f"Here is the context of PART 1 and PART 2 for consistency:\n"
         f"--- START OF CONTEXT ---\n"
         f"{compact_context_part3}\n"

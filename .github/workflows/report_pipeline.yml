@@ -37,7 +37,7 @@ jobs:
         ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports
-        python generate_equity_reports.py
+        python -u generate_equity_reports.py
 
     - name: Commit and Push Newly Compiled Reports
       run: |
