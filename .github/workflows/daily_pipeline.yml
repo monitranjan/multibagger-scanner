@@ -52,6 +52,6 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         # Force add database file and newly generated reports/markdowns
-        git add logs/backtest.db outputs/
+        git add -f logs/backtest.db outputs/
         # Commit only if changes exist
         git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync database and confluence reports [skip ci]" && git pull --rebase origin main && git push)
