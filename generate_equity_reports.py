@@ -484,6 +484,33 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
     except Exception as e:
         print(f"❌ Failed to deliver dedicated report email for {symbol}: {e}")
 
+def git_commit_and_push(symbol: str, report_file: Path) -> None:
+    """Commit and push a newly generated report immediately to prevent losing progress if the pipeline is cancelled or fails later."""
+    import subprocess
+    try:
+        print(f"📦 [GIT] Syncing {symbol} report to remote repository...")
+        # Configure user details locally to prevent commit blocks on fresh VMs
+        subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=False)
+        subprocess.run(["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"], check=False)
+        
+        # Add the report file
+        subprocess.run(["git", "add", "-f", str(report_file)], check=True)
+        
+        # Check if there is anything to commit
+        diff_res = subprocess.run(["git", "diff", "--quiet", "--staged"], check=False)
+        if diff_res.returncode != 0:
+            # Commit the staged file
+            subprocess.run(["git", "commit", "-m", f"chore: auto-publish equity report for {symbol} [skip ci]"], check=True)
+            # Rebase autostash pull to ensure we integrate any concurrent remote updates safely
+            subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=True)
+            # Push to the remote branch
+            subprocess.run(["git", "push", "origin", "main"], check=True)
+            print(f"🚀 [GIT] Successfully synced {symbol} report to GitHub!")
+        else:
+            print(f"ℹ️ [GIT] No changes detected for {symbol} report (already synced).")
+    except Exception as e:
+        print(f"⚠️ [GIT WARNING] Failed to auto-sync {symbol} report: {e}")
+
 def main() -> None:
     print("="*80)
     print("🌟🚀 AUTOMATED MONIT DEEP EQUITY RESEARCH PIPELINE 🚀🌟")
@@ -571,6 +598,9 @@ def main() -> None:
                 
             print(f"✅ [SUCCESS] Saved report: {report_file}")
             
+            # Commit and push immediately to preserve progress
+            git_commit_and_push(symbol, report_file)
+            
             # Send separate dedicated email with the report
             try:
                 send_report_email(symbol, company, report_text)
@@ -622,6 +652,9 @@ def main() -> None:
                         f.write(report_text)
                         
                     print(f"✅ [SUCCESS] Saved report to file: {report_file}")
+                    
+                    # Commit and push immediately to preserve progress
+                    git_commit_and_push(symbol, report_file)
                     
                     # Output the full report to console/log
                     print(f"\n" + "="*80)
