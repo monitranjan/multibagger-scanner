@@ -95,7 +95,7 @@ def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetim
     return False, ""
 
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
-    """Invoke the Gemini API in two distinct stages to guarantee complete, non-truncated reports."""
+    """Invoke the Gemini API in three distinct stages to guarantee complete, non-truncated reports."""
     symbol = r["symbol"]
     company = r["company"]
     sector = r["industry"]
@@ -150,35 +150,36 @@ YOUR RATING: BUY
                 delay *= 2
         return None
 
-    # Split the prompt template to create highly clean, separate guidelines for Stage 1 and Stage 2
-    prompt_parts = prompt_template.split("### SECTION 8 — VALUATION")
-    stage1_guidelines = prompt_parts[0].strip()
+    # Split prompt template into three clean stages
+    parts1 = prompt_template.split("### SECTION 6 — FINANCIAL DEEP-DIVE")
+    stage1_guidelines = parts1[0].strip()
     
-    # Re-stitch SECTION 8 to the rest for Stage 2
-    stage2_guidelines = "### SECTION 8 — VALUATION\n" + prompt_parts[1].strip()
+    parts2 = parts1[1].split("### SECTION 8 — VALUATION")
+    stage2_guidelines = "### SECTION 6 — FINANCIAL DEEP-DIVE" + parts2[0].strip()
+    stage3_guidelines = "### SECTION 8 — VALUATION" + parts2[1].strip()
     
-    # Extract Global Style Rules to append to Stage 1 guidelines for formatting consistency
+    # Extract Global Style Rules to append to Stage 1 and Stage 2 guidelines for table formatting consistency
     global_rules = ""
     global_rules_match = re.search(r"(GLOBAL STYLE RULES:.*)", prompt_template, re.DOTALL)
     if global_rules_match:
         global_rules = global_rules_match.group(1).strip()
         stage1_guidelines = stage1_guidelines + "\n\n" + global_rules
+        stage2_guidelines = stage2_guidelines + "\n\n" + global_rules
 
-    # --- STAGE 1: CORE SECTIONS 1 TO 7 ---
+    # --- STAGE 1: SECTIONS 1 TO 5 ---
     stage1_prompt = (
         f"{stage1_guidelines}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 1:\n"
         f"1. You are tasked with generating PART 1 of the equity research report for {company} ({symbol}).\n"
-        f"2. You MUST ONLY generate from the beginning up to the end of 'SECTION 7 — EARNINGS QUALITY CHECKLIST'.\n"
-        f"3. Under no circumstances should you generate SECTION 8 or beyond in this call. Stop generating immediately after Section 7.\n"
+        f"2. You MUST ONLY generate the HEADER BLOCK and SECTIONS 2 to 5.\n"
+        f"3. Under no circumstances should you generate SECTION 6 or beyond in this call. Stop generating immediately after Section 5.\n"
         f"4. Format the Header Block metrics as exactly two wide horizontal tables stacked vertically.\n"
-        f"5. Compile the detailed Income Statement, Balance Sheet, and Cash Flow tables in Section 6, and the 8-metric Green/Amber/Red table in Section 7.\n"
-        f"6. {whitespace_rule}\n\n"
-        f"Generate PART 1 (Header Block up to end of Section 7) for:\n\n"
+        f"5. {whitespace_rule}\n\n"
+        f"Generate PART 1 (Header Block up to end of Section 5) for:\n\n"
         f"{metadata}"
     )
 
-    print(f"🤖 [STAGE 1] Requesting Gemini to generate core financials and thesis...")
+    print(f"🤖 [STAGE 1] Requesting Gemini to generate core moats & landscape...")
     res_json1 = call_gemini_with_retry({
         "contents": [{"parts": [{"text": stage1_prompt}]}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
@@ -189,27 +190,24 @@ YOUR RATING: BUY
         
     part1_text = res_json1["candidates"][0]["content"]["parts"][0]["text"].strip()
     
-    # --- STAGE 2: SECTIONS 8 TO DISCLAIMER ---
+    # --- STAGE 2: SECTIONS 6 TO 7 ---
     stage2_prompt = (
         f"{stage2_guidelines}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 2:\n"
         f"1. You are tasked with generating PART 2 of the equity research report for {company} ({symbol}).\n"
-        f"2. You MUST cover the remaining sections: SECTION 8 (Valuation grid & narrative), SECTION 9 (Risks matrix), SECTION 10 (Recommendation zones), SECTION 10B (Technical Chart Levels and weekly EMAs), APPENDIX (Latest Concall Brief), and Global Disclaimer.\n"
-        f"3. START DIRECTLY with the header '### SECTION 8 — VALUATION'. Do NOT repeat any header, title, metadata, or preceding sections.\n"
-        f"4. Maintain absolute mathematical and analytical consistency with the rating, prices, and metrics established in PART 1.\n"
-        f"5. CRITICAL DENSITY RULE: You MUST keep all Stage 2 sections extremely dense and concise to prevent text truncation:\n"
-        f"   - SECTION 9 (Key Risks): List exactly 5-6 core risks with a 1-line description and 1-line monitoring metric each.\n"
-        f"   - SECTION 10B (Technical EMAs & Chart Levels): Provide highly precise, compact, single-line answers for all indicators.\n"
-        f"   - APPENDIX (Latest Concall Brief): Summarize each of the 10 subsections in exactly 1-2 punchy, data-filled bullet points. Keep it extremely dense and free of empty transition phrases.\n"
+        f"2. You MUST cover the following sections: SECTION 6 (Financial Statements: Income Statement, Balance Sheet, and Cash Flow tables + commentary) and SECTION 7 (Earnings Quality Checklist Green/Amber/Red table).\n"
+        f"3. START DIRECTLY with the header '### SECTION 6 — FINANCIAL DEEP-DIVE (CONSOLIDATED)'. Do NOT repeat any header, title, metadata, or preceding sections.\n"
+        f"4. Under no circumstances should you generate SECTION 8 or beyond in this call. Stop generating immediately after Section 7.\n"
+        f"5. Maintain absolute mathematical and analytical consistency with the rating, prices, and metrics established in PART 1.\n"
         f"6. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 generated previously for consistency:\n"
         f"--- START OF PART 1 CONTEXT ---\n"
         f"{part1_text}\n"
         f"--- END OF PART 1 CONTEXT ---\n\n"
-        f"Now, generate PART 2 (starting from ### SECTION 8 — VALUATION) for {company} ({symbol}):"
+        f"Now, generate PART 2 (starting from ### SECTION 6 — FINANCIAL DEEP-DIVE) for {company} ({symbol}):"
     )
 
-    print(f"🤖 [STAGE 2] Requesting Gemini to generate valuation, technicals & appendix...")
+    print(f"🤖 [STAGE 2] Requesting Gemini to generate financial statements & quality checklist...")
     res_json2 = call_gemini_with_retry({
         "contents": [{"parts": [{"text": stage2_prompt}]}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
@@ -220,8 +218,39 @@ YOUR RATING: BUY
         
     part2_text = res_json2["candidates"][0]["content"]["parts"][0]["text"].strip()
     
-    # Combine both parts beautifully
-    full_report = part1_text + "\n\n" + part2_text
+    # --- STAGE 3: SECTIONS 8 TO DISCLAIMER ---
+    stage3_prompt = (
+        f"{stage3_guidelines}\n\n"
+        f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 3:\n"
+        f"1. You are tasked with generating PART 3 of the equity research report for {company} ({symbol}).\n"
+        f"2. You MUST cover the remaining sections: SECTION 8 (Valuation scenarios), SECTION 9 (Key Risks), SECTION 10 (Recommendations), SECTION 10B (Technical Chart Levels EMA map), APPENDIX (Latest Concall Brief), and Global Disclaimer.\n"
+        f"3. START DIRECTLY with the header '### SECTION 8 — VALUATION'. Do NOT repeat any header, title, metadata, or preceding sections from PART 1 or PART 2.\n"
+        f"4. Maintain absolute mathematical and analytical consistency with the rating and financials established in PART 1 and PART 2.\n"
+        f"5. CRITICAL DENSITY RULE: Keep all Stage 3 sections extremely dense and concise to prevent text truncation:\n"
+        f"   - SECTION 9 (Key Risks): List exactly 5-6 core risks with a 1-line description and 1-line monitoring metric each.\n"
+        f"   - SECTION 10B (Technical EMAs & Chart Levels): Provide highly precise, compact, single-line answers for all indicators.\n"
+        f"   - APPENDIX (Latest Concall Brief): Summarize each of the 10 subsections in exactly 1-2 punchy, data-filled bullet points. Keep it extremely dense and free of empty transition phrases.\n"
+        f"6. {whitespace_rule}\n\n"
+        f"Here is the context of PART 1 and PART 2 generated previously for consistency:\n"
+        f"--- START OF CONTEXT ---\n"
+        f"{part1_text}\n\n{part2_text}\n"
+        f"--- END OF CONTEXT ---\n\n"
+        f"Now, generate PART 3 (starting from ### SECTION 8 — VALUATION) for {company} ({symbol}):"
+    )
+
+    print(f"🤖 [STAGE 3] Requesting Gemini to generate valuation, technicals & appendix...")
+    res_json3 = call_gemini_with_retry({
+        "contents": [{"parts": [{"text": stage3_prompt}]}],
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
+    })
+    
+    if not res_json3:
+        raise RuntimeError("Failed to generate Stage 3 report.")
+        
+    part3_text = res_json3["candidates"][0]["content"]["parts"][0]["text"].strip()
+    
+    # Combine all three parts beautifully
+    full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text
     return full_report
 
 
