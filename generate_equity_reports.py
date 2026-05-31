@@ -150,9 +150,23 @@ YOUR RATING: BUY
                 delay *= 2
         return None
 
+    # Split the prompt template to create highly clean, separate guidelines for Stage 1 and Stage 2
+    prompt_parts = prompt_template.split("### SECTION 8 — VALUATION")
+    stage1_guidelines = prompt_parts[0].strip()
+    
+    # Re-stitch SECTION 8 to the rest for Stage 2
+    stage2_guidelines = "### SECTION 8 — VALUATION\n" + prompt_parts[1].strip()
+    
+    # Extract Global Style Rules to append to Stage 1 guidelines for formatting consistency
+    global_rules = ""
+    global_rules_match = re.search(r"(GLOBAL STYLE RULES:.*)", prompt_template, re.DOTALL)
+    if global_rules_match:
+        global_rules = global_rules_match.group(1).strip()
+        stage1_guidelines = stage1_guidelines + "\n\n" + global_rules
+
     # --- STAGE 1: CORE SECTIONS 1 TO 7 ---
     stage1_prompt = (
-        f"{prompt_template}\n\n"
+        f"{stage1_guidelines}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 1:\n"
         f"1. You are tasked with generating PART 1 of the equity research report for {company} ({symbol}).\n"
         f"2. You MUST ONLY generate from the beginning up to the end of 'SECTION 7 — EARNINGS QUALITY CHECKLIST'.\n"
@@ -177,7 +191,7 @@ YOUR RATING: BUY
     
     # --- STAGE 2: SECTIONS 8 TO DISCLAIMER ---
     stage2_prompt = (
-        f"{prompt_template}\n\n"
+        f"{stage2_guidelines}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 2:\n"
         f"1. You are tasked with generating PART 2 of the equity research report for {company} ({symbol}).\n"
         f"2. You MUST cover the remaining sections: SECTION 8 (Valuation grid & narrative), SECTION 9 (Risks matrix), SECTION 10 (Recommendation zones), SECTION 10B (Technical Chart Levels and weekly EMAs), APPENDIX (Latest Concall Brief), and Global Disclaimer.\n"
