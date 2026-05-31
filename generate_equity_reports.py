@@ -300,10 +300,153 @@ YOUR RATING: BUY
     return full_report
 
 
+def markdown_to_html(md_text: str) -> str:
+    # Pre-process bold, links, and code blocks
+    md_text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", md_text)
+    md_text = re.sub(
+        r"\[(.*?)\]\((.*?)\)",
+        r'<a href="\2" style="color: #1b365d; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #1b365d;">\1</a>',
+        md_text
+    )
+    md_text = re.sub(
+        r"`(.*?)`",
+        r'<code style="background-color: #f4f6f9; color: #d63384; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 90%; font-weight: bold;">\1</code>',
+        md_text
+    )
+
+    html_lines = []
+    in_table = False
+    table_headers = []
+    table_rows = []
+    in_list = False
+
+    def format_html_table(headers, rows) -> str:
+        if not headers:
+            return ""
+        header_html = "".join([f'<th style="border: 1px solid #e2e8f0; padding: 10px 12px; background-color: #1b365d; color: white; font-weight: bold; text-align: left; font-size: 13px;">{h}</th>' for h in headers])
+        
+        row_html_list = []
+        for idx, r in enumerate(rows):
+            bg_color = "#f8f9fa" if idx % 2 == 1 else "#ffffff"
+            cells_html = []
+            for c in r:
+                # Align numeric cells to right
+                align = "right" if re.match(r"^[\d\.,₹\(\)\-\%x\s\:\/]+$", c.strip().replace("Rs.", "").replace("Rs", "")) else "left"
+                cells_html.append(f'<td style="border: 1px solid #e2e8f0; padding: 8px 12px; background-color: {bg_color}; font-size: 12.5px; text-align: {align}; color: #2d3748;">{c}</td>')
+            row_html_list.append(f'<tr>{"".join(cells_html)}</tr>')
+            
+        return f"""
+        <div style="overflow-x: auto; margin: 15px 0;">
+          <table style="border-collapse: collapse; width: 100%; border: 1px solid #e2e8f0; font-family: sans-serif;">
+            <thead>
+              <tr>{header_html}</tr>
+            </thead>
+            <tbody>
+              {"".join(row_html_list)}
+            </tbody>
+          </table>
+        </div>
+        """
+
+    lines = md_text.splitlines()
+    for line in lines:
+        line_strip = line.strip()
+        
+        # Close list if no longer in list
+        if in_list and not (line_strip.startswith("* ") or line_strip.startswith("- ")):
+            html_lines.append("</ul>")
+            in_list = False
+            
+        # 1. Handle dividers
+        if line_strip == "---" or line_strip == "──────────────────":
+            if in_table:
+                html_lines.append(format_html_table(table_headers, table_rows))
+                in_table = False
+                table_headers, table_rows = [], []
+            html_lines.append('<hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 25px 0;">')
+            continue
+            
+        # 2. Handle headers
+        if line_strip.startswith("####"):
+            if in_table:
+                html_lines.append(format_html_table(table_headers, table_rows))
+                in_table = False
+                table_headers, table_rows = [], []
+            h_text = line_strip.lstrip("#").strip()
+            html_lines.append(f'<h4 style="color: #2d3748; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #1b365d; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
+            continue
+        elif line_strip.startswith("###"):
+            if in_table:
+                html_lines.append(format_html_table(table_headers, table_rows))
+                in_table = False
+                table_headers, table_rows = [], []
+            h_text = line_strip.lstrip("#").strip()
+            html_lines.append(f'<h3 style="color: #1b365d; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
+            continue
+        elif line_strip.startswith("##"):
+            if in_table:
+                html_lines.append(format_html_table(table_headers, table_rows))
+                in_table = False
+                table_headers, table_rows = [], []
+            h_text = line_strip.lstrip("#").strip()
+            html_lines.append(f'<h3 style="color: #1b365d; font-size: 19px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
+            continue
+        elif line_strip.startswith("#"):
+            if in_table:
+                html_lines.append(format_html_table(table_headers, table_rows))
+                in_table = False
+                table_headers, table_rows = [], []
+            h_text = line_strip.lstrip("#").strip()
+            html_lines.append(f'<h2 style="color: #1b365d; font-size: 22px; border-bottom: 3px solid #1b365d; padding-bottom: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif; text-align: center;">{h_text}</h2>')
+            continue
+            
+        # 3. Handle tables
+        if line_strip.startswith("|") and line_strip.endswith("|"):
+            if ":---" in line_strip or "---:" in line_strip or "-|-" in line_strip:
+                continue
+            cells = [c.strip() for c in line_strip.split("|")[1:-1]]
+            if not in_table:
+                in_table = True
+                table_headers = cells
+                table_rows = []
+            else:
+                table_rows.append(cells)
+            continue
+        else:
+            if in_table:
+                html_lines.append(format_html_table(table_headers, table_rows))
+                in_table = False
+                table_headers, table_rows = [], []
+                
+        # 4. Handle lists
+        if line_strip.startswith("* ") or line_strip.startswith("- "):
+            if not in_list:
+                html_lines.append('<ul style="margin: 10px 0; padding-left: 20px; font-family: sans-serif;">')
+                in_list = True
+            item_text = line_strip[2:].strip()
+            html_lines.append(f'<li style="margin-bottom: 6px; line-height: 1.6; color: #4a5568; font-size: 14px;">{item_text}</li>')
+            continue
+            
+        # 5. Handle paragraphs
+        if line_strip:
+            if "Overall Earnings Quality Rating:" in line_strip or "CALL GRADE:" in line_strip:
+                html_lines.append(f'<div style="background-color: #f4f6f9; border-left: 4px solid #1b365d; padding: 12px; margin: 15px 0; border-radius: 4px; font-weight: bold; color: #1b365d; font-family: sans-serif;">{line_strip}</div>')
+            elif line_strip.startswith("COMPANY:") or line_strip.startswith("NSE TICKER:") or line_strip.startswith("SECTOR:"):
+                html_lines.append(f'<p style="line-height: 1.5; margin: 4px 0; color: #2d3748; font-size: 13.5px; font-family: sans-serif;">{line_strip}</p>')
+            else:
+                html_lines.append(f'<p style="line-height: 1.6; margin: 10px 0; color: #4a5568; font-size: 14px; font-family: sans-serif;">{line_strip}</p>')
+            
+    if in_table:
+        html_lines.append(format_html_table(table_headers, table_rows))
+    if in_list:
+        html_lines.append("</ul>")
+        
+    return "\n".join(html_lines)
+
+
 def send_report_email(symbol: str, company: str, report_md: str) -> None:
     """Send the newly generated research report as a beautifully rendered, inline HTML email body directly in Gmail (no attachments)."""
     import smtplib
-    import re
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
     
@@ -323,149 +466,6 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
     print(f"📧 Sending Beautiful Inline Research Report Email for {symbol} to: {', '.join(recipients)}...")
     today_str = date.today().strftime("%d %b %Y")
     
-    def markdown_to_html(md_text: str) -> str:
-        # Pre-process bold, links, and code blocks
-        md_text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", md_text)
-        md_text = re.sub(
-            r"\[(.*?)\]\((.*?)\)",
-            r'<a href="\2" style="color: #1b365d; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #1b365d;">\1</a>',
-            md_text
-        )
-        md_text = re.sub(
-            r"`(.*?)`",
-            r'<code style="background-color: #f4f6f9; color: #d63384; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 90%; font-weight: bold;">\1</code>',
-            md_text
-        )
-
-        html_lines = []
-        in_table = False
-        table_headers = []
-        table_rows = []
-        in_list = False
-
-        def format_html_table(headers, rows) -> str:
-            if not headers:
-                return ""
-            header_html = "".join([f'<th style="border: 1px solid #e2e8f0; padding: 10px 12px; background-color: #1b365d; color: white; font-weight: bold; text-align: left; font-size: 13px;">{h}</th>' for h in headers])
-            
-            row_html_list = []
-            for idx, r in enumerate(rows):
-                bg_color = "#f8f9fa" if idx % 2 == 1 else "#ffffff"
-                cells_html = []
-                for c in r:
-                    # Align numeric cells to right
-                    align = "right" if re.match(r"^[\d\.,₹\(\)\-\%x\s\:\/]+$", c.strip().replace("Rs.", "").replace("Rs", "")) else "left"
-                    cells_html.append(f'<td style="border: 1px solid #e2e8f0; padding: 8px 12px; background-color: {bg_color}; font-size: 12.5px; text-align: {align}; color: #2d3748;">{c}</td>')
-                row_html_list.append(f'<tr>{"".join(cells_html)}</tr>')
-                
-            return f"""
-            <div style="overflow-x: auto; margin: 15px 0;">
-              <table style="border-collapse: collapse; width: 100%; border: 1px solid #e2e8f0; font-family: sans-serif;">
-                <thead>
-                  <tr>{header_html}</tr>
-                </thead>
-                <tbody>
-                  {"".join(row_html_list)}
-                </tbody>
-              </table>
-            </div>
-            """
-
-        lines = md_text.splitlines()
-        for line in lines:
-            line_strip = line.strip()
-            
-            # Close list if no longer in list
-            if in_list and not (line_strip.startswith("* ") or line_strip.startswith("- ")):
-                html_lines.append("</ul>")
-                in_list = False
-                
-            # 1. Handle dividers
-            if line_strip == "---" or line_strip == "──────────────────":
-                if in_table:
-                    html_lines.append(format_html_table(table_headers, table_rows))
-                    in_table = False
-                    table_headers, table_rows = [], []
-                html_lines.append('<hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 25px 0;">')
-                continue
-                
-            # 2. Handle headers
-            if line_strip.startswith("####"):
-                if in_table:
-                    html_lines.append(format_html_table(table_headers, table_rows))
-                    in_table = False
-                    table_headers, table_rows = [], []
-                h_text = line_strip.lstrip("#").strip()
-                html_lines.append(f'<h4 style="color: #2d3748; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #1b365d; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
-                continue
-            elif line_strip.startswith("###"):
-                if in_table:
-                    html_lines.append(format_html_table(table_headers, table_rows))
-                    in_table = False
-                    table_headers, table_rows = [], []
-                h_text = line_strip.lstrip("#").strip()
-                html_lines.append(f'<h3 style="color: #1b365d; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
-                continue
-            elif line_strip.startswith("##"):
-                if in_table:
-                    html_lines.append(format_html_table(table_headers, table_rows))
-                    in_table = False
-                    table_headers, table_rows = [], []
-                h_text = line_strip.lstrip("#").strip()
-                html_lines.append(f'<h3 style="color: #1b365d; font-size: 19px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
-                continue
-            elif line_strip.startswith("#"):
-                if in_table:
-                    html_lines.append(format_html_table(table_headers, table_rows))
-                    in_table = False
-                    table_headers, table_rows = [], []
-                h_text = line_strip.lstrip("#").strip()
-                html_lines.append(f'<h2 style="color: #1b365d; font-size: 22px; border-bottom: 3px solid #1b365d; padding-bottom: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif; text-align: center;">{h_text}</h2>')
-                continue
-                
-            # 3. Handle tables
-            if line_strip.startswith("|") and line_strip.endswith("|"):
-                if ":---" in line_strip or "---:" in line_strip or "-|-" in line_strip:
-                    continue
-                cells = [c.strip() for c in line_strip.split("|")[1:-1]]
-                if not in_table:
-                    in_table = True
-                    table_headers = cells
-                    table_rows = []
-                else:
-                    table_rows.append(cells)
-                continue
-            else:
-                if in_table:
-                    html_lines.append(format_html_table(table_headers, table_rows))
-                    in_table = False
-                    table_headers, table_rows = [], []
-                    
-            # 4. Handle lists
-            if line_strip.startswith("* ") or line_strip.startswith("- "):
-                if not in_list:
-                    html_lines.append('<ul style="margin: 10px 0; padding-left: 20px; font-family: sans-serif;">')
-                    in_list = True
-                item_text = line_strip[2:].strip()
-                html_lines.append(f'<li style="margin-bottom: 6px; line-height: 1.6; color: #4a5568; font-size: 14px;">{item_text}</li>')
-                continue
-                
-            # 5. Handle paragraphs
-            if line_strip:
-                if "Overall Earnings Quality Rating:" in line_strip or "CALL GRADE:" in line_strip:
-                    html_lines.append(f'<div style="background-color: #f4f6f9; border-left: 4px solid #1b365d; padding: 12px; margin: 15px 0; border-radius: 4px; font-weight: bold; color: #1b365d; font-family: sans-serif;">{line_strip}</div>')
-                elif line_strip.startswith("COMPANY:") or line_strip.startswith("NSE TICKER:") or line_strip.startswith("SECTOR:"):
-                    html_lines.append(f'<p style="line-height: 1.5; margin: 4px 0; color: #2d3748; font-size: 13.5px; font-family: sans-serif;">{line_strip}</p>')
-                else:
-                    html_lines.append(f'<p style="line-height: 1.6; margin: 10px 0; color: #4a5568; font-size: 14px; font-family: sans-serif;">{line_strip}</p>')
-                
-        if in_table:
-            html_lines.append(format_html_table(table_headers, table_rows))
-        if in_list:
-            html_lines.append("</ul>")
-            
-        return "\n".join(html_lines)
-
     html_content = markdown_to_html(report_md)
     
     html_body = f"""
@@ -502,6 +502,146 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
         print(f"✅ Dedicated Inline Research Report Email sent successfully for {symbol}!")
     except Exception as e:
         print(f"❌ Failed to deliver dedicated report email for {symbol}: {e}")
+
+
+def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
+    """Send a consolidated summary email for all emerging leaders compiled today, containing collapsible accordion sections for each report."""
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    
+    gmail_user = os.environ.get("GMAIL_USER", "")
+    gmail_app_pass = os.environ.get("GMAIL_APP_PASS", "")
+    alert_email = os.environ.get("ALERT_EMAIL", gmail_user)
+    
+    if not (gmail_user and gmail_app_pass):
+        print("ℹ️  Email credentials not configured inside report pipeline. Skipping emerging digest email.")
+        return
+        
+    recipients = [e.strip() for e in alert_email.split(",") if e.strip()]
+    if not recipients:
+        print("⚠️  No valid recipients in ALERT_EMAIL. Skipping emerging digest email.")
+        return
+        
+    print(f"📧 Sending Consolidated Emerging Leaders Digest Email for {len(compiled_reports)} stocks to: {', '.join(recipients)}...")
+    today_str = date.today().strftime("%d %b %Y")
+    
+    # 1. Build the summary table rows
+    table_rows_html = []
+    for idx, item in enumerate(compiled_reports):
+        r = item["r"]
+        symbol = item["symbol"]
+        company = item["company"]
+        sector = r.get("industry", "N/A")
+        cmp = r.get("close", 0.0)
+        mcap = r.get("mcap_cr", 0.0)
+        
+        bg_color = "#f8f9fa" if idx % 2 == 1 else "#ffffff"
+        target_price = cmp * 1.35
+        
+        table_rows_html.append(f"""
+        <tr style="background-color: {bg_color};">
+          <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold; color: #1b365d; font-family: sans-serif;">{symbol}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #4a5568; font-family: sans-serif;">₹{mcap:,.1f} Cr</td>
+        </tr>
+        """)
+        
+    summary_table_html = f"""
+    <div style="overflow-x: auto; margin: 20px 0;">
+      <table style="border-collapse: collapse; width: 100%; border: 1px solid #e2e8f0;">
+        <thead>
+          <tr style="background-color: #1b365d; color: white;">
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Ticker</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Company Name</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Industry/Sector</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">CMP</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">12M Target</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">MCap (Cr)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {"".join(table_rows_html)}
+        </tbody>
+      </table>
+    </div>
+    """
+    
+    # 2. Build the Collapsible Accordion sections for each report
+    accordions_html = []
+    for item in compiled_reports:
+        symbol = item["symbol"]
+        company = item["company"]
+        report_md = item["report_md"]
+        
+        # Convert report markdown to beautiful HTML
+        report_html = markdown_to_html(report_md)
+        
+        accordions_html.append(f"""
+        <details style="border: 1px solid #e2e8f0; border-radius: 6px; margin: 20px 0; background-color: #fcfcfc; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+          <summary style="font-size: 15px; font-weight: bold; padding: 12px 15px; color: #1b365d; background-color: #f4f6f9; cursor: pointer; outline: none; border-radius: 6px; display: list-item; font-family: sans-serif;">
+            📈 {symbol} — {company} Research Report (Click to Expand/Collapse)
+          </summary>
+          <div style="padding: 20px; background-color: white; border-top: 1px solid #e2e8f0;">
+            {report_html}
+          </div>
+        </details>
+        """)
+        
+    html_body = f"""
+    <html>
+      <body style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fcfcfc;">
+        <div style="background-color: #2e7d32; color: white; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;">
+          <h2 style="margin: 0; letter-spacing: 1px;">🚀 DAILY MONIT EMERGING LEADERS DIGEST</h2>
+          <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">High-Conviction Momentum & Emerging Signals</p>
+        </div>
+        <div style="padding: 20px; background-color: white;">
+          <p style="line-height: 1.6; color: #4a5568; font-size: 14.5px; font-family: sans-serif;">
+            Our automated deep equity research engine has compiled and validated comprehensive Wheels-style research reports for today's **{len(compiled_reports)} emerging leader** candidates.
+          </p>
+          
+          <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
+          {summary_table_html}
+          
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
+          
+          <h3 style="color: #1b365d; margin-bottom: 10px; font-family: sans-serif;">👇 Collapsible Detailed Reports</h3>
+          <p style="font-size: 12.5px; color: #718096; margin-bottom: 15px; font-style: italic; font-family: sans-serif;">
+            Click on any stock banner below to instantly expand the full 12-section institutional equity research report.
+          </p>
+          
+          {"".join(accordions_html)}
+        </div>
+        <div style="background-color: #f4f6f9; text-align: center; padding: 15px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px; border-top: 1px solid #e2e8f0;">
+          Generated on {today_str} | Monit Multibagger Research Desk
+        </div>
+      </body>
+    </html>
+    """
+    
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = f"🚀 Daily Monit Emerging Leaders Digest — {len(compiled_reports)} Signals ({today_str})"
+        msg["From"] = gmail_user
+        msg["To"] = ", ".join(recipients)
+        
+        plain_text = f"Our automated deep equity research engine has compiled comprehensive reports for {len(compiled_reports)} emerging leaders:\n\n"
+        for item in compiled_reports:
+            plain_text += f"* {item['symbol']} ({item['company']})\n"
+            
+        msg.attach(MIMEText(plain_text, "plain"))
+        msg.attach(MIMEText(html_body, "html"))
+        
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
+            s.login(gmail_user, gmail_app_pass)
+            s.sendmail(gmail_user, recipients, msg.as_string())
+        print(f"✅ Consolidated Emerging Leaders Digest Email sent successfully for {len(compiled_reports)} stocks!")
+    except Exception as e:
+        print(f"❌ Failed to deliver emerging leaders digest email: {e}")
+
 
 def git_commit_and_push(symbol: str, report_file: Path) -> None:
     """Commit and push a newly generated report immediately to prevent losing progress if the pipeline is cancelled or fails later."""
@@ -668,12 +808,7 @@ def main() -> None:
                 print(f"⚠️  Error sending separate email for {symbol}: {mail_err}")
         except Exception as e:
             print(f"❌ [FAILED] Error generating report for {symbol}: {e}")
-            consecutive_failures += 1
-            if consecutive_failures >= 3:
-                print("\n❌ [CRITICAL] 3 consecutive report generation failures occurred. Terminating pipeline to protect API quota.")
-                sys.exit(1)
-            
-    # Load and process emerging leaders (save file & output to log ONLY, no emails)
+                # Load and process emerging leaders (save file, commit, and send consolidated digest email)
     emerg_json_path = Path("outputs") / "today_emerging.json"
     if emerg_json_path.exists():
         try:
@@ -685,8 +820,10 @@ def main() -> None:
             
         if emerging_rows:
             print("\n" + "="*80)
-            print(f"🚀 Found {len(emerging_rows)} emerging leaders. Processing and logging reports...")
+            print(f"🚀 Found {len(emerging_rows)} emerging leaders. Processing reports...")
             print("="*80)
+            
+            compiled_emerging_reports = []
             
             for r in emerging_rows:
                 symbol = r["symbol"]
@@ -760,12 +897,14 @@ def main() -> None:
                     # Reset consecutive failure counter on success
                     consecutive_failures = 0
                     
-                    # Output the full report to console/log
-                    print(f"\n" + "="*80)
-                    print(f"📄 [EMERGING LEADER REPORT LOG] {symbol} ({company})")
-                    print(f"="*80)
-                    print(report_text)
-                    print(f"="*80 + "\n")
+                    # Keep track of compiled report details for consolidated digest email
+                    compiled_emerging_reports.append({
+                        "symbol": symbol,
+                        "company": company,
+                        "report_md": report_text,
+                        "r": r
+                    })
+                    print(f"✅ [EMERGING LEADER] Successfully compiled and committed report for {symbol} ({company})!")
                     
                 except Exception as e:
                     print(f"❌ [FAILED] Error generating report for emerging leader {symbol}: {e}")
@@ -773,6 +912,13 @@ def main() -> None:
                     if consecutive_failures >= 3:
                         print("\n❌ [CRITICAL] 3 consecutive report generation failures occurred. Terminating pipeline to protect API quota.")
                         sys.exit(1)
+            
+            # Send the consolidated emerging leaders digest email if any reports were compiled
+            if compiled_emerging_reports:
+                try:
+                    send_emerging_digest_email(compiled_emerging_reports)
+                except Exception as digest_err:
+                    print(f"⚠️  Error sending emerging leaders digest email: {digest_err}")
     else:
         print("\nℹ️ No emerging leaders list found at outputs/today_emerging.json. Skipping.")
 
