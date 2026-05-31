@@ -119,7 +119,6 @@ YOUR RATING: BUY
         model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
         
     print(f"🤖 [MODEL] Route to: {model}")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
 
     # Define a strict instruction to eradicate space repetition loops in tables
@@ -130,11 +129,11 @@ YOUR RATING: BUY
         "in the Gemini text generation engine and crash the process. Make every table row compact, with exactly one space on each side of the text."
     )
     
-    def call_gemini_with_retry(payload, max_retries=8, initial_delay=12):
+    def call_gemini_with_retry(stage_url, payload, max_retries=8, initial_delay=12):
         delay = initial_delay
         for attempt in range(1, max_retries + 1):
             try:
-                response = requests.post(url, headers=headers, json=payload, timeout=180)
+                response = requests.post(stage_url, headers=headers, json=payload, timeout=180)
                 if response.status_code in [429, 503]:
                     print(f"⚠️ [Attempt {attempt}/{max_retries}] API returned {response.status_code}. Retrying in {delay}s...")
                     time.sleep(delay)
@@ -149,6 +148,60 @@ YOUR RATING: BUY
                 time.sleep(delay)
                 delay *= 2
         return None
+
+    def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
+        # We try primary_model first. If it's gemini-2.5-flash, we set thinkingBudget: 0.
+        models_to_try = [primary_model]
+        # If the primary model is 2.5, add 1.5-flash as the fallback
+        if "2.5" in primary_model and "1.5-flash" not in models_to_try:
+            models_to_try.append("gemini-1.5-flash")
+            
+        for attempt_model in models_to_try:
+            print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model}...")
+            
+            # Setup payload with thinkingConfig if model is 2.5
+            gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
+            if "2.5" in attempt_model:
+                gen_config["thinkingConfig"] = {"thinkingBudget": 0}
+                
+            payload = {
+                "contents": [{"parts": [{"text": prompt_text}]}],
+                "generationConfig": gen_config
+            }
+            
+            stage_url = f"https://generativelanguage.googleapis.com/v1beta/models/{attempt_model}:generateContent?key={api_key}"
+            
+            res_json = call_gemini_with_retry(stage_url, payload)
+            if not res_json or "candidates" not in res_json:
+                print(f"⚠️ [STAGE {stage_num}] Failed API call for {attempt_model}. Trying next option...")
+                continue
+                
+            candidate = res_json["candidates"][0]
+            finish_reason = candidate.get("finishReason")
+            
+            if "content" not in candidate or "parts" not in candidate["content"]:
+                print(f"⚠️ [STAGE {stage_num}] No content in candidate from {attempt_model}. Trying next option...")
+                continue
+                
+            text = candidate["content"]["parts"][0]["text"].strip()
+            
+            # Validate completion
+            missing_headers = []
+            for h in expected_headers:
+                if not re.search(h, text, re.IGNORECASE):
+                    missing_headers.append(h)
+                    
+            if finish_reason == "MAX_TOKENS" or missing_headers:
+                print(f"⚠️ [STAGE {stage_num}] Incomplete output using {attempt_model} (finishReason: {finish_reason}, missing headers: {missing_headers})")
+                if len(models_to_try) > 1 and attempt_model == primary_model:
+                    print(f"🔄 [STAGE {stage_num}] Falling back from {primary_model} to {models_to_try[1]}...")
+                    continue
+            
+            # Successful run
+            print(f"✅ [STAGE {stage_num}] Successfully generated via {attempt_model}!")
+            return text
+            
+        raise RuntimeError(f"Stage {stage_num} failed completely on all available models.")
 
     # Split prompt template into three clean stages
     parts1 = prompt_template.split("### SECTION 6 — FINANCIAL DEEP-DIVE")
@@ -166,7 +219,7 @@ YOUR RATING: BUY
         stage1_guidelines = stage1_guidelines + "\n\n" + global_rules
         stage2_guidelines = stage2_guidelines + "\n\n" + global_rules
 
-    # --- STAGE 1: SECTIONS 1 TO 5 ---
+    # --- STAGE 1: HEADER BLOCK TO SECTION 5 ---
     stage1_prompt = (
         f"{stage1_guidelines}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 1:\n"
@@ -179,44 +232,45 @@ YOUR RATING: BUY
         f"{metadata}"
     )
 
-    print(f"🤖 [STAGE 1] Requesting Gemini to generate core moats & landscape...")
-    res_json1 = call_gemini_with_retry({
-        "contents": [{"parts": [{"text": stage1_prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
-    })
+    stage1_headers = ["Rating", "INVESTMENT THESIS", "BUSINESS OVERVIEW", "INDUSTRY", "MANAGEMENT"]
+    part1_text = call_stage_with_fallback(1, stage1_prompt, stage1_headers, model)
     
-    if not res_json1:
-        raise RuntimeError("Failed to generate Stage 1 report.")
-        
-    part1_text = res_json1["candidates"][0]["content"]["parts"][0]["text"].strip()
+    # Prepare compact context from Part 1 (Header block only)
+    lines = part1_text.splitlines()
+    header_lines = []
+    for line in lines:
+        if "SECTION 2" in line or "### SECTION 2" in line:
+            break
+        header_lines.append(line)
+    header_context = "\n".join(header_lines).strip()
     
-    # --- STAGE 2: SECTIONS 6 TO 7 ---
+    compact_context = header_context
+    
+    # --- STAGE 2: SECTION 6 TO SECTION 7 ---
     stage2_prompt = (
         f"{stage2_guidelines}\n\n"
         f"CRITICAL ASSIGNMENT DIRECTIONS FOR STAGE 2:\n"
         f"1. You are tasked with generating PART 2 of the equity research report for {company} ({symbol}).\n"
-        f"2. You MUST cover the following sections: SECTION 6 (Financial Statements: Income Statement, Balance Sheet, and Cash Flow tables + commentary) and SECTION 7 (Earnings Quality Checklist Green/Amber/Red table).\n"
+        f"2. You MUST cover the following sections: SECTION 6 (Financial Statements: Income Statement, Balance Sheet, and Cash Flow tables + commentary) and SECTION 7 (Earnings Quality Checklist table).\n"
         f"3. START DIRECTLY with the header '### SECTION 6 — FINANCIAL DEEP-DIVE (CONSOLIDATED)'. Do NOT repeat any header, title, metadata, or preceding sections.\n"
         f"4. Under no circumstances should you generate SECTION 8 or beyond in this call. Stop generating immediately after Section 7.\n"
         f"5. Maintain absolute mathematical and analytical consistency with the rating, prices, and metrics established in PART 1.\n"
         f"6. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 generated previously for consistency:\n"
         f"--- START OF PART 1 CONTEXT ---\n"
-        f"{part1_text}\n"
+        f"{compact_context}\n"
         f"--- END OF PART 1 CONTEXT ---\n\n"
         f"Now, generate PART 2 (starting from ### SECTION 6 — FINANCIAL DEEP-DIVE) for {company} ({symbol}):"
     )
 
-    print(f"🤖 [STAGE 2] Requesting Gemini to generate financial statements & quality checklist...")
-    res_json2 = call_gemini_with_retry({
-        "contents": [{"parts": [{"text": stage2_prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
-    })
+    stage2_headers = ["SECTION 6", "SECTION 7"]
+    part2_text = call_stage_with_fallback(2, stage2_prompt, stage2_headers, model)
     
-    if not res_json2:
-        raise RuntimeError("Failed to generate Stage 2 report.")
-        
-    part2_text = res_json2["candidates"][0]["content"]["parts"][0]["text"].strip()
+    # Prepare compact context for Stage 3 (Header + Table 1 from part2_text)
+    table1_match = re.search(r"(####?\s*TABLE 1\b.*?(?=####?\s*TABLE 2\b|###\s*SECTION|$))", part2_text, re.DOTALL | re.IGNORECASE)
+    table1_context = table1_match.group(1).strip() if table1_match else ""
+    
+    compact_context_part3 = f"{header_context}\n\n{table1_context}".strip()
     
     # --- STAGE 3: SECTIONS 8 TO DISCLAIMER ---
     stage3_prompt = (
@@ -225,7 +279,7 @@ YOUR RATING: BUY
         f"1. You are tasked with generating PART 3 of the equity research report for {company} ({symbol}).\n"
         f"2. You MUST cover the remaining sections: SECTION 8 (Valuation scenarios), SECTION 9 (Key Risks), SECTION 10 (Recommendations), SECTION 10B (Technical Chart Levels EMA map), APPENDIX (Latest Concall Brief), and Global Disclaimer.\n"
         f"3. START DIRECTLY with the header '### SECTION 8 — VALUATION'. Do NOT repeat any header, title, metadata, or preceding sections from PART 1 or PART 2.\n"
-        f"4. Maintain absolute mathematical and analytical consistency with the rating and financials established in PART 1 and PART 2.\n"
+        f"4. Maintain absolute mathematical and analytical consistency with the rating, financials, and valuation established in PART 1 and PART 2.\n"
         f"5. CRITICAL DENSITY RULE: Keep all Stage 3 sections extremely dense and concise to prevent text truncation:\n"
         f"   - SECTION 9 (Key Risks): List exactly 5-6 core risks with a 1-line description and 1-line monitoring metric each.\n"
         f"   - SECTION 10B (Technical EMAs & Chart Levels): Provide highly precise, compact, single-line answers for all indicators.\n"
@@ -233,21 +287,13 @@ YOUR RATING: BUY
         f"6. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 and PART 2 generated previously for consistency:\n"
         f"--- START OF CONTEXT ---\n"
-        f"{part1_text}\n\n{part2_text}\n"
+        f"{compact_context_part3}\n"
         f"--- END OF CONTEXT ---\n\n"
         f"Now, generate PART 3 (starting from ### SECTION 8 — VALUATION) for {company} ({symbol}):"
     )
 
-    print(f"🤖 [STAGE 3] Requesting Gemini to generate valuation, technicals & appendix...")
-    res_json3 = call_gemini_with_retry({
-        "contents": [{"parts": [{"text": stage3_prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
-    })
-    
-    if not res_json3:
-        raise RuntimeError("Failed to generate Stage 3 report.")
-        
-    part3_text = res_json3["candidates"][0]["content"]["parts"][0]["text"].strip()
+    stage3_headers = ["SECTION 8", "SECTION 9", "SECTION 10", "TECHNICAL LEVELS|SECTION 10B", "CONCALL BRIEF|APPENDIX", "DISCLAIMER"]
+    part3_text = call_stage_with_fallback(3, stage3_prompt, stage3_headers, model)
     
     # Combine all three parts beautifully
     full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text
