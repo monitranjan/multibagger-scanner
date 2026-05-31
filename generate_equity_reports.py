@@ -153,9 +153,8 @@ YOUR RATING: BUY
     if not res_json1:
         raise RuntimeError("Failed to generate Stage 1 report.")
     part1_text = res_json1["candidates"][0]["content"]["parts"][0]["text"].strip()
-    
-    # Space requests to protect free tier limits (increased to 12s to prevent RPM limits)
-    time.sleep(12)
+    # Minimize delay on Paid Tier (1s spacing between stages)
+    time.sleep(1)
     
     # --- STAGE 2: SECTIONS 7 TO 10B ---
     print(f"🚀 [STAGE 2/3] Compiling valuations, risks & weekly technical setup (Sections 7-10B) for {symbol}...")
@@ -211,9 +210,8 @@ Here are the exact financial numbers established in Part 1 for consistency:
     if not res_json2:
         raise RuntimeError("Failed to generate Stage 2 report.")
     part2_text = res_json2["candidates"][0]["content"]["parts"][0]["text"].strip()
-    
-    # Space requests to protect free tier limits (increased to 12s to prevent RPM limits)
-    time.sleep(12)
+    # Minimize delay on Paid Tier (1s spacing between stages)
+    time.sleep(1)
     
     # --- STAGE 3: APPENDIX (CONCALL BRIEF) & DISCLAIMER ---
     print(f"🚀 [STAGE 3/3] Compiling quarterly earnings concall appendix & disclaimer for {symbol}...")
@@ -581,11 +579,11 @@ def main() -> None:
             
         print(f"✍️  [COMPILING] No report found for {symbol} in the current calendar quarter.")
         
-        # Add a 45-second delay between consecutive compiles to safely stay under the Free Tier rate limit of 2 RPM
+        # Add a small 2-second delay between consecutive compiles to remain safely within standard API limits
         if reports_compiled > 0:
             import time
-            print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (45s delay)...")
-            time.sleep(45)
+            print("⏳ Spacing out API requests (2s delay)...")
+            time.sleep(2)
             
         print(f"Requesting Gemini AI to generate full Wheels-style equity research report...")
         reports_compiled += 1
@@ -647,8 +645,8 @@ def main() -> None:
                 
                 if reports_compiled > 0:
                     import time
-                    print("⏳ Spacing out API requests to safely remain below Free Tier rate limits (45s delay)...")
-                    time.sleep(45)
+                    print("⏳ Spacing out API requests (2s delay)...")
+                    time.sleep(2)
                     
                 reports_compiled += 1
                 
