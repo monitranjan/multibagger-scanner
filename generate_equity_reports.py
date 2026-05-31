@@ -592,7 +592,7 @@ def main() -> None:
         reports_compiled += 1
         
         try:
-            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-2.5-pro")
+            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-2.5-flash")
             report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=confl_model)
             report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
             
