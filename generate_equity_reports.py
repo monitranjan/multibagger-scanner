@@ -152,16 +152,16 @@ YOUR RATING: BUY
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
         # We try primary_model first. If it's gemini-2.5-flash, we set thinkingBudget: 0.
         models_to_try = [primary_model]
-        # If the primary model is 2.5, add 1.5-flash as the fallback
-        if "2.5" in primary_model and "1.5-flash" not in models_to_try:
-            models_to_try.append("gemini-1.5-flash")
+        # If the primary model is 2.5, add gemini-flash-latest as the fallback
+        if "2.5" in primary_model and "gemini-flash-latest" not in models_to_try:
+            models_to_try.append("gemini-flash-latest")
             
         for attempt_model in models_to_try:
             print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model}...")
             
-            # Setup payload with thinkingConfig if model is 2.5
+            # Setup payload with thinkingConfig if model is 2.5, latest, or pro
             gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
-            if "2.5" in attempt_model:
+            if "2.5" in attempt_model or "latest" in attempt_model or "pro" in attempt_model:
                 gen_config["thinkingConfig"] = {"thinkingBudget": 0}
                 
             payload = {
