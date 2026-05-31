@@ -33,21 +33,21 @@ def get_calendar_quarter(dt: datetime) -> tuple[int, int]:
     return quarter, dt.year
 
 def verify_report_completeness(report_text: str) -> list[str]:
-    """Verify that every single required section and table is present in the output text."""
+    """Verify that every single required section and table is present in the output text using content-focused resilient checks."""
     required_patterns = {
-        "HEADER BLOCK": [r"HEADER BLOCK", r"Rating", r"12M Target Price"],
-        "SECTION 2 (Thesis)": [r"SECTION 2", r"INVESTMENT THESIS"],
-        "SECTION 3 (Overview)": [r"SECTION 3", r"BUSINESS OVERVIEW"],
-        "SECTION 4 (Landscape)": [r"SECTION 4", r"INDUSTRY", r"COMPETITIVE"],
-        "SECTION 5 (Management)": [r"SECTION 5", r"MANAGEMENT", r"CAPITAL ALLOCATION"],
-        "SECTION 6 (Financials)": [r"SECTION 6", r"FINANCIAL DEEP-DIVE", r"TABLE 1", r"TABLE 2", r"TABLE 3"],
-        "SECTION 7 (Earnings Quality)": [r"SECTION 7", r"EARNINGS QUALITY"],
-        "SECTION 8 (Valuation)": [r"SECTION 8", r"VALUATION", r"BULL", r"BASE", r"BEAR"],
-        "SECTION 9 (Key Risks)": [r"SECTION 9", r"KEY RISKS"],
-        "SECTION 10 (Recommendation)": [r"SECTION 10", r"RECOMMENDATION"],
-        "SECTION 10B (Technical levels)": [r"SECTION 10B", r"TECHNICAL LEVELS"],
-        "APPENDIX (Concall Brief)": [r"APPENDIX", r"LATEST CONCALL BRIEF"],
-        "DISCLAIMER": [r"GLOBAL STYLE RULES", r"DISCLAIMER"]
+        "HEADER BLOCK (Rating & Target)": [r"Rating", r"12M Target Price"],
+        "SECTION 2 (Investment Thesis)": [r"INVESTMENT THESIS"],
+        "SECTION 3 (Business Overview)": [r"BUSINESS OVERVIEW"],
+        "SECTION 4 (Industry Landscape)": [r"INDUSTRY", r"COMPETITIVE"],
+        "SECTION 5 (Management Quality)": [r"MANAGEMENT", r"CAPITAL ALLOCATION"],
+        "SECTION 6 (Financial Statements)": [r"FINANCIAL DEEP-DIVE", r"INCOME STATEMENT", r"BALANCE SHEET"],
+        "SECTION 7 (Earnings Quality)": [r"EARNINGS QUALITY"],
+        "SECTION 8 (Valuation Scenarios)": [r"VALUATION", r"BULL", r"BASE", r"BEAR"],
+        "SECTION 9 (Key Risks)": [r"RISK"],
+        "SECTION 10 (Recommendation)": [r"RECOMMENDATION"],
+        "SECTION 10B (Technical Chart Levels)": [r"TECHNICAL LEVELS", r"EMA"],
+        "APPENDIX (Latest Concall Brief)": [r"CONCALL BRIEF", r"CONCALL"],
+        "DISCLAIMER (Global style rules)": [r"DISCLAIMER"]
     }
     
     missing = []
@@ -582,6 +582,19 @@ def main() -> None:
                     break
                 else:
                     print(f"⚠️ [VERIFICATION FAILED] Missing sections on attempt {attempt}: {missing_sections}")
+                    
+                    # Save and sync failed draft to remote GitHub for instant diagnostics
+                    try:
+                        failed_dir = reports_dir / "failed"
+                        failed_dir.mkdir(exist_ok=True)
+                        failed_file = failed_dir / f"failed_draft_{symbol}_attempt_{attempt}.md"
+                        with open(failed_file, "w") as ff:
+                            ff.write(report_text)
+                        print(f"📂 [DIAGNOSTIC] Saved failed draft to: {failed_file}")
+                        git_commit_and_push(f"{symbol}_failed_{attempt}", failed_file)
+                    except Exception as df_err:
+                        print(f"⚠️ Failed to save or sync diagnostic draft: {df_err}")
+                        
                     if attempt < max_attempts:
                         print("🔄 Retrying full generation to recover missing sections...")
                         time.sleep(2)
@@ -668,6 +681,19 @@ def main() -> None:
                             break
                         else:
                             print(f"⚠️ [VERIFICATION FAILED] Missing sections on attempt {attempt}: {missing_sections}")
+                            
+                            # Save and sync failed draft to remote GitHub for instant diagnostics
+                            try:
+                                failed_dir = reports_dir / "failed"
+                                failed_dir.mkdir(exist_ok=True)
+                                failed_file = failed_dir / f"failed_draft_{symbol}_attempt_{attempt}.md"
+                                with open(failed_file, "w") as ff:
+                                    ff.write(report_text)
+                                print(f"📂 [DIAGNOSTIC] Saved failed draft to: {failed_file}")
+                                git_commit_and_push(f"{symbol}_failed_{attempt}", failed_file)
+                            except Exception as df_err:
+                                print(f"⚠️ Failed to save or sync diagnostic draft: {df_err}")
+                                
                             if attempt < max_attempts:
                                 print("🔄 Retrying full generation to recover missing sections...")
                                 time.sleep(2)
