@@ -32,6 +32,36 @@ def get_calendar_quarter(dt: datetime) -> tuple[int, int]:
     quarter = (dt.month - 1) // 3 + 1
     return quarter, dt.year
 
+def verify_report_completeness(report_text: str) -> list[str]:
+    """Verify that every single required section and table is present in the output text."""
+    required_patterns = {
+        "HEADER BLOCK": [r"HEADER BLOCK", r"Rating", r"12M Target Price"],
+        "SECTION 2 (Thesis)": [r"SECTION 2", r"INVESTMENT THESIS"],
+        "SECTION 3 (Overview)": [r"SECTION 3", r"BUSINESS OVERVIEW"],
+        "SECTION 4 (Landscape)": [r"SECTION 4", r"INDUSTRY", r"COMPETITIVE"],
+        "SECTION 5 (Management)": [r"SECTION 5", r"MANAGEMENT", r"CAPITAL ALLOCATION"],
+        "SECTION 6 (Financials)": [r"SECTION 6", r"FINANCIAL DEEP-DIVE", r"TABLE 1", r"TABLE 2", r"TABLE 3"],
+        "SECTION 7 (Earnings Quality)": [r"SECTION 7", r"EARNINGS QUALITY"],
+        "SECTION 8 (Valuation)": [r"SECTION 8", r"VALUATION", r"BULL", r"BASE", r"BEAR"],
+        "SECTION 9 (Key Risks)": [r"SECTION 9", r"KEY RISKS"],
+        "SECTION 10 (Recommendation)": [r"SECTION 10", r"RECOMMENDATION"],
+        "SECTION 10B (Technical levels)": [r"SECTION 10B", r"TECHNICAL LEVELS"],
+        "APPENDIX (Concall Brief)": [r"APPENDIX", r"LATEST CONCALL BRIEF"],
+        "DISCLAIMER": [r"GLOBAL STYLE RULES", r"DISCLAIMER"]
+    }
+    
+    missing = []
+    for label, keywords in required_patterns.items():
+        found_all = True
+        for kw in keywords:
+            if not re.search(kw, report_text, re.IGNORECASE):
+                found_all = False
+                break
+        if not found_all:
+            missing.append(label)
+            
+    return missing
+
 def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[bool, str]:
     """Check if a report for this symbol already exists in the same calendar quarter as today."""
     if not reports_dir.exists():
@@ -65,7 +95,7 @@ def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetim
     return False, ""
 
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
-    """Invoke the Gemini API in 3 chained stages to generate a comprehensive, non-truncated report."""
+    """Invoke the Gemini API in a single shot to generate a complete, non-truncated research report."""
     symbol = r["symbol"]
     company = r["company"]
     sector = r["industry"]
@@ -100,6 +130,42 @@ YOUR RATING: BUY
         "in the Gemini text generation engine and crash the process. Make every table row compact, with exactly one space on each side of the text."
     )
     
+    single_shot_prompt = (
+        f"{prompt_template}\n\n"
+        f"CRITICAL ASSIGNMENT DIRECTIONS:\n"
+        f"1. You are tasked with generating the COMPLETE equity research report for the company in one single go.\n"
+        f"2. You MUST cover all 10 sections plus the Concall Appendix (Latest Concall Brief) and Global Disclaimer exactly as structured in prompt.md.\n"
+        f"3. Make sure to generate the full, detailed content for all sections including:\n"
+        f"   - HEADER BLOCK (You MUST format the Header Block metrics as exactly two wide horizontal tables stacked vertically, exactly in this markdown format:\n"
+        f"     \n"
+        f"     | Rating | 12M Target Price | Upside % | CMP (Rs.) | Market Cap (Rs. Cr) | 52W High (Rs.) | 52W Low (Rs.) |\n"
+        f"     |---|---|---|---|---|---|---|\n"
+        f"     | BUY | Rs. X | +35% | Rs. Y | Z Cr | Rs. A | Rs. B |\n"
+        f"     \n"
+        f"     | P/E (TTM) | P/B (TTM) | ROCE (%) | ROE (%) | EPS (FY26A) | Book Value (Rs.) | Dividend Yield (%) | Face Value (Rs.) | Promoter (%) | FII (%) | DII (%) |\n"
+        f"     |---|---|---|---|---|---|---|---|---|---|---|\n"
+        f"     | C | D | E% | F% | Rs. G | Rs. H | I% | Rs. J | K% | L% | M% |\n"
+        f"     \n"
+        f"     Do NOT use any other layout, do NOT merge them, and do NOT use a 6-column key-value grid.)\n"
+        f"   - SECTION 2 — INVESTMENT THESIS\n"
+        f"   - SECTION 3 — BUSINESS OVERVIEW\n"
+        f"   - SECTION 4 — INDUSTRY & COMPETITIVE LANDSCAPE (peer comparison table)\n"
+        f"   - SECTION 5 — MANAGEMENT QUALITY & CAPITAL ALLOCATION\n"
+        f"   - SECTION 6 — FINANCIAL DEEP-DIVE (Income Statement, Balance Sheet, Cash Flow tables with commentary)\n"
+        f"   - SECTION 7 — EARNINGS QUALITY CHECKLIST (GREEN/AMBER/RED table with comment)\n"
+        f"   - SECTION 8 — VALUATION (You MUST run the three scenarios as a clean, highly structured markdown table containing rows for BULL, BASE, and BEAR with columns: Scenario | Revenue Growth % | EBITDA Margin % | Projected EPS (Rs.) | Target Multiple | Target Price (Rs.) | Upside/Downside %. Then provide the detailed workings for Method 1: P/E-based target, Method 2: EV/EBITDA-based target, the Blended Target, FCF yield, and the re-rating potential narrative.)\n"
+        f"   - SECTION 9 — KEY RISKS (6-7 risks with matrix/probability-impact, monitoring metric)\n"
+        f"   - SECTION 10 — RECOMMENDATION (suggested entry zone, investment horizon, three thesis invalidation triggers, ideal profile)\n"
+        f"   - SECTION 10B — TECHNICAL LEVELS & CHART STRUCTURE (weekly support/resistance table, weekly EMAs and VStop structure)\n"
+        f"   - APPENDIX — LATEST CONCALL BRIEF (Call grade, signal summary table, to my boss paragraph, 10 sub-sections as described in prompt.md)\n"
+        f"   - GLOBAL STYLE RULES & DISCLAIMER\n"
+        f"4. Under no circumstances should you truncate, shorten, or omit any sections. Compile the entire report beautifully from start to finish.\n"
+        f"5. Apply all style rules. Keep table columns compact and do not pad with trailing spaces.\n"
+        f"6. {whitespace_rule}\n\n"
+        f"Generate the full, complete research report for the following company:\n\n"
+        f"{metadata}"
+    )
+
     def call_gemini_with_retry(payload, max_retries=8, initial_delay=12):
         delay = initial_delay
         for attempt in range(1, max_retries + 1):
@@ -120,165 +186,15 @@ YOUR RATING: BUY
                 delay *= 2
         return None
 
-    # --- STAGE 1: SECTIONS 1 TO 6 ---
-    print(f"🚀 [STAGE 1/3] Compiling fundamental metrics & tables (Sections 1-6) for {symbol}...")
-    part1_prompt = (
-        f"{prompt_template}\n\n"
-        f"CRITICAL ASSIGNMENT DIRECTIONS FOR PART 1:\n"
-        f"1. You are tasked with generating PART 1 of the report. This must cover ONLY the following sections in order:\n"
-        f"   - HEADER BLOCK (You MUST format the Header Block metrics as exactly two wide horizontal tables stacked vertically, exactly in this markdown format:\n"
-        f"     \n"
-        f"     | Rating | 12M Target Price | Upside % | CMP (Rs.) | Market Cap (Rs. Cr) | 52W High (Rs.) | 52W Low (Rs.) |\n"
-        f"     |---|---|---|---|---|---|---|\n"
-        f"     | BUY | Rs. X | +35% | Rs. Y | Z Cr | Rs. A | Rs. B |\n"
-        f"     \n"
-        f"     | P/E (TTM) | P/B (TTM) | ROCE (%) | ROE (%) | EPS (FY26A) | Book Value (Rs.) | Dividend Yield (%) | Face Value (Rs.) | Promoter (%) | FII (%) | DII (%) |\n"
-        f"     |---|---|---|---|---|---|---|---|---|---|---|\n"
-        f"     | C | D | E% | F% | Rs. G | Rs. H | I% | Rs. J | K% | L% | M% |\n"
-        f"     \n"
-        f"     Do NOT use any other layout, do NOT merge them, and do NOT use a 6-column key-value grid.)\n"
-        f"   - SECTION 2 — INVESTMENT THESIS (5 bullet points)\n"
-        f"   - SECTION 3 — BUSINESS OVERVIEW\n"
-        f"   - SECTION 4 — INDUSTRY & COMPETITIVE LANDSCAPE (peer comparison table)\n"
-        f"   - SECTION 5 — MANAGEMENT QUALITY & CAPITAL ALLOCATION\n"
-        f"   - SECTION 6 — FINANCIAL DEEP-DIVE (Income Statement, Balance Sheet, Cash Flow tables with commentary)\n"
-        f"2. STOP IMMEDIATELY after completing SECTION 6. Do NOT write anything for Section 7, 8, 9, 10, 10B, or the Appendix.\n"
-        f"3. Apply all style rules. For all financial tables, place clickable Screener.in verification links directly BELOW the table. Keep table cells compact.\n"
-        f"4. {whitespace_rule}\n\n"
-        f"Apply the above structure and guidelines to produce PART 1 of the equity research report for the following company:\n\n"
-        f"{metadata}"
-    )
-    
-    res_json1 = call_gemini_with_retry({
-        "contents": [{"parts": [{"text": part1_prompt}]}],
+    res_json = call_gemini_with_retry({
+        "contents": [{"parts": [{"text": single_shot_prompt}]}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
     })
-    if not res_json1:
-        raise RuntimeError("Failed to generate Stage 1 report.")
-    part1_text = res_json1["candidates"][0]["content"]["parts"][0]["text"].strip()
-    # Minimize delay on Paid Tier (1s spacing between stages)
-    time.sleep(1)
     
-    # --- STAGE 2: SECTIONS 7 TO 10B ---
-    print(f"🚀 [STAGE 2/3] Compiling valuations, risks & weekly technical setup (Sections 7-10B) for {symbol}...")
-    
-    # Extract compact context from Part 1 with robust continuity guards
-    lines = part1_text.splitlines()
-    header_lines = []
-    for line in lines:
-        if "SECTION 2" in line or ("### SECTION" in line and "HEADER" not in line):
-            break
-        header_lines.append(line)
-    header_context = "\n".join(header_lines).strip()
-    if not header_context:
-        header_context = metadata.strip()
+    if not res_json:
+        raise RuntimeError("Failed to generate complete report.")
         
-    table1_match = re.search(r"(\*\*TABLE 1 — Income Statement\*\*.*?(?=\*\*TABLE 2|$))", part1_text, re.DOTALL)
-    table1_context = table1_match.group(1).strip() if table1_match else "Income statement data was truncated in part 1. Please generate earnings checklist and valuation based on general sector metrics and stock metadata."
-    
-    compact_context = f"""
-{header_context}
-
----
-Here are the exact financial numbers established in Part 1 for consistency:
-{table1_context}
-"""
-    
-    part2_prompt = (
-        f"{prompt_template}\n\n"
-        f"CRITICAL ASSIGNMENT DIRECTIONS FOR PART 2:\n"
-        f"1. You are tasked with generating PART 2 of the report, continuing from the previously generated PART 1.\n"
-        f"2. PART 2 must cover ONLY the following sections in order:\n"
-        f"   - SECTION 7 — EARNINGS QUALITY CHECKLIST (table rating GREEN/AMBER/RED with comment, overall rating)\n"
-        f"   - SECTION 8 — VALUATION (You MUST first run the three scenarios as a clean, highly structured markdown table containing rows for BULL, BASE, and BEAR with columns: Scenario | Revenue Growth % | EBITDA Margin % | Projected EPS (Rs.) | Target Multiple | Target Price (Rs.) | Upside/Downside %. Then provide the detailed workings for Method 1: P/E-based target, Method 2: EV/EBITDA-based target, the Blended Target, FCF yield, and the re-rating potential narrative.)\n"
-        f"   - SECTION 9 — KEY RISKS (6-7 risks with matrix/probability-impact, monitoring metric)\n"
-        f"   - SECTION 10 — RECOMMENDATION (suggested entry zone, investment horizon, three thesis invalidation triggers, ideal profile)\n"
-        f"   - SECTION 10B — TECHNICAL LEVELS & CHART STRUCTURE (weekly support/resistance table, weekly EMAs and VStop structure)\n"
-        f"3. START DIRECTLY with the header '### SECTION 7 — EARNINGS QUALITY CHECKLIST'. Do NOT repeat any header, metadata, or content from PART 1.\n"
-        f"4. STOP IMMEDIATELY after completing SECTION 10B. Do NOT write anything for the Appendix.\n"
-        f"5. Maintain absolute consistency with the numbers, estimates, and ratings established in PART 1.\n"
-        f"6. Apply all style rules. Keep table columns compact and do not pad with trailing spaces.\n"
-        f"7. {whitespace_rule}\n\n"
-        f"Here is the context of PART 1 for consistency:\n"
-        f"--- START OF PART 1 CONTEXT ---\n"
-        f"{compact_context}\n"
-        f"--- END OF PART 1 CONTEXT ---\n\n"
-        f"Now, generate PART 2 (starting from ### SECTION 7 and stopping after SECTION 10B) for {company} ({symbol}):"
-    )
-    
-    res_json2 = call_gemini_with_retry({
-        "contents": [{"parts": [{"text": part2_prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
-    })
-    if not res_json2:
-        raise RuntimeError("Failed to generate Stage 2 report.")
-    part2_text = res_json2["candidates"][0]["content"]["parts"][0]["text"].strip()
-    # Minimize delay on Paid Tier (1s spacing between stages)
-    time.sleep(1)
-    
-    # --- STAGE 3: APPENDIX (CONCALL BRIEF) & DISCLAIMER ---
-    print(f"🚀 [STAGE 3/3] Compiling quarterly earnings concall appendix & disclaimer for {symbol}...")
-    
-    part2_lines = part2_text.splitlines()
-    valuation_lines = []
-    capture = False
-    for line in part2_lines:
-        if "### SECTION 8 — VALUATION" in line or "SECTION 8" in line:
-            capture = True
-        if "### SECTION 9" in line or "SECTION 9" in line:
-            capture = False
-        if capture:
-            valuation_lines.append(line)
-    valuation_context = "\n".join(valuation_lines).strip()
-    if not valuation_context:
-        valuation_context = "Valuation metrics were truncated in part 2. Please establish the concall signals and final analyst verdict in consistency with a standard BUY rating."
-    
-    compact_context_part3 = f"""
-{header_context}
-
----
-Here are the exact financial numbers established in Part 1 for consistency:
-{table1_context}
-
----
-Here is the Valuation context established in Part 2 for consistency:
-{valuation_context}
-"""
-    
-    concall_constraint = (
-        "CRITICAL VOLUME CONSTRAINT: Keep the APPENDIX — LATEST CONCALL BRIEF extremely dense, fact-focused, and concise. "
-        "The entire Part 3 (including the concall appendix and global disclaimer) MUST be under 800 words total. Summarize each of "
-        "the 10 sub-sections in 1-2 punchy sentences. Do not use filler words. This is mandatory to prevent truncation."
-    )
-
-    part3_prompt = (
-        f"{prompt_template}\n\n"
-        f"CRITICAL ASSIGNMENT DIRECTIONS FOR PART 3:\n"
-        f"1. You are tasked with generating PART 3 (the APPENDIX and DISCLAIMER) of the report.\n"
-        f"2. PART 3 must cover the remaining sections in order:\n"
-        f"   - APPENDIX — LATEST CONCALL BRIEF (Call grade, signal summary table, to my boss paragraph, 10 sub-sections as described in prompt.md)\n"
-        f"   - GLOBAL STYLE RULES & DISCLAIMER\n"
-        f"3. START DIRECTLY with the header '### APPENDIX — LATEST CONCALL BRIEF'. Do NOT repeat any header, metadata, or content from PART 1 or PART 2.\n"
-        f"4. Maintain absolute consistency with the numbers, estimates, valuations, and ratings established in PART 1 and PART 2.\n"
-        f"5. Apply all style rules. Keep table columns compact.\n"
-        f"6. {whitespace_rule}\n"
-        f"7. {concall_constraint}\n\n"
-        f"Here is the context of PART 1 and PART 2 for consistency:\n"
-        f"--- START OF CONTEXT ---\n"
-        f"{compact_context_part3}\n"
-        f"--- END OF CONTEXT ---\n\n"
-        f"Now, generate PART 3 (starting from ### APPENDIX — LATEST CONCALL BRIEF) for {company} ({symbol}):"
-    )
-    
-    res_json3 = call_gemini_with_retry({
-        "contents": [{"parts": [{"text": part3_prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192}
-    })
-    if not res_json3:
-        raise RuntimeError("Failed to generate Stage 3 report.")
-    part3_text = res_json3["candidates"][0]["content"]["parts"][0]["text"].strip()
-    
-    full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text
+    full_report = res_json["candidates"][0]["content"]["parts"][0]["text"].strip()
     return full_report
 
 
@@ -593,7 +509,31 @@ def main() -> None:
         
         try:
             confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-2.5-flash")
-            report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=confl_model)
+            
+            # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
+            max_attempts = 3
+            report_text = ""
+            success = False
+            
+            for attempt in range(1, max_attempts + 1):
+                print(f"✍️ [COMPILE ATTEMPT {attempt}/{max_attempts}] Requesting {confl_model} to generate full report...")
+                report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=confl_model)
+                
+                # Verify report completeness
+                missing_sections = verify_report_completeness(report_text)
+                if not missing_sections:
+                    print(f"✅ [VERIFICATION SUCCESS] All sections generated successfully on attempt {attempt}!")
+                    success = True
+                    break
+                else:
+                    print(f"⚠️ [VERIFICATION FAILED] Missing sections on attempt {attempt}: {missing_sections}")
+                    if attempt < max_attempts:
+                        print("🔄 Retrying full generation to recover missing sections...")
+                        time.sleep(2)
+            
+            if not success:
+                raise RuntimeError(f"Failed to generate a complete report for {symbol} after {max_attempts} attempts.")
+                
             report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
             
             with open(report_file, "w") as f:
@@ -656,7 +596,31 @@ def main() -> None:
                 
                 try:
                     emerg_model = os.environ.get("EMERGING_MODEL", "gemini-2.5-flash")
-                    report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=emerg_model)
+                    
+                    # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
+                    max_attempts = 3
+                    report_text = ""
+                    success = False
+                    
+                    for attempt in range(1, max_attempts + 1):
+                        print(f"✍️ [COMPILE ATTEMPT {attempt}/{max_attempts}] Requesting {emerg_model} to generate emerging leader report...")
+                        report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=emerg_model)
+                        
+                        # Verify report completeness
+                        missing_sections = verify_report_completeness(report_text)
+                        if not missing_sections:
+                            print(f"✅ [VERIFICATION SUCCESS] Emerging report generated successfully on attempt {attempt}!")
+                            success = True
+                            break
+                        else:
+                            print(f"⚠️ [VERIFICATION FAILED] Missing sections on attempt {attempt}: {missing_sections}")
+                            if attempt < max_attempts:
+                                print("🔄 Retrying full generation to recover missing sections...")
+                                time.sleep(2)
+                                
+                    if not success:
+                        raise RuntimeError(f"Failed to generate a complete emerging report for {symbol} after {max_attempts} attempts.")
+                        
                     report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
                     
                     with open(report_file, "w") as f:
