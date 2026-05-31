@@ -64,7 +64,7 @@ def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetim
                 
     return False, ""
 
-def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str) -> str:
+def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
     """Invoke the Gemini API in 3 chained stages to generate a comprehensive, non-truncated report."""
     symbol = r["symbol"]
     company = r["company"]
@@ -84,8 +84,11 @@ YOUR RATING: BUY
 12M TARGET: Rs. {cmp * 1.35:.2f} (derived 12-month target with +35% upside)
 """
     
-    # Dynamic model from environment - default to the stable, open gemini-2.5-flash
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+    # Dual-model routing support
+    if not model:
+        model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+        
+    print(f"🤖 [MODEL] Route to: {model}")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
 
@@ -589,7 +592,8 @@ def main() -> None:
         reports_compiled += 1
         
         try:
-            report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str)
+            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-1.5-pro")
+            report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=confl_model)
             report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
             
             with open(report_file, "w") as f:
@@ -651,7 +655,8 @@ def main() -> None:
                 reports_compiled += 1
                 
                 try:
-                    report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str)
+                    emerg_model = os.environ.get("EMERGING_MODEL", "gemini-2.5-flash")
+                    report_text = generate_report_via_gemini(api_key, r, prompt_template, today_str, model=emerg_model)
                     report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
                     
                     with open(report_file, "w") as f:
