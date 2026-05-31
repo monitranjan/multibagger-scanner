@@ -500,7 +500,6 @@ def main() -> None:
         
         # Add a small 2-second delay between consecutive compiles to remain safely within standard API limits
         if reports_compiled > 0:
-            import time
             print("⏳ Spacing out API requests (2s delay)...")
             time.sleep(2)
             
@@ -588,7 +587,6 @@ def main() -> None:
                 print(f"✍️  [COMPILING] Compiling report for emerging leader {symbol}...")
                 
                 if reports_compiled > 0:
-                    import time
                     print("⏳ Spacing out API requests (2s delay)...")
                     time.sleep(2)
                     
