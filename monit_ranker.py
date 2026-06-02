@@ -3086,6 +3086,9 @@ def write_scoring_sheet(
             "Close",
             "Today Return %",
             "Volume",
+            "Relative Strength Rating",
+            "Relative Strength Status",
+            "Relative Strength Score",
             "Calculated RSI (14)",
             "Calculated ADX (14)",
             "Calculated V-stop Line",
@@ -3094,10 +3097,7 @@ def write_scoring_sheet(
             "Benchmark 1Y Return %",
             "Stock 1Y Return %",
             "Relative Strength 1Y (%)",
-            "O'Neil Weighted Score",
-            "Relative Strength Rating",
-            "Relative Strength Status",
-            "Relative Strength Score"
+            "O'Neil Weighted Score"
         ]
     else:
         meta_headers = [
@@ -3112,6 +3112,9 @@ def write_scoring_sheet(
             "Close",
             "Today Return %",
             "Volume",
+            "Relative Strength Rating",
+            "Relative Strength Status",
+            "Relative Strength Score",
             "Calculated RSI (14)",
             "Calculated ADX (14)",
             "Calculated V-stop Line",
@@ -3120,10 +3123,7 @@ def write_scoring_sheet(
             "Benchmark 1Y Return %",
             "Stock 1Y Return %",
             "Relative Strength 1Y (%)",
-            "O'Neil Weighted Score",
-            "Relative Strength Rating",
-            "Relative Strength Status",
-            "Relative Strength Score"
+            "O'Neil Weighted Score"
         ]
     headers = meta_headers[:]
     for criterion in criteria:
@@ -3335,7 +3335,8 @@ def write_scoring_sheet(
             ws.cell(row_idx, 1, f'=IF(B{row_idx}=0,"",RANK(B{row_idx},$B$2:$B${max_row},0))')
 
         style_basic_table(ws, 1, max_row, len(headers), include_portfolio=include_portfolio)
-        ws.freeze_panes = get_column_letter(len(meta_headers) + 1) + "2"
+        volume_col_idx = col_map["Volume"]
+        ws.freeze_panes = get_column_letter(volume_col_idx + 1) + "2"
         ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{max_row}"
         # Highlight Total Score > 250 with a premium highlight (Light Green fill, Dark Green font)
         from openpyxl.formatting.rule import CellIsRule
@@ -3370,7 +3371,26 @@ def write_scoring_sheet(
             f"{score_col_letter}2:{score_col_letter}{max_row}",
             CellIsRule(operator='equal', formula=['-5'], stopIfTrue=True, fill=red_fill, font=red_font)
         )
+
+        # Apply conditional formatting for Calculated V-stop Line (Close >= V-stop is green, Close < V-stop is red)
+        from openpyxl.formatting.rule import FormulaRule
+        close_letter = get_column_letter(col_map["Close"])
+        vstop_letter = get_column_letter(col_map["Calculated V-stop Line"])
         
+        green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+        green_font = Font(color="006100", bold=True)
+        red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        red_font = Font(color="9C0006", bold=True)
+        
+        ws.conditional_formatting.add(
+            f"{vstop_letter}2:{vstop_letter}{max_row}",
+            FormulaRule(formula=[f"=AND({vstop_letter}2<>\"\",{vstop_letter}2>0,{close_letter}2>={vstop_letter}2)"], stopIfTrue=True, fill=green_fill, font=green_font)
+        )
+        ws.conditional_formatting.add(
+            f"{vstop_letter}2:{vstop_letter}{max_row}",
+            FormulaRule(formula=[f"=AND({vstop_letter}2<>\"\",{vstop_letter}2>0,{close_letter}2<{vstop_letter}2)"], stopIfTrue=True, fill=red_fill, font=red_font)
+        )
+
         # Write weekly tracking removals for Scan Match sheets
         if ws.title.startswith("Scan Match") and removed_symbols:
             start_removed_row = max_row + 4

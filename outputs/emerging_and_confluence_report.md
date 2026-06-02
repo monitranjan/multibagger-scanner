@@ -11,7 +11,7 @@ Total triple-confluence candidates: **8**
 
 | Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Active Signal | Scans Count | Deep Research Report |
 |---|---|---|---|---|---|---|---|---|
-| `SIGMAADV` | Sigma Advanced System Ltd | Aerospace & Defence - Equipments | ₹416.10 | -2.42% | 7,514.9 | **52W Breakout** | **31** | 📝 **Sent on 30-May-2026** |
+| `SIGMAADV` | Sigma Advanced System Ltd | Aerospace & Defence - Equipments | ₹416.10 | -2.42% | 7,514.9 | **52W Breakout** | **30** | 📝 **Sent on 30-May-2026** |
 | `MODISONLTD` | Modison Ltd | Capital Goods - Electric General | ₹313.70 | 4.99% | 969.6 | **52W Breakout** | **28** | 📝 **Sent on 02-Jun-2026** |
 | `HFCL` | HFCL Ltd | Telecom Services | ₹189.94 | 4.2% | 27,899.8 | **52W Breakout** | **27** | 📝 **Sent on 01-Jun-2026** |
 | `BLISSGVS` | Bliss Gvs Pharma Limited | Pharma - Formulators | ₹434.45 | 7.95% | 4,257.5 | **52W Breakout** | **27** | 📝 **Sent on 31-May-2026** |
