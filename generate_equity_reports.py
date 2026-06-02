@@ -505,10 +505,11 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
 
 
 def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
-    """Send a consolidated summary email for all emerging leaders compiled today, containing collapsible accordion sections for each report."""
+    """Send a consolidated summary email for all emerging leaders compiled today, containing inline reports and standalone premium HTML attachments."""
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
+    from email.mime.application import MIMEApplication
     
     gmail_user = os.environ.get("GMAIL_USER", "")
     gmail_app_pass = os.environ.get("GMAIL_APP_PASS", "")
@@ -570,8 +571,8 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
     </div>
     """
     
-    # 2. Build the Collapsible Accordion sections for each report
-    accordions_html = []
+    # 2. Build the inline reports sections for each report
+    reports_body_html = []
     for item in compiled_reports:
         symbol = item["symbol"]
         company = item["company"]
@@ -580,27 +581,27 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         # Convert report markdown to beautiful HTML
         report_html = markdown_to_html(report_md)
         
-        accordions_html.append(f"""
-        <details style="border: 1px solid #e2e8f0; border-radius: 6px; margin: 20px 0; background-color: #fcfcfc; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-          <summary style="font-size: 15px; font-weight: bold; padding: 12px 15px; color: #1b365d; background-color: #f4f6f9; cursor: pointer; outline: none; border-radius: 6px; display: list-item; font-family: sans-serif;">
-            📈 {symbol} — {company} Research Report (Click to Expand/Collapse)
-          </summary>
-          <div style="padding: 20px; background-color: white; border-top: 1px solid #e2e8f0;">
-            {report_html}
-          </div>
-        </details>
+        reports_body_html.append(f"""
+        <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 6px; margin-top: 50px; font-family: sans-serif; text-transform: uppercase;">📄 {symbol} — {company} Research Report</h3>
+        <div style="padding: 15px 0; background-color: white;">
+          {report_html}
+        </div>
+        <hr style="border: 0; border-top: 2px dashed #cbd5e0; margin: 40px 0;">
         """)
         
     html_body = f"""
     <html>
       <body style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fcfcfc;">
         <div style="background-color: #2e7d32; color: white; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;">
-          <h2 style="margin: 0; letter-spacing: 1px;">🚀 DAILY MONIT EMERGING LEADERS DIGEST</h2>
+          <h2 style="margin: 0; letter-spacing: 1px; color: white;">🚀 DAILY MONIT EMERGING LEADERS DIGEST</h2>
           <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">High-Conviction Momentum & Emerging Signals</p>
         </div>
         <div style="padding: 20px; background-color: white;">
           <p style="line-height: 1.6; color: #4a5568; font-size: 14.5px; font-family: sans-serif;">
             Our automated deep equity research engine has compiled and validated comprehensive Wheels-style research reports for today's **{len(compiled_reports)} emerging leader** candidates.
+          </p>
+          <p style="font-size: 13px; color: #4a5568; font-family: sans-serif;">
+            ℹ️ <strong>Note:</strong> We have attached fully styled, interactive standalone <code>.html</code> files for each stock in this email. You can open them in one click to view the reports with full margins and premium styling!
           </p>
           
           <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
@@ -608,14 +609,9 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
           
           <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
           
-          <h3 style="color: #1b365d; margin-bottom: 10px; font-family: sans-serif;">👇 Collapsible Detailed Reports</h3>
-          <p style="font-size: 12.5px; color: #718096; margin-bottom: 15px; font-style: italic; font-family: sans-serif;">
-            Click on any stock banner below to instantly expand the full 12-section institutional equity research report.
-          </p>
-          
-          {"".join(accordions_html)}
+          {reports_body_html}
         </div>
-        <div style="background-color: #f4f6f9; text-align: center; padding: 15px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px; border-top: 1px solid #e2e8f0;">
+        <div style="background-color: #f4f6f9; text-align: center; padding: 15px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px; border-top: 1px solid #e2e8f0; margin-top: 30px;">
           Generated on {today_str} | Monit Multibagger Research Desk
         </div>
       </body>
@@ -623,21 +619,94 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
     """
     
     try:
-        msg = MIMEMultipart("alternative")
+        # Create multipart/mixed message to support attachments
+        msg = MIMEMultipart("mixed")
         msg["Subject"] = f"🚀 Daily Monit Emerging Leaders Digest — {len(compiled_reports)} Signals ({today_str})"
         msg["From"] = gmail_user
         msg["To"] = ", ".join(recipients)
         
+        # Attach the HTML body as alternative
+        body_parts = MIMEMultipart("alternative")
+        
         plain_text = f"Our automated deep equity research engine has compiled comprehensive reports for {len(compiled_reports)} emerging leaders:\n\n"
         for item in compiled_reports:
             plain_text += f"* {item['symbol']} ({item['company']})\n"
+        body_parts.attach(MIMEText(plain_text, "plain"))
+        body_parts.attach(MIMEText(html_body, "html"))
+        msg.attach(body_parts)
+        
+        # Attach standalone HTML files for each compiled report
+        for item in compiled_reports:
+            symbol = item["symbol"]
+            company = item["company"]
+            report_md = item["report_md"]
             
-        msg.attach(MIMEText(plain_text, "plain"))
-        msg.attach(MIMEText(html_body, "html"))
+            report_html = markdown_to_html(report_md)
+            
+            # Premium standalone HTML template with custom CSS for browser viewing
+            standalone_html = f"""
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="utf-8">
+                <title>{symbol} ({company}) — Equity Research Report</title>
+                <style>
+                  body {{
+                    font-family: 'Segoe UI', -apple-system, Roboto, Helvetica, Arial, sans-serif;
+                    color: #2d3748;
+                    max-width: 850px;
+                    margin: 40px auto;
+                    padding: 40px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 12px;
+                    background-color: #ffffff;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+                    line-height: 1.6;
+                  }}
+                  hr {{
+                    border: 0;
+                    border-top: 1px solid #e2e8f0;
+                    margin: 30px 0;
+                  }}
+                  strong {{
+                    color: #1a202c;
+                  }}
+                </style>
+              </head>
+              <body>
+                <div style="background-color: #2e7d32; color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+                  <h2 style="margin: 0; letter-spacing: 1.5px; font-weight: bold; color: white;">🚀 MONIT MULTIBAGGER RESEARCH</h2>
+                  <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">Premium Emerging Leader Equity Report</p>
+                </div>
+                
+                <div style="background-color: #f7fafc; border-left: 4px solid #2e7d32; padding: 15px; margin-bottom: 30px; border-radius: 4px;">
+                  <h3 style="margin: 0 0 5px 0; color: #2e7d32;">Emerging Leader Segment</h3>
+                  <p style="margin: 0; font-size: 13.5px; color: #4a5568;">
+                    This document was compiled automatically by the Monit Equity Engine on {today_str} and is archived locally in your private research repository.
+                  </p>
+                </div>
+                
+                {report_html}
+                
+                <div style="background-color: #f7fafc; text-align: center; padding: 20px; font-size: 12px; color: #718096; border-radius: 8px; border-top: 1px solid #e2e8f0; margin-top: 40px;">
+                  Generated on {today_str} | Monit Multibagger Research Desk
+                </div>
+              </body>
+            </html>
+            """
+            
+            # Create the MIME application attachment
+            attachment = MIMEApplication(standalone_html.encode("utf-8"), _subtype="html")
+            attachment.add_header("Content-Disposition", "attachment", filename=f"{symbol}_equity_report_{today_str.replace(' ', '_')}.html")
+            msg.attach(attachment)
+            print(f"📎 Attached standalone HTML report for {symbol} to digest email.")
         
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(gmail_user, gmail_app_pass)
             s.sendmail(gmail_user, recipients, msg.as_string())
+        print(f"✅ Consolidated Emerging Leaders Digest Email sent successfully for {len(compiled_reports)} stocks!")
+    except Exception as e:
+        print(f"❌ Failed to deliver emerging leaders digest email: {e}")
         print(f"✅ Consolidated Emerging Leaders Digest Email sent successfully for {len(compiled_reports)} stocks!")
     except Exception as e:
         print(f"❌ Failed to deliver emerging leaders digest email: {e}")

@@ -420,6 +420,18 @@ def get_automated_input_value(
 
     if label == "PEG Ratio":
         peg = info.get("trailingPegRatio")
+        if peg is None or pd.isna(peg):
+            # Robust manual fallback calculation
+            pe = info.get("trailingPE") or info.get("forwardPE")
+            growth = info.get("earningsGrowth") or info.get("revenueGrowth")
+            if pe is not None and growth is not None:
+                pe = float(pe)
+                growth = float(growth)
+                if growth > 0:
+                    pct_growth = growth if growth > 1.0 else growth * 100.0
+                    peg = pe / pct_growth
+                else:
+                    peg = 99.0  # Failsafe for negative/flat growth to place in "Above 2"
         if peg is not None:
             peg = float(peg)
             if peg < 1.5:
@@ -580,6 +592,381 @@ def get_automated_input_value(
         return str(scans)
 
     return None
+
+
+def map_stockscans_index_to_yfinance(index_id: str, index_name: str) -> tuple[str, str] | None:
+    """
+    Map a StockScans index ID/Name to a supported Yahoo Finance index ticker and name.
+    Returns: (yf_ticker, yf_name) or None if no map is found.
+    """
+    id_upper = str(index_id or "").upper()
+    name_lower = str(index_name or "").lower()
+    
+    # Direct Ticker Mapping for known indices
+    if "CNXFMCG" in id_upper or "fmcg" in name_lower:
+        return "^CNXFMCG", "Nifty FMCG"
+    if "CNXPHARMA" in id_upper or "pharma" in name_lower or "healthcare" in name_lower:
+        return "^CNXPHARMA", "Nifty Pharma"
+    if "CNXIT" in id_upper or "it" in name_lower:
+        return "^CNXIT", "Nifty IT"
+    if "CNXAUTO" in id_upper or "auto" in name_lower:
+        return "^CNXAUTO", "Nifty Auto"
+    if "CNXMETAL" in id_upper or "metal" in name_lower:
+        return "^CNXMETAL", "Nifty Metal"
+    if "CNXREALTY" in id_upper or "realty" in name_lower:
+        return "^CNXREALTY", "Nifty Realty"
+    if "CNXENERGY" in id_upper or "energy" in name_lower:
+        return "^CNXENERGY", "Nifty Energy"
+    if "CNXINFRA" in id_upper or "infra" in name_lower or "indust" in name_lower:
+        return "^CNXINFRA", "Nifty Infra"
+    if "BANK" in id_upper or "bank" in name_lower or "finance" in name_lower:
+        if "PSU" in id_upper or "psu" in name_lower:
+            return "^CNXPSUBANK", "Nifty PSU Bank"
+        return "^NSEBANK", "Nifty Bank"
+    if "MEDIA" in id_upper or "media" in name_lower:
+        return "^CNXMEDIA", "Nifty Media"
+        
+    # General Market Indices
+    if "CNX500" in id_upper or "500" in name_lower:
+        return "^CRSLDX", "Nifty 500"
+    if "CNX200" in id_upper or "200" in name_lower:
+        return "^CNX200", "Nifty 200"
+    if "CNX100" in id_upper or "100" in name_lower:
+        return "^CNX100", "Nifty 100"
+    if "NIFTY50" in id_upper or "nifty 50" in name_lower or "nifty" in name_lower or "sensex" in name_lower:
+        return "^NSEI", "Nifty 50"
+        
+    return None
+
+
+def fetch_all_stockscans_indices(symbols: list[str]) -> dict[str, tuple[str, str]]:
+    """Fetch indices list for all symbols from StockScans API in parallel."""
+    cookie = os.environ.get(
+        "STOCKSCANS_COOKIE", 
+        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
+    )
+    headers = {
+        "accept": "application/json",
+        "cookie": cookie,
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/148.0.0.0 Safari/537.36"
+    }
+    
+    print(f"Fetching StockScans indices data for {len(symbols)} stocks in parallel...")
+    results = {}
+    
+    def fetch_one(symbol: str):
+        for exchange in ["NSE", "BSE"]:
+            url = f"https://www.stockscans.in/api/company/indices/{exchange}:{symbol}"
+            try:
+                r = requests.get(url, headers=headers, timeout=10)
+                if r.status_code == 200:
+                    data = r.json()
+                    indices = data.get("indices", [])
+                    if indices:
+                        for idx_item in indices:
+                            mapped = map_stockscans_index_to_yfinance(idx_item.get("companyId"), idx_item.get("Name"))
+                            if mapped:
+                                return symbol, mapped
+                        first_idx = indices[0]
+                        return symbol, (first_idx.get("companyId"), first_idx.get("Name"))
+            except Exception:
+                continue
+        return symbol, None
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    with ThreadPoolExecutor(max_workers=30) as executor:
+        futures = {executor.submit(fetch_one, sym): sym for sym in symbols}
+        for future in as_completed(futures):
+            sym = futures[future]
+            try:
+                symbol, mapped = future.result()
+                if mapped:
+                    results[symbol] = mapped
+            except Exception as e:
+                print(f"⚠️ Error fetching StockScans indices for {sym}: {e}")
+                
+    return results
+
+
+def get_benchmark_ticker(sector: str, industry: str) -> tuple[str, str] | None:
+    """
+    Map stock sector and industry to the most appropriate Nifty benchmark index.
+    Returns: (benchmark_ticker, benchmark_name) or None if not matching standard sectoral index.
+    """
+    s = str(sector or "").strip().lower()
+    ind = str(industry or "").strip().lower()
+    
+    # Healthcare / Pharma
+    if "pharma" in s or "pharma" in ind or "healthcare" in s or "hospital" in ind:
+        return "^CNXPHARMA", "Nifty Pharma"
+    
+    # Banking & Financial Services
+    if "psu bank" in ind or "psu bank" in s:
+        return "^CNXPSUBANK", "Nifty PSU Bank"
+    if "bank" in s or "bank" in ind or "financial" in s or "financial" in ind or "nbfc" in s or "nbfc" in ind:
+        return "^NSEBANK", "Nifty Bank"
+        
+    # Information Technology
+    if "it" in s or "i.t" in s or "software" in ind or "data centre" in ind:
+        return "^CNXIT", "Nifty IT"
+        
+    # Auto & Auto Ancillaries
+    if "auto" in s or "auto" in ind:
+        return "^CNXAUTO", "Nifty Auto"
+        
+    # Metals & Mining
+    if "metal" in s or "mining" in s or "metal" in ind or "mining" in ind or "steel" in ind or "aluminium" in ind:
+        return "^CNXMETAL", "Nifty Metal"
+        
+    # Realty
+    if "realty" in s or "realty" in ind or "real estate" in s or "real estate" in ind:
+        return "^CNXREALTY", "Nifty Realty"
+        
+    # FMCG / Consumer Discretionary (FMCG proxy)
+    if "fmcg" in s or "fmcg" in ind or "personal care" in ind or "agricultural" in ind:
+        return "^CNXFMCG", "Nifty FMCG"
+        
+    # Energy & Utilities
+    if "energy" in s or "power" in s or "utilities" in s or "power" in ind or "oil" in ind:
+        return "^CNXENERGY", "Nifty Energy"
+        
+    # Infrastructure & Construction
+    if "infra" in s or "infrastructure" in s or "construction" in ind or "building materials" in s or "cables" in ind:
+        return "^CNXINFRA", "Nifty Infra"
+        
+    # Media
+    if "media" in s or "media" in ind:
+        return "^CNXMEDIA", "Nifty Media"
+        
+    return None
+
+
+def fetch_benchmark_indices() -> dict[str, dict]:
+    """Fetch 2-year weekly history for Nifty benchmark indices."""
+    benchmarks = [
+        "^NSEI", "^CRSLDX", "^NSEBANK", "^CNXIT", "^CNXPHARMA", 
+        "^CNXFMCG", "^CNXAUTO", "^CNXMETAL", "^CNXREALTY", 
+        "^CNXENERGY", "^CNXINFRA", "^CNXMEDIA", "^CNXPSUBANK"
+    ]
+    print(f"Fetching weekly data for {len(benchmarks)} benchmark indices in parallel...")
+    results = {}
+    
+    def fetch_one(ticker_symbol: str):
+        for attempt in range(3):
+            try:
+                ticker = yf.Ticker(ticker_symbol)
+                hist = ticker.history(period="2y", interval="1wk")
+                if hist is not None and not hist.empty:
+                    return ticker_symbol, {
+                        "close": hist["Close"].squeeze(),
+                        "high": hist["High"].squeeze(),
+                        "low": hist["Low"].squeeze(),
+                        "volume": hist["Volume"].squeeze(),
+                    }
+            except Exception as e:
+                time.sleep(0.5)
+        print(f"⚠️ Error fetching benchmark index {ticker_symbol}")
+        return ticker_symbol, {}
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = {executor.submit(fetch_one, t): t for t in benchmarks}
+        for future in as_completed(futures):
+            t, data = future.result()
+            if data:
+                results[t] = data
+                
+    return results
+
+
+def calculate_oneil_relative_strength(
+    stock_series: pd.Series, 
+    bench_series: pd.Series
+) -> tuple[float | None, float | None, float | None, float | None, float | None]:
+    """
+    Calculate date-aligned 1Y stock return, benchmark return, TradingView RS Spread, RS Line,
+    and O'Neil Weighted Score (2*q4 + q3 + q2 + q1)/5 based on weekly series.
+    Returns: (stock_1y_ret, bench_1y_ret, rs_spread, rs_line_now, weighted_score)
+    """
+    if stock_series is None or len(stock_series) < 2 or bench_series is None or len(bench_series) < 2:
+        return None, None, None, None, None
+        
+    # Align by intersecting the date indices
+    common = stock_series.index.intersection(bench_series.index)
+    if len(common) < 2:
+        return None, None, None, None, None
+        
+    s = stock_series.loc[common]
+    b = bench_series.loc[common]
+    
+    # Restrict to last 53 weeks (approx 1 year of weekly close prices)
+    if len(s) > 53:
+        s = s.iloc[-53:]
+        b = b.iloc[-53:]
+        
+    if len(s) < 2:
+        return None, None, None, None, None
+        
+    # Standard 1Y Returns
+    s_ret = (s.iloc[-1] / s.iloc[0] - 1) * 100.0
+    b_ret = (b.iloc[-1] / b.iloc[0] - 1) * 100.0
+    
+    # TradingView comparative relative strength formula
+    rs_spread = ((s.iloc[-1] / s.iloc[0]) / (b.iloc[-1] / b.iloc[0]) - 1) * 100.0
+    
+    # RS Line (stock relative performance trend)
+    rs_line_series = (s / s.iloc[0]) / (b / b.iloc[0])
+    rs_line_now = rs_line_series.iloc[-1]
+    
+    # O'Neil weighted score calculation
+    q = len(s) // 4
+    if q < 1:
+        return round(s_ret, 2), round(b_ret, 2), round(rs_spread, 2), round(rs_line_now, 4), round(s_ret, 2)
+        
+    q1 = (s.iloc[q] / s.iloc[0] - 1) * 100.0
+    q2 = (s.iloc[2 * q] / s.iloc[q] - 1) * 100.0
+    q3 = (s.iloc[3 * q] / s.iloc[2 * q] - 1) * 100.0
+    q4 = (s.iloc[-1] / s.iloc[3 * q] - 1) * 100.0
+    weighted_score = (2 * q4 + q3 + q2 + q1) / 5.0
+    
+    return (
+        round(s_ret, 2), 
+        round(b_ret, 2), 
+        round(rs_spread, 2), 
+        round(rs_line_now, 4), 
+        round(weighted_score, 2)
+    )
+
+
+def add_rs_rating_conditional_formatting(ws, col: int, start_row: int, end_row: int) -> None:
+    """Add conditional formatting to RS Rating: >=95 green bold, >=90 light green, >=80 amber."""
+    # Dark Green for >= 95
+    green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+    green_font = Font(color="006100", bold=True)
+    
+    # Light Green for 90 to 94
+    light_green_fill = PatternFill(start_color="E2EFDA", end_color="E2EFDA", fill_type="solid")
+    light_green_font = Font(color="375623", bold=False)
+    
+    # Amber for 80 to 89
+    amber_fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
+    amber_font = Font(color="9C6500", bold=False)
+    
+    col_letter = get_column_letter(col)
+    range_str = f"{col_letter}{start_row}:{col_letter}{end_row}"
+    
+    from openpyxl.formatting.rule import CellIsRule
+    ws.conditional_formatting.add(
+        range_str,
+        CellIsRule(operator='greaterThanOrEqual', formula=['95'], stopIfTrue=True, fill=green_fill, font=green_font)
+    )
+    ws.conditional_formatting.add(
+        range_str,
+        CellIsRule(operator='between', formula=['90', '94'], stopIfTrue=True, fill=light_green_fill, font=light_green_font)
+    )
+    ws.conditional_formatting.add(
+        range_str,
+        CellIsRule(operator='between', formula=['80', '89'], stopIfTrue=True, fill=amber_fill, font=amber_font)
+    )
+
+
+def calculate_global_rs_ratings(
+    all_symbols: list[str], 
+    universe: pd.DataFrame, 
+    yfinance_data: dict[str, dict], 
+    benchmark_data: dict[str, dict],
+    stockscans_indices: dict[str, tuple[str, str]]
+) -> dict[str, dict]:
+    """
+    Calculate O'Neil Weighted Score and RS Rating percentile (1-99) for all symbols.
+    Returns a dict mapping symbol -> {
+        "bench_name": bench_name,
+        "stock_1y_ret": stock_1y_ret,
+        "bench_1y_ret": bench_1y_ret,
+        "rs_spread": rs_spread,
+        "weighted_score": weighted_score,
+        "rs_rating": rs_rating,
+        "rs_status": rs_status
+    }
+    """
+    scores_list = []
+    rs_raw = {}
+    
+    for symbol in all_symbols:
+        details = yfinance_data.get(symbol, {})
+        if not details:
+            continue
+            
+        # Sector benchmark mapping
+        # Look up sector/industry in universe first
+        univ_match = universe[universe["symbol"] == symbol]
+        if not univ_match.empty:
+            sector = univ_match.iloc[0].get("sector")
+            industry = univ_match.iloc[0].get("industry")
+        else:
+            info = details.get("info", {})
+            sector = info.get("sector", "")
+            industry = info.get("industry", "")
+            
+        mapped_bench = get_benchmark_ticker(sector, industry)
+        if mapped_bench is not None:
+            bench_ticker, bench_name = mapped_bench
+        else:
+            api_mapped = stockscans_indices.get(symbol)
+            if api_mapped is not None:
+                bench_ticker, bench_name = api_mapped
+            else:
+                bench_ticker, bench_name = "^NSEI", "Nifty 50"
+                
+        if bench_ticker not in benchmark_data:
+            bench_ticker, bench_name = "^NSEI", "Nifty 50"
+            
+        bench_series = benchmark_data.get(bench_ticker, {}).get("close")
+        stock_series = details.get("close")
+        
+        stock_1y_ret, bench_1y_ret, rs_spread, rs_line_now, weighted_score = calculate_oneil_relative_strength(
+            stock_series, bench_series
+        )
+        
+        rs_raw[symbol] = {
+            "bench_name": bench_name,
+            "stock_1y_ret": stock_1y_ret,
+            "bench_1y_ret": bench_1y_ret,
+            "rs_spread": rs_spread,
+            "weighted_score": weighted_score,
+        }
+        if weighted_score is not None:
+            scores_list.append((symbol, weighted_score))
+            
+    # Calculate global percentile rank (1-99)
+    valid_scores = sorted([score for sym, score in scores_list])
+    total_valid = len(valid_scores)
+    
+    def get_percentile_rating(score) -> int | str:
+        if score is None or total_valid == 0:
+            return ""
+        count = sum(1 for s in valid_scores if s <= score)
+        percentile = (count / total_valid) * 99.0
+        return max(1, min(99, int(round(percentile))))
+        
+    global_rs = {}
+    for symbol, raw in rs_raw.items():
+        score = raw["weighted_score"]
+        rating = get_percentile_rating(score)
+        rs_spread = raw["rs_spread"]
+        status = "Outperforming" if (rs_spread is not None and rs_spread > 0) else "Underperforming" if rs_spread is not None else ""
+        
+        global_rs[symbol] = {
+            "bench_name": raw["bench_name"],
+            "stock_1y_ret": raw["stock_1y_ret"],
+            "bench_1y_ret": raw["bench_1y_ret"],
+            "rs_spread": raw["rs_spread"],
+            "weighted_score": raw["weighted_score"],
+            "rs_rating": rating,
+            "rs_status": status
+        }
+        
+    return global_rs
 
 
 def fetch_single_stock_details(symbol: str) -> tuple[str, dict]:
@@ -1269,7 +1656,22 @@ def build_workbook(
     scan_matched_symbols = load_scan_matched_symbols()
     symbols = universe["symbol"].dropna().unique().tolist()
     all_symbols = list(set(symbols + scanner_symbols + scan_matched_symbols))
+    # Fetch benchmarks and StockScans indices first to avoid yfinance rate limiting
+    benchmark_data = fetch_benchmark_indices()
+    stockscans_indices = fetch_all_stockscans_indices(all_symbols)
     yfinance_data = fetch_all_stocks_details(all_symbols)
+    
+    # Compute weekly scan match additions and removals
+    added_symbols, removed_symbols = track_weekly_scanmatch_changes(scan_matched_symbols)
+    
+    # Calculate global RS ratings and percentiles
+    global_rs = calculate_global_rs_ratings(
+        all_symbols=all_symbols,
+        universe=universe,
+        yfinance_data=yfinance_data,
+        benchmark_data=benchmark_data,
+        stockscans_indices=stockscans_indices
+    )
 
     wb = Workbook()
     ws_readme = wb.active
@@ -1288,6 +1690,7 @@ def build_workbook(
         "Non Financial",
         non_fin_inputs,
         yfinance_data,
+        global_rs,
         include_portfolio=False
     )
     monit_bank_scores = write_scoring_sheet(
@@ -1297,6 +1700,7 @@ def build_workbook(
         "Banks & NBFC",
         bank_inputs,
         yfinance_data,
+        global_rs,
         include_portfolio=False
     )
 
@@ -1336,6 +1740,7 @@ def build_workbook(
             "Non Financial",
             non_fin_inputs,
             yfinance_data,
+            global_rs,
             include_portfolio=True
         )
         scanner_bank_scores = write_scoring_sheet(
@@ -1345,6 +1750,7 @@ def build_workbook(
             "Banks & NBFC",
             bank_inputs,
             yfinance_data,
+            global_rs,
             include_portfolio=True
         )
 
@@ -1375,7 +1781,10 @@ def build_workbook(
             "Non Financial",
             non_fin_inputs,
             yfinance_data,
-            include_portfolio=False
+            global_rs,
+            include_portfolio=False,
+            added_symbols=added_symbols,
+            removed_symbols=removed_symbols
         )
         scan_match_bank_scores = write_scoring_sheet(
             wb.create_sheet("Scan Match Banks NBFC"),
@@ -1384,7 +1793,10 @@ def build_workbook(
             "Banks & NBFC",
             bank_inputs,
             yfinance_data,
-            include_portfolio=False
+            global_rs,
+            include_portfolio=False,
+            added_symbols=added_symbols,
+            removed_symbols=removed_symbols
         )
 
     # Combine all scores dictionaries!
@@ -1458,7 +1870,8 @@ def build_workbook(
             backtest_df,
             universe,
             yfinance_data,
-            all_scores
+            all_scores,
+            global_rs
         )
 
     write_formula_map(wb.create_sheet("Formula Map"), non_financial_criteria, bank_criteria)
@@ -1486,6 +1899,110 @@ def build_workbook(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(output_path)
     return output_path
+
+
+def track_weekly_scanmatch_changes(current_symbols: list[str]) -> tuple[set[str], dict[str, str]]:
+    """
+    Tracks weekly changes (additions/removals) for StockScans 100 stock list.
+    Resets every Monday. Added ones are highlighted. Removed ones are listed below the sheet.
+    Returns:
+        added_symbols: set of symbols currently added (status='added')
+        removed_symbols: dict mapping symbol -> removed_date
+    """
+    import sqlite3
+    from datetime import datetime, timedelta
+    
+    today_dt = datetime.now()
+    # Find Monday of this week
+    monday_dt = today_dt - timedelta(days=today_dt.weekday())
+    week_start_date = monday_dt.strftime("%Y-%m-%d")
+    today_str = today_dt.strftime("%Y-%m-%d")
+    
+    db_path = Path("logs/backtest.db")
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    conn = sqlite3.connect(str(db_path))
+    cursor = conn.cursor()
+    
+    # 1. Query records for the current week
+    cursor.execute(
+        "SELECT symbol, status, added_date, removed_date FROM scanmatch_weekly_tracking WHERE week_start_date = ?",
+        (week_start_date,)
+    )
+    records = cursor.fetchall()
+    
+    current_symbols_set = {sym.strip().upper() for sym in current_symbols if sym.strip()}
+    
+    if not records:
+        # First run of the week: establish base set
+        print(f"🗓️ First run of the week ({week_start_date}). Establishing base set of {len(current_symbols_set)} symbols...")
+        for sym in current_symbols_set:
+            cursor.execute(
+                """INSERT OR REPLACE INTO scanmatch_weekly_tracking 
+                   (week_start_date, symbol, status, added_date, removed_date) 
+                   VALUES (?, ?, 'base', NULL, NULL)""",
+                (week_start_date, sym)
+            )
+        conn.commit()
+        conn.close()
+        return set(), {}
+        
+    # Existent records for this week
+    db_status = {row[0]: (row[1], row[2], row[3]) for row in records}
+    
+    # Process updates:
+    for sym in current_symbols_set:
+        if sym in db_status:
+            status, added_date, removed_date = db_status[sym]
+            if status == "removed":
+                # Restore to base or added depending on if added_date was set
+                orig_status = "added" if added_date else "base"
+                cursor.execute(
+                    """UPDATE scanmatch_weekly_tracking 
+                       SET status = ?, removed_date = NULL 
+                       WHERE week_start_date = ? AND symbol = ?""",
+                    (orig_status, week_start_date, sym)
+                )
+        else:
+            # New addition
+            cursor.execute(
+                """INSERT INTO scanmatch_weekly_tracking 
+                   (week_start_date, symbol, status, added_date, removed_date) 
+                   VALUES (?, ?, 'added', ?, NULL)""",
+                (week_start_date, sym, today_str)
+            )
+            
+    # Process removals
+    for sym, (status, added_date, removed_date) in db_status.items():
+        if status in ("base", "added") and sym not in current_symbols_set:
+            cursor.execute(
+                """UPDATE scanmatch_weekly_tracking 
+                   SET status = 'removed', removed_date = ? 
+                   WHERE week_start_date = ? AND symbol = ?""",
+                (today_str, week_start_date, sym)
+            )
+            
+    conn.commit()
+    
+    # Fetch final updated set of records
+    cursor.execute(
+        "SELECT symbol, status, added_date, removed_date FROM scanmatch_weekly_tracking WHERE week_start_date = ?",
+        (week_start_date,)
+    )
+    records = cursor.fetchall()
+    conn.close()
+    
+    added_symbols = set()
+    removed_symbols = {}
+    
+    for symbol, status, added_date, removed_date in records:
+        if status == "added":
+            added_symbols.add(symbol)
+        elif status == "removed":
+            removed_symbols[symbol] = removed_date
+            
+    return added_symbols, removed_symbols
+
 
 
 def init_and_seed_database() -> None:
@@ -1522,6 +2039,16 @@ def init_and_seed_database() -> None:
             appearances_15d INTEGER,
             appearances_30d INTEGER,
             appearances_90d INTEGER
+        )
+    """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS scanmatch_weekly_tracking (
+            week_start_date TEXT,
+            symbol TEXT,
+            status TEXT,
+            added_date TEXT,
+            removed_date TEXT,
+            PRIMARY KEY (week_start_date, symbol)
         )
     """)
     conn.commit()
@@ -1945,7 +2472,8 @@ def write_leaderboard_sheet(
     df_backtest: pd.DataFrame,
     universe: pd.DataFrame,
     yfinance_data: dict[str, dict],
-    all_scores: dict[str, float]
+    all_scores: dict[str, float],
+    global_rs: dict[str, dict]
 ) -> None:
     ws.sheet_view.showGridLines = False
     
@@ -2171,11 +2699,91 @@ def write_leaderboard_sheet(
         ws.cell(t4_row, 14, item["counts_30d"]).border = thin_border
         ws.cell(t4_row, 14).alignment = Alignment(horizontal="center")
         t4_row += 1
+
+    # ─── TABLE 5: HIGH MOMENTUM LEADERS (RS RATING >= 90) (LOWER SIDE: COL A-H, ROW 44+) ────
+    start_r5 = max(max(t2_row, t4_row) + 3, 44)
+    ws.cell(start_r5, 1, "🚀 HIGH MOMENTUM LEADERS (RS RATING >= 90)").font = Font(name="Calibri", size=12, bold=True, color="C00000")
+    t5_headers = ["Rank", "RS Rating", "O'Neil Score", "Monit Score", "Symbol", "Company Name", "Sector", "Market Cap Cr"]
+    for col_idx, h in enumerate(t5_headers, start=1):
+        cell = ws.cell(start_r5 + 1, col_idx, h)
+        cell.font = header_font
+        cell.fill = PatternFill("solid", fgColor="C00000") # Crimson header for high momentum!
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        cell.border = thin_border
+        
+    rs_leaders = []
+    for sym, metrics in global_rs.items():
+        rating = metrics.get("rs_rating")
+        if rating and isinstance(rating, int) and rating >= 90:
+            rs_leaders.append({
+                "symbol": sym,
+                "rs_rating": rating,
+                "weighted_score": metrics.get("weighted_score"),
+                "monit_score": all_scores.get(sym, 0.0)
+            })
+            
+    # Sort rs_leaders by rs_rating descending, then by weighted_score descending
+    rs_leaders = sorted(rs_leaders, key=lambda x: (x["rs_rating"], x["weighted_score"] or 0.0), reverse=True)
+    
+    t5_row = start_r5 + 2
+    for idx, item in enumerate(rs_leaders, start=1):
+        sym = item["symbol"]
+        comp_name = sym
+        sector = "unknown"
+        mcap_cr = 0.0
+        
+        univ_match = universe[universe["symbol"] == sym]
+        if not univ_match.empty:
+            comp_name = univ_match.iloc[0]["company"]
+            sector = univ_match.iloc[0]["sector"]
+            mcap_cr = univ_match.iloc[0]["marketcap_cr"]
+        else:
+            details = yfinance_data.get(sym, {})
+            info = details.get("info", {})
+            if info:
+                comp_name = info.get("longName", sym)
+                sector = info.get("sector", "unknown")
+                mcap_cr = round(info.get("marketCap", 0) / 10000000, 2) if info.get("marketCap") else 0.0
+                
+        ws.cell(t5_row, 1, idx).border = thin_border
+        ws.cell(t5_row, 1).alignment = Alignment(horizontal="center")
+        
+        # Color coding cell based on rating
+        rating = item["rs_rating"]
+        rating_cell = ws.cell(t5_row, 2, rating)
+        rating_cell.border = thin_border
+        rating_cell.alignment = Alignment(horizontal="center")
+        if rating >= 95:
+            rating_cell.fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+            rating_cell.font = Font(color="006100", bold=True)
+        else:
+            rating_cell.fill = PatternFill(start_color="E2EFDA", end_color="E2EFDA", fill_type="solid")
+            rating_cell.font = Font(color="375623", bold=False)
+            
+        ws.cell(t5_row, 3, item["weighted_score"]).border = thin_border
+        ws.cell(t5_row, 3).alignment = Alignment(horizontal="right")
+        ws.cell(t5_row, 3).number_format = "#,##0.00"
+        
+        ws.cell(t5_row, 4, item["monit_score"]).border = thin_border
+        ws.cell(t5_row, 4).alignment = Alignment(horizontal="right")
+        ws.cell(t5_row, 4).number_format = "#,##0.00"
+        
+        ws.cell(t5_row, 5, sym).font = Font(bold=True)
+        ws.cell(t5_row, 5).border = thin_border
+        ws.cell(t5_row, 5).alignment = Alignment(horizontal="center")
+        
+        ws.cell(t5_row, 6, comp_name).border = thin_border
+        ws.cell(t5_row, 7, sector).border = thin_border
+        
+        ws.cell(t5_row, 8, mcap_cr).border = thin_border
+        ws.cell(t5_row, 8).number_format = "#,##0.0"
+        ws.cell(t5_row, 8).alignment = Alignment(horizontal="right")
+        t5_row += 1
         
     for col in range(1, 15):
         letter = get_column_letter(col)
         max_len = 0
-        for r in range(4, max(t2_row, t4_row) + 1):
+        for r in range(4, max(t2_row, t4_row, t5_row) + 1):
             val = ws.cell(r, col).value
             if val is not None:
                 max_len = max(max_len, len(str(val)))
@@ -2287,6 +2895,56 @@ def write_readme(ws) -> None:
             "Tab: Scan Match tabs\n(StockScans Confluence)",
             "Displays the top 100 stocks appearing across all StockScans screeners.\n\n[THESIS]: Scores stocks qualitatively by scan volume. Stocks appearing in >20 scans receive a premium 10-point bonus, proving market-wide momentum consensus.",
             "Applies a nested Excel IF formula: `=IF(D8>20,10,IF(D8>=10,5,2))`\nScores: >20 scans = 10 pts; 10-20 scans = 5 pts; <10 scans = 2 pts."
+        ),
+        (
+            "Leaderboard Score\n(Persistence Ranking)",
+            "The primary metric used to rank stocks on the Momentum & Sector Rotation Leaderboard.\n\n[THESIS]: Institutional accumulation is a multi-week process. Combining the frequency of appearances (30D Persistence) with current trend continuation (Streak) helps identify high-probability runaway momentum leaders.",
+            "Calculated dynamically in Python:\nFormula: (Persistence Score * 3) + (Consecutive Streak Days * 6)"
+        ),
+        (
+            "Total Score\n(Confluence Ranking)",
+            "The final ranking score used on the Monit scoring worksheets.\n\n[THESIS]: High-conviction watchlist candidates require a blend of technical momentum and strong fundamental catalysts. Combining Relative Strength with qualitative analyst checks ensures ranking objectivity.",
+            "Calculated in Excel:\nFormula: =SUM(Relative Strength Score, [Qualitative Checklist Criterion Scores])"
+        ),
+        (
+            "Relative Strength Rating\n(RS Rating)",
+            "A percentile ranking (1 to 99) of the stock's O'Neil Weighted Score relative to the entire active universe.\n\n[THESIS]: Measures the stock's price momentum relative to all other stocks. Leaders with RS Ratings >= 90 are in the top 10% momentum class, where the strongest institutional accumulation occurs.",
+            "Calculated globally across the active universe:\nFormula: Percentile Rank (1-99) of O'Neil Weighted Score"
+        ),
+        (
+            "O'Neil Weighted Score\n(Accelerating Momentum)",
+            "A momentum-based score that evaluates stock performance over the past year (53 weekly periods) divided into four quarters.\n\n[THESIS]: Based on William O'Neil's CANSLIM methodology, momentum is weighted more heavily in recent months. Double-weighting the most recent quarter (q4) highlights accelerating momentum.",
+            "Calculated using weekly close prices:\nFormula: (2 * q4 + q3 + q2 + q1) / 5.0\nWhere q4 is the most recent quarter."
+        ),
+        (
+            "Relative Strength Score\n(Sectoral Outperformance)",
+            "A milestone scoring system checking relative performance against a specific industry or sector index rather than Nifty 50.\n\n[THESIS]: Stocks that cannot beat their industry peer groups are laggards. Tier-based milestone scores reward outstanding sector leaders and penalize underperformers.",
+            "Calculated in Excel:\nFormula: =IF(Status=\"Underperforming\", -5, IF(Rating>=95, 15, IF(Rating>=90, 10, IF(Rating>=80, 5, 0))))"
+        ),
+        (
+            "Calculated RSI (14)\n(Relative Strength Index)",
+            "A momentum oscillator measuring the speed and change of price movements between 0 and 100.\n\n[THESIS]: Helps prevent chasing overextended rallies. Entries on low-risk pullbacks (RSI < 40) are preferred over buying vertical extensions (RSI > 70).",
+            "Calculated using the standard Wilders smoothing method over a 14-period daily close price window."
+        ),
+        (
+            "Calculated ADX (14)\n(Average Directional Index)",
+            "A technical indicator measuring the overall strength of a trend on a scale from 0 to 100, independent of trend direction.\n\n[THESIS]: Distinguishes between choppy ranges and active breakout trends. An ADX value > 25 confirms a strong, sustainable trending environment.",
+            "Calculated over a 14-period window using Daily High, Low, and Close prices."
+        ),
+        (
+            "Calculated V-stop Line\n(Volatility Stop)",
+            "A volatility-based trailing stop-loss boundary derived from the Average True Range (ATR).\n\n[THESIS]: Serves as a dynamic trailing stop-loss. A price drop below this line indicates a breakdown of the trend's volatility boundary, signaling a potential exit.",
+            "Calculated using the stock's true range adjusted by a volatility multiplier. Plotting provides a trailing stop reference."
+        ),
+        (
+            "Calculated Near-term Trigger\n(Breakout Confirmation)",
+            "Identifies specific consolidation contractions or sudden volume breakout triggers based on recent prices.\n\n[THESIS]: Pinpoints the exact day of momentum expansion to trigger active buy/sell execution.",
+            "Checks recent volume spikes and tight price ranges to flag patterns like 'Volume Surge' or 'Range Breakout'."
+        ),
+        (
+            "Weekly Tracking Highlighting\n(Additions / Removals)",
+            "Visual highlights indicating weekly changes in the StockScans 100 (Scan Match) list.\n\n[THESIS]: Helps track the weekly turnover. Newly added candidates indicate fresh institutional attention, while removed candidates represent names losing relative strength.",
+            "Compares daily lists against Monday's baseline database:\n- Added stocks: Highlighted in Soft Blue.\n- Removed stocks: Listed in the bottom section of Scan Match sheets."
         )
     ]
     
@@ -2404,7 +3062,10 @@ def write_scoring_sheet(
     source_sheet_name: str,
     existing_inputs: dict[str, dict[str, str]],
     yfinance_data: dict[str, dict],
-    include_portfolio: bool = False
+    global_rs: dict[str, dict],
+    include_portfolio: bool = False,
+    added_symbols: set[str] = None,
+    removed_symbols: dict[str, str] = None
 ) -> dict[str, float]:
     signals_dict = load_scanner_signals_dict() if include_portfolio else {}
     if include_portfolio:
@@ -2429,6 +3090,14 @@ def write_scoring_sheet(
             "Calculated ADX (14)",
             "Calculated V-stop Line",
             "Calculated Near-term Trigger",
+            "Sector Benchmark",
+            "Benchmark 1Y Return %",
+            "Stock 1Y Return %",
+            "Relative Strength 1Y (%)",
+            "O'Neil Weighted Score",
+            "Relative Strength Rating",
+            "Relative Strength Status",
+            "Relative Strength Score"
         ]
     else:
         meta_headers = [
@@ -2447,6 +3116,14 @@ def write_scoring_sheet(
             "Calculated ADX (14)",
             "Calculated V-stop Line",
             "Calculated Near-term Trigger",
+            "Sector Benchmark",
+            "Benchmark 1Y Return %",
+            "Stock 1Y Return %",
+            "Relative Strength 1Y (%)",
+            "O'Neil Weighted Score",
+            "Relative Strength Rating",
+            "Relative Strength Status",
+            "Relative Strength Score"
         ]
     headers = meta_headers[:]
     for criterion in criteria:
@@ -2467,6 +3144,17 @@ def write_scoring_sheet(
         details = yfinance_data.get(symbol, {})
         is_bank = source_sheet_name == "Banks & NBFC"
         
+        # Retrieve pre-calculated RS metrics from global dict
+        rs_metrics = global_rs.get(symbol, {
+            "bench_name": "",
+            "stock_1y_ret": None,
+            "bench_1y_ret": None,
+            "rs_spread": None,
+            "weighted_score": None,
+            "rs_rating": "",
+            "rs_status": ""
+        })
+        
         row_inputs = {}
         total_score = 0.0
         for criterion in criteria:
@@ -2482,14 +3170,38 @@ def write_scoring_sheet(
             if val is not None:
                 total_score += evaluate_excel_if_formula(criterion.score_formula, val)
                 
+        # Calculate Relative Strength Score based on Option 1 (Milestone Tiers)
+        rs_score_val = 0.0
+        rs_rating = rs_metrics.get("rs_rating")
+        rs_status = rs_metrics.get("rs_status", "")
+        if rs_status == "Underperforming":
+            rs_score_val = -5.0
+        elif rs_rating != "" and rs_rating is not None:
+            try:
+                rating_val = int(rs_rating)
+                if rating_val >= 95:
+                    rs_score_val = 15.0
+                elif rating_val >= 90:
+                    rs_score_val = 10.0
+                elif rating_val >= 80:
+                    rs_score_val = 5.0
+            except ValueError:
+                pass
+                
+        total_score += rs_score_val
+                
         enriched_rows.append({
             "row": row,
             "inputs": row_inputs,
-            "total_score": total_score
+            "total_score": total_score,
+            "rs_metrics": rs_metrics
         })
         
     # 2. Sort the rows by total_score in descending order!
     enriched_rows = sorted(enriched_rows, key=lambda x: x["total_score"], reverse=True)
+
+    # Build dynamic column map dictionary to bypass hardcoded column index shifts
+    col_map = {name: col_idx for col_idx, name in enumerate(meta_headers, start=1)}
 
     # 3. Write metadata and automated/prepopulated inputs in sorted order
     for idx, item in enumerate(enriched_rows, start=2):
@@ -2497,6 +3209,8 @@ def write_scoring_sheet(
         row_inputs = item["inputs"]
         symbol = row["symbol"]
         details = yfinance_data.get(symbol, {})
+        rs_metrics = item["rs_metrics"]
+        rs_status = rs_metrics.get("rs_status", "")
         
         # Calculate raw technical values
         rsi_val = ""
@@ -2519,6 +3233,10 @@ def write_scoring_sheet(
             vstop_val = round(vstop_raw, 2) if vstop_raw else ""
             trigger_val = trigger_raw
 
+        # Rank and Total Score columns are formula-driven, set placeholders
+        ws.cell(idx, 1, "")
+        ws.cell(idx, 2, "")
+
         if include_portfolio:
             sig = signals_dict.get(symbol, {
                 "entry": "No Signal",
@@ -2527,46 +3245,53 @@ def write_scoring_sheet(
                 "alloc_inr": 0.0,
                 "qty": 0
             })
-            ws.cell(idx, 3, sig["entry"])
-            ws.cell(idx, 4, sig["score"])
-            ws.cell(idx, 5, sig["alloc_pct"])
-            ws.cell(idx, 6, sig["alloc_inr"])
-            ws.cell(idx, 7, sig["qty"])
+            ws.cell(idx, col_map["Entry"], sig["entry"])
+            ws.cell(idx, col_map["Entry Score"], sig["score"])
+            ws.cell(idx, col_map["Allocation %"], sig["alloc_pct"])
+            ws.cell(idx, col_map["Allocation (₹)"], sig["alloc_inr"])
+            ws.cell(idx, col_map["Quantity"], sig["qty"])
 
-            # Write metadata (shifted by 6 columns because Total Score is in Col 2 and Scanner Details are in Cols 3-7!)
-            ws.cell(idx, 8, row["symbol"])
-            ws.cell(idx, 9, row["company"])
-            ws.cell(idx, 10, row.get("sector"))
-            ws.cell(idx, 11, row.get("industry"))
-            ws.cell(idx, 12, row.get("marketcap_bucket"))
-            ws.cell(idx, 13, row.get("marketcap_cr"))
-            ws.cell(idx, 14, row.get("close"))
-            ws.cell(idx, 15, row.get("today_return_pct"))
-            ws.cell(idx, 16, row.get("volume"))
-            
-            # Write new raw technical columns!
-            ws.cell(idx, 17, rsi_val)
-            ws.cell(idx, 18, adx_val)
-            ws.cell(idx, 19, vstop_val)
-            ws.cell(idx, 20, trigger_val)
-        else:
-            # Write metadata standard layout
-            ws.cell(idx, 3, row["symbol"])
-            ws.cell(idx, 4, row["company"])
-            ws.cell(idx, 5, row.get("sector"))
-            ws.cell(idx, 6, row.get("industry"))
-            ws.cell(idx, 7, row.get("marketcap_bucket"))
-            ws.cell(idx, 8, row.get("marketcap_cr"))
-            ws.cell(idx, 9, row.get("close"))
-            ws.cell(idx, 10, row.get("today_return_pct"))
-            ws.cell(idx, 11, row.get("volume"))
-            
-            # Write new raw technical columns!
-            ws.cell(idx, 12, rsi_val)
-            ws.cell(idx, 13, adx_val)
-            ws.cell(idx, 14, vstop_val)
-            ws.cell(idx, 15, trigger_val)
+        c_sym = ws.cell(idx, col_map["Symbol"], row["symbol"])
+        c_comp = ws.cell(idx, col_map["Company"], row["company"])
+        if added_symbols and row["symbol"] in added_symbols:
+            added_fill = PatternFill("solid", fgColor="D9E1F2") # Soft Blue
+            c_sym.fill = added_fill
+            c_comp.fill = added_fill
+        elif rs_status == "Underperforming":
+            under_fill = PatternFill("solid", fgColor="F2DCDB") # Soft Red
+            c_sym.fill = under_fill
+            c_comp.fill = under_fill
+        ws.cell(idx, col_map["Sector"], row.get("sector") or "")
+        ws.cell(idx, col_map["Industry"], row.get("industry") or "")
+        ws.cell(idx, col_map["Market Cap Bucket"], row.get("marketcap_bucket") or "")
+        ws.cell(idx, col_map["Market Cap Cr"], row.get("marketcap_cr") or 0.0)
+        ws.cell(idx, col_map["Close"], row.get("close") or 0.0)
+        ws.cell(idx, col_map["Today Return %"], row.get("today_return_pct") or 0.0)
+        ws.cell(idx, col_map["Volume"], row.get("volume") or 0.0)
+        
+        # Write technical indicator columns
+        ws.cell(idx, col_map["Calculated RSI (14)"], rsi_val)
+        ws.cell(idx, col_map["Calculated ADX (14)"], adx_val)
+        ws.cell(idx, col_map["Calculated V-stop Line"], vstop_val)
+        ws.cell(idx, col_map["Calculated Near-term Trigger"], trigger_val)
+        
+        # Write sectoral Nifty benchmark relative strength columns
+        
+        ws.cell(idx, col_map["Sector Benchmark"], rs_metrics["bench_name"] or "")
+        ws.cell(idx, col_map["Benchmark 1Y Return %"], rs_metrics["bench_1y_ret"] if rs_metrics["bench_1y_ret"] is not None else "")
+        ws.cell(idx, col_map["Stock 1Y Return %"], rs_metrics["stock_1y_ret"] if rs_metrics["stock_1y_ret"] is not None else "")
+        ws.cell(idx, col_map["Relative Strength 1Y (%)"], rs_metrics["rs_spread"] if rs_metrics["rs_spread"] is not None else "")
+        ws.cell(idx, col_map["O'Neil Weighted Score"], rs_metrics["weighted_score"] if rs_metrics["weighted_score"] is not None else "")
+        ws.cell(idx, col_map["Relative Strength Rating"], rs_metrics["rs_rating"])
+        ws.cell(idx, col_map["Relative Strength Status"], rs_status)
+        
+        # Populate dynamic Excel formula for Option 1 Relative Strength Score
+        rating_letter = get_column_letter(col_map["Relative Strength Rating"])
+        status_letter = get_column_letter(col_map["Relative Strength Status"])
+        rs_score_formula = f'=IF({status_letter}{idx}="Underperforming",-5,IF({rating_letter}{idx}>=95,15,IF({rating_letter}{idx}>=90,10,IF({rating_letter}{idx}>=80,5,0))))'
+        ws.cell(idx, col_map["Relative Strength Score"], rs_score_formula)
 
+        # Write qualitative input columns
         input_start_col = len(meta_headers) + 1
         for i, criterion in enumerate(criteria):
             input_col = input_start_col + i * 2
@@ -2600,8 +3325,9 @@ def write_scoring_sheet(
                 )
                 ws.cell(row_idx, score_col, clean_excel_formula(translated))
 
+        rs_score_col_letter = get_column_letter(col_map["Relative Strength Score"])
         for row_idx in range(2, max_row + 1):
-            refs = [
+            refs = [f"{rs_score_col_letter}{row_idx}"] + [
                 f"{get_column_letter(col)}{row_idx}"
                 for col in score_cols
             ]
@@ -2609,11 +3335,111 @@ def write_scoring_sheet(
             ws.cell(row_idx, 1, f'=IF(B{row_idx}=0,"",RANK(B{row_idx},$B$2:$B${max_row},0))')
 
         style_basic_table(ws, 1, max_row, len(headers), include_portfolio=include_portfolio)
-        ws.freeze_panes = "H2" if include_portfolio else "L2"
-        ws.auto_filter.ref = ws.dimensions
+        ws.freeze_panes = get_column_letter(len(meta_headers) + 1) + "2"
+        ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{max_row}"
+        # Highlight Total Score > 250 with a premium highlight (Light Green fill, Dark Green font)
+        from openpyxl.formatting.rule import CellIsRule
+        high_score_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+        high_score_font = Font(color="006100", bold=True)
+        ws.conditional_formatting.add(
+            f"B2:B{max_row}",
+            CellIsRule(operator='greaterThan', formula=['250'], stopIfTrue=True, fill=high_score_fill, font=high_score_font)
+        )
+
         add_score_conditional_format(ws, 2, 2, max_row)
         for col in score_cols:
             add_score_conditional_format(ws, col, 2, max_row)
+        
+        # Apply custom color coding to Relative Strength Rating
+        rs_rating_col = col_map["Relative Strength Rating"]
+        add_rs_rating_conditional_formatting(ws, rs_rating_col, 2, max_row)
+        
+        # Apply red color coding for Underperforming Status and Score
+        from openpyxl.formatting.rule import CellIsRule
+        red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        red_font = Font(color="9C0006", bold=True)
+        
+        status_col_letter = get_column_letter(col_map["Relative Strength Status"])
+        ws.conditional_formatting.add(
+            f"{status_col_letter}2:{status_col_letter}{max_row}",
+            CellIsRule(operator='equal', formula=['"Underperforming"'], stopIfTrue=True, fill=red_fill, font=red_font)
+        )
+        
+        score_col_letter = get_column_letter(col_map["Relative Strength Score"])
+        ws.conditional_formatting.add(
+            f"{score_col_letter}2:{score_col_letter}{max_row}",
+            CellIsRule(operator='equal', formula=['-5'], stopIfTrue=True, fill=red_fill, font=red_font)
+        )
+        
+        # Write weekly tracking removals for Scan Match sheets
+        if ws.title.startswith("Scan Match") and removed_symbols:
+            start_removed_row = max_row + 4
+            
+            title_cell = ws.cell(start_removed_row, 1, "❌ REMOVED SCAN MATCH STOCKS (THIS WEEK)")
+            title_cell.font = Font(name="Calibri", size=12, bold=True, color="C00000")
+            
+            rem_headers = ["Symbol", "Company Name", "Sector", "Date of Removal"]
+            header_font = Font(name="Calibri", size=11, bold=True, color="FFFFFF")
+            header_fill = PatternFill("solid", fgColor="595959")
+            thin_border = Border(
+                left=Side(style="thin", color="D9E2F3"),
+                right=Side(style="thin", color="D9E2F3"),
+                top=Side(style="thin", color="D9E2F3"),
+                bottom=Side(style="thin", color="D9E2F3")
+            )
+            
+            for col_idx, h in enumerate(rem_headers, start=1):
+                c = ws.cell(start_removed_row + 1, col_idx, h)
+                c.font = header_font
+                c.fill = header_fill
+                c.border = thin_border
+                c.alignment = Alignment(horizontal="center", vertical="center")
+                
+            r_row = start_removed_row + 2
+            is_banking_sheet = source_sheet_name == "Banks & NBFC"
+            
+            for sym, rem_date in sorted(removed_symbols.items()):
+                # Classify symbol to verify if it belongs to this sheet
+                is_fin = False
+                details = yfinance_data.get(sym, {})
+                info = details.get("info", {})
+                
+                dummy_row = pd.Series({
+                    "symbol": sym,
+                    "company": info.get("longName", sym),
+                    "sector": info.get("sector", "unknown"),
+                    "industry": info.get("industry", "unknown")
+                })
+                is_fin = is_financial_company(dummy_row)
+                
+                if (is_banking_sheet and not is_fin) or (not is_banking_sheet and is_fin):
+                    continue
+                    
+                comp_name = info.get("longName", sym)
+                sector = info.get("sector", "unknown")
+                
+                row_fill = PatternFill("solid", fgColor="F9EBEA") # Soft light red/pink fill for removed status
+                
+                c_sym = ws.cell(r_row, 1, sym)
+                c_sym.font = Font(bold=True)
+                c_sym.border = thin_border
+                c_sym.fill = row_fill
+                c_sym.alignment = Alignment(horizontal="center")
+                
+                c_name = ws.cell(r_row, 2, comp_name)
+                c_name.border = thin_border
+                c_name.fill = row_fill
+                
+                c_sect = ws.cell(r_row, 3, sector)
+                c_sect.border = thin_border
+                c_sect.fill = row_fill
+                
+                c_date = ws.cell(r_row, 4, rem_date)
+                c_date.border = thin_border
+                c_date.fill = row_fill
+                c_date.alignment = Alignment(horizontal="center")
+                
+                r_row += 1
     else:
         style_basic_table(ws, 1, 1, len(headers), include_portfolio=include_portfolio)
 
@@ -2767,10 +3593,21 @@ def style_basic_table(ws, header_row: int, max_row: int, max_col: int, include_p
     for row in range(header_row + 1, max_row + 1):
         for col in range(1, max_col + 1):
             ws.cell(row, col).alignment = Alignment(vertical="top", wrap_text=True)
-    fmt_cols = [2, 4, 6, 7, 13, 14, 15, 16, 17, 18, 19] if include_portfolio else [2, 8, 9, 10, 11, 12, 13, 14]
+    # Dynamically format float/numeric columns
+    fmt_cols = []
+    for col in range(1, max_col + 1):
+        header_val = ws.cell(header_row, col).value
+        if header_val in (
+            "Total Score", "Entry Score", "Allocation %", "Allocation (₹)", "Quantity",
+            "Market Cap Cr", "Close", "Today Return %", "Volume",
+            "Calculated RSI (14)", "Calculated ADX (14)", "Calculated V-stop Line",
+            "Benchmark 1Y Return %", "Stock 1Y Return %", "Relative Strength 1Y (%)", "O'Neil Weighted Score", "Relative Strength Score"
+        ):
+            fmt_cols.append(col)
+            
     for col in fmt_cols:
         if col <= max_col:
-            for row in range(2, max_row + 1):
+            for row in range(header_row + 1, max_row + 1):
                 ws.cell(row, col).number_format = "#,##0.00"
 
 
