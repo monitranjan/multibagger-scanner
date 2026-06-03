@@ -1,122 +1,130 @@
 [
   {
-    "symbol": "MONARCH",
-    "company": "Monarch Networth Capital Ltd",
-    "industry": "financials",
-    "close": 340.4,
-    "mcap_cr": 2614.27,
-    "persistence": 10
-  },
-  {
-    "symbol": "HONAUT",
-    "company": "Honeywell Automation India Limited",
-    "industry": "consumer discretionary",
-    "close": 34895.0,
-    "mcap_cr": 31007.22,
-    "persistence": 10
-  },
-  {
-    "symbol": "PGHL",
-    "company": "Procter & Gamble Health Ltd",
-    "industry": "Pharma - MNC bulk Drugs",
-    "close": 6030.5,
-    "mcap_cr": 10064.21,
-    "persistence": 10
-  },
-  {
-    "symbol": "TMPV",
-    "company": "Tata Motors Passenger Vehicles Ltd",
-    "industry": "auto",
-    "close": 390.2,
-    "mcap_cr": 141734.71,
-    "persistence": 10
-  },
-  {
-    "symbol": "SUPRAJIT",
-    "company": "Suprajit Engineering Limited",
-    "industry": "auto",
-    "close": 459.25,
-    "mcap_cr": 6351.02,
-    "persistence": 10
-  },
-  {
     "symbol": "HESTERBIO",
     "company": "Hester Biosciences Limited",
-    "industry": "Pharma - Animal",
-    "close": 2015.4,
-    "mcap_cr": 1715.92,
+    "industry": "healthcare",
+    "close": 1956.9,
+    "mcap_cr": 1714.47,
     "persistence": 10
   },
   {
     "symbol": "KOPRAN",
     "company": "Kopran Limited",
     "industry": "healthcare",
-    "close": 195.92,
-    "mcap_cr": 946.2,
-    "persistence": 10
-  },
-  {
-    "symbol": "MINDACORP",
-    "company": "Minda Corporation Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 629.85,
-    "mcap_cr": 14794.24,
+    "close": 186.43,
+    "mcap_cr": 946.01,
     "persistence": 10
   },
   {
     "symbol": "JAGRAN",
     "company": "Jagran Prakashan Limited",
     "industry": "media",
-    "close": 76.99,
-    "mcap_cr": 1661.36,
+    "close": 77.44,
+    "mcap_cr": 1675.72,
+    "persistence": 10
+  },
+  {
+    "symbol": "MINDACORP",
+    "company": "Minda Corporation Limited",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 626.4,
+    "mcap_cr": 15058.42,
+    "persistence": 10
+  },
+  {
+    "symbol": "SUPRAJIT",
+    "company": "Suprajit Engineering Limited",
+    "industry": "auto",
+    "close": 465.45,
+    "mcap_cr": 6299.58,
+    "persistence": 10
+  },
+  {
+    "symbol": "TMPV",
+    "company": "Tata Motors Passenger Vehicles Ltd",
+    "industry": "auto",
+    "close": 398.15,
+    "mcap_cr": 143686.37,
+    "persistence": 10
+  },
+  {
+    "symbol": "PGHL",
+    "company": "Procter & Gamble Health Ltd",
+    "industry": "healthcare",
+    "close": 6108.5,
+    "mcap_cr": 10010.26,
+    "persistence": 10
+  },
+  {
+    "symbol": "HONAUT",
+    "company": "Honeywell Automation India Limited",
+    "industry": "consumer discretionary",
+    "close": 34750.0,
+    "mcap_cr": 30852.49,
+    "persistence": 10
+  },
+  {
+    "symbol": "MONARCH",
+    "company": "Monarch Networth Capital Ltd",
+    "industry": "financials",
+    "close": 338.8,
+    "mcap_cr": 2698.29,
     "persistence": 10
   },
   {
     "symbol": "ASAHIINDIA",
     "company": "Asahi India Glass Limited",
     "industry": "building materials",
-    "close": 899.15,
-    "mcap_cr": 22912.86,
-    "persistence": 9
-  },
-  {
-    "symbol": "DIAMONDYD",
-    "company": "Prataap Snacks Ltd",
-    "industry": "fmcg",
-    "close": 1087.1,
-    "mcap_cr": 2636.56,
+    "close": 903.5,
+    "mcap_cr": 22921.78,
     "persistence": 9
   },
   {
     "symbol": "AVANTEL",
     "company": "Avantel Ltd",
     "industry": "aerospace & defence",
-    "close": 176.14,
-    "mcap_cr": 4607.69,
+    "close": 175.7,
+    "mcap_cr": 4680.23,
     "persistence": 9
   },
   {
-    "symbol": "JAYAGROGN",
-    "company": "Jayant Agro Organics Limited",
-    "industry": "chemicals",
-    "close": 235.63,
-    "mcap_cr": 694.65,
-    "persistence": 8
+    "symbol": "DIAMONDYD",
+    "company": "Prataap Snacks Ltd",
+    "industry": "fmcg",
+    "close": 1186.6,
+    "mcap_cr": 2598.55,
+    "persistence": 9
   },
   {
     "symbol": "VINCOFE",
     "company": "Vintage Coffee & Beverages Ltd",
     "industry": "consumer discretionary",
-    "close": 147.11,
-    "mcap_cr": 2094.71,
+    "close": 148.81,
+    "mcap_cr": 2143.22,
+    "persistence": 8
+  },
+  {
+    "symbol": "PANAMAPET",
+    "company": "Panama Petrochem Limited",
+    "industry": "energy",
+    "close": 337.8,
+    "mcap_cr": 1908.88,
     "persistence": 8
   },
   {
     "symbol": "SPECTRUM",
     "company": "Spectrum Electrical Industries Ltd",
     "industry": "industrials",
-    "close": 1473.7,
-    "mcap_cr": 2278.82,
+    "close": 1621.1,
+    "mcap_cr": 2315.75,
+    "persistence": 8
+  },
+  {
+    "symbol": "JAYAGROGN",
+    "company": "Jayant Agro Organics Limited",
+    "industry": "chemicals",
+    "close": 229.71,
+    "mcap_cr": 706.89,
     "persistence": 8
   },
   {
@@ -136,107 +144,67 @@
     "persistence": 7
   },
   {
-    "symbol": "PANAMAPET",
-    "company": "PANAMAPET",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
-    "persistence": 7
+    "symbol": "GUFICBIO",
+    "company": "Gufic Biosciences Limited",
+    "industry": "healthcare",
+    "close": 361.95,
+    "mcap_cr": 3501.36,
+    "persistence": 6
   },
   {
     "symbol": "NH",
     "company": "Narayana Hrudayalaya Ltd.",
     "industry": "healthcare",
-    "close": 1934.2,
-    "mcap_cr": 38920.52,
-    "persistence": 6
-  },
-  {
-    "symbol": "AJAXENGG",
-    "company": "Ajax Engineering Ltd",
-    "industry": "industrials",
-    "close": 590.4,
-    "mcap_cr": 6731.12,
-    "persistence": 6
-  },
-  {
-    "symbol": "GUFICBIO",
-    "company": "Gufic Biosciences Limited",
-    "industry": "healthcare",
-    "close": 349.15,
-    "mcap_cr": 3476.79,
+    "close": 1980.6,
+    "mcap_cr": 39527.47,
     "persistence": 6
   },
   {
     "symbol": "BFINVEST",
     "company": "Bf Investment Limited",
     "industry": "financials",
-    "close": 435.75,
-    "mcap_cr": 1625.73,
+    "close": 440.8,
+    "mcap_cr": 1641.37,
     "persistence": 6
   },
   {
     "symbol": "INDNIPPON",
     "company": "India Nippon Electricals Limited",
     "industry": "Auto Ancillaries - Engine Parts",
-    "close": 895.7,
-    "mcap_cr": 2017.94,
+    "close": 900.5,
+    "mcap_cr": 2026.2,
     "persistence": 6
   },
   {
     "symbol": "TEGA",
     "company": "Tega Industries Ltd",
     "industry": "industrials",
-    "close": 1827.1,
-    "mcap_cr": 13608.63,
+    "close": 1821.1,
+    "mcap_cr": 13726.58,
     "persistence": 6
   },
   {
-    "symbol": "TPLPLASTEH",
-    "company": "Tpl Plastech Limited",
+    "symbol": "AJAXENGG",
+    "company": "Ajax Engineering Ltd",
     "industry": "industrials",
-    "close": 71.21,
-    "mcap_cr": 545.48,
-    "persistence": 5
-  },
-  {
-    "symbol": "JSWDULUX",
-    "company": "JSWDULUX",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
-    "persistence": 4
+    "close": 596.5,
+    "mcap_cr": 6754.58,
+    "persistence": 6
   },
   {
     "symbol": "KOVAI",
     "company": "Kovai Medical Center & Hospital Ltd",
     "industry": "healthcare",
-    "close": 5342.0,
-    "mcap_cr": 5875.45,
+    "close": 5369.0,
+    "mcap_cr": 5845.36,
     "persistence": 4
   },
   {
     "symbol": "NOVARTIND",
     "company": "Novartis India Ltd",
     "industry": "healthcare",
-    "close": 1465.5,
-    "mcap_cr": 3726.09,
-    "persistence": 4
-  },
-  {
-    "symbol": "SFL",
-    "company": "SFL",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
-    "persistence": 4
-  },
-  {
-    "symbol": "MUNJALAU",
-    "company": "MUNJALAU",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
+    "close": 1323.1,
+    "mcap_cr": 3618.44,
     "persistence": 4
   },
   {
@@ -256,28 +224,36 @@
     "persistence": 4
   },
   {
-    "symbol": "AEGISLOG",
-    "company": "Aegis Logistics Ltd",
-    "industry": "services",
-    "close": 767.15,
-    "mcap_cr": 27176.18,
-    "persistence": 3
+    "symbol": "MUNJALAU",
+    "company": "MUNJALAU",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 4
   },
   {
-    "symbol": "TECHM",
-    "company": "Tech Mahindra Limited",
-    "industry": "i.t",
-    "close": 1571.4,
-    "mcap_cr": 151209.1,
-    "persistence": 3
+    "symbol": "JSWDULUX",
+    "company": "JSWDULUX",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 4
   },
   {
-    "symbol": "VADILALIND",
-    "company": "Vadilal Industries Limited",
-    "industry": "FMCG - Dairy Products",
-    "close": 5384.9,
-    "mcap_cr": 3780.37,
-    "persistence": 3
+    "symbol": "TPLPLASTEH",
+    "company": "TPLPLASTEH",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 4
+  },
+  {
+    "symbol": "SFL",
+    "company": "SFL",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 4
   },
   {
     "symbol": "BANKINDIA",
@@ -291,8 +267,24 @@
     "symbol": "GEECEE",
     "company": "Geecee Ventures Limited",
     "industry": "realty",
-    "close": 324.45,
-    "mcap_cr": 676.81,
+    "close": 325.45,
+    "mcap_cr": 678.48,
+    "persistence": 3
+  },
+  {
+    "symbol": "AEGISLOG",
+    "company": "Aegis Logistics Ltd",
+    "industry": "services",
+    "close": 760.5,
+    "mcap_cr": 26926.97,
+    "persistence": 3
+  },
+  {
+    "symbol": "VADILALIND",
+    "company": "Vadilal Industries Limited",
+    "industry": "FMCG - Dairy Products",
+    "close": 5393.9,
+    "mcap_cr": 3870.57,
     "persistence": 3
   }
 ]
