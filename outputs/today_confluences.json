@@ -5,7 +5,7 @@
     "industry": "Capital Goods - Electric General",
     "close": 362.7,
     "return_1d": 4.99,
-    "mcap_cr": 1120.99,
+    "mcap_cr": 1176.96,
     "signal": "52W Breakout",
     "scans_count": 31
   },
@@ -15,7 +15,7 @@
     "industry": "Pharma - API & CRAMS",
     "close": 3328.3,
     "return_1d": 5.17,
-    "mcap_cr": 25909.75,
+    "mcap_cr": 27249.17,
     "signal": "52W Breakout",
     "scans_count": 28
   },
@@ -25,7 +25,7 @@
     "industry": "Pharmaceuticals - I V Fluids",
     "close": 1633.5,
     "return_1d": 4.99,
-    "mcap_cr": 2079.64,
+    "mcap_cr": 2183.5,
     "signal": "52W Breakout",
     "scans_count": 27
   },
@@ -35,7 +35,7 @@
     "industry": "Consumer Electronics - EMS",
     "close": 1226.8,
     "return_1d": 0.43,
-    "mcap_cr": 23556.17,
+    "mcap_cr": 23656.44,
     "signal": "52W Breakout",
     "scans_count": 22
   },
@@ -45,17 +45,17 @@
     "industry": "Pharma - API & CRAMS",
     "close": 538.05,
     "return_1d": 2.33,
-    "mcap_cr": 10283.69,
+    "mcap_cr": 10523.28,
     "signal": "52W Breakout",
     "scans_count": 22
   },
   {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 137.1,
-    "return_1d": 3.01,
-    "mcap_cr": 17896.09,
+    "symbol": "ATHERENERG",
+    "company": "Ather Energy Ltd",
+    "industry": "Auto - 2 & 3 Wheelers",
+    "close": 1033.6,
+    "return_1d": 4.6,
+    "mcap_cr": 39553.1,
     "signal": "52W Breakout",
     "scans_count": 21
   },
@@ -65,29 +65,19 @@
     "industry": "Cables - Power",
     "close": 2223.4,
     "return_1d": 0.02,
-    "mcap_cr": 25143.35,
+    "mcap_cr": 25147.88,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "RPEL",
-    "company": "Raghav Productivity Enhancers Ltd",
-    "industry": "Steel Products",
-    "close": 1110.15,
-    "return_1d": 9.89,
-    "mcap_cr": 4638.03,
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives/Protectives",
+    "close": 137.1,
+    "return_1d": 3.01,
+    "mcap_cr": 18435.3,
     "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "ATHERENERG",
-    "company": "Ather Energy Ltd",
-    "industry": "Auto - 2 & 3 Wheelers",
-    "close": 1033.6,
-    "return_1d": 4.6,
-    "mcap_cr": 37813.85,
-    "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 21
   },
   {
     "symbol": "INDOBORAX",
@@ -95,7 +85,17 @@
     "industry": "Chemicals - Inorganic",
     "close": 367.4,
     "return_1d": 2.43,
-    "mcap_cr": 1151.07,
+    "mcap_cr": 1178.99,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "RPEL",
+    "company": "Raghav Productivity Enhancers Ltd",
+    "industry": "Steel Products",
+    "close": 1110.15,
+    "return_1d": 9.89,
+    "mcap_cr": 5096.92,
     "signal": "52W Breakout",
     "scans_count": 20
   },
@@ -105,7 +105,17 @@
     "industry": "Carbon Black",
     "close": 685.05,
     "return_1d": 6.71,
-    "mcap_cr": 32391.57,
+    "mcap_cr": 34563.62,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "IDEAFORGE",
+    "company": "Ideaforge Technology Ltd",
+    "industry": "Aerospace & Defence - Equipments",
+    "close": 945.0,
+    "return_1d": 5.0,
+    "mcap_cr": 4089.58,
     "signal": "52W Breakout",
     "scans_count": 19
   }
