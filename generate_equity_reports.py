@@ -300,6 +300,117 @@ YOUR RATING: BUY
     return full_report
 
 
+REPORT_STYLESHEET = """
+          .report-h4 {
+            color: #2d3748;
+            font-size: 15px;
+            margin: 20px 0 10px 0;
+            border-left: 3px solid #1b365d;
+            padding-left: 10px;
+            font-weight: bold;
+            font-family: sans-serif;
+          }
+          .report-h3 {
+            color: #1b365d;
+            font-size: 18px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+            margin: 25px 0 12px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: sans-serif;
+          }
+          .report-h2 {
+            color: #1b365d;
+            font-size: 20px;
+            border-bottom: 3px solid #1b365d;
+            padding-bottom: 8px;
+            margin: 30px 0 15px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: sans-serif;
+            text-align: center;
+          }
+          .report-ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            font-family: sans-serif;
+          }
+          .report-li {
+            margin-bottom: 6px;
+            line-height: 1.6;
+            color: #4a5568;
+            font-size: 14px;
+          }
+          .report-p {
+            line-height: 1.6;
+            margin: 10px 0;
+            color: #4a5568;
+            font-size: 14px;
+            font-family: sans-serif;
+          }
+          .report-meta {
+            line-height: 1.5;
+            margin: 4px 0;
+            color: #2d3748;
+            font-size: 13.5px;
+            font-family: sans-serif;
+          }
+          .report-callout {
+            background-color: #f4f6f9;
+            border-left: 4px solid #1b365d;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #1b365d;
+            font-family: sans-serif;
+          }
+          .report-table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+          }
+          .report-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            font-family: sans-serif;
+          }
+          .report-th {
+            border: 1px solid #e2e8f0;
+            padding: 10px 12px;
+            background-color: #1b365d;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            font-size: 13px;
+          }
+          .report-td {
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            font-size: 12.5px;
+            color: #2d3748;
+          }
+          .report-hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 25px 0;
+          }
+          .odd-row {
+            background-color: #f8f9fa;
+          }
+          .even-row {
+            background-color: #ffffff;
+          }
+          .right {
+            text-align: right;
+          }
+          .left {
+            text-align: left;
+          }
+"""
+
+
 def markdown_to_html(md_text: str) -> str:
     # Pre-process bold, links, and code blocks
     md_text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", md_text)
@@ -470,6 +581,12 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
     
     html_body = f"""
     <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          {REPORT_STYLESHEET}
+        </style>
+      </head>
       <body style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fcfcfc;">
         <div style="background-color: #1b365d; color: white; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;">
           <h2 style="margin: 0; letter-spacing: 1px;">🏆 MONIT PREMIUM INSTITUTIONAL RESEARCH</h2>
@@ -529,6 +646,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
     
     # 1. Build the summary table rows
     table_rows_html = []
+    
     for idx, item in enumerate(compiled_reports):
         r = item["r"]
         symbol = item["symbol"]
@@ -542,7 +660,9 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         
         table_rows_html.append(f"""
         <tr style="background-color: {bg_color};">
-          <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold; color: #1b365d; font-family: sans-serif;">{symbol}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold; color: #1b365d; font-family: sans-serif;">
+            <a href="#report-{symbol}" style="color: #1b365d; text-decoration: none; border-bottom: 1px dashed #1b365d;">{symbol}</a>
+          </td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
@@ -571,28 +691,227 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
     </div>
     """
     
-    # 2. Build the inline reports sections for each report
+    # 2. Build both flat reports (with jump-links) and collapsible details sections
     reports_body_html = []
+    collapsible_sections = []
+    
     for item in compiled_reports:
         symbol = item["symbol"]
         company = item["company"]
         report_md = item["report_md"]
+        r = item["r"]
+        sector = r.get("industry", "N/A")
+        cmp = r.get("close", 0.0)
+        target_price = cmp * 1.35
+        mcap = r.get("mcap_cr", 0.0)
         
-        # Convert report markdown to beautiful HTML
         report_html = markdown_to_html(report_md)
         
+        # A. Flat report block with jump-links (for mobile email body)
         reports_body_html.append(f"""
-        <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 6px; margin-top: 50px; font-family: sans-serif; text-transform: uppercase;">📄 {symbol} — {company} Research Report</h3>
-        <div style="padding: 15px 0; background-color: white;">
-          {report_html}
+        <div id="report-{symbol}">
+          <a name="report-{symbol}"></a>
+          <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 6px; margin-top: 50px; font-family: sans-serif; text-transform: uppercase;">📄 {symbol} — {company} Research Report</h3>
+          <div style="padding: 15px 0; background-color: white;">
+            {report_html}
+          </div>
+          <div style="text-align: right; margin-top: 10px; margin-bottom: 20px;">
+            <a href="#summary-dashboard" style="color: #2e7d32; font-weight: bold; text-decoration: none; font-size: 13.5px; font-family: sans-serif; border: 1px solid #2e7d32; padding: 6px 12px; border-radius: 4px; background-color: #f0fdf4;">[Back to Dashboard Table ↑]</a>
+          </div>
+          <hr style="border: 0; border-top: 2px dashed #cbd5e0; margin: 40px 0;">
         </div>
-        <hr style="border: 0; border-top: 2px dashed #cbd5e0; margin: 40px 0;">
         """)
-    
+        
+        # B. Collapsible report block (for attached HTML file)
+        collapsible_sections.append(f"""
+        <details id="report-{symbol}" style="background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); overflow: hidden; font-family: sans-serif;">
+          <summary style="padding: 15px 20px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc; user-select: none; border-bottom: 1px solid transparent; transition: background-color 0.2s ease;">
+            <div class="summary-content" style="display: flex; align-items: center; flex-wrap: wrap; width: 95%;">
+              <span class="summary-ticker" style="font-weight: bold; font-size: 15px; color: white; background-color: #1b365d; padding: 4px 8px; border-radius: 4px; margin-right: 15px; letter-spacing: 0.5px;">{symbol}</span>
+              <span class="summary-name" style="font-weight: 600; font-size: 15px; color: #2d3748; margin-right: auto;">{company} <span class="summary-sector" style="font-size: 12px; font-weight: normal; color: #718096; margin-left: 5px;">({sector})</span></span>
+              <span class="summary-cmp" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">CMP: <strong>₹{cmp:,.2f}</strong></span>
+              <span class="summary-target" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">12M Target (Upside): <strong style="color: #2e7d32;">₹{target_price:,.2f} (+35%)</strong></span>
+              <span class="summary-mcap" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">MCap: <strong>₹{mcap:,.1f} Cr</strong></span>
+            </div>
+            <span class="arrow" style="font-size: 12px; color: #718096;">▼</span>
+          </summary>
+          <div class="details-body" style="padding: 25px; background-color: #ffffff; border-top: none; line-height: 1.6; font-family: sans-serif;">
+            {report_html}
+            <div style="text-align: right; margin-top: 20px; border-top: 1px solid #edf2f7; padding-top: 15px;">
+              <a href="#summary-dashboard" style="color: #2e7d32; font-weight: bold; text-decoration: none; font-size: 13px; font-family: sans-serif; border: 1px solid #2e7d32; padding: 5px 10px; border-radius: 4px; background-color: #f0fdf4; margin-right: 10px;">[Back to Dashboard Table ↑]</a>
+              <button onclick="document.getElementById('report-{symbol}').open = false; window.location.hash = '#summary-dashboard';" style="color: #e53e3e; font-weight: bold; text-decoration: none; font-size: 13px; font-family: sans-serif; border: 1px solid #e53e3e; padding: 5px 10px; border-radius: 4px; background-color: #fff5f5; cursor: pointer; border-style: solid;">[Collapse Report ✕]</button>
+            </div>
+          </div>
+        </details>
+        """)
+        
     reports_body_joined = "\n".join(reports_body_html)
+        
+    interactive_html = f"""
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Daily Monit Emerging Leaders Digest — {today_str}</title>
+        <style>
+          body {{
+            font-family: 'Segoe UI', -apple-system, Roboto, Helvetica, Arial, sans-serif;
+            color: #2d3748;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f7fafc;
+          }}
+          .header {{
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          }}
+          .header h1 {{
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: white;
+          }}
+          .header p {{
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+            color: white;
+          }}
+          .intro {{
+            background-color: white;
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            line-height: 1.6;
+          }}
+          .intro p {{
+            margin: 0 0 10px 0;
+          }}
+          .intro strong {{
+            color: #2e7d32;
+          }}
+          
+          /* Collapsible Accordion details & summary */
+          details {{
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: all 0.2s ease-in-out;
+          }}
+          details[open] {{
+            border-color: #2e7d32;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+          }}
+          summary {{
+            padding: 15px 20px;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8fafc;
+            user-select: none;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.2s ease;
+          }}
+          summary::-webkit-details-marker {{
+            display: none;
+          }}
+          summary:hover {{
+            background-color: #edf2f7;
+          }}
+          details[open] summary {{
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-bottom: 1px solid #c8e6c9;
+          }}
+          details[open] summary:hover {{
+            background-color: #c8e6c9;
+          }}
+          details[open] .arrow {{
+            transform: rotate(180deg);
+            color: #2e7d32;
+          }}
+        </style>
+        <script>
+          function handleHashChange() {{
+            const hash = window.location.hash;
+            if (!hash) return;
+            
+            const targetId = decodeURIComponent(hash.substring(1));
+            const details = document.getElementById(targetId);
+            if (details && details.tagName === 'DETAILS') {{
+              details.open = true;
+              setTimeout(() => {{
+                details.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+              }}, 100);
+            }}
+          }}
+
+          window.addEventListener('hashchange', handleHashChange);
+          window.addEventListener('DOMContentLoaded', () => {{
+            // Intercept clicks on links that target a details tag
+            document.querySelectorAll('a[href^="#"]').forEach(link => {{
+              link.addEventListener('click', (e) => {{
+                const href = link.getAttribute('href');
+                if (href === '#') return;
+                const targetId = decodeURIComponent(href.substring(1));
+                const details = document.getElementById(targetId);
+                if (details && details.tagName === 'DETAILS') {{
+                  details.open = true;
+                  setTimeout(() => {{
+                    details.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+                  }}, 100);
+                }}
+              }});
+            }});
+            
+            // Run initially if loaded with a hash
+            setTimeout(handleHashChange, 300);
+          }});
+        </script>
+      </head>
+      <body>
+        <div class="header">
+          <h1>🚀 DAILY MONIT EMERGING LEADERS DIGEST</h1>
+          <p>Interactive Premium Dashboard — {today_str}</p>
+        </div>
+        <div class="intro">
+          <p>
+            Welcome to today's premium emerging leaders digest. Below you will find the interactive dashboard. 
+            Click on any stock's summary bar to expand the full Wheels-style research report.
+          </p>
+          <a name="summary-dashboard" id="summary-dashboard"></a>
+          <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
+          {summary_table_html}
+        </div>
+        
+        <div class="accordion">
+          {"".join(collapsible_sections)}
+        </div>
+      </body>
+    </html>
+    """
     
+    # 3. Build the clean email body with mobile navigation tips and inline reports
     html_body = f"""
     <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          {REPORT_STYLESHEET}
+        </style>
+      </head>
       <body style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fcfcfc;">
         <div style="background-color: #2e7d32; color: white; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;">
           <h2 style="margin: 0; letter-spacing: 1px; color: white;">🚀 DAILY MONIT EMERGING LEADERS DIGEST</h2>
@@ -603,6 +922,19 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
             Our automated deep equity research engine has compiled and validated comprehensive Wheels-style research reports for today's **{len(compiled_reports)} emerging leader** candidates.
           </p>
           
+          <div style="background-color: #f0fdf4; border-left: 4px solid #2e7d32; padding: 15px; margin: 20px 0; border-radius: 4px; font-family: sans-serif;">
+            <p style="margin: 0; font-size: 13.5px; color: #1b5e20; line-height: 1.5; font-weight: bold;">
+              💡 Mobile Quick Navigation Active:
+            </p>
+            <p style="margin: 3px 0 0 0; font-size: 13px; color: #2e7d32; line-height: 1.5;">
+              Tap any stock's <strong>Ticker Symbol</strong> in the dashboard table below to jump directly down to its report. Tap <code>[Back to Dashboard Table ↑]</code> at the end of any report to scroll back up instantly.
+            </p>
+            <p style="margin: 8px 0 0 0; font-size: 13px; color: #2e7d32; line-height: 1.5;">
+              📎 <strong>Interactive Collapsible Attachment Included:</strong> Open the attached HTML file (<code>Emerging_Leaders_Digest_{today_str.replace(' ', '_')}.html</code>) on any laptop/browser to view reports in a premium collapsible layout.
+            </p>
+          </div>
+          
+          <a name="summary-dashboard" id="summary-dashboard"></a>
           <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
           {summary_table_html}
           
@@ -627,19 +959,23 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         # Attach the HTML body as alternative
         body_parts = MIMEMultipart("alternative")
         
-        plain_text = f"Our automated deep equity research engine has compiled comprehensive reports for {len(compiled_reports)} emerging leaders:\n\n"
+        plain_text = f"Our automated deep equity research engine has compiled comprehensive reports for {len(compiled_reports)} emerging leaders.\n\n"
+        plain_text += f"Please open the attached interactive HTML dashboard file (Emerging_Leaders_Digest_{today_str.replace(' ', '_')}.html) in your browser to view the collapsible reports.\n\n"
         for item in compiled_reports:
             plain_text += f"* {item['symbol']} ({item['company']})\n"
         body_parts.attach(MIMEText(plain_text, "plain"))
         body_parts.attach(MIMEText(html_body, "html"))
         msg.attach(body_parts)
         
+        # Attach the interactive collapsible HTML dashboard file
+        attachment = MIMEApplication(interactive_html.encode("utf-8"), _subtype="html")
+        attachment.add_header("Content-Disposition", "attachment", filename=f"Emerging_Leaders_Digest_{today_str.replace(' ', '_')}.html")
+        msg.attach(attachment)
+        print("📎 Attached consolidated interactive HTML dashboard to digest email.")
+        
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(gmail_user, gmail_app_pass)
             s.sendmail(gmail_user, recipients, msg.as_string())
-        print(f"✅ Consolidated Emerging Leaders Digest Email sent successfully for {len(compiled_reports)} stocks!")
-    except Exception as e:
-        print(f"❌ Failed to deliver emerging leaders digest email: {e}")
         print(f"✅ Consolidated Emerging Leaders Digest Email sent successfully for {len(compiled_reports)} stocks!")
     except Exception as e:
         print(f"❌ Failed to deliver emerging leaders digest email: {e}")
