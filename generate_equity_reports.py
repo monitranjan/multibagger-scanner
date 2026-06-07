@@ -62,6 +62,52 @@ def verify_report_completeness(report_text: str) -> list[str]:
             
     return missing
 
+def extract_target_and_upside(report_md: str, cmp: float) -> tuple[float, float]:
+    """
+    Attempt to extract the 12M target price and upside % from the generated markdown report.
+    Falls back to cmp * 1.35 (+35%) if parsing fails.
+    """
+    patterns = [
+        r"(?:Blended Target Price|Blended Target|12M Price Target|12M Target Price|12M Target|Price Target|Target Price)\b.*?(?:Rs\.|₹|Rs)\s*\**([\d,]+(?:\.\d+)?)\**",
+        r"12M TARGET\s*:\s*(?:Rs\.|₹|Rs)?\s*([\d,]+(?:\.\d+)?)"
+    ]
+    
+    target_val = None
+    for pattern in patterns:
+        matches = re.findall(pattern, report_md, re.IGNORECASE)
+        if matches:
+            for val_str in matches:
+                try:
+                    val = float(val_str.replace(",", "").strip())
+                    if cmp > 0 and (cmp * 0.5 < val < cmp * 10):
+                        target_val = val
+                        break
+                except ValueError:
+                    continue
+        if target_val is not None:
+            break
+            
+    if target_val is None:
+        for line in report_md.splitlines():
+            if "|" in line and any(x in line.lower() for x in ["target", "upside"]):
+                nums = re.findall(r"[\d,]+(?:\.\d+)?", line)
+                for num_str in nums:
+                    try:
+                        val = float(num_str.replace(",", "").strip())
+                        if cmp > 0 and (cmp * 0.8 < val < cmp * 10):
+                            target_val = val
+                            break
+                    except ValueError:
+                        continue
+            if target_val is not None:
+                break
+
+    if target_val is not None and cmp > 0:
+        upside = ((target_val / cmp) - 1.0) * 100.0
+        return target_val, upside
+        
+    return cmp * 1.35, 35.0
+
 def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[bool, str]:
     """Check if a report for this symbol already exists in the same calendar quarter as today."""
     if not reports_dir.exists():
@@ -111,7 +157,7 @@ REPORT DATE: {today_str}
 CMP: Rs. {cmp:.2f}
 MARKET CAP: Rs. {mcap:.1f} Cr
 YOUR RATING: BUY
-12M TARGET: Rs. {cmp * 1.35:.2f} (derived 12-month target with +35% upside)
+12M TARGET: (Please calculate dynamically based on peer multiples, financial data, and your valuation modeling)
 """
     
     # Dual-model routing support
@@ -656,7 +702,8 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         mcap = r.get("mcap_cr", 0.0)
         
         bg_color = "#f8f9fa" if idx % 2 == 1 else "#ffffff"
-        target_price = cmp * 1.35
+        report_md = item["report_md"]
+        target_price, upside_pct = extract_target_and_upside(report_md, cmp)
         
         table_rows_html.append(f"""
         <tr style="background-color: {bg_color};">
@@ -666,7 +713,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
-          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f} (+35%)</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f} (+{upside_pct:.1f}%)</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #4a5568; font-family: sans-serif;">₹{mcap:,.1f} Cr</td>
         </tr>
         """)
@@ -702,7 +749,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         r = item["r"]
         sector = r.get("industry", "N/A")
         cmp = r.get("close", 0.0)
-        target_price = cmp * 1.35
+        target_price, upside_pct = extract_target_and_upside(report_md, cmp)
         mcap = r.get("mcap_cr", 0.0)
         
         report_html = markdown_to_html(report_md)
@@ -730,7 +777,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
               <span class="summary-ticker" style="font-weight: bold; font-size: 15px; color: white; background-color: #1b365d; padding: 4px 8px; border-radius: 4px; margin-right: 15px; letter-spacing: 0.5px;">{symbol}</span>
               <span class="summary-name" style="font-weight: 600; font-size: 15px; color: #2d3748; margin-right: auto;">{company} <span class="summary-sector" style="font-size: 12px; font-weight: normal; color: #718096; margin-left: 5px;">({sector})</span></span>
               <span class="summary-cmp" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">CMP: <strong>₹{cmp:,.2f}</strong></span>
-              <span class="summary-target" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">12M Target (Upside): <strong style="color: #2e7d32;">₹{target_price:,.2f} (+35%)</strong></span>
+              <span class="summary-target" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">12M Target (Upside): <strong style="color: #2e7d32;">₹{target_price:,.2f} (+{upside_pct:.1f}%)</strong></span>
               <span class="summary-mcap" style="font-size: 13.5px; margin-left: 20px; color: #4a5568;">MCap: <strong>₹{mcap:,.1f} Cr</strong></span>
             </div>
             <span class="arrow" style="font-size: 12px; color: #718096;">▼</span>
