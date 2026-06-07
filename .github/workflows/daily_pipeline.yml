@@ -2,8 +2,8 @@ name: Daily Multibagger Pipeline
 
 on:
   schedule:
-    # Run daily at 10:22 AM UTC (which is 3:52 PM IST, right after market close and off-peak to avoid schedule delays)
-    - cron: '22 10 * * *'
+    # Run Monday through Friday at 10:22 AM UTC (which is 3:52 PM IST, right after market close)
+    - cron: '22 10 * * 1-5'
   workflow_dispatch: # Allows you to trigger it manually from GitHub website with 1 click
 
 jobs:

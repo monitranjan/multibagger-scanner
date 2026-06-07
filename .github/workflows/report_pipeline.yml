@@ -2,8 +2,8 @@ name: Automated Deep Equity Reports Pipeline
 
 on:
   schedule:
-    # Run daily at 10:52 AM UTC (which is 4:22 PM IST, 30 minutes after the main pipeline and off-peak to avoid schedule delays)
-    - cron: '52 10 * * *'
+    # Run Monday through Friday at 10:52 AM UTC (which is 4:22 PM IST, 30 minutes after the main pipeline)
+    - cron: '52 10 * * 1-5'
   workflow_dispatch: # Allows you to trigger it manually from GitHub website with 1 click
 
 jobs:

@@ -1849,7 +1849,7 @@ def build_workbook(
 
     # Create and write Confluence Overlap sheet!
     write_confluence_sheet(
-        wb.create_sheet("Confluence Overlap"),
+        wb.create_sheet("Confluence Overlap", index=2),
         overlap_symbols,
         universe,
         scanner_symbols,
@@ -3373,7 +3373,7 @@ def write_scoring_sheet(
         )
 
         # Apply conditional formatting for Calculated V-stop Line (Close >= V-stop is green, Close < V-stop is red)
-        from openpyxl.formatting.rule import FormulaRule
+        from openpyxl.formatting.rule import CellIsRule
         close_letter = get_column_letter(col_map["Close"])
         vstop_letter = get_column_letter(col_map["Calculated V-stop Line"])
         
@@ -3382,13 +3382,20 @@ def write_scoring_sheet(
         red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
         red_font = Font(color="9C0006", bold=True)
         
+        # Rule 1: Blank check to stop evaluation for empty V-stops (so they don't turn green/red)
         ws.conditional_formatting.add(
             f"{vstop_letter}2:{vstop_letter}{max_row}",
-            FormulaRule(formula=[f"=AND({vstop_letter}2<>\"\",{vstop_letter}2>0,{close_letter}2>={vstop_letter}2)"], stopIfTrue=True, fill=green_fill, font=green_font)
+            CellIsRule(operator='equal', formula=['""'], stopIfTrue=True)
         )
+        # Rule 2: Green if Vstop <= Close
         ws.conditional_formatting.add(
             f"{vstop_letter}2:{vstop_letter}{max_row}",
-            FormulaRule(formula=[f"=AND({vstop_letter}2<>\"\",{vstop_letter}2>0,{close_letter}2<{vstop_letter}2)"], stopIfTrue=True, fill=red_fill, font=red_font)
+            CellIsRule(operator='lessThanOrEqual', formula=[f"={close_letter}2"], stopIfTrue=True, fill=green_fill, font=green_font)
+        )
+        # Rule 3: Red if Vstop > Close
+        ws.conditional_formatting.add(
+            f"{vstop_letter}2:{vstop_letter}{max_row}",
+            CellIsRule(operator='greaterThan', formula=[f"={close_letter}2"], stopIfTrue=True, fill=red_fill, font=red_font)
         )
 
         # Write weekly tracking removals for Scan Match sheets
@@ -3510,6 +3517,7 @@ def write_confluence_sheet(
     headers = [
         "Confluence Rank",
         "Total Score",
+        "Relative Strength Rating",
         "Symbol",
         "Company Name",
         "Industry",
@@ -3563,17 +3571,20 @@ def write_confluence_sheet(
     max_row = len(sorted_rows) + 1
     for idx, item in enumerate(sorted_rows, start=2):
         sym = item["symbol"]
-        ws.cell(idx, 3, sym)
-        ws.cell(idx, 4, item["company"])
-        ws.cell(idx, 5, item["industry"])
-        ws.cell(idx, 6, item["overlap_count"])
-        ws.cell(idx, 7, item["in_scan"])
-        ws.cell(idx, 8, item["in_univ"])
-        ws.cell(idx, 9, item["scans_count"])
-        ws.cell(idx, 10, item["recurrence"])
+        ws.cell(idx, 4, sym)
+        ws.cell(idx, 5, item["company"])
+        ws.cell(idx, 6, item["industry"])
+        ws.cell(idx, 7, item["overlap_count"])
+        ws.cell(idx, 8, item["in_scan"])
+        ws.cell(idx, 9, item["in_univ"])
+        ws.cell(idx, 10, item["scans_count"])
+        ws.cell(idx, 11, item["recurrence"])
         
         # INDEX-MATCH lookup for scores
-        ws.cell(idx, 2, f"=IFERROR(INDEX('Monit Non Financial'!$B$2:$B$400, MATCH(C{idx}, 'Monit Non Financial'!$C$2:$C$400, 0)), IFERROR(INDEX('Monit Banks NBFC'!$B$2:$B$100, MATCH(C{idx}, 'Monit Banks NBFC'!$C$2:$C$100, 0)), 0))")
+        ws.cell(idx, 2, f"=IFERROR(INDEX('Monit Non Financial'!$B$2:$B$400, MATCH(D{idx}, 'Monit Non Financial'!$C$2:$C$400, 0)), IFERROR(INDEX('Monit Banks NBFC'!$B$2:$B$100, MATCH(D{idx}, 'Monit Banks NBFC'!$C$2:$C$100, 0)), 0))")
+        
+        # INDEX-MATCH lookup for Relative Strength Rating (col L in Monit sheets)
+        ws.cell(idx, 3, f"=IFERROR(INDEX('Monit Non Financial'!$L$2:$L$400, MATCH(D{idx}, 'Monit Non Financial'!$C$2:$C$400, 0)), IFERROR(INDEX('Monit Banks NBFC'!$L$2:$L$100, MATCH(D{idx}, 'Monit Banks NBFC'!$C$2:$C$100, 0)), \"\"))")
         
         # Confluence Rank
         ws.cell(idx, 1, f'=IF(B{idx}=0,"",ROW()-1)')
@@ -3582,7 +3593,8 @@ def write_confluence_sheet(
     ws.freeze_panes = "F2"
     ws.auto_filter.ref = ws.dimensions
     ws.sheet_view.showGridLines = False
-    add_score_conditional_format(ws, 6, 2, max_row)
+    add_score_conditional_format(ws, 7, 2, max_row)
+    add_rs_rating_conditional_formatting(ws, 3, 2, max_row)
 
 
 def translate_score_formula(formula: str, source_row: int, target_input_cell: str) -> str:
