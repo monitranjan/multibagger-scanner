@@ -7,7 +7,7 @@
     "return_1d": 4.99,
     "mcap_cr": 1176.96,
     "signal": "52W Breakout",
-    "scans_count": 31
+    "scans_count": 28
   },
   {
     "symbol": "ACUTAAS",
@@ -17,7 +17,7 @@
     "return_1d": 5.17,
     "mcap_cr": 27249.17,
     "signal": "52W Breakout",
-    "scans_count": 28
+    "scans_count": 27
   },
   {
     "symbol": "VENUSREM",
@@ -27,7 +27,17 @@
     "return_1d": 4.99,
     "mcap_cr": 2183.5,
     "signal": "52W Breakout",
-    "scans_count": 27
+    "scans_count": 26
+  },
+  {
+    "symbol": "RRKABEL",
+    "company": "R R Kabel Ltd",
+    "industry": "Cables - Power",
+    "close": 2223.4,
+    "return_1d": 0.02,
+    "mcap_cr": 25147.88,
+    "signal": "52W Breakout",
+    "scans_count": 24
   },
   {
     "symbol": "SYRMA",
@@ -47,36 +57,6 @@
     "return_1d": 2.33,
     "mcap_cr": 10523.28,
     "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "ATHERENERG",
-    "company": "Ather Energy Ltd",
-    "industry": "Auto - 2 & 3 Wheelers",
-    "close": 1033.6,
-    "return_1d": 4.6,
-    "mcap_cr": 39553.1,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "RRKABEL",
-    "company": "R R Kabel Ltd",
-    "industry": "Cables - Power",
-    "close": 2223.4,
-    "return_1d": 0.02,
-    "mcap_cr": 25147.88,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 137.1,
-    "return_1d": 3.01,
-    "mcap_cr": 18435.3,
-    "signal": "52W Breakout",
     "scans_count": 21
   },
   {
@@ -90,33 +70,13 @@
     "scans_count": 20
   },
   {
-    "symbol": "RPEL",
-    "company": "Raghav Productivity Enhancers Ltd",
-    "industry": "Steel Products",
-    "close": 1110.15,
-    "return_1d": 9.89,
-    "mcap_cr": 5096.92,
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives/Protectives",
+    "close": 137.1,
+    "return_1d": 3.01,
+    "mcap_cr": 18435.3,
     "signal": "52W Breakout",
     "scans_count": 20
-  },
-  {
-    "symbol": "HSCL",
-    "company": "Himadri Speciality Chemical Limited",
-    "industry": "Carbon Black",
-    "close": 685.05,
-    "return_1d": 6.71,
-    "mcap_cr": 34563.62,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "IDEAFORGE",
-    "company": "Ideaforge Technology Ltd",
-    "industry": "Aerospace & Defence - Equipments",
-    "close": 945.0,
-    "return_1d": 5.0,
-    "mcap_cr": 4089.58,
-    "signal": "52W Breakout",
-    "scans_count": 19
   }
 ]
