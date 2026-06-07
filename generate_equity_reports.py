@@ -609,7 +609,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
           
           <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
           
-          {reports_body_html}
+          {"\n".join(reports_body_html)}
         </div>
         <div style="background-color: #f4f6f9; text-align: center; padding: 15px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px; border-top: 1px solid #e2e8f0; margin-top: 30px;">
           Generated on {today_str} | Monit Multibagger Research Desk
