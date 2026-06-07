@@ -140,6 +140,32 @@ def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetim
                 
     return False, ""
 
+def get_existing_quarter_report_path(symbol, reports_dir, today):
+    """Return the Path of the existing report for this symbol in the same calendar quarter, if any."""
+    if not reports_dir.exists():
+        return None
+        
+    current_q, current_y = get_calendar_quarter(today)
+    prefix = f"{symbol}_equity_report_"
+    
+    for filepath in reports_dir.glob(f"{prefix}*.md"):
+        filename = filepath.name
+        try:
+            date_str = filename.replace(prefix, "").replace(".md", "")
+            file_date = datetime.strptime(date_str, "%Y-%m-%d")
+            file_q, file_y = get_calendar_quarter(file_date)
+            if file_q == current_q and file_y == current_y:
+                return filepath
+        except Exception:
+            try:
+                mtime = datetime.fromtimestamp(filepath.stat().st_mtime)
+                file_q, file_y = get_calendar_quarter(mtime)
+                if file_q == current_q and file_y == current_y:
+                    return filepath
+            except Exception:
+                pass
+    return None
+
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
     """Invoke the Gemini API in three distinct stages to guarantee complete, non-truncated reports."""
     symbol = r["symbol"]
@@ -1218,7 +1244,21 @@ def main() -> None:
                 
                 exists, quarter_info = check_existing_quarter_report(symbol, reports_dir, today)
                 if exists:
-                    print(f"⏭️  [SKIPPED] A report for emerging leader {symbol} exists in current quarter: {quarter_info}.")
+                    print(f"⏭️  [SKIPPED GENERATION] A report for emerging leader {symbol} exists in current quarter: {quarter_info}.")
+                    existing_path = get_existing_quarter_report_path(symbol, reports_dir, today)
+                    if existing_path and existing_path.exists():
+                        try:
+                            with open(existing_path, "r") as ef:
+                                report_text = ef.read()
+                            compiled_emerging_reports.append({
+                                "symbol": symbol,
+                                "company": company,
+                                "report_md": report_text,
+                                "r": r
+                            })
+                            print(f"📋 Loaded existing report for {symbol} into today's digest.")
+                        except Exception as read_err:
+                            print(f"⚠️ Failed to read existing report for {symbol}: {read_err}")
                     continue
                     
                 print(f"✍️  [COMPILING] Compiling report for emerging leader {symbol}...")
