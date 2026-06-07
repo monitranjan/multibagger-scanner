@@ -588,7 +588,9 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         </div>
         <hr style="border: 0; border-top: 2px dashed #cbd5e0; margin: 40px 0;">
         """)
-        
+    
+    reports_body_joined = "\n".join(reports_body_html)
+    
     html_body = f"""
     <html>
       <body style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fcfcfc;">
@@ -600,16 +602,13 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
           <p style="line-height: 1.6; color: #4a5568; font-size: 14.5px; font-family: sans-serif;">
             Our automated deep equity research engine has compiled and validated comprehensive Wheels-style research reports for today's **{len(compiled_reports)} emerging leader** candidates.
           </p>
-          <p style="font-size: 13px; color: #4a5568; font-family: sans-serif;">
-            ℹ️ <strong>Note:</strong> We have attached fully styled, interactive standalone <code>.html</code> files for each stock in this email. You can open them in one click to view the reports with full margins and premium styling!
-          </p>
           
           <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
           {summary_table_html}
           
           <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
           
-          {"\n".join(reports_body_html)}
+          {reports_body_joined}
         </div>
         <div style="background-color: #f4f6f9; text-align: center; padding: 15px; font-size: 11px; color: #777; border-radius: 0 0 6px 6px; border-top: 1px solid #e2e8f0; margin-top: 30px;">
           Generated on {today_str} | Monit Multibagger Research Desk
@@ -634,72 +633,6 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         body_parts.attach(MIMEText(plain_text, "plain"))
         body_parts.attach(MIMEText(html_body, "html"))
         msg.attach(body_parts)
-        
-        # Attach standalone HTML files for each compiled report
-        for item in compiled_reports:
-            symbol = item["symbol"]
-            company = item["company"]
-            report_md = item["report_md"]
-            
-            report_html = markdown_to_html(report_md)
-            
-            # Premium standalone HTML template with custom CSS for browser viewing
-            standalone_html = f"""
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <meta charset="utf-8">
-                <title>{symbol} ({company}) — Equity Research Report</title>
-                <style>
-                  body {{
-                    font-family: 'Segoe UI', -apple-system, Roboto, Helvetica, Arial, sans-serif;
-                    color: #2d3748;
-                    max-width: 850px;
-                    margin: 40px auto;
-                    padding: 40px;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 12px;
-                    background-color: #ffffff;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-                    line-height: 1.6;
-                  }}
-                  hr {{
-                    border: 0;
-                    border-top: 1px solid #e2e8f0;
-                    margin: 30px 0;
-                  }}
-                  strong {{
-                    color: #1a202c;
-                  }}
-                </style>
-              </head>
-              <body>
-                <div style="background-color: #2e7d32; color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
-                  <h2 style="margin: 0; letter-spacing: 1.5px; font-weight: bold; color: white;">🚀 MONIT MULTIBAGGER RESEARCH</h2>
-                  <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">Premium Emerging Leader Equity Report</p>
-                </div>
-                
-                <div style="background-color: #f7fafc; border-left: 4px solid #2e7d32; padding: 15px; margin-bottom: 30px; border-radius: 4px;">
-                  <h3 style="margin: 0 0 5px 0; color: #2e7d32;">Emerging Leader Segment</h3>
-                  <p style="margin: 0; font-size: 13.5px; color: #4a5568;">
-                    This document was compiled automatically by the Monit Equity Engine on {today_str} and is archived locally in your private research repository.
-                  </p>
-                </div>
-                
-                {report_html}
-                
-                <div style="background-color: #f7fafc; text-align: center; padding: 20px; font-size: 12px; color: #718096; border-radius: 8px; border-top: 1px solid #e2e8f0; margin-top: 40px;">
-                  Generated on {today_str} | Monit Multibagger Research Desk
-                </div>
-              </body>
-            </html>
-            """
-            
-            # Create the MIME application attachment
-            attachment = MIMEApplication(standalone_html.encode("utf-8"), _subtype="html")
-            attachment.add_header("Content-Disposition", "attachment", filename=f"{symbol}_equity_report_{today_str.replace(' ', '_')}.html")
-            msg.attach(attachment)
-            print(f"📎 Attached standalone HTML report for {symbol} to digest email.")
         
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(gmail_user, gmail_app_pass)
