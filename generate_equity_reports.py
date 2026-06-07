@@ -108,6 +108,43 @@ def extract_target_and_upside(report_md: str, cmp: float) -> tuple[float, float]
         
     return cmp * 1.35, 35.0
 
+def sanitize_report_header_block(report_md: str, cmp: float, target_price: float, upside_pct: float) -> str:
+    """
+    Finds the header block table in the report markdown and replaces the old target price
+    and old 35% upside with the dynamically computed target price and upside %.
+    """
+    import re
+    lines = report_md.splitlines()
+    header_end = 30 if len(lines) > 30 else len(lines)
+    
+    for i in range(header_end):
+        line = lines[i]
+        if "|" in line:
+            if any(r in line for r in ["BUY", "HOLD", "REDUCE"]):
+                old_target_approx = cmp * 1.35
+                
+                # Replace upside % representation (like 35%, 35.0%, 35.00%, etc.)
+                line = re.sub(r'\b35(?:\.0+)?%?', f'{upside_pct:.1f}%', line)
+                
+                # Replace the old target price in the table cells
+                cells = line.split("|")
+                new_cells = []
+                for cell in cells:
+                    cell_strip = cell.strip()
+                    num_match = re.search(r'([\d,]+(?:\.\d+)?)', cell_strip)
+                    if num_match:
+                        try:
+                            val = float(num_match.group(1).replace(",", ""))
+                            if cmp > 0 and abs(val - old_target_approx) / old_target_approx < 0.05:
+                                cell = cell.replace(num_match.group(1), f"{target_price:.2f}")
+                        except ValueError:
+                            pass
+                    new_cells.append(cell)
+                line = "|".join(new_cells)
+                lines[i] = line
+                
+    return "\n".join(lines)
+
 def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[bool, str]:
     """Check if a report for this symbol already exists in the same calendar quarter as today."""
     if not reports_dir.exists():
@@ -1142,11 +1179,25 @@ def main() -> None:
         
         print(f"\n🔍 Checking report status for `{symbol}` ({company})...")
         
-        # Check calendar quarter report existance to avoid repeated generation within same quarter
         exists, quarter_info = check_existing_quarter_report(symbol, reports_dir, today)
         if exists:
             print(f"⏭️  [SKIPPED] A report for {symbol} has already been compiled in the current calendar quarter: {quarter_info}.")
             print("Avoiding repeated token expenditure as no new quarterly earnings result has been released.")
+            # Sanitize the existing report's header block on disk
+            existing_path = get_existing_quarter_report_path(symbol, reports_dir, today)
+            if existing_path and existing_path.exists():
+                try:
+                    with open(existing_path, "r") as ef:
+                        report_text = ef.read()
+                    cmp = r.get("close", 0.0)
+                    target_price, upside_pct = extract_target_and_upside(report_text, cmp)
+                    sanitized_text = sanitize_report_header_block(report_text, cmp, target_price, upside_pct)
+                    if sanitized_text != report_text:
+                        with open(existing_path, "w") as wf:
+                            wf.write(sanitized_text)
+                        print(f"✍️ Sanitized and updated existing confluence report for {symbol} on disk.")
+                except Exception as sanitize_err:
+                    print(f"⚠️ Failed to sanitize existing confluence report for {symbol}: {sanitize_err}")
             continue
             
         print(f"✍️  [COMPILING] No report found for {symbol} in the current calendar quarter.")
@@ -1201,6 +1252,11 @@ def main() -> None:
                 
             report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
             
+            # Sanitize header block for mathematical correctness
+            cmp = r.get("close", 0.0)
+            target_price, upside_pct = extract_target_and_upside(report_text, cmp)
+            report_text = sanitize_report_header_block(report_text, cmp, target_price, upside_pct)
+            
             with open(report_file, "w") as f:
                 f.write(report_text)
                 
@@ -1250,6 +1306,19 @@ def main() -> None:
                         try:
                             with open(existing_path, "r") as ef:
                                 report_text = ef.read()
+                                
+                            # Dynamically sanitize the header block in the existing report
+                            cmp = r.get("close", 0.0)
+                            target_price, upside_pct = extract_target_and_upside(report_text, cmp)
+                            sanitized_text = sanitize_report_header_block(report_text, cmp, target_price, upside_pct)
+                            
+                            # If it changed, write it back to disk to permanently update it
+                            if sanitized_text != report_text:
+                                with open(existing_path, "w") as wf:
+                                    wf.write(sanitized_text)
+                                report_text = sanitized_text
+                                print(f"✍️ Sanitized and updated existing emerging report for {symbol} on disk.")
+                                
                             compiled_emerging_reports.append({
                                 "symbol": symbol,
                                 "company": company,
@@ -1310,6 +1379,11 @@ def main() -> None:
                         raise RuntimeError(f"Failed to generate a complete emerging report for {symbol} after {max_attempts} attempts.")
                         
                     report_file = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
+                    
+                    # Sanitize header block for mathematical correctness
+                    cmp = r.get("close", 0.0)
+                    target_price, upside_pct = extract_target_and_upside(report_text, cmp)
+                    report_text = sanitize_report_header_block(report_text, cmp, target_price, upside_pct)
                     
                     with open(report_file, "w") as f:
                         f.write(report_text)
