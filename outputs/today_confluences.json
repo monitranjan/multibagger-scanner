@@ -1,82 +1,72 @@
 [
   {
-    "symbol": "MODISONLTD",
-    "company": "Modison Ltd",
-    "industry": "Capital Goods - Electric General",
-    "close": 362.7,
-    "return_1d": 4.99,
-    "mcap_cr": 1176.96,
-    "signal": "52W Breakout",
-    "scans_count": 28
-  },
-  {
-    "symbol": "ACUTAAS",
-    "company": "Acutaas Chemicals Ltd",
-    "industry": "Pharma - API & CRAMS",
-    "close": 3328.3,
-    "return_1d": 5.17,
-    "mcap_cr": 27249.17,
-    "signal": "52W Breakout",
-    "scans_count": 27
-  },
-  {
     "symbol": "VENUSREM",
     "company": "Venus Remedies Limited",
     "industry": "Pharmaceuticals - I V Fluids",
-    "close": 1633.5,
-    "return_1d": 4.99,
+    "close": 1695.4,
+    "return_1d": 3.79,
     "mcap_cr": 2183.5,
     "signal": "52W Breakout",
     "scans_count": 26
   },
   {
-    "symbol": "RRKABEL",
-    "company": "R R Kabel Ltd",
-    "industry": "Cables - Power",
-    "close": 2223.4,
-    "return_1d": 0.02,
-    "mcap_cr": 25147.88,
+    "symbol": "BAJAJCON",
+    "company": "Bajaj Consumer Care Ltd",
+    "industry": "FMCG - Personal Care",
+    "close": 575.35,
+    "return_1d": 4.22,
+    "mcap_cr": 7210.78,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "JAYBARMARU",
+    "company": "Jay Bharat Maruti Limited",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 140.76,
+    "return_1d": 9.99,
+    "mcap_cr": 1385.28,
     "signal": "52W Breakout",
     "scans_count": 24
   },
   {
-    "symbol": "SYRMA",
-    "company": "Syrma SGS Technology Ltd",
-    "industry": "Consumer Electronics - EMS",
-    "close": 1226.8,
-    "return_1d": 0.43,
-    "mcap_cr": 23656.44,
+    "symbol": "PANACEABIO",
+    "company": "Panacea Biotec Limited",
+    "industry": "Pharma - Others",
+    "close": 552.9,
+    "return_1d": 2.35,
+    "mcap_cr": 3308.77,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 24
   },
   {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 538.05,
-    "return_1d": 2.33,
-    "mcap_cr": 10523.28,
+    "symbol": "NRBBEARING",
+    "company": "Nrb Bearing Limited",
+    "industry": "Bearings",
+    "close": 428.35,
+    "return_1d": 11.07,
+    "mcap_cr": 3737.82,
     "signal": "52W Breakout",
     "scans_count": 21
-  },
-  {
-    "symbol": "INDOBORAX",
-    "company": "Indo Borax & Chemicals Ltd",
-    "industry": "Chemicals - Inorganic",
-    "close": 367.4,
-    "return_1d": 2.43,
-    "mcap_cr": 1178.99,
-    "signal": "52W Breakout",
-    "scans_count": 20
   },
   {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 137.1,
-    "return_1d": 3.01,
+    "close": 140.37,
+    "return_1d": 2.39,
     "mcap_cr": 18435.3,
     "signal": "52W Breakout",
     "scans_count": 20
+  },
+  {
+    "symbol": "THYROCARE",
+    "company": "Thyrocare Technologies Limited",
+    "industry": "Diagnostics",
+    "close": 541.35,
+    "return_1d": 4.51,
+    "mcap_cr": 8244.76,
+    "signal": "52W Breakout",
+    "scans_count": 18
   }
 ]
