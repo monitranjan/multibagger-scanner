@@ -1,6 +1,6 @@
 ### HEADER BLOCK
 
-| Rating | BUY | 12M Target Price | Rs. 20.88 | Upside % | 35.0% | CMP | Rs. 15.47 | Market Cap | Rs. 500.9 Cr |
+| Rating | BUY | 12M Target Price | Rs. 20.88 | Upside % | 31.1% | CMP | Rs. 15.47 | Market Cap | Rs. 500.9 Cr |
 |---|---|---|---|---|---|---|---|---|---|
 | 52W High/Low | Rs. 20.00 / Rs. 13.00 | P/E (TTM) | 18.2x | P/B (TTM) | 1.8x | ROCE | 15.5% | ROE | 14.8% | EPS (latest full year) | Rs. 0.85 |
 | Book Value | Rs. 8.59 | Dividend Yield | 0.0% | Face Value | Rs. 1.00 | Promoter % | 73.1% | FII % | 0.0% | DII % | 0.0% |
