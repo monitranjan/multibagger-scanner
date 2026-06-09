@@ -1,51 +1,31 @@
 [
   {
-    "symbol": "VENUSREM",
-    "company": "Venus Remedies Limited",
-    "industry": "Pharmaceuticals - I V Fluids",
-    "close": 1695.4,
-    "return_1d": 3.79,
-    "mcap_cr": 2183.5,
+    "symbol": "RPEL",
+    "company": "Raghav Productivity Enhancers Ltd",
+    "industry": "Steel Products",
+    "close": 1170.5,
+    "return_1d": 7.36,
+    "mcap_cr": 5005.55,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 23
   },
   {
-    "symbol": "BAJAJCON",
-    "company": "Bajaj Consumer Care Ltd",
-    "industry": "FMCG - Personal Care",
-    "close": 575.35,
-    "return_1d": 4.22,
-    "mcap_cr": 7210.78,
+    "symbol": "SYRMA",
+    "company": "Syrma SGS Technology Ltd",
+    "industry": "Consumer Electronics - EMS",
+    "close": 1256.8,
+    "return_1d": 4.63,
+    "mcap_cr": 23162.8,
     "signal": "52W Breakout",
-    "scans_count": 25
+    "scans_count": 21
   },
   {
-    "symbol": "JAYBARMARU",
-    "company": "Jay Bharat Maruti Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 140.76,
-    "return_1d": 9.99,
-    "mcap_cr": 1385.28,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "PANACEABIO",
-    "company": "Panacea Biotec Limited",
-    "industry": "Pharma - Others",
-    "close": 552.9,
-    "return_1d": 2.35,
-    "mcap_cr": 3308.77,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "NRBBEARING",
-    "company": "Nrb Bearing Limited",
-    "industry": "Bearings",
-    "close": 428.35,
-    "return_1d": 11.07,
-    "mcap_cr": 3737.82,
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1203.8,
+    "return_1d": 10.0,
+    "mcap_cr": 18800.43,
     "signal": "52W Breakout",
     "scans_count": 21
   },
@@ -53,20 +33,10 @@
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 140.37,
-    "return_1d": 2.39,
-    "mcap_cr": 18435.3,
+    "close": 145.86,
+    "return_1d": 3.91,
+    "mcap_cr": 18875.0,
     "signal": "52W Breakout",
     "scans_count": 20
-  },
-  {
-    "symbol": "THYROCARE",
-    "company": "Thyrocare Technologies Limited",
-    "industry": "Diagnostics",
-    "close": 541.35,
-    "return_1d": 4.51,
-    "mcap_cr": 8244.76,
-    "signal": "52W Breakout",
-    "scans_count": 18
   }
 ]
