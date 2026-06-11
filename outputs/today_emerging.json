@@ -1,147 +1,147 @@
 [
   {
-    "symbol": "KOVAI",
-    "company": "Kovai Medical Center & Hospital Ltd",
-    "industry": "healthcare",
-    "close": 5856.5,
-    "mcap_cr": 6287.42,
-    "persistence": 10
-  },
-  {
-    "symbol": "GEECEE",
-    "company": "Geecee Ventures Limited",
-    "industry": "financials",
-    "close": 330.2,
-    "mcap_cr": 679.11,
-    "persistence": 10
-  },
-  {
     "symbol": "VADILALIND",
     "company": "Vadilal Industries Limited",
     "industry": "FMCG - Dairy Products",
-    "close": 5926.8,
-    "mcap_cr": 4138.47,
+    "close": 5940.9,
+    "mcap_cr": 4260.08,
+    "persistence": 10
+  },
+  {
+    "symbol": "KOVAI",
+    "company": "Kovai Medical Center & Hospital Ltd",
+    "industry": "healthcare",
+    "close": 5794.5,
+    "mcap_cr": 6408.34,
     "persistence": 10
   },
   {
     "symbol": "AEGISLOG",
     "company": "Aegis Logistics Ltd",
     "industry": "Logistics",
-    "close": 801.0,
-    "mcap_cr": 27471.02,
+    "close": 925.9,
+    "mcap_cr": 28115.1,
+    "persistence": 9
+  },
+  {
+    "symbol": "KPRMILL",
+    "company": "K.p.r. Mill Limited",
+    "industry": "consumer discretionary",
+    "close": 1054.7,
+    "mcap_cr": 35738.36,
     "persistence": 9
   },
   {
     "symbol": "NOVARTIND",
-    "company": "NOVARTIND",
+    "company": "Novartis India Ltd",
+    "industry": "healthcare",
+    "close": 1329.7,
+    "mcap_cr": 3261.9,
+    "persistence": 9
+  },
+  {
+    "symbol": "MGEL",
+    "company": "Mangalam Global Enterprise Ltd",
+    "industry": "services",
+    "close": 16.02,
+    "mcap_cr": 544.1,
+    "persistence": 9
+  },
+  {
+    "symbol": "GEECEE",
+    "company": "GEECEE",
     "industry": "unknown",
     "close": 0.0,
     "mcap_cr": 0.0,
     "persistence": 9
   },
   {
-    "symbol": "SVLL",
-    "company": "Shree Vasu Logistics Ltd",
-    "industry": "transportation",
-    "close": 740.05,
-    "mcap_cr": 872.14,
+    "symbol": "MSTCLTD",
+    "company": "MSTC Ltd",
+    "industry": "E-Commerce - Platform - Utility",
+    "close": 560.75,
+    "mcap_cr": 3912.48,
     "persistence": 8
   },
   {
-    "symbol": "KPRMILL",
-    "company": "K.p.r. Mill Limited",
-    "industry": "consumer discretionary",
-    "close": 1045.55,
-    "mcap_cr": 35198.3,
+    "symbol": "HITECHCORP",
+    "company": "Hitech Corporation",
+    "industry": "industrials",
+    "close": 310.74,
+    "mcap_cr": 540.43,
     "persistence": 8
   },
   {
-    "symbol": "GPTHEALTH",
-    "company": "GPT Healthcare Ltd",
-    "industry": "healthcare",
-    "close": 148.25,
-    "mcap_cr": 1230.66,
-    "persistence": 8
-  },
-  {
-    "symbol": "MGEL",
-    "company": "Mangalam Global Enterprise Ltd",
-    "industry": "services",
-    "close": 16.51,
-    "mcap_cr": 543.11,
+    "symbol": "GANESHBE",
+    "company": "Ganesh Benzoplast Ltd",
+    "industry": "miscellaneous",
+    "close": 108.23,
+    "mcap_cr": 768.63,
     "persistence": 8
   },
   {
     "symbol": "PANACEABIO",
     "company": "Panacea Biotec Limited",
     "industry": "Pharma - Others",
-    "close": 547.0,
-    "mcap_cr": 3722.51,
-    "persistence": 7
+    "close": 522.3,
+    "mcap_cr": 3350.42,
+    "persistence": 8
   },
   {
-    "symbol": "MSTCLTD",
-    "company": "MSTC Ltd",
-    "industry": "i.t",
-    "close": 555.75,
-    "mcap_cr": 3836.45,
-    "persistence": 7
+    "symbol": "SVLL",
+    "company": "SVLL",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 8
   },
   {
-    "symbol": "HITECHCORP",
-    "company": "Hitech Corporation",
-    "industry": "industrials",
-    "close": 314.65,
-    "mcap_cr": 531.28,
-    "persistence": 7
-  },
-  {
-    "symbol": "GANESHBE",
-    "company": "Ganesh Benzoplast Ltd",
-    "industry": "miscellaneous",
-    "close": 106.77,
-    "mcap_cr": 796.28,
-    "persistence": 7
-  },
-  {
-    "symbol": "HMVL",
-    "company": "Hindustan Media Ventures Limited",
-    "industry": "media",
-    "close": 83.88,
-    "mcap_cr": 625.18,
-    "persistence": 6
-  },
-  {
-    "symbol": "BHAGERIA",
-    "company": "Bhageria Industries Limited",
-    "industry": "chemicals",
-    "close": 207.85,
-    "mcap_cr": 944.46,
-    "persistence": 6
+    "symbol": "GPTHEALTH",
+    "company": "GPTHEALTH",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 8
   },
   {
     "symbol": "SSWL",
     "company": "Steel Strips Wheels Limited",
     "industry": "auto",
-    "close": 227.09,
-    "mcap_cr": 3687.45,
-    "persistence": 6
+    "close": 225.83,
+    "mcap_cr": 3569.41,
+    "persistence": 7
   },
   {
     "symbol": "TINNARUBR",
     "company": "Tinna Rubber & Infrastructure Ltd",
     "industry": "fmcg",
-    "close": 867.9,
-    "mcap_cr": 1569.17,
-    "persistence": 6
+    "close": 868.65,
+    "mcap_cr": 1563.59,
+    "persistence": 7
+  },
+  {
+    "symbol": "BHAGERIA",
+    "company": "Bhageria Industries Limited",
+    "industry": "chemicals",
+    "close": 205.37,
+    "mcap_cr": 907.14,
+    "persistence": 7
   },
   {
     "symbol": "GREENPLY",
-    "company": "GREENPLY",
+    "company": "Greenply Industries Limited",
+    "industry": "building materials",
+    "close": 292.5,
+    "mcap_cr": 3512.37,
+    "persistence": 6
+  },
+  {
+    "symbol": "HMVL",
+    "company": "HMVL",
     "industry": "unknown",
     "close": 0.0,
     "mcap_cr": 0.0,
-    "persistence": 5
+    "persistence": 6
   },
   {
     "symbol": "UNIDT",
@@ -152,11 +152,27 @@
     "persistence": 5
   },
   {
-    "symbol": "NBCC",
-    "company": "NBCC",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
+    "symbol": "RAMCOSYS",
+    "company": "Ramco Systems Limited",
+    "industry": "i.t",
+    "close": 549.8,
+    "mcap_cr": 2030.72,
+    "persistence": 5
+  },
+  {
+    "symbol": "STOVEKRAFT",
+    "company": "Stove Kraft Ltd",
+    "industry": "consumer discretionary",
+    "close": 651.6,
+    "mcap_cr": 2158.76,
+    "persistence": 4
+  },
+  {
+    "symbol": "STEL",
+    "company": "Stel Holdings Limited",
+    "industry": "financials",
+    "close": 543.8,
+    "mcap_cr": 985.06,
     "persistence": 4
   },
   {
@@ -168,51 +184,19 @@
     "persistence": 4
   },
   {
-    "symbol": "RAMCOSYS",
-    "company": "RAMCOSYS",
+    "symbol": "NBCC",
+    "company": "NBCC",
     "industry": "unknown",
     "close": 0.0,
     "mcap_cr": 0.0,
     "persistence": 4
   },
   {
-    "symbol": "OCCLLTD",
-    "company": "OCCL Ltd",
-    "industry": "chemicals",
-    "close": 128.44,
-    "mcap_cr": 698.91,
-    "persistence": 3
-  },
-  {
-    "symbol": "TECHM",
-    "company": "TECHM",
+    "symbol": "ZENTEC",
+    "company": "ZENTEC",
     "industry": "unknown",
     "close": 0.0,
     "mcap_cr": 0.0,
-    "persistence": 3
-  },
-  {
-    "symbol": "BELRISE",
-    "company": "Belrise Industries Ltd",
-    "industry": "auto",
-    "close": 227.13,
-    "mcap_cr": 20888.13,
-    "persistence": 3
-  },
-  {
-    "symbol": "STOVEKRAFT",
-    "company": "Stove Kraft Ltd",
-    "industry": "consumer discretionary",
-    "close": 652.05,
-    "mcap_cr": 2199.98,
-    "persistence": 3
-  },
-  {
-    "symbol": "STEL",
-    "company": "Stel Holdings Limited",
-    "industry": "financials",
-    "close": 533.75,
-    "mcap_cr": 968.63,
     "persistence": 3
   },
   {
@@ -224,6 +208,30 @@
     "persistence": 3
   },
   {
+    "symbol": "OCCLLTD",
+    "company": "OCCLLTD",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 3
+  },
+  {
+    "symbol": "BELRISE",
+    "company": "BELRISE",
+    "industry": "unknown",
+    "close": 0.0,
+    "mcap_cr": 0.0,
+    "persistence": 3
+  },
+  {
+    "symbol": "IDFCFIRSTB",
+    "company": "IDFC First Bank Ltd",
+    "industry": "bank",
+    "close": 72.95,
+    "mcap_cr": 62783.8,
+    "persistence": 3
+  },
+  {
     "symbol": "TBZ",
     "company": "TBZ",
     "industry": "unknown",
@@ -232,11 +240,27 @@
     "persistence": 3
   },
   {
-    "symbol": "ZENTEC",
-    "company": "ZENTEC",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
+    "symbol": "NRL",
+    "company": "Nupur Recyclers Ltd",
+    "industry": "services",
+    "close": 75.12,
+    "mcap_cr": 519.88,
+    "persistence": 3
+  },
+  {
+    "symbol": "ELECTHERM",
+    "company": "Electrotherm (india) Limited",
+    "industry": "metals & mining",
+    "close": 1182.65,
+    "mcap_cr": 1461.35,
+    "persistence": 3
+  },
+  {
+    "symbol": "CERA",
+    "company": "Cera Sanitaryware Limited",
+    "industry": "building materials",
+    "close": 5854.5,
+    "mcap_cr": 7570.21,
     "persistence": 3
   }
 ]
