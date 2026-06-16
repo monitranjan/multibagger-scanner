@@ -1,92 +1,102 @@
 [
   {
-    "symbol": "VENUSREM",
-    "company": "Venus Remedies Limited",
-    "industry": "Pharmaceuticals - I V Fluids",
-    "close": 1883.0,
-    "return_1d": 4.76,
-    "mcap_cr": 2402.72,
+    "symbol": "RPTECH",
+    "company": "Rashi Peripherals Ltd",
+    "industry": "Trading",
+    "close": 662.6,
+    "return_1d": 18.06,
+    "mcap_cr": 3698.62,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 27
   },
   {
     "symbol": "JAYBARMARU",
     "company": "Jay Bharat Maruti Limited",
     "industry": "Auto Ancillaries - Diversified",
-    "close": 159.12,
-    "return_1d": 10.0,
-    "mcap_cr": 1565.94,
+    "close": 167.68,
+    "return_1d": 5.38,
+    "mcap_cr": 1722.47,
     "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 25
   },
   {
-    "symbol": "UNIPARTS",
-    "company": "Uniparts India Ltd",
-    "industry": "Castings, Forgings & Fastners",
-    "close": 663.65,
-    "return_1d": 0.6,
-    "mcap_cr": 2978.09,
+    "symbol": "BHAGYANGR",
+    "company": "Bhagyanagar India",
+    "industry": "Recycling",
+    "close": 342.4,
+    "return_1d": 5.0,
+    "mcap_cr": 1043.36,
     "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 23
   },
   {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 164.83,
-    "return_1d": 3.04,
-    "mcap_cr": 21510.54,
+    "close": 164.89,
+    "return_1d": 0.04,
+    "mcap_cr": 22164.04,
     "signal": "52W Breakout",
     "scans_count": 23
   },
   {
-    "symbol": "AVALON",
-    "company": "Avalon Technologies Ltd",
-    "industry": "Consumer Electronics - EMS",
-    "close": 1760.0,
-    "return_1d": 4.33,
-    "mcap_cr": 11263.45,
+    "symbol": "RPEL",
+    "company": "Raghav Productivity Enhancers Ltd",
+    "industry": "Steel Products",
+    "close": 1203.4,
+    "return_1d": 0.29,
+    "mcap_cr": 5508.98,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 23
   },
   {
-    "symbol": "GAYAPROJ",
-    "company": "Gayatri Projects Limited",
-    "industry": "Construction - Civil/Turnkey",
-    "close": 22.95,
-    "return_1d": 4.99,
-    "mcap_cr": 647.49,
+    "symbol": "UNIPARTS",
+    "company": "Uniparts India Ltd",
+    "industry": "Castings, Forgings & Fastners",
+    "close": 670.3,
+    "return_1d": 1.0,
+    "mcap_cr": 2995.92,
     "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "KERNEX",
-    "company": "Kernex Microsystems (india) Limited",
-    "industry": "Railways - Kavach/Springs",
-    "close": 2037.2,
-    "return_1d": 2.2,
-    "mcap_cr": 3349.23,
-    "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 23
   },
   {
     "symbol": "GVPIL",
     "company": "GE Power India Ltd",
     "industry": "Infra - General",
-    "close": 976.0,
+    "close": 1024.8,
     "return_1d": 5.0,
-    "mcap_cr": 6249.13,
+    "mcap_cr": 6561.4,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 22
   },
   {
-    "symbol": "AEROFLEX",
-    "company": "Aeroflex Industries Ltd",
-    "industry": "Stainless Steel",
-    "close": 478.0,
-    "return_1d": 6.67,
-    "mcap_cr": 5929.74,
+    "symbol": "KERNEX",
+    "company": "Kernex Microsystems (india) Limited",
+    "industry": "Railways - Kavach/Springs",
+    "close": 2055.0,
+    "return_1d": 0.87,
+    "mcap_cr": 3422.99,
     "signal": "52W Breakout",
     "scans_count": 20
+  },
+  {
+    "symbol": "GAYAPROJ",
+    "company": "Gayatri Projects Limited",
+    "industry": "Construction - Civil/Turnkey",
+    "close": 24.09,
+    "return_1d": 4.97,
+    "mcap_cr": 679.78,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "MAYURUNIQ",
+    "company": "Mayur Uniquoters Ltd",
+    "industry": "Plastics - Plastic & Plastic Products",
+    "close": 823.95,
+    "return_1d": 3.37,
+    "mcap_cr": 3463.61,
+    "signal": "52W Breakout",
+    "scans_count": 18
   }
 ]
