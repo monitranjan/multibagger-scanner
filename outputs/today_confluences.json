@@ -1,21 +1,51 @@
 [
   {
-    "symbol": "RPEL",
-    "company": "Raghav Productivity Enhancers Ltd",
-    "industry": "Steel Products",
-    "close": 1206.65,
-    "return_1d": 0.27,
-    "mcap_cr": 5525.05,
+    "symbol": "SIGMAADV",
+    "company": "Sigma Advanced System Ltd",
+    "industry": "Aerospace & Defence - Equipments",
+    "close": 500.05,
+    "return_1d": 5.0,
+    "mcap_cr": 8393.42,
     "signal": "52W Breakout",
-    "scans_count": 23
+    "scans_count": 26
+  },
+  {
+    "symbol": "JAYBARMARU",
+    "company": "Jay Bharat Maruti Limited",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 172.79,
+    "return_1d": 4.99,
+    "mcap_cr": 1781.47,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "BAJAJCON",
+    "company": "Bajaj Consumer Care Ltd",
+    "industry": "FMCG - Personal Care",
+    "close": 620.5,
+    "return_1d": 2.93,
+    "mcap_cr": 7874.33,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives/Protectives",
+    "close": 169.19,
+    "return_1d": 1.81,
+    "mcap_cr": 22345.57,
+    "signal": "52W Breakout",
+    "scans_count": 24
   },
   {
     "symbol": "BHAGYANGR",
     "company": "Bhagyanagar India",
     "industry": "Recycling",
-    "close": 359.5,
+    "close": 377.45,
     "return_1d": 4.99,
-    "mcap_cr": 1095.51,
+    "mcap_cr": 1150.22,
     "signal": "52W Breakout",
     "scans_count": 23
   },
@@ -23,60 +53,40 @@
     "symbol": "BLISSGVS",
     "company": "Bliss Gvs Pharma Limited",
     "industry": "Pharma - Formulators",
-    "close": 474.85,
-    "return_1d": 5.08,
-    "mcap_cr": 4780.6,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "GAYAPROJ",
-    "company": "Gayatri Projects Limited",
-    "industry": "Construction - Civil/Turnkey",
-    "close": 25.26,
-    "return_1d": 4.86,
-    "mcap_cr": 713.54,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "KERNEX",
-    "company": "Kernex Microsystems (india) Limited",
-    "industry": "Railways - Kavach/Springs",
-    "close": 2103.5,
-    "return_1d": 2.36,
-    "mcap_cr": 3452.9,
+    "close": 482.95,
+    "return_1d": 1.71,
+    "mcap_cr": 5023.39,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "MAHABANK",
-    "company": "Bank Of Maharashtra Ltd",
-    "industry": "Banks - PSU",
-    "close": 90.14,
-    "return_1d": 2.21,
-    "mcap_cr": 67831.82,
+    "symbol": "IBULLSLTD",
+    "company": "Indiabulls Limited",
+    "industry": "Diversified",
+    "close": 25.25,
+    "return_1d": 4.99,
+    "mcap_cr": 5590.14,
     "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 21
+  },
+  {
+    "symbol": "SYRMA",
+    "company": "Syrma SGS Technology Ltd",
+    "industry": "Consumer Electronics - EMS",
+    "close": 1346.8,
+    "return_1d": 3.74,
+    "mcap_cr": 25035.18,
+    "signal": "52W Breakout",
+    "scans_count": 19
   },
   {
     "symbol": "SASKEN",
     "company": "Sasken Communication Technologies Limited",
     "industry": "IT - Software",
-    "close": 2407.2,
+    "close": 2647.9,
     "return_1d": 10.0,
-    "mcap_cr": 3323.41,
+    "mcap_cr": 3655.69,
     "signal": "52W Breakout",
     "scans_count": 19
-  },
-  {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 572.4,
-    "return_1d": 3.61,
-    "mcap_cr": 10804.92,
-    "signal": "52W Breakout",
-    "scans_count": 18
   }
 ]
