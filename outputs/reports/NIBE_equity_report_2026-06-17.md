@@ -6,7 +6,7 @@ Please note: As an AI, I cannot access real-time financial data or perform dynam
 
 | Rating | 12M Target Price | Upside % | CMP (Rs.) | Market Cap (Rs. Cr) | 52W High/Low (Rs.) |
 | :----- | :--------------- | :------- | :-------- | :------------------ | :----------------- |
-| BUY    | 2090.00             | 29.2%    | 1625.30   | 2470.8              | 1750 / 850         |
+| BUY    | 2090.00             | 29.2%    | 1625.30   | 2090.00              | 1750 / 850         |
 
 | P/E (TTM) | P/B (TTM) | ROCE (%) | ROE (%) | EPS (FY26) (Rs.) | Book Value (Rs.) | Dividend Yield (%) | Face Value (Rs.) | Promoter % | FII % | DII % |
 | :-------- | :-------- | :------- | :------ | :--------------- | :--------------- | :----------------- | :--------------- | :--------- | :---- | :---- |
