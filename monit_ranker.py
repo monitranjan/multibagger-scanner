@@ -1655,7 +1655,17 @@ def build_workbook(
     scanner_symbols = load_scanner_symbols()
     scan_matched_symbols = load_scan_matched_symbols()
     symbols = universe["symbol"].dropna().unique().tolist()
-    all_symbols = list(set(symbols + scanner_symbols + scan_matched_symbols))
+    
+    # Load backtest database early to identify emerging leaders and fetch their yfinance details
+    backtest_df = load_backtest_df()
+    emerging_leaders = []
+    if not backtest_df.empty:
+        try:
+            emerging_leaders = detect_emerging_leaders(backtest_df)
+        except Exception as e:
+            print(f"⚠️ Error detecting emerging leaders early: {e}")
+            
+    all_symbols = list(set(symbols + scanner_symbols + scan_matched_symbols + emerging_leaders))
     # Fetch benchmarks and StockScans indices first to avoid yfinance rate limiting
     benchmark_data = fetch_benchmark_indices()
     stockscans_indices = fetch_all_stockscans_indices(all_symbols)
@@ -1863,7 +1873,6 @@ def build_workbook(
     )
 
     # Load and build the Multibagger Leaderboard dashboard tab as tab 2!
-    backtest_df = load_backtest_df()
     if not backtest_df.empty:
         write_leaderboard_sheet(
             wb.create_sheet("Leaderboard", index=1),

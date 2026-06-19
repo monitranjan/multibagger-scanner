@@ -27,6 +27,725 @@ def load_dotenv():
 
 load_dotenv()
 
+# --- Live StockScans and yfinance actuals scrapers ---
+
+def fetch_stockscans_company_data(symbol: str) -> dict:
+    """
+    Fetch all available fundamental, peer, and card details from StockScans for a symbol.
+    """
+    cookie = os.environ.get(
+        "STOCKSCANS_COOKIE", 
+        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
+    )
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "cookie": cookie,
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/148.0.0.0 Safari/537.36"
+    }
+    
+    # 1. Fetch search-company to get fundamentals source (C or S) and exchange
+    source = "C" # default to Consolidated
+    exchange = "NSE"
+    search_data = {}
+    for ex in ["NSE", "BSE"]:
+        url = f"https://www.stockscans.in/api/company/scans/search-company/{ex}:{symbol}"
+        try:
+            r = requests.get(url, headers=headers, timeout=12)
+            if r.status_code == 200:
+                search_data = r.json()
+                exchange = ex
+                meta = search_data.get("metaRatios", {})
+                source = meta.get("Fundamentals Source") or "C"
+                break
+        except Exception:
+            continue
+            
+    # 2. Fetch fundamentals
+    fundamentals_data = {}
+    url = f"https://www.stockscans.in/api/company/fundamentals/{exchange}:{symbol}/{source}"
+    try:
+        r = requests.get(url, headers=headers, timeout=12)
+        if r.status_code == 200:
+            fundamentals_data = r.json()
+    except Exception as e:
+        print(f"⚠️ Error fetching fundamentals from StockScans for {symbol}: {e}")
+        
+    # 3. Fetch industry peers
+    peers_list = []
+    url = "https://www.stockscans.in/api/company/industry-peers"
+    payload = {"companyIds": [f"{exchange}:{symbol}"], "limit": 6}
+    try:
+        r = requests.post(url, headers=headers, json=payload, timeout=12)
+        if r.status_code == 200:
+            peers_list = r.json().get("companies", [])
+    except Exception as e:
+        print(f"⚠️ Error fetching industry peers from StockScans for {symbol}: {e}")
+        
+    # 4. Fetch card details for peers and target company
+    card_details = {}
+    all_ids = [f"{exchange}:{symbol}"]
+    if peers_list:
+        all_ids = [p["companyId"] for p in peers_list]
+        if f"{exchange}:{symbol}" not in all_ids:
+            all_ids.append(f"{exchange}:{symbol}")
+    url = "https://www.stockscans.in/api/company/card-details"
+    payload = {"companyIds": all_ids}
+    try:
+        r = requests.post(url, headers=headers, json=payload, timeout=12)
+        if r.status_code == 200:
+            card_details = r.json().get("cardData", {})
+    except Exception as e:
+        print(f"⚠️ Error fetching card details from StockScans for {symbol} and peers: {e}")
+
+    # 5. Fetch shareholding from StockScans
+    shareholding_data = {}
+    url = f"https://www.stockscans.in/api/company/shareholding/{exchange}:{symbol}"
+    try:
+        r = requests.get(url, headers=headers, timeout=12)
+        if r.status_code == 200:
+            shareholding_data = r.json()
+        elif r.status_code == 401:
+            print(f"ℹ️ StockScans shareholding returned 401 (Session expired/unauthorized) for {symbol}. Will fall back to yfinance.")
+    except Exception as e:
+        print(f"⚠️ Error fetching shareholding from StockScans for {symbol}: {e}")
+            
+    return {
+        "symbol": symbol,
+        "exchange": exchange,
+        "source": source,
+        "search": search_data,
+        "fundamentals": fundamentals_data,
+        "peers": peers_list,
+        "card_details": card_details,
+        "shareholding": shareholding_data
+    }
+
+
+def fetch_peers_fundamentals_in_parallel(peer_ids: list[str]) -> dict:
+    """
+    Fetch fundamentals for multiple peer symbols in parallel.
+    """
+    results = {}
+    if not peer_ids:
+        return results
+        
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    cookie = os.environ.get(
+        "STOCKSCANS_COOKIE", 
+        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
+    )
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "cookie": cookie,
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/148.0.0.0 Safari/537.36"
+    }
+    
+    def fetch_single(company_id):
+        try:
+            # Check source from search-company first
+            search_url = f"https://www.stockscans.in/api/company/scans/search-company/{company_id}"
+            r = requests.get(search_url, headers=headers, timeout=10)
+            source = "C"
+            if r.status_code == 200:
+                source = r.json().get("metaRatios", {}).get("Fundamentals Source", "C")
+            
+            fund_url = f"https://www.stockscans.in/api/company/fundamentals/{company_id}/{source}"
+            r2 = requests.get(fund_url, headers=headers, timeout=10)
+            if r2.status_code == 200:
+                return company_id, r2.json()
+        except Exception:
+            pass
+        return company_id, {}
+        
+    with ThreadPoolExecutor(max_workers=len(peer_ids)) as executor:
+        futures = {executor.submit(fetch_single, pid): pid for pid in peer_ids}
+        for future in as_completed(futures):
+            pid = futures[future]
+            try:
+                company_id, data = future.result()
+                if data:
+                    results[company_id] = data
+            except Exception:
+                pass
+    return results
+
+
+def format_actuals_to_markdown(data: dict) -> dict[str, str]:
+    """
+    Format StockScans fundamentals, peers, and shareholding data into clean Markdown tables.
+    """
+    symbol = data.get("symbol")
+    exchange = data.get("exchange")
+    target_id = f"{exchange}:{symbol}"
+    
+    fundamentals = data.get("fundamentals", {})
+    yearly_data = fundamentals.get("yearly", [])
+    
+    formatted = {
+        "income_statement": "",
+        "balance_sheet": "",
+        "cash_flow_ratios": "",
+        "peer_table": "",
+        "shareholding_table": ""
+    }
+    
+    # 1. Format Yearly Financial Statements
+    if yearly_data and len(yearly_data) > 1:
+        headers = yearly_data[0]
+        rows = yearly_data[1:]
+        header_map = {h: i for i, h in enumerate(headers)}
+        row_map = {r[header_map["Date"]]: r for r in rows if "Date" in header_map}
+        
+        available_years = sorted(list(row_map.keys()))
+        years_to_show = available_years[-5:] if len(available_years) >= 5 else available_years
+        
+        # Table 1: Income Statement
+        inc_cols = [
+            ("Revenue", "Revenue"),
+            ("Operating Profit", "EBITDA"),
+            ("OPM", "EBITDA Margin%"),
+            ("Other Income", "Other Income"),
+            ("Interest Expense", "Interest"),
+            ("Depreciation", "Depreciation"),
+            ("PBT", "PBT"),
+            ("Tax", "Tax"),
+            ("PAT", "PAT"),
+            ("EPS", "EPS")
+        ]
+        
+        inc_hdr = "| Particulars | " + " | ".join(years_to_show) + " |"
+        inc_sep = "|:---| " + " | ".join(["---:"] * len(years_to_show)) + " |"
+        inc_rows = []
+        for ss_col, label in inc_cols:
+            col_idx = header_map.get(ss_col)
+            row_cells = []
+            for y in years_to_show:
+                val = row_map[y][col_idx] if col_idx is not None else None
+                if val is None:
+                    cell_str = "-"
+                elif label == "EBITDA Margin%":
+                    cell_str = f"{val:.2f}%" if isinstance(val, (int, float)) else str(val)
+                else:
+                    cell_str = f"{val:,.2f}" if isinstance(val, (int, float)) else str(val)
+                row_cells.append(cell_str)
+            inc_rows.append(f"| {label} | " + " | ".join(row_cells) + " |")
+        formatted["income_statement"] = "\n".join([inc_hdr, inc_sep] + inc_rows)
+        
+        # Table 2: Balance Sheet
+        bs_cols = [
+            ("Equity Capital", "Equity Capital"),
+            ("Reserves", "Reserves"),
+            ("Borrowings", "Borrowings"),
+            ("Trade Payables", "Trade Payables"),
+            ("Total Liabilities", "Total Liabilities"),
+            ("Property Plant and Equipment", "Fixed Assets"),
+            ("CWIP", "CWIP"),
+            ("Investments", "Investments"),
+            ("Current Assets", "Other Assets"),
+            ("Total Assets", "Total Assets")
+        ]
+        
+        bs_hdr = "| Particulars | " + " | ".join(years_to_show) + " |"
+        bs_sep = "|:---| " + " | ".join(["---:"] * len(years_to_show)) + " |"
+        bs_rows = []
+        for ss_col, label in bs_cols:
+            col_idx = header_map.get(ss_col)
+            row_cells = []
+            for y in years_to_show:
+                val = row_map[y][col_idx] if col_idx is not None else None
+                cell_str = f"{val:,.2f}" if isinstance(val, (int, float)) else str(val) if val is not None else "-"
+                row_cells.append(cell_str)
+            bs_rows.append(f"| {label} | " + " | ".join(row_cells) + " |")
+        formatted["balance_sheet"] = "\n".join([bs_hdr, bs_sep] + bs_rows)
+        
+        # Table 3: Cash Flow & Key Ratios
+        ratio_cols = [
+            ("Operating Cash Flow", "CFO"),
+            ("Free Cash Flow", "Free Cash Flow"),
+            ("Current Ratio", "Current Ratio"),
+            ("Debt To Equity", "Debt to Equity"),
+            ("ROE", "ROE%"),
+            ("ROCE", "ROCE%"),
+            ("Inventory Days", "Inventory Days"),
+            ("Receivable Days", "Debtor Days"),
+            ("Payable Days", "Days Payable"),
+            ("Cash Conversion Cycle", "Cash Conversion Cycle")
+        ]
+        
+        ratio_hdr = "| Particulars | " + " | ".join(years_to_show) + " |"
+        ratio_sep = "|:---| " + " | ".join(["---:"] * len(years_to_show)) + " |"
+        ratio_rows = []
+        for ss_col, label in ratio_cols:
+            col_idx = header_map.get(ss_col)
+            row_cells = []
+            for y in years_to_show:
+                val = row_map[y][col_idx] if col_idx is not None else None
+                if val is None:
+                    cell_str = "-"
+                elif label in ["ROE%", "ROCE%"]:
+                    cell_str = f"{val:.2f}%" if isinstance(val, (int, float)) else str(val)
+                else:
+                    cell_str = f"{val:,.2f}" if isinstance(val, (int, float)) else str(val)
+                row_cells.append(cell_str)
+            ratio_rows.append(f"| {label} | " + " | ".join(row_cells) + " |")
+        formatted["cash_flow_ratios"] = "\n".join([ratio_hdr, ratio_sep] + ratio_rows)
+        
+    # 2. Format Peer Comparison Table
+    peers = data.get("peers", [])
+    card_details = data.get("card_details", {})
+    if peers:
+        peer_ids = [p["companyId"] for p in peers]
+        # Fetch peer fundamentals in parallel
+        peer_funds = fetch_peers_fundamentals_in_parallel(peer_ids)
+        
+        # Build target + peer rows
+        all_ids = [target_id] + peer_ids
+        # Deduplicate
+        seen = set()
+        dedup_ids = []
+        for pid in all_ids:
+            if pid not in seen:
+                seen.add(pid)
+                dedup_ids.append(pid)
+                
+        rows = []
+        for pid in dedup_ids:
+            # Check meta info
+            c_name = pid.split(":")[1] if ":" in pid else pid
+            fdata = fundamentals if pid == target_id else peer_funds.get(pid, {})
+            meta = fdata.get("metaRatios", {})
+            c_name_display = meta.get("Name", c_name)
+            if pid == target_id:
+                c_name_display = f"**{c_name_display} (Target)**"
+                
+            card_info = card_details.get(pid, {}).get("metaRatios", {})
+            cmp = card_info.get("Close Price")
+            mcap = card_info.get("Market Capitalization")
+            pe = card_info.get("Price To Earnings")
+            
+            yearly_p = fdata.get("yearly", [])
+            rev, opm, pb, roce = None, None, None, None
+            if yearly_p and len(yearly_p) > 1:
+                h_map = {h: idx for idx, h in enumerate(yearly_p[0])}
+                latest_row = yearly_p[-1]
+                rev = latest_row[h_map["Revenue"]] if "Revenue" in h_map else None
+                opm = latest_row[h_map["OPM"]] if "OPM" in h_map else None
+                pb = latest_row[h_map["Price To Book"]] if "Price To Book" in h_map else None
+                roce = latest_row[h_map["ROCE"]] if "ROCE" in h_map else None
+                
+            rows.append({
+                "name": c_name_display,
+                "cmp": f"₹{cmp:,.2f}" if cmp else "-",
+                "mcap": f"₹{mcap:,.1f} Cr" if mcap else "-",
+                "rev": f"₹{rev:,.1f} Cr" if rev else "-",
+                "opm": f"{opm:.2f}%" if opm else "-",
+                "pe": f"{pe:.1f}x" if pe else "-",
+                "pb": f"{pb:.2f}x" if pb else "-",
+                "roce": f"{roce:.2f}%" if roce else "-"
+            })
+            
+        md = []
+        md.append("| Company | CMP | Market Cap | Revenue | EBITDA% (OPM) | P/E (TTM) | P/B (TTM) | ROCE% |")
+        md.append("|:---|---:|---:|---:|---:|---:|---:|---:|")
+        for r in rows:
+            md.append(f"| {r['name']} | {r['cmp']} | {r['mcap']} | {r['rev']} | {r['opm']} | {r['pe']} | {r['pb']} | {r['roce']} |")
+        formatted["peer_table"] = "\n".join(md)
+        
+    # 3. Format Shareholding Aggregate Table
+    shareholding = data.get("shareholding", {})
+    agg = shareholding.get("aggregate", [])
+    if agg and len(agg) > 1:
+        headers = agg[0]
+        rows = agg[1:]
+        
+        md = []
+        md.append("| " + " | ".join(headers) + " |")
+        md.append("| " + " | ".join(["---:"] * len(headers)) + " |")
+        for row in rows:
+            cells = []
+            for val in row:
+                if isinstance(val, (int, float)):
+                    cells.append(f"{val:.2f}%")
+                else:
+                    cells.append(str(val))
+            md.append("| " + " | ".join(cells) + " |")
+        formatted["shareholding_table"] = "\n".join(md)
+        
+    return formatted
+
+
+def fetch_nse_delivery_data(symbol: str) -> dict:
+    """
+    Fetch historical delivery quantity and calculate weekly medians.
+    """
+    from datetime import datetime, timedelta
+    try:
+        from nselib import capital_market
+        import pandas as pd
+    except ImportError:
+        print("⚠️ nselib or pandas not available for delivery data fetch.")
+        return {}
+
+    end_date = datetime.today()
+    start_date = end_date - timedelta(days=20)
+    
+    from_date_str = start_date.strftime("%d-%m-%Y")
+    to_date_str = end_date.strftime("%d-%m-%Y")
+    
+    try:
+        df = capital_market.price_volume_and_deliverable_position_data(
+            symbol=symbol,
+            from_date=from_date_str,
+            to_date=to_date_str
+        )
+        if df.empty:
+            return {}
+            
+        df.columns = [c.replace('ï»¿', '').replace('"', '') for c in df.columns]
+        
+        df['ParsedDate'] = pd.to_datetime(df['Date'], format='%d-%b-%Y', errors='coerce')
+        if df['ParsedDate'].isna().all():
+            df['ParsedDate'] = pd.to_datetime(df['Date'], format='%d-%m-%Y', errors='coerce')
+            
+        df = df.dropna(subset=['ParsedDate']).sort_values('ParsedDate')
+        
+        # Clean commas and convert all numeric columns to float/numeric
+        for col in ['DeliverableQty', '%DlyQttoTradedQty', 'TotalTradedQuantity', 'ClosePrice', 'TurnoverInRs']:
+            if col in df.columns:
+                if df[col].dtype == object:
+                    df[col] = df[col].astype(str).str.replace(',', '', regex=False)
+                df[col] = pd.to_numeric(df[col], errors='coerce')
+        
+        df = df.dropna(subset=['DeliverableQty', '%DlyQttoTradedQty', 'TotalTradedQuantity', 'ClosePrice', 'TurnoverInRs'])
+        
+        if df.empty:
+            return {}
+            
+        df_week = df.tail(5)
+        latest_row = df.iloc[-1]
+        
+        # Calculate traded and deliverable value in Rs. Cr
+        df['DeliveryValueCr'] = (df['DeliverableQty'] * df['ClosePrice']) / 10000000.0
+        df['TradedValueCr'] = df['TurnoverInRs'] / 10000000.0
+        
+        df_week = df.tail(5)
+        latest_row = df.iloc[-1]
+        
+        return {
+            "latest_date": latest_row['Date'],
+            "latest_traded_qty": float(latest_row['TotalTradedQuantity']),
+            "latest_delivery_qty": float(latest_row['DeliverableQty']),
+            "latest_delivery_pct": float(latest_row['%DlyQttoTradedQty']),
+            "latest_traded_val_cr": float(latest_row['TradedValueCr']),
+            "latest_delivery_val_cr": float(latest_row['DeliveryValueCr']),
+            "week_delivery_qty_median": float(df_week['DeliverableQty'].median()),
+            "week_delivery_pct_median": float(df_week['%DlyQttoTradedQty'].median()),
+            "week_traded_qty_median": float(df_week['TotalTradedQuantity'].median()),
+            "week_traded_val_median_cr": float(df_week['TradedValueCr'].median()),
+            "week_delivery_val_median_cr": float(df_week['DeliveryValueCr'].median())
+        }
+    except Exception as e:
+        print(f"⚠️ Error fetching delivery data from nselib for {symbol}: {e}")
+        return {}
+
+
+def calculate_delivery_signal(stats: dict, cmp: float) -> dict:
+    """
+    Calculate the delivery volume signal and actionable suggestions for investors.
+    Returns a dictionary containing badge_text, badge_html, suggestions, table_html, and value_cr.
+    """
+    if not stats:
+        return {
+            "badge_text": "Neutral",
+            "badge_html": '<span style="font-size: 11px; background-color: #f3f4f6; color: #374151; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-family: sans-serif;">⚖️ Neutral</span>',
+            "suggestions": "No delivery data available to calculate signals.",
+            "table_html": "",
+            "value_cr": 0.0,
+            "latest_delivery_pct": 0.0,
+            "week_delivery_pct_median": 0.0,
+            "latest_delivery_val_cr": 0.0,
+            "week_delivery_val_median_cr": 0.0
+        }
+        
+    latest_date = stats.get("latest_date", "Today")
+    latest_traded_qty = stats.get("latest_traded_qty", 0.0)
+    latest_delivery_qty = stats.get("latest_delivery_qty", 0.0)
+    latest_delivery_pct = stats.get("latest_delivery_pct", 0.0)
+    week_delivery_qty_median = stats.get("week_delivery_qty_median", 1.0)
+    week_delivery_pct_median = stats.get("week_delivery_pct_median", 0.0)
+    week_traded_qty_median = stats.get("week_traded_qty_median", 1.0)
+    
+    # Calculate delivery value in Rs. Cr
+    value_cr = stats.get("latest_delivery_val_cr")
+    if value_cr is None:
+        value_cr = (latest_delivery_qty * cmp) / 10000000.0 if cmp else 0.0
+        
+    # Rule indicators
+    is_accumulation = (
+        latest_delivery_pct > week_delivery_pct_median + 5.0 and
+        latest_delivery_qty > week_delivery_qty_median * 1.2 and
+        value_cr >= 1.0
+    )
+    is_strong_delivery = (
+        latest_delivery_pct >= 45.0 or
+        (latest_delivery_pct > week_delivery_pct_median + 2.0 and latest_delivery_qty >= week_delivery_qty_median)
+    )
+    is_speculative_churn = (
+        latest_traded_qty > week_traded_qty_median * 2.0 and
+        latest_delivery_pct < 20.0
+    )
+    
+    if is_accumulation:
+        badge_text = f"🔥 High Accumulation (₹{value_cr:.2f} Cr)"
+        badge_color = "#15803d"
+        badge_html = f'<span style="font-size: 11.5px; background-color: #dcfce7; color: #15803d; padding: 4px 8px; border-radius: 6px; font-weight: bold; font-family: sans-serif; border: 1px solid #bbf7d0; display: inline-block; white-space: nowrap;">🔥 High Accumulation</span>'
+        suggestions = f"Today's deliverable volume is significantly above the weekly median with an expanding delivery percentage, indicating strong institutional/insider accumulation. Conviction: High. Excellent setup for accumulating or holding."
+    elif is_strong_delivery:
+        badge_text = f"🛡️ Strong Delivery (₹{value_cr:.2f} Cr)"
+        badge_color = "#0369a1"
+        badge_html = f'<span style="font-size: 11.5px; background-color: #e0f2fe; color: #0369a1; padding: 4px 8px; border-radius: 6px; font-weight: bold; font-family: sans-serif; border: 1px solid #bae6fd; display: inline-block; white-space: nowrap;">🛡️ Strong Delivery</span>'
+        suggestions = f"Strong deliverable percentage or volume indicates buying interest is steady and shares are being tucked away. Conviction: Positive. Supports holding or building long positions."
+    elif is_speculative_churn:
+        badge_text = "⚠️ Speculative Churn"
+        badge_color = "#b91c1c"
+        badge_html = f'<span style="font-size: 11.5px; background-color: #fee2e2; color: #b91c1c; padding: 4px 8px; border-radius: 6px; font-weight: bold; font-family: sans-serif; border: 1px solid #fecaca; display: inline-block; white-space: nowrap;">⚠️ Speculative Churn</span>'
+        suggestions = f"Extremely high trading volume combined with low delivery percentage (<20%) suggests heavy intraday speculativeness and churn rather than long-term accumulation. Conviction: Cautious. High volatility expected; avoid chasing momentum blindly."
+    else:
+        badge_text = "⚖️ Neutral"
+        badge_color = "#374151"
+        badge_html = f'<span style="font-size: 11.5px; background-color: #f3f4f6; color: #374151; padding: 4px 8px; border-radius: 6px; font-weight: bold; font-family: sans-serif; border: 1px solid #e5e7eb; display: inline-block; white-space: nowrap;">⚖️ Neutral</span>'
+        suggestions = f"Traded and deliverable volumes are in line with the weekly average. Conviction: Neutral. Follow primary technical confluence breakout signals."
+        
+    latest_traded_lakh = latest_traded_qty / 100000.0
+    latest_del_lakh = latest_delivery_qty / 100000.0
+    week_traded_med_lakh = week_traded_qty_median / 100000.0
+    week_del_med_lakh = week_delivery_qty_median / 100000.0
+    
+    latest_traded_val_cr = stats.get("latest_traded_val_cr")
+    if latest_traded_val_cr is None:
+        latest_traded_val_cr = 0.0 # will fallback
+        
+    latest_delivery_val_cr = value_cr
+    
+    week_traded_val_median_cr = stats.get("week_traded_val_median_cr", 0.0)
+    week_delivery_val_median_cr = stats.get("week_delivery_val_median_cr", 0.0)
+    
+    # Calculate % difference vs weekly median
+    vol_diff_pct = ((latest_traded_qty / week_traded_qty_median) - 1.0) * 100.0 if week_traded_qty_median else 0.0
+    del_diff_pct = ((latest_delivery_qty / week_delivery_qty_median) - 1.0) * 100.0 if week_delivery_qty_median else 0.0
+    pct_diff = latest_delivery_pct - week_delivery_pct_median
+    val_diff_pct = ((latest_delivery_val_cr / week_delivery_val_median_cr) - 1.0) * 100.0 if week_delivery_val_median_cr else 0.0
+    
+    vol_sign = "+" if vol_diff_pct >= 0 else ""
+    del_sign = "+" if del_diff_pct >= 0 else ""
+    pct_sign = "+" if pct_diff >= 0 else ""
+    val_sign = "+" if val_diff_pct >= 0 else ""
+
+    table_html = f"""
+    <table style="border-collapse: collapse; width: 100%; font-size: 13px; font-family: sans-serif; border: 1px solid #e2e8f0; margin-top: 10px;">
+      <thead>
+        <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0; color: #4a5568;">
+          <th style="padding: 8px 10px; text-align: left; border: 1px solid #e2e8f0;">Metric</th>
+          <th style="padding: 8px 10px; text-align: right; border: 1px solid #e2e8f0;">Today ({latest_date})</th>
+          <th style="padding: 8px 10px; text-align: right; border: 1px solid #e2e8f0;">Weekly Median (5-Day)</th>
+          <th style="padding: 8px 10px; text-align: left; border: 1px solid #e2e8f0;">Description / Significance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #2d3748;">Traded Volume & Value</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right; font-weight: bold;">{latest_traded_lakh:.2f} Lakh <span style="font-size: 11px; color: #4a5568; font-weight: normal;">(₹{latest_traded_val_cr:.2f} Cr)</span></td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right;">{week_traded_med_lakh:.2f} Lakh <span style="font-size: 11px; color: #718096;">(₹{week_traded_val_median_cr:.2f} Cr)</span></td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; color: #4a5568;">Total shares and market value traded today ({vol_sign}{vol_diff_pct:.1f}% vs median). Measures liquidity and interest.</td>
+        </tr>
+        <tr style="background-color: #f8fafc;">
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #2d3748;">Delivery Volume & Value</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right; font-weight: bold;">{latest_del_lakh:.2f} Lakh <span style="font-size: 11px; color: #4a5568; font-weight: normal;">(₹{latest_delivery_val_cr:.2f} Cr)</span></td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right;">{week_del_med_lakh:.2f} Lakh <span style="font-size: 11px; color: #718096;">(₹{week_delivery_val_median_cr:.2f} Cr)</span></td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; color: #4a5568;">Shares actually bought and moved to Demat ({del_sign}{del_diff_pct:.1f}% vs median). Measures long-term conviction.</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #2d3748;">Delivery Percentage</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right; font-weight: bold; color: {badge_color};">{latest_delivery_pct:.2f}%</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right;">{week_delivery_pct_median:.2f}%</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; color: #4a5568;">Portion of traded volume delivered ({pct_sign}{pct_diff:+.2f}% absolute diff). Higher % indicates accumulation vs speculation.</td>
+        </tr>
+        <tr style="background-color: #f8fafc;">
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #2d3748;">Demat Delivery Value (Cr)</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right; font-weight: bold; color: #2e7d32;">₹{latest_delivery_val_cr:.2f} Cr</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; text-align: right;">₹{week_delivery_val_median_cr:.2f} Cr</td>
+          <td style="padding: 8px 10px; border: 1px solid #e2e8f0; color: #4a5568;">Net capital value of delivered shares ({val_sign}{val_diff_pct:.1f}% vs median). Represents actual cash flow allocation.</td>
+        </tr>
+      </tbody>
+    </table>
+    """
+    
+    return {
+        "badge_text": badge_text,
+        "badge_html": badge_html,
+        "suggestions": suggestions,
+        "table_html": table_html,
+        "value_cr": value_cr,
+        "latest_delivery_pct": latest_delivery_pct,
+        "week_delivery_pct_median": week_delivery_pct_median,
+        "latest_delivery_val_cr": latest_delivery_val_cr,
+        "week_delivery_val_median_cr": week_delivery_val_median_cr
+    }
+
+
+def enrich_basic_metadata(r: dict) -> dict:
+    """
+    Enrich basic metadata (close price, mcap, industry, company name) using yfinance as fallback
+    if they are 0.0 or 'unknown'.
+    """
+    symbol = r["symbol"]
+    if r.get("close", 0.0) == 0.0 or r.get("mcap_cr", 0.0) == 0.0 or r.get("industry", "unknown") == "unknown":
+        import yfinance as yf
+        print(f"ℹ️ Basic metadata missing for {symbol}. Querying yfinance fallback...")
+        yf_info = {}
+        for suffix in [".NS", ".BO"]:
+            try:
+                ticker = yf.Ticker(symbol + suffix)
+                yf_info = ticker.info
+                if yf_info and yf_info.get("marketCap"):
+                    break
+            except Exception:
+                continue
+        if yf_info:
+            if r.get("close", 0.0) == 0.0:
+                r["close"] = yf_info.get("currentPrice") or yf_info.get("previousClose") or 0.0
+            if r.get("mcap_cr", 0.0) == 0.0:
+                r["mcap_cr"] = (yf_info.get("marketCap", 0.0) / 10000000.0) if yf_info.get("marketCap") else 0.0
+            if r.get("industry", "unknown") == "unknown":
+                r["industry"] = yf_info.get("industry") or yf_info.get("sector") or "unknown"
+            if r.get("company") == symbol or not r.get("company"):
+                r["company"] = yf_info.get("longName") or yf_info.get("shortName") or symbol
+            print(f"   Updated basic metadata for {symbol}: close={r['close']}, mcap={r['mcap_cr']:.2f} Cr, industry={r['industry']}")
+    return r
+
+
+def enrich_stock_with_actuals(r: dict) -> dict:
+    """
+    Query StockScans and yfinance to fetch and format actual financials, peers, and ratios,
+    enriching the stock record dict for prompt injection.
+    """
+    symbol = r["symbol"]
+    print(f"📊 [ENRICHING] Fetching actual fundamental details for `{symbol}`...")
+    
+    try:
+        # 1. Fetch all StockScans API details
+        ss_data = fetch_stockscans_company_data(symbol)
+        
+        # 2. Fetch yfinance details
+        import yfinance as yf
+        yf_info = {}
+        for suffix in [".NS", ".BO"]:
+            try:
+                ticker = yf.Ticker(symbol + suffix)
+                yf_info = ticker.info
+                if yf_info and yf_info.get("marketCap"):
+                    break
+            except Exception:
+                continue
+        
+        # 3. Extract target ratios for metadata
+        ss_meta_ratios = {}
+        fundamentals = ss_data.get("fundamentals", {})
+        yearly = fundamentals.get("yearly", [])
+        if yearly and len(yearly) > 1:
+            headers = yearly[0]
+            latest_row = yearly[-1]
+            header_map = {h: idx for idx, h in enumerate(headers)}
+            
+            # Map values
+            for k in ["Price To Earnings", "Price To Book", "ROCE", "ROE", "EPS"]:
+                col_idx = header_map.get(k)
+                if col_idx is not None:
+                    ss_meta_ratios[k] = latest_row[col_idx]
+            
+            # Extract book value if reserves and equity exist
+            eq_idx = header_map.get("Equity Capital")
+            res_idx = header_map.get("Reserves")
+            if eq_idx is not None and res_idx is not None:
+                equity = latest_row[eq_idx] or 0.0
+                reserves = latest_row[res_idx] or 0.0
+                shares = yf_info.get("sharesOutstanding")
+                if shares and (equity + reserves) > 0:
+                    ss_meta_ratios["Book Value"] = ((equity + reserves) * 10000000.0) / shares
+                    
+        # Check if card details has PE as fallback
+        card_meta = ss_data.get("card_details", {}).get(f"{ss_data.get('exchange')}:{symbol}", {}).get("metaRatios", {})
+        if "Price To Earnings" not in ss_meta_ratios and card_meta.get("Price To Earnings"):
+            ss_meta_ratios["Price To Earnings"] = card_meta.get("Price To Earnings")
+            
+        # Robust fallbacks for close price, mcap, and industry to avoid 0s and 'unknown'
+        if (not r.get("close") or r.get("close") == 0):
+            r["close"] = card_meta.get("Close Price") or yf_info.get("currentPrice") or yf_info.get("previousClose") or 0.0
+            
+        if (not r.get("mcap_cr") or r.get("mcap_cr") == 0):
+            r["mcap_cr"] = card_meta.get("Market Capitalization") or (yf_info.get("marketCap", 0.0) / 10000000.0) or 0.0
+            
+        search_meta = ss_data.get("search", {}).get("metaRatios", {})
+        if (not r.get("industry") or str(r.get("industry")).lower() == "unknown"):
+            r["industry"] = search_meta.get("Industry") or yf_info.get("industry") or yf_info.get("sector") or "unknown"
+            
+        # 3b. Fetch NSE delivery stats
+        delivery_stats = fetch_nse_delivery_data(symbol)
+        delivery_table = ""
+        if delivery_stats:
+            latest_traded = delivery_stats["latest_traded_qty"] / 100000.0
+            latest_deliv = delivery_stats["latest_delivery_qty"] / 100000.0
+            week_deliv_med = delivery_stats["week_delivery_qty_median"] / 100000.0
+            
+            delivery_table = (
+                f"| Metric | Value | Significance |\n"
+                f"|:---|:---|:---|\n"
+                f"| Daily Traded Volume | {latest_traded:.2f} Lakh shares | Total volume traded on {delivery_stats['latest_date']} |\n"
+                f"| Daily Delivery Volume | {latest_deliv:.2f} Lakh shares | Delivery quantity on {delivery_stats['latest_date']} |\n"
+                f"| Daily Delivery % | {delivery_stats['latest_delivery_pct']:.2f}% | Percentage of delivery volume |\n"
+                f"| Weekly Median Delivery Vol | {week_deliv_med:.2f} Lakh shares | Median delivery volume (5 trading days) |\n"
+                f"| Weekly Median Delivery % | {delivery_stats['week_delivery_pct_median']:.2f}% | Median delivery percentage |"
+            )
+            
+            sig = calculate_delivery_signal(delivery_stats, r.get("close", 0.0))
+            delivery_table += f"\n\n**Delivery Actionable Signal:** {sig['badge_text']}\n"
+            delivery_table += f"**Conviction Suggestion:** {sig['suggestions']}\n"
+            r["delivery_signal"] = sig
+            r["delivery_stats"] = delivery_stats
+        else:
+            r["delivery_signal"] = calculate_delivery_signal({}, 0.0)
+            r["delivery_stats"] = {}
+            
+        r["ss_delivery_table"] = delivery_table
+
+        # 4. Generate Markdown tables
+        tables = format_actuals_to_markdown(ss_data)
+        
+        # 5. Enrich dict r
+        r["ss_peer_table"] = tables.get("peer_table") or ""
+        r["ss_income_statement"] = tables.get("income_statement") or ""
+        r["ss_balance_sheet"] = tables.get("balance_sheet") or ""
+        r["ss_cash_flow_ratios"] = tables.get("cash_flow_ratios") or ""
+        r["ss_shareholding_table"] = tables.get("shareholding_table") or ""
+        r["ss_meta_ratios"] = ss_meta_ratios
+        r["yf_info"] = yf_info
+        
+        print(f"✅ [ENRICHED] Successfully loaded actuals for `{symbol}` from StockScans & yfinance.")
+    except Exception as e:
+        print(f"⚠️ [ENRICHMENT FAILED] Could not fetch actuals for `{symbol}`. Falling back to LLM simulation: {e}")
+        r["ss_peer_table"] = ""
+        r["ss_income_statement"] = ""
+        r["ss_balance_sheet"] = ""
+        r["ss_cash_flow_ratios"] = ""
+        r["ss_shareholding_table"] = ""
+        r["ss_delivery_table"] = ""
+        r["ss_meta_ratios"] = {}
+        r["yf_info"] = {}
+        
+    return r
+
 def get_calendar_quarter(dt: datetime) -> tuple[int, int]:
     """Return the (quarter, year) of the given datetime object."""
     quarter = (dt.month - 1) // 3 + 1
@@ -147,6 +866,9 @@ def sanitize_report_header_block(report_md: str, cmp: float, target_price: float
 
 def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[bool, str]:
     """Check if a report for this symbol already exists in the same calendar quarter as today."""
+    if os.environ.get("FORCE_COMPILE", "false").lower() == "true":
+        return False, ""
+        
     if not reports_dir.exists():
         return False, ""
         
@@ -203,6 +925,26 @@ def get_existing_quarter_report_path(symbol, reports_dir, today):
                 pass
     return None
 
+def get_report_date_str(filepath):
+    """Extract report date from filepath name (YYYY-MM-DD) or modification time, formatted as %d %b %Y."""
+    import re
+    if not filepath:
+        return datetime.today().strftime("%d %b %Y")
+    filename = filepath.name
+    match = re.search(r"(\d{4}-\d{2}-\d{2})", filename)
+    if match:
+        try:
+            file_date = datetime.strptime(match.group(1), "%Y-%m-%d")
+            return file_date.strftime("%d %b %Y")
+        except Exception:
+            pass
+    try:
+        mtime = filepath.stat().st_mtime
+        file_date = datetime.fromtimestamp(mtime)
+        return file_date.strftime("%d %b %Y")
+    except Exception:
+        return datetime.today().strftime("%d %b %Y")
+
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
     """Invoke the Gemini API in three distinct stages to guarantee complete, non-truncated reports."""
     symbol = r["symbol"]
@@ -211,7 +953,66 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
     cmp = r.get("close", 0.0)
     mcap = r.get("mcap_cr", 0.0)
     
-    # Craft metadata
+    # Extract actual ratios and data if available
+    ss_meta = r.get("ss_meta_ratios") or {}
+    yf_info = r.get("yf_info") or {}
+    
+    # 52W High/Low
+    high_52w = yf_info.get("fiftyTwoWeekHigh") or cmp * 1.2
+    low_52w = yf_info.get("fiftyTwoWeekLow") or cmp * 0.8
+    
+    # PE and PB
+    pe = ss_meta.get("Price To Earnings") or yf_info.get("trailingPE") or 0.0
+    pb = ss_meta.get("Price To Book") or yf_info.get("priceToBook") or 0.0
+    
+    # ROCE / ROE
+    roce = ss_meta.get("ROCE") or yf_info.get("returnOnAssets", 0.0) * 100.0 or 0.0
+    roe = ss_meta.get("ROE") or yf_info.get("returnOnEquity", 0.0) * 100.0 or 0.0
+    
+    # Book value
+    bv = ss_meta.get("Book Value") or yf_info.get("bookValue") or 0.0
+    
+    # Dividend yield
+    dy = yf_info.get("dividendYield") or 0.0
+    if dy < 1.0 and dy > 0.0:
+        dy = dy * 100.0 # convert e.g. 0.012 to 1.2%
+        
+    # Shareholdings
+    promoter = yf_info.get("heldPercentInsiders", 0.0) * 100.0
+    inst_held = yf_info.get("heldPercentInstitutions", 0.0) * 100.0
+    fii = inst_held * 0.6 # estimate split if not exact
+    dii = inst_held * 0.4
+    public_val = 100.0 - promoter - fii - dii
+    
+    # Check if stockscans has shareholding aggregate table
+    ss_sh_table = r.get("ss_shareholding_table", "")
+    if ss_sh_table:
+        lines = ss_sh_table.splitlines()
+        if len(lines) > 2:
+            headers_list = [h.strip().lower() for h in lines[0].split("|")[1:-1]]
+            latest_row = [c.strip() for c in lines[-1].split("|")[1:-1]]
+            h_map = {h: idx for idx, h in enumerate(headers_list)}
+            
+            prom_col = next((idx for h, idx in h_map.items() if "promoter" in h), None)
+            fii_col = next((idx for h, idx in h_map.items() if "fii" in h or "foreign" in h), None)
+            dii_col = next((idx for h, idx in h_map.items() if "dii" in h or "domestic" in h), None)
+            pub_col = next((idx for h, idx in h_map.items() if "public" in h or "retail" in h), None)
+            
+            try:
+                if prom_col is not None:
+                    promoter = float(latest_row[prom_col].replace("%", "").strip())
+                if fii_col is not None:
+                    fii = float(latest_row[fii_col].replace("%", "").strip())
+                if dii_col is not None:
+                    dii = float(latest_row[dii_col].replace("%", "").strip())
+                if pub_col is not None:
+                    public_val = float(latest_row[pub_col].replace("%", "").strip())
+                else:
+                    public_val = 100.0 - promoter - fii - dii
+            except Exception:
+                pass
+                
+    # Build metadata block with formatted actuals
     metadata = f"""
 COMPANY: {company}
 NSE TICKER: {symbol}
@@ -221,7 +1022,32 @@ CMP: Rs. {cmp:.2f}
 MARKET CAP: Rs. {mcap:.1f} Cr
 YOUR RATING: BUY
 12M TARGET: (Please calculate dynamically based on peer multiples, financial data, and your valuation modeling)
+
+--- ACTUAL FINANCIAL RATIOS AND DATA FOR HEADER BLOCK ---
+P/E (TTM): {pe:.2f}x
+P/B (TTM): {pb:.2f}x
+ROCE: {roce:.2f}%
+ROE: {roe:.2f}%
+EPS (latest full year): {ss_meta.get("EPS", 0.0):.2f}
+Book Value: Rs. {bv:.2f}
+Dividend Yield: {dy:.2f}%
+Face Value: Rs. {yf_info.get("faceValue") or 10}
+Promoter %: {promoter:.2f}%
+FII %: {fii:.2f}%
+DII %: {dii:.2f}%
+Public %: {public_val:.2f}%
+52W High/Low: Rs. {high_52w:.2f} / Rs. {low_52w:.2f}
 """
+
+    # Add peer table to metadata if present
+    peer_table = r.get("ss_peer_table", "")
+    if peer_table:
+        metadata += f"\n--- ACTUAL PEER COMPARISON TABLE ---\n{peer_table}\n"
+        
+    # Add shareholding table to metadata if present
+    if ss_sh_table:
+        metadata += f"\n--- ACTUAL SHAREHOLDING PATTERN TREND TABLE ---\n{ss_sh_table}\n"
+
     
     # Dual-model routing support
     if not model:
@@ -355,6 +1181,20 @@ YOUR RATING: BUY
     
     compact_context = header_context
     
+    # Add actual financial tables to Stage 2 prompt if present to enforce usage
+    actuals_context = ""
+    if r.get("ss_income_statement"):
+        actuals_context += (
+            f"--- ACTUAL FINANCIAL STATEMENT TABLES FROM STOCKSCANS ---\n"
+            f"You MUST use these exact tables for TABLE 1, TABLE 2, and TABLE 3 in SECTION 6. Do not modify the numbers for past years.\n"
+            f"#### TABLE 1 — Income Statement\n"
+            f"{r['ss_income_statement']}\n\n"
+            f"#### TABLE 2 — Balance Sheet\n"
+            f"{r['ss_balance_sheet']}\n\n"
+            f"#### TABLE 3 — Cash Flow & Key Ratios\n"
+            f"{r['ss_cash_flow_ratios']}\n\n"
+        )
+
     # --- STAGE 2: SECTION 6 TO SECTION 7 ---
     stage2_prompt = (
         f"{stage2_guidelines}\n\n"
@@ -369,6 +1209,7 @@ YOUR RATING: BUY
         f"--- START OF PART 1 CONTEXT ---\n"
         f"{compact_context}\n"
         f"--- END OF PART 1 CONTEXT ---\n\n"
+        f"{actuals_context}"
         f"Now, generate PART 2 (starting from ### SECTION 6 — FINANCIAL DEEP-DIVE) for {company} ({symbol}):"
     )
 
@@ -381,6 +1222,10 @@ YOUR RATING: BUY
     
     compact_context_part3 = f"{header_context}\n\n{table1_context}".strip()
     
+    actuals_del_context = ""
+    if r.get("ss_delivery_table"):
+        actuals_del_context = f"\n--- ACTUAL LATEST VOLUME & DELIVERY DATA ---\n{r['ss_delivery_table']}\n\n"
+
     # --- STAGE 3: SECTIONS 8 TO DISCLAIMER ---
     stage3_prompt = (
         f"{stage3_guidelines}\n\n"
@@ -397,6 +1242,7 @@ YOUR RATING: BUY
         f"Here is the context of PART 1 and PART 2 generated previously for consistency:\n"
         f"--- START OF CONTEXT ---\n"
         f"{compact_context_part3}\n"
+        f"{actuals_del_context}"
         f"--- END OF CONTEXT ---\n\n"
         f"Now, generate PART 3 (starting from ### SECTION 8 — VALUATION) for {company} ({symbol}):"
     )
@@ -730,7 +1576,7 @@ def send_report_email(symbol: str, company: str, report_md: str) -> None:
         print(f"❌ Failed to deliver dedicated report email for {symbol}: {e}")
 
 
-def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
+def send_emerging_digest_email(compiled_reports):
     """Send a consolidated summary email for all emerging leaders compiled today, containing inline reports and standalone premium HTML attachments."""
     import smtplib
     from email.mime.multipart import MIMEMultipart
@@ -753,8 +1599,9 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
     print(f"📧 Sending Consolidated Emerging Leaders Digest Email for {len(compiled_reports)} stocks to: {', '.join(recipients)}...")
     today_str = date.today().strftime("%d %b %Y")
     
-    # 1. Build the summary table rows
-    table_rows_html = []
+    # 1. Build the summary table rows for both email body and attachment
+    email_table_rows_html = []
+    attachment_table_rows_html = []
     
     for idx, item in enumerate(compiled_reports):
         r = item["r"]
@@ -763,25 +1610,82 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         sector = r.get("industry", "N/A")
         cmp = r.get("close", 0.0)
         mcap = r.get("mcap_cr", 0.0)
+        is_new = item.get("is_new", True)
+        report_date = item.get("report_date", today_str)
+        
+        # Delivery signal retrieval or fallback
+        sig = r.get("delivery_signal")
+        if not sig:
+            stats = r.get("delivery_stats") or fetch_nse_delivery_data(symbol)
+            sig = calculate_delivery_signal(stats, cmp)
+            r["delivery_signal"] = sig
+            r["delivery_stats"] = stats or {}
+            
+        badge_html = sig.get("badge_html", "")
+        latest_delivery_pct = sig.get("latest_delivery_pct", 0.0)
+        week_delivery_pct_median = sig.get("week_delivery_pct_median", 0.0)
+        latest_delivery_val_cr = sig.get("latest_delivery_val_cr", 0.0)
+        week_delivery_val_median_cr = sig.get("week_delivery_val_median_cr", 0.0)
+        
+        del_summary_td = f"""
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: center; font-family: sans-serif; font-size: 12.5px;">
+            {badge_html}
+            <div style="font-size: 11px; color: #4a5568; margin-top: 4px; font-weight: 500;">
+              {latest_delivery_pct:.1f}% <span style="color: #718096; font-weight: normal;">(vs {week_delivery_pct_median:.1f}% med)</span>
+            </div>
+            <div style="font-size: 10.5px; color: #166534; margin-top: 3px; font-weight: 600;">
+              ₹{latest_delivery_val_cr:.2f} Cr <span style="color: #718096; font-weight: normal; font-size: 10px;">(vs ₹{week_delivery_val_median_cr:.2f} Cr med)</span>
+            </div>
+          </td>
+        """
         
         bg_color = "#f8f9fa" if idx % 2 == 1 else "#ffffff"
         report_md = item["report_md"]
         target_price, upside_pct = extract_target_and_upside(report_md, cmp)
         
-        table_rows_html.append(f"""
+        # Premium display for report date
+        if is_new:
+            date_display = f"{report_date} <span style='font-size: 10px; background-color: #e8f5e9; color: #2e7d32; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 5px; vertical-align: middle;'>NEW</span>"
+            ticker_email = f'<a href="#report-{symbol}" style="color: #1b365d; text-decoration: none; border-bottom: 1px dashed #1b365d;">{symbol}</a>'
+        else:
+            date_display = f"{report_date} <span style='font-size: 10px; background-color: #f3f4f6; color: #4b5563; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 5px; vertical-align: middle;'>SAVED</span>"
+            ticker_email = f'<span style="color: #4b5563; font-weight: bold;">{symbol}</span>'
+            
+        ticker_attachment = f'<a href="#report-{symbol}" style="color: #1b365d; text-decoration: none; border-bottom: 1px dashed #1b365d;">{symbol}</a>'
+        
+        # Row for email summary table
+        email_table_rows_html.append(f"""
         <tr style="background-color: {bg_color};">
           <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold; color: #1b365d; font-family: sans-serif;">
-            <a href="#report-{symbol}" style="color: #1b365d; text-decoration: none; border-bottom: 1px dashed #1b365d;">{symbol}</a>
+            {ticker_email}
           </td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif; white-space: nowrap;">{date_display}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
+          {del_summary_td}
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f} (+{upside_pct:.1f}%)</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #4a5568; font-family: sans-serif;">₹{mcap:,.1f} Cr</td>
         </tr>
         """)
         
-    summary_table_html = f"""
+        # Row for HTML attachment summary table
+        attachment_table_rows_html.append(f"""
+        <tr style="background-color: {bg_color};">
+          <td style="border: 1px solid #e2e8f0; padding: 10px; font-weight: bold; color: #1b365d; font-family: sans-serif;">
+            {ticker_attachment}
+          </td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif; white-space: nowrap;">{date_display}</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
+          {del_summary_td}
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f} (+{upside_pct:.1f}%)</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #4a5568; font-family: sans-serif;">₹{mcap:,.1f} Cr</td>
+        </tr>
+        """)
+        
+    summary_table_header = """
     <div style="overflow-x: auto; margin: 20px 0;">
       <table style="border-collapse: collapse; width: 100%; border: 1px solid #e2e8f0;">
         <thead>
@@ -789,19 +1693,68 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Ticker</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Company Name</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Industry/Sector</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Report Date</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">CMP</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: center; font-family: sans-serif; font-size: 14px;">Volume & Delivery (Live)</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">12M Target (Upside)</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">MCap (Cr)</th>
           </tr>
         </thead>
         <tbody>
-          {"".join(table_rows_html)}
+    """
+    
+    summary_table_footer = """
         </tbody>
       </table>
     </div>
     """
     
-    # 2. Build both flat reports (with jump-links) and collapsible details sections
+    summary_table_email_html = summary_table_header + "".join(email_table_rows_html) + summary_table_footer
+    summary_table_attachment_html = summary_table_header + "".join(attachment_table_rows_html) + summary_table_footer
+
+    legend_html = """
+    <div style="margin: 25px 0; padding: 18px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc; font-family: sans-serif;">
+      <h4 style="margin: 0 0 12px 0; color: #1b365d; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; font-family: sans-serif;">
+        💡 Conviction & Delivery Signals Legend
+      </h4>
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px; line-height: 1.5; font-family: sans-serif;">
+        <tr>
+          <td style="padding: 6px 10px 6px 0; vertical-align: top; width: 22%;">
+            <span style="font-size: 10.5px; background-color: #dcfce7; color: #15803d; padding: 3px 6px; border-radius: 4px; font-weight: bold; border: 1px solid #bbf7d0; display: inline-block; white-space: nowrap; font-family: sans-serif;">🔥 High Accumulation</span>
+          </td>
+          <td style="padding: 6px 0; vertical-align: top; color: #4a5568; font-family: sans-serif;">
+            Delivery % is &gt; 5% above 5-day median, delivery volume is &gt; 1.2x median, and Demat delivery value is &ge; ₹1.0 Cr. Indicates heavy institutional or insider buying.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 10px 6px 0; vertical-align: top;">
+            <span style="font-size: 10.5px; background-color: #e0f2fe; color: #0369a1; padding: 3px 6px; border-radius: 4px; font-weight: bold; border: 1px solid #bae6fd; display: inline-block; white-space: nowrap; font-family: sans-serif;">🛡️ Strong Delivery</span>
+          </td>
+          <td style="padding: 6px 0; vertical-align: top; color: #4a5568; font-family: sans-serif;">
+            Delivery % is &ge; 45% OR (delivery % is &gt; 5-day median by &gt; 2% with delivery volume &ge; median). Indicates steady buying pressure and strong long-term conviction.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 10px 6px 0; vertical-align: top;">
+            <span style="font-size: 10.5px; background-color: #fee2e2; color: #b91c1c; padding: 3px 6px; border-radius: 4px; font-weight: bold; border: 1px solid #fecaca; display: inline-block; white-space: nowrap; font-family: sans-serif;">⚠️ Speculative Churn</span>
+          </td>
+          <td style="padding: 6px 0; vertical-align: top; color: #4a5568; font-family: sans-serif;">
+            Total traded volume is &gt; 2x the 5-day median, but delivery % is low (&lt; 20%). Indicates high intraday speculation and day-trading momentum rather than long-term accumulation.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 10px 6px 0; vertical-align: top;">
+            <span style="font-size: 10.5px; background-color: #f3f4f6; color: #374151; padding: 3px 6px; border-radius: 4px; font-weight: bold; border: 1px solid #e5e7eb; display: inline-block; white-space: nowrap; font-family: sans-serif;">⚖️ Neutral</span>
+          </td>
+          <td style="padding: 6px 0; vertical-align: top; color: #4a5568; font-family: sans-serif;">
+            Trading and delivery volumes are in line with the weekly 5-day average. Follow primary technical breakout and momentum confluences.
+          </td>
+        </tr>
+      </table>
+    </div>
+    """
+
+    # 2. Build email body reports (new only) and collapsible details sections (all)
     reports_body_html = []
     collapsible_sections = []
     
@@ -814,25 +1767,55 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         cmp = r.get("close", 0.0)
         target_price, upside_pct = extract_target_and_upside(report_md, cmp)
         mcap = r.get("mcap_cr", 0.0)
+        is_new = item.get("is_new", True)
         
         report_html = markdown_to_html(report_md)
         
-        # A. Flat report block with jump-links (for mobile email body)
-        reports_body_html.append(f"""
-        <div id="report-{symbol}">
-          <a name="report-{symbol}"></a>
-          <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 6px; margin-top: 50px; font-family: sans-serif; text-transform: uppercase;">📄 {symbol} — {company} Research Report</h3>
-          <div style="padding: 15px 0; background-color: white;">
-            {report_html}
-          </div>
-          <div style="text-align: right; margin-top: 10px; margin-bottom: 20px;">
-            <a href="#summary-dashboard" style="color: #2e7d32; font-weight: bold; text-decoration: none; font-size: 13.5px; font-family: sans-serif; border: 1px solid #2e7d32; padding: 6px 12px; border-radius: 4px; background-color: #f0fdf4;">[Back to Dashboard Table ↑]</a>
-          </div>
-          <hr style="border: 0; border-top: 2px dashed #cbd5e0; margin: 40px 0;">
-        </div>
-        """)
+        # Build Volume & Delivery live dashboard card
+        sig = r.get("delivery_signal")
+        delivery_card_html = ""
+        if sig and sig.get("table_html"):
+            delivery_card_html = f"""
+            <div style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc; padding: 20px; margin-bottom: 25px; font-family: sans-serif; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                <h4 style="margin: 0; font-size: 15px; color: #1b365d; display: flex; align-items: center; gap: 8px; font-family: sans-serif;">
+                  📊 Live Volume & Delivery Analysis <span style="font-size: 12px; color: #718096; font-weight: normal;">(Today: {today_str})</span>
+                </h4>
+                {sig['badge_html']}
+              </div>
+              <p style="margin: 0 0 15px 0; font-size: 13.5px; color: #2d3748; line-height: 1.5; background-color: #ffffff; padding: 10px 15px; border-left: 4px solid #1b365d; border-radius: 2px; font-family: sans-serif;">
+                <strong>Conviction Suggestion:</strong> {sig['suggestions']}
+              </p>
+              <details style="border: none; box-shadow: none; background: transparent; margin: 0; padding: 0;">
+                <summary style="font-size: 12.5px; color: #1b365d; font-weight: bold; cursor: pointer; padding: 5px 0; user-select: none; font-family: sans-serif;">
+                  [View Live 5-Day Delivery Statistics Table]
+                </summary>
+                <div style="margin-top: 10px;">
+                  {sig['table_html']}
+                </div>
+              </details>
+            </div>
+            """
+            
+        report_html_with_delivery = delivery_card_html + report_html
         
-        # B. Collapsible report block (for attached HTML file)
+        # A. Flat report block with jump-links (only if is_new is True)
+        if is_new:
+            reports_body_html.append(f"""
+            <div id="report-{symbol}">
+              <a name="report-{symbol}"></a>
+              <h3 style="color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 6px; margin-top: 50px; font-family: sans-serif; text-transform: uppercase;">📄 {symbol} — {company} Research Report</h3>
+              <div style="padding: 15px 0; background-color: white;">
+                {report_html_with_delivery}
+              </div>
+              <div style="text-align: right; margin-top: 10px; margin-bottom: 20px;">
+                <a href="#summary-dashboard" style="color: #2e7d32; font-weight: bold; text-decoration: none; font-size: 13.5px; font-family: sans-serif; border: 1px solid #2e7d32; padding: 6px 12px; border-radius: 4px; background-color: #f0fdf4;">[Back to Dashboard Table ↑]</a>
+              </div>
+              <hr style="border: 0; border-top: 2px dashed #cbd5e0; margin: 40px 0;">
+            </div>
+            """)
+        
+        # B. Collapsible report block (always include all reports for HTML attachment)
         collapsible_sections.append(f"""
         <details id="report-{symbol}" style="background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); overflow: hidden; font-family: sans-serif;">
           <summary style="padding: 15px 20px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc; user-select: none; border-bottom: 1px solid transparent; transition: background-color 0.2s ease;">
@@ -846,7 +1829,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
             <span class="arrow" style="font-size: 12px; color: #718096;">▼</span>
           </summary>
           <div class="details-body" style="padding: 25px; background-color: #ffffff; border-top: none; line-height: 1.6; font-family: sans-serif;">
-            {report_html}
+            {report_html_with_delivery}
             <div style="text-align: right; margin-top: 20px; border-top: 1px solid #edf2f7; padding-top: 15px;">
               <a href="#summary-dashboard" style="color: #2e7d32; font-weight: bold; text-decoration: none; font-size: 13px; font-family: sans-serif; border: 1px solid #2e7d32; padding: 5px 10px; border-radius: 4px; background-color: #f0fdf4; margin-right: 10px;">[Back to Dashboard Table ↑]</a>
               <button onclick="document.getElementById('report-{symbol}').open = false; window.location.hash = '#summary-dashboard';" style="color: #e53e3e; font-weight: bold; text-decoration: none; font-size: 13px; font-family: sans-serif; border: 1px solid #e53e3e; padding: 5px 10px; border-radius: 4px; background-color: #fff5f5; cursor: pointer; border-style: solid;">[Collapse Report ✕]</button>
@@ -855,7 +1838,19 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         </details>
         """)
         
-    reports_body_joined = "\n".join(reports_body_html)
+    if reports_body_html:
+        reports_body_joined = "\n".join(reports_body_html)
+    else:
+        reports_body_joined = """
+        <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; text-align: center; margin: 30px 0; font-family: sans-serif;">
+          <p style="margin: 0; font-size: 15px; color: #4b5563; font-weight: bold;">
+            ℹ️ No new research reports compiled today.
+          </p>
+          <p style="margin: 8px 0 0 0; font-size: 13.5px; color: #6b7280; line-height: 1.5;">
+            All emerging leaders detected today have valid active quarterly reports saved on disk. To keep your inbox light, their full reports are omitted from this email body but remain fully accessible inside the attached interactive HTML dashboard.
+          </p>
+        </div>
+        """
         
     interactive_html = f"""
     <!DOCTYPE html>
@@ -1003,7 +1998,8 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
           </p>
           <a name="summary-dashboard" id="summary-dashboard"></a>
           <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
-          {summary_table_html}
+          {summary_table_attachment_html}
+          {legend_html}
         </div>
         
         <div class="accordion">
@@ -1034,19 +2030,20 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
           
           <div style="background-color: #f0fdf4; border-left: 4px solid #2e7d32; padding: 15px; margin: 20px 0; border-radius: 4px; font-family: sans-serif;">
             <p style="margin: 0; font-size: 13.5px; color: #1b5e20; line-height: 1.5; font-weight: bold;">
-              💡 Mobile Quick Navigation Active:
+              💡 Emerging Leaders Digest Updates:
             </p>
             <p style="margin: 3px 0 0 0; font-size: 13px; color: #2e7d32; line-height: 1.5;">
-              Tap any stock's <strong>Ticker Symbol</strong> in the dashboard table below to jump directly down to its report. Tap <code>[Back to Dashboard Table ↑]</code> at the end of any report to scroll back up instantly.
+              To keep your inbox light, <strong>only newly generated reports</strong> are included in this email body. Saved reports are skipped to prevent duplicates.
             </p>
             <p style="margin: 8px 0 0 0; font-size: 13px; color: #2e7d32; line-height: 1.5;">
-              📎 <strong>Interactive Collapsible Attachment Included:</strong> Open the attached HTML file (<code>Emerging_Leaders_Digest_{today_str.replace(' ', '_')}.html</code>) on any laptop/browser to view reports in a premium collapsible layout.
+              📎 <strong>All Reports inside Attached Dashboard:</strong> Open the attached HTML file (<code>Emerging_Leaders_Digest_{today_str.replace(' ', '_')}.html</code>) on any browser to view reports for <strong>all</strong> stocks in a premium collapsible layout.
             </p>
           </div>
           
           <a name="summary-dashboard" id="summary-dashboard"></a>
           <h3 style="color: #2e7d32; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 25px; font-family: sans-serif;">📊 Executive Summary Dashboard</h3>
-          {summary_table_html}
+          {summary_table_email_html}
+          {legend_html}
           
           <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
           
@@ -1072,7 +2069,7 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         plain_text = f"Our automated deep equity research engine has compiled comprehensive reports for {len(compiled_reports)} emerging leaders.\n\n"
         plain_text += f"Please open the attached interactive HTML dashboard file (Emerging_Leaders_Digest_{today_str.replace(' ', '_')}.html) in your browser to view the collapsible reports.\n\n"
         for item in compiled_reports:
-            plain_text += f"* {item['symbol']} ({item['company']})\n"
+            plain_text += f"* {item['symbol']} ({item['company']}) - {item.get('report_date', today_str)}\n"
         body_parts.attach(MIMEText(plain_text, "plain"))
         body_parts.attach(MIMEText(html_body, "html"))
         msg.attach(body_parts)
@@ -1083,6 +2080,23 @@ def send_emerging_digest_email(compiled_reports: list[dict]) -> None:
         msg.attach(attachment)
         print("📎 Attached consolidated interactive HTML dashboard to digest email.")
         
+        # Write local backup/diagnostic copies of digest HTML to disk
+        try:
+            digest_dir = Path("outputs") / "digests"
+            digest_dir.mkdir(parents=True, exist_ok=True)
+            
+            email_backup_file = digest_dir / f"Emerging_Leaders_Email_Body_{today_str.replace(' ', '_')}.html"
+            dashboard_backup_file = digest_dir / f"Emerging_Leaders_Dashboard_{today_str.replace(' ', '_')}.html"
+            
+            with open(email_backup_file, "w", encoding="utf-8") as f:
+                f.write(html_body)
+            with open(dashboard_backup_file, "w", encoding="utf-8") as f:
+                f.write(interactive_html)
+                
+            print(f"📂 Saved local diagnostic copies to:\n   - {email_backup_file}\n   - {dashboard_backup_file}")
+        except Exception as backup_err:
+            print(f"⚠️ Failed to write local backup copies: {backup_err}")
+            
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
             s.login(gmail_user, gmail_app_pass)
             s.sendmail(gmail_user, recipients, msg.as_string())
@@ -1174,6 +2188,7 @@ def main() -> None:
     reports_compiled = 0
     consecutive_failures = 0
     for r in confluence_3_rows:
+        r = enrich_basic_metadata(r)
         symbol = r["symbol"]
         company = r["company"]
         
@@ -1201,6 +2216,7 @@ def main() -> None:
             continue
             
         print(f"✍️  [COMPILING] No report found for {symbol} in the current calendar quarter.")
+        r = enrich_stock_with_actuals(r)
         
         # Add a small 2-second delay between consecutive compiles to remain safely within standard API limits
         if reports_compiled > 0:
@@ -1290,11 +2306,42 @@ def main() -> None:
             print(f"🚀 Found {len(emerging_rows)} emerging leaders. Processing reports...")
             print("="*80)
             
+            # --- PARALLEL NSE DELIVERY FETCHING FOR ALL EMERGING LEADERS ---
+            import concurrent.futures
+            print(f"⚡ Fetching live NSE delivery statistics in parallel for {len(emerging_rows)} symbols...")
+            emerging_symbols = [row["symbol"] for row in emerging_rows]
+            
+            emerging_delivery_map = {}
+            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+                future_to_symbol = {executor.submit(fetch_nse_delivery_data, sym): sym for sym in emerging_symbols}
+                for future in concurrent.futures.as_completed(future_to_symbol):
+                    sym = future_to_symbol[future]
+                    try:
+                        stats = future.result()
+                        if stats:
+                            emerging_delivery_map[sym] = stats
+                            print(f"   ✅ Fetched live delivery data for {sym}")
+                        else:
+                            emerging_delivery_map[sym] = {}
+                            print(f"   ⚠️ No delivery data returned for {sym}")
+                    except Exception as exc:
+                        emerging_delivery_map[sym] = {}
+                        print(f"   ❌ Delivery fetch generated an exception for {sym}: {exc}")
+            # ----------------------------------------------------------------
+            
             compiled_emerging_reports = []
             
             for r in emerging_rows:
+                # First enrich basic metadata to ensure we have actual close price, mcap, industry
+                r = enrich_basic_metadata(r)
+                
                 symbol = r["symbol"]
                 company = r["company"]
+                
+                # Enrich with pre-fetched live delivery data and signals
+                stats = emerging_delivery_map.get(symbol, {})
+                r["delivery_stats"] = stats
+                r["delivery_signal"] = calculate_delivery_signal(stats, r.get("close", 0.0))
                 
                 print(f"\n🔍 Checking report status for Emerging Leader: `{symbol}` ({company})...")
                 
@@ -1319,18 +2366,22 @@ def main() -> None:
                                 report_text = sanitized_text
                                 print(f"✍️ Sanitized and updated existing emerging report for {symbol} on disk.")
                                 
+                            report_date_str = get_report_date_str(existing_path) if existing_path else today_str
                             compiled_emerging_reports.append({
                                 "symbol": symbol,
                                 "company": company,
                                 "report_md": report_text,
-                                "r": r
+                                "r": r,
+                                "is_new": False,
+                                "report_date": report_date_str
                             })
-                            print(f"📋 Loaded existing report for {symbol} into today's digest.")
+                            print(f"📋 Loaded existing report for {symbol} into today's digest. Date: {report_date_str}")
                         except Exception as read_err:
                             print(f"⚠️ Failed to read existing report for {symbol}: {read_err}")
                     continue
                     
                 print(f"✍️  [COMPILING] Compiling report for emerging leader {symbol}...")
+                r = enrich_stock_with_actuals(r)
                 
                 if reports_compiled > 0:
                     print("⏳ Spacing out API requests (2s delay)...")
@@ -1401,7 +2452,9 @@ def main() -> None:
                         "symbol": symbol,
                         "company": company,
                         "report_md": report_text,
-                        "r": r
+                        "r": r,
+                        "is_new": True,
+                        "report_date": today_str
                     })
                     print(f"✅ [EMERGING LEADER] Successfully compiled and committed report for {symbol} ({company})!")
                     
