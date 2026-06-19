@@ -116,6 +116,17 @@ multibagger-scanner/
 - 52W Breakout → ~₹50,000 per stock
 - ATH Momentum → ~₹40,000 per stock
 
+### 📈 Conviction & Delivery Signals (NSE Live Volume)
+
+These signals are computed dynamically at run-time by evaluating live NSE deliverable positions and 5-day moving statistics:
+
+| Signal | Mathematical Definition / Condition | Investment Conviction & Meaning |
+|:---|:---|:---|
+| **🔥 High Accumulation** | `latest_delivery_pct > 5-day median + 5%` and<br>`latest_delivery_qty > 5-day median * 1.2` and<br>`demat_delivery_value >= ₹1.0 Cr` | Heavy institutional or insider buying. Excellent setup for accumulating or holding. |
+| **🛡️ Strong Delivery** | `latest_delivery_pct >= 45%` OR<br>(`latest_delivery_pct > 5-day median + 2%` and<br>`latest_delivery_qty >= 5-day median`) | Steady buying pressure with shares being tucked away in Demat. Supports holding or adding. |
+| **⚠️ Speculative Churn** | `latest_traded_qty > 5-day median * 2.0` and<br>`latest_delivery_pct < 20%` | High intraday volatility and day-trading churn with very low long-term conviction. Caution recommended. |
+| **⚖️ Neutral** | Fallback when none of the rules above are met. | Volume and delivery are in line with weekly averages. Rely on primary technical confluences. |
+
 ---
 
 ## 🚪 Exit rules (check manually on TradingView)
