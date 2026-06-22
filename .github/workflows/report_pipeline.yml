@@ -4,11 +4,16 @@ on:
   schedule:
     # Run Monday through Friday at 10:52 AM UTC (which is 4:22 PM IST, 30 minutes after the main pipeline)
     - cron: '52 10 * * 1-5'
+  workflow_run:
+    workflows: ["Daily Multibagger Pipeline"]
+    types:
+      - completed
   workflow_dispatch: # Allows you to trigger it manually from GitHub website with 1 click
 
 jobs:
   run-report-pipeline:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     permissions:
       contents: write
 
