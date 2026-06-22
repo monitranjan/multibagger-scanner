@@ -3740,11 +3740,25 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         
         # Build plain text watchlist lines
         sig_lines = []
+        from generate_equity_reports import fetch_nse_delivery_data, calculate_delivery_signal
         for _, row in signals_df.iterrows():
             e = ENTRY_EMOJI.get(row["entry"], "⚪")
+            del_plain_str = "N/A"
+            try:
+                stats = fetch_nse_delivery_data(row['ticker'])
+                if stats:
+                    latest_del_pct = stats.get("latest_delivery_pct", 0.0)
+                    sig = calculate_delivery_signal(stats, row['close'])
+                    del_badge_val = sig.get("badge_text", "Neutral")
+                    latest_del_val = stats.get("latest_delivery_val_cr", 0.0)
+                    del_plain_str = f"Deliv {latest_del_pct:.1f}% (₹{latest_del_val:.2f} Cr | {del_badge_val})"
+            except Exception as e:
+                print(f"⚠️ Error fetching delivery stats for {row['ticker']}: {e}")
+
             sig_lines.append(
                 f"{e} {row['ticker']:12s} | ₹{row['close']:>8.2f} | "
                 f"RSI {row['rsi']:4.1f} | {row['pct_ath']:4.1f}% from ATH | "
+                f"{del_plain_str} | "
                 f"{row['entry']:13s} | Alloc ₹{row['alloc_inr']:>7,} ({row['qty']} qty)"
             )
         signals_plain_list = "\n".join(sig_lines)
@@ -3773,12 +3787,39 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
         for _, row in signals_df.iterrows():
             e = ENTRY_EMOJI.get(row["entry"], "⚪")
             bg = {"EMA Crossover": "#e6ffe6", "52W Breakout": "#fffbe6", "ATH Momentum": "#e6f0ff"}.get(row["entry"], "#fff")
+            del_cell_html = '<td style="padding:8px;text-align:center;font-size:12px;">N/A</td>'
+            try:
+                stats = fetch_nse_delivery_data(row['ticker'])
+                if stats:
+                    latest_delivery_pct = stats.get("latest_delivery_pct", 0.0)
+                    week_delivery_pct_median = stats.get("week_delivery_pct_median", 0.0)
+                    latest_delivery_val_cr = stats.get("latest_delivery_val_cr", 0.0)
+                    week_delivery_val_median_cr = stats.get("week_delivery_val_median_cr", 0.0)
+                    
+                    sig = calculate_delivery_signal(stats, row['close'])
+                    badge_html = sig.get("badge_html", "Neutral")
+                    
+                    del_cell_html = f"""
+                    <td style="padding:8px;text-align:center;font-family:sans-serif;font-size:12.5px;">
+                      {badge_html}
+                      <div style="font-size:11px;color:#4a5568;margin-top:4px;font-weight:500;">
+                        {latest_delivery_pct:.1f}% <span style="color:#718096;font-weight:normal;">(vs {week_delivery_pct_median:.1f}% med)</span>
+                      </div>
+                      <div style="font-size:10.5px;color:#166534;margin-top:3px;font-weight:600;">
+                        ₹{latest_delivery_val_cr:.2f} Cr <span style="color:#718096;font-weight:normal;font-size:10px;">(vs ₹{week_delivery_val_median_cr:.2f} Cr med)</span>
+                      </div>
+                    </td>
+                    """
+            except Exception as e:
+                print(f"⚠️ Error fetching delivery stats for {row['ticker']}: {e}")
+
             rows_html += f"""
             <tr style="background:{bg}">
               <td style="padding:8px;font-weight:bold">{e} {row['ticker']}</td>
               <td style="padding:8px;text-align:right">₹{row['close']:,.2f}</td>
               <td style="padding:8px;text-align:right">{row['rsi']}</td>
               <td style="padding:8px;text-align:right">{row['pct_ath']}%</td>
+              {del_cell_html}
               <td style="padding:8px;font-weight:bold;color:{'#1a7a1a' if row['entry']=='EMA Crossover' else '#7a6a00' if row['entry']=='52W Breakout' else '#003e7a'}">{row['entry']}</td>
               <td style="padding:8px;text-align:right">₹{row['alloc_inr']:,}</td>
               <td style="padding:8px;text-align:right">{row['qty']}</td>
@@ -3808,6 +3849,7 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
               <th style="padding:8px">Close</th>
               <th style="padding:8px">RSI</th>
               <th style="padding:8px">% from ATH</th>
+              <th style="padding:8px">Delivery % & Vol Signal</th>
               <th style="padding:8px">Entry</th>
               <th style="padding:8px">Alloc (₹)</th>
               <th style="padding:8px">Qty</th>
