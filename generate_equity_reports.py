@@ -2409,8 +2409,21 @@ def main() -> None:
                         with open(existing_path, "w") as wf:
                             wf.write(sanitized_text)
                         print(f"✍️ Sanitized and updated existing confluence report for {symbol} on disk.")
+                        report_text = sanitized_text
                 except Exception as sanitize_err:
                     print(f"⚠️ Failed to sanitize existing confluence report for {symbol}: {sanitize_err}")
+            
+            # If the report was generated *today*, we should still send/retry the dedicated email
+            # since a manual trigger or retry of the pipeline should ensure email delivery.
+            today_report_path = reports_dir / f"{symbol}_equity_report_{date_suffix}.md"
+            if today_report_path.exists():
+                print(f"📧 Report for {symbol} was compiled today. Sending/Retrying dedicated email delivery...")
+                try:
+                    with open(today_report_path, "r") as f:
+                        today_report_text = f.read()
+                    send_report_email(symbol, company, today_report_text)
+                except Exception as mail_err:
+                    print(f"⚠️ Error sending separate email for {symbol}: {mail_err}")
             continue
             
         print(f"✍️  [COMPILING] No report found for {symbol} in the current calendar quarter.")
@@ -2565,15 +2578,16 @@ def main() -> None:
                                 print(f"✍️ Sanitized and updated existing emerging report for {symbol} on disk.")
                                 
                             report_date_str = get_report_date_str(existing_path) if existing_path else today_str
+                            is_new_for_digest = (existing_path and existing_path.name == f"{symbol}_equity_report_{date_suffix}.md")
                             compiled_emerging_reports.append({
                                 "symbol": symbol,
                                 "company": company,
                                 "report_md": report_text,
                                 "r": r,
-                                "is_new": False,
+                                "is_new": is_new_for_digest,
                                 "report_date": report_date_str
                             })
-                            print(f"📋 Loaded existing report for {symbol} into today's digest. Date: {report_date_str}")
+                            print(f"📋 Loaded existing report for {symbol} into today's digest. Date: {report_date_str} (is_new_for_digest: {is_new_for_digest})")
                         except Exception as read_err:
                             print(f"⚠️ Failed to read existing report for {symbol}: {read_err}")
                     continue
