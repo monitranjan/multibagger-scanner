@@ -1501,6 +1501,49 @@ def generate_automated_reports(
     except Exception as e:
         print(f"⚠️ Error saving today's emerging leaders list JSON: {e}")
         
+    # Pre-fetch and cache today's live NSE delivery data for confluences and emerging leaders
+    try:
+        from generate_equity_reports import fetch_nse_delivery_data
+        
+        all_symbols = list(set([r["symbol"] for r in confluence_3_rows] + [r["symbol"] for r in emerging_rows]))
+        print(f"⚡ Pre-fetching live NSE delivery statistics locally for {len(all_symbols)} symbols...")
+        
+        # Load existing cache first to merge and prevent losing data if fetch fails
+        cache_path = Path("outputs") / "today_delivery_data.json"
+        cache = {}
+        if cache_path.exists():
+            try:
+                with open(cache_path, "r") as f:
+                    cache = json.load(f)
+            except Exception as read_err:
+                print(f"⚠️ Error reading existing delivery cache: {read_err}")
+                cache = {}
+                
+        import concurrent.futures
+        new_stats_count = 0
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            future_to_symbol = {executor.submit(fetch_nse_delivery_data, sym): sym for sym in all_symbols}
+            for future in concurrent.futures.as_completed(future_to_symbol):
+                sym = future_to_symbol[future]
+                try:
+                    stats = future.result()
+                    if stats and "latest_delivery_pct" in stats:
+                        cache[sym] = stats
+                        new_stats_count += 1
+                        print(f"   ✅ Pre-fetched & cached delivery stats for {sym}")
+                    else:
+                        print(f"   ⚠️ No fresh stats returned for {sym}")
+                except Exception as exc:
+                    print(f"   ❌ Exception fetching stats for {sym}: {exc}")
+                    
+        # Write merged cache back to file
+        with open(cache_path, "w") as f:
+            json.dump(cache, f, indent=2)
+        print(f"✅ Successfully wrote delivery cache to {cache_path} ({new_stats_count} fresh of {len(all_symbols)} total)")
+        
+    except Exception as cache_err:
+        print(f"⚠️ Failed to pre-fetch and cache delivery data: {cache_err}")
+        
     # 4. Format the HTML report content for Gmail
     html_confl_rows = ""
     if confluence_3_rows:

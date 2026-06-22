@@ -379,7 +379,21 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
 def fetch_nse_delivery_data(symbol: str) -> dict:
     """
     Fetch historical delivery quantity and calculate weekly medians.
+    First checks outputs/today_delivery_data.json cache to bypass cloud IP blocks.
     """
+    cache_path = Path("outputs") / "today_delivery_data.json"
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r") as f:
+                cache = json.load(f)
+            if symbol in cache and cache[symbol]:
+                if "latest_delivery_pct" in cache[symbol]:
+                    print(f"📦 [CACHE HIT] Loaded delivery data from cache for {symbol}")
+                    return cache[symbol]
+        except Exception as e:
+            print(f"⚠️ Error reading delivery cache for {symbol}: {e}")
+
+    # Fallback to live fetch
     from datetime import datetime, timedelta
     try:
         from nselib import capital_market
