@@ -7,27 +7,7 @@
     "return_1d": 5.0,
     "mcap_cr": 9253.47,
     "signal": "52W Breakout",
-    "scans_count": 30
-  },
-  {
-    "symbol": "RRKABEL",
-    "company": "R R Kabel Ltd",
-    "industry": "Cables - Power",
-    "close": 2353.3,
-    "return_1d": 1.39,
-    "mcap_cr": 26252.92,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "CEMPRO",
-    "company": "Cemindia Projects Ltd",
-    "industry": "Infra - Construction & Contracting",
-    "close": 1273.2,
-    "return_1d": 1.69,
-    "mcap_cr": 21507.81,
-    "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 26
   },
   {
     "symbol": "BHAGYANGR",
@@ -37,6 +17,66 @@
     "return_1d": 5.0,
     "mcap_cr": 1241.57,
     "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "WABAG",
+    "company": "Va Tech Wabag Limited",
+    "industry": "Water Treatment",
+    "close": 2061.8,
+    "return_1d": 3.94,
+    "mcap_cr": 12359.73,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "NYKAA",
+    "company": "FSN E-Commerce Ventures Ltd",
+    "industry": "New age - Platform - E-Retail",
+    "close": 304.35,
+    "return_1d": 0.68,
+    "mcap_cr": 86555.36,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1273.2,
+    "return_1d": 1.69,
+    "mcap_cr": 21507.81,
+    "signal": "52W Breakout",
     "scans_count": 19
+  },
+  {
+    "symbol": "KPIL",
+    "company": "Kalpataru Projects International Ltd",
+    "industry": "Infra - Power - Generation/Distribution",
+    "close": 1439.7,
+    "return_1d": 2.93,
+    "mcap_cr": 23885.96,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "NAM-INDIA",
+    "company": "Nippon Life India Asset Management Ltd",
+    "industry": "financials",
+    "close": 1188.4,
+    "return_1d": 0.13,
+    "mcap_cr": 75737.99,
+    "signal": "52W Breakout",
+    "scans_count": 0
+  },
+  {
+    "symbol": "HAPPYFORGE",
+    "company": "Happy Forgings Ltd",
+    "industry": "industrials",
+    "close": 1554.8,
+    "return_1d": 6.13,
+    "mcap_cr": 13822.34,
+    "signal": "52W Breakout",
+    "scans_count": 0
   }
 ]
