@@ -8,14 +8,6 @@
     "persistence": 10
   },
   {
-    "symbol": "STEL",
-    "company": "Stel Holdings Limited",
-    "industry": "financials",
-    "close": 615.55,
-    "mcap_cr": 1103.73,
-    "persistence": 10
-  },
-  {
     "symbol": "NRL",
     "company": "Nupur Recyclers Ltd",
     "industry": "services",
@@ -40,28 +32,12 @@
     "persistence": 10
   },
   {
-    "symbol": "BELRISE",
-    "company": "Belrise Industries Ltd",
-    "industry": "Auto Ancillaries - 2 Wheelers",
-    "close": 247.5,
-    "mcap_cr": 21454.1,
-    "persistence": 9
-  },
-  {
-    "symbol": "UNIMECH",
-    "company": "Unimech Aerospace and Manufacturing Ltd",
-    "industry": "aerospace & defence",
-    "close": 1187.9,
-    "mcap_cr": 6090.87,
-    "persistence": 9
-  },
-  {
-    "symbol": "DIFFNKG",
-    "company": "Diffusion Engineers Ltd",
-    "industry": "industrials",
-    "close": 375.8,
-    "mcap_cr": 1405.54,
-    "persistence": 9
+    "symbol": "STEL",
+    "company": "Stel Holdings Limited",
+    "industry": "financials",
+    "close": 615.55,
+    "mcap_cr": 1103.73,
+    "persistence": 10
   },
   {
     "symbol": "GREENLAM",
@@ -88,19 +64,43 @@
     "persistence": 9
   },
   {
+    "symbol": "BELRISE",
+    "company": "Belrise Industries Ltd",
+    "industry": "Auto Ancillaries - 2 Wheelers",
+    "close": 247.5,
+    "mcap_cr": 21454.1,
+    "persistence": 9
+  },
+  {
+    "symbol": "UNIMECH",
+    "company": "Unimech Aerospace and Manufacturing Ltd",
+    "industry": "aerospace & defence",
+    "close": 1187.9,
+    "mcap_cr": 6090.87,
+    "persistence": 9
+  },
+  {
+    "symbol": "DIFFNKG",
+    "company": "Diffusion Engineers Ltd",
+    "industry": "industrials",
+    "close": 375.8,
+    "mcap_cr": 1405.54,
+    "persistence": 9
+  },
+  {
+    "symbol": "MMTC",
+    "company": "Mmtc Limited",
+    "industry": "Trading",
+    "close": 75.18,
+    "mcap_cr": 11182.5,
+    "persistence": 8
+  },
+  {
     "symbol": "BANKBARODA",
     "company": "Bank Of Baroda Ltd",
     "industry": "bank",
     "close": 286.05,
     "mcap_cr": 145341.13,
-    "persistence": 8
-  },
-  {
-    "symbol": "CHAMBLFERT",
-    "company": "Chambal Fertilizers & Chemicals Limited",
-    "industry": "chemicals",
-    "close": 487.2,
-    "mcap_cr": 19399.58,
     "persistence": 8
   },
   {
@@ -112,19 +112,19 @@
     "persistence": 8
   },
   {
-    "symbol": "MMTC",
-    "company": "Mmtc Limited",
-    "industry": "Trading",
-    "close": 75.18,
-    "mcap_cr": 11182.5,
+    "symbol": "CHAMBLFERT",
+    "company": "Chambal Fertilizers & Chemicals Limited",
+    "industry": "chemicals",
+    "close": 487.2,
+    "mcap_cr": 19399.58,
     "persistence": 8
   },
   {
-    "symbol": "KAMDHENU",
-    "company": "Kamdhenu Limited",
-    "industry": "metals & mining",
-    "close": 28.88,
-    "mcap_cr": 812.67,
+    "symbol": "MANALIPETC",
+    "company": "Manali Petrochemicals Limited",
+    "industry": "energy",
+    "close": 66.2,
+    "mcap_cr": 1126.59,
     "persistence": 7
   },
   {
@@ -144,14 +144,6 @@
     "persistence": 7
   },
   {
-    "symbol": "MANALIPETC",
-    "company": "Manali Petrochemicals Limited",
-    "industry": "energy",
-    "close": 66.2,
-    "mcap_cr": 1126.59,
-    "persistence": 7
-  },
-  {
     "symbol": "KOTAKBANK",
     "company": "Kotak Mahindra Bank Limited",
     "industry": "bank",
@@ -160,19 +152,19 @@
     "persistence": 7
   },
   {
+    "symbol": "KAMDHENU",
+    "company": "Kamdhenu Limited",
+    "industry": "metals & mining",
+    "close": 28.88,
+    "mcap_cr": 812.67,
+    "persistence": 7
+  },
+  {
     "symbol": "SIMPLEXINF",
     "company": "Simplex Infrastructures Limited",
     "industry": "realty",
     "close": 265.1,
     "mcap_cr": 2173.94,
-    "persistence": 6
-  },
-  {
-    "symbol": "FILATEX",
-    "company": "Filatex India Limited",
-    "industry": "textiles",
-    "close": 55.09,
-    "mcap_cr": 2436.1,
     "persistence": 6
   },
   {
@@ -200,35 +192,19 @@
     "persistence": 6
   },
   {
+    "symbol": "FILATEX",
+    "company": "Filatex India Limited",
+    "industry": "textiles",
+    "close": 55.09,
+    "mcap_cr": 2436.1,
+    "persistence": 6
+  },
+  {
     "symbol": "NIBE",
     "company": "NIBE Ltd",
     "industry": "Aerospace & Defence - Equipments",
     "close": 1835.3,
     "mcap_cr": 2770.53,
-    "persistence": 6
-  },
-  {
-    "symbol": "PETRONET",
-    "company": "Petronet Lng Limited",
-    "industry": "energy",
-    "close": 286.5,
-    "mcap_cr": 43305.0,
-    "persistence": 6
-  },
-  {
-    "symbol": "SETL",
-    "company": "Standard Enginnering Technology Ltd",
-    "industry": "Engineering - Heavy - Glass - lined Equipment",
-    "close": 202.34,
-    "mcap_cr": 3712.74,
-    "persistence": 6
-  },
-  {
-    "symbol": "TBOTEK",
-    "company": "TBO Tek Ltd",
-    "industry": "i.t",
-    "close": 1456.0,
-    "mcap_cr": 16177.41,
     "persistence": 6
   },
   {
@@ -240,19 +216,35 @@
     "persistence": 6
   },
   {
+    "symbol": "TBOTEK",
+    "company": "TBO Tek Ltd",
+    "industry": "i.t",
+    "close": 1456.0,
+    "mcap_cr": 16177.41,
+    "persistence": 6
+  },
+  {
+    "symbol": "SETL",
+    "company": "Standard Enginnering Technology Ltd",
+    "industry": "Engineering - Heavy - Glass - lined Equipment",
+    "close": 202.34,
+    "mcap_cr": 3712.74,
+    "persistence": 6
+  },
+  {
+    "symbol": "PETRONET",
+    "company": "Petronet Lng Limited",
+    "industry": "energy",
+    "close": 286.5,
+    "mcap_cr": 43305.0,
+    "persistence": 6
+  },
+  {
     "symbol": "NCLIND",
     "company": "Ncl Industries Limited",
     "industry": "building materials",
     "close": 192.39,
     "mcap_cr": 867.93,
-    "persistence": 5
-  },
-  {
-    "symbol": "RIIL",
-    "company": "Reliance Industrial Infrastructure Limited",
-    "industry": "transportation",
-    "close": 867.35,
-    "mcap_cr": 1296.18,
     "persistence": 5
   },
   {
@@ -269,6 +261,14 @@
     "industry": "realty",
     "close": 458.7,
     "mcap_cr": 7397.54,
+    "persistence": 5
+  },
+  {
+    "symbol": "RIIL",
+    "company": "Reliance Industrial Infrastructure Limited",
+    "industry": "transportation",
+    "close": 867.35,
+    "mcap_cr": 1296.18,
     "persistence": 5
   },
   {
@@ -304,54 +304,6 @@
     "persistence": 4
   },
   {
-    "symbol": "KIRLFER",
-    "company": "Kirloskar Ferrous Industries Ltd",
-    "industry": "metals & mining",
-    "close": 498.05,
-    "mcap_cr": 7863.46,
-    "persistence": 4
-  },
-  {
-    "symbol": "GENUSPOWER",
-    "company": "Genus Power Infrastructures Limited",
-    "industry": "consumer discretionary",
-    "close": 323.1,
-    "mcap_cr": 9877.95,
-    "persistence": 4
-  },
-  {
-    "symbol": "ORBTEXP",
-    "company": "Orbit Exports Limited",
-    "industry": "Consumer Cyclical",
-    "close": 216.98,
-    "mcap_cr": 551.5115008,
-    "persistence": 4
-  },
-  {
-    "symbol": "SCPL",
-    "company": "Sheetal Cool Products Ltd",
-    "industry": "fmcg",
-    "close": 491.5,
-    "mcap_cr": 506.99,
-    "persistence": 4
-  },
-  {
-    "symbol": "TEJASNET",
-    "company": "Tejas Networks Ltd",
-    "industry": "telecom",
-    "close": 627.4,
-    "mcap_cr": 11239.51,
-    "persistence": 4
-  },
-  {
-    "symbol": "PANACHE",
-    "company": "Panache Digilife Ltd",
-    "industry": "i.t",
-    "close": 443.0,
-    "mcap_cr": 681.88,
-    "persistence": 4
-  },
-  {
     "symbol": "STCINDIA",
     "company": "The State Trading Corporation Of India Limited",
     "industry": "services",
@@ -368,6 +320,30 @@
     "persistence": 4
   },
   {
+    "symbol": "ORBTEXP",
+    "company": "Orbit Exports Limited",
+    "industry": "Consumer Cyclical",
+    "close": 216.98,
+    "mcap_cr": 551.5115008,
+    "persistence": 4
+  },
+  {
+    "symbol": "GENUSPOWER",
+    "company": "Genus Power Infrastructures Limited",
+    "industry": "consumer discretionary",
+    "close": 323.1,
+    "mcap_cr": 9877.95,
+    "persistence": 4
+  },
+  {
+    "symbol": "SCPL",
+    "company": "Sheetal Cool Products Ltd",
+    "industry": "fmcg",
+    "close": 491.5,
+    "mcap_cr": 506.99,
+    "persistence": 4
+  },
+  {
     "symbol": "VMART",
     "company": "V-mart Retail Limited",
     "industry": "consumer discretionary",
@@ -376,11 +352,19 @@
     "persistence": 4
   },
   {
-    "symbol": "BORORENEW",
-    "company": "Borosil Renewables Ltd",
-    "industry": "building materials",
-    "close": 604.35,
-    "mcap_cr": 8386.8,
+    "symbol": "PANACHE",
+    "company": "Panache Digilife Ltd",
+    "industry": "i.t",
+    "close": 443.0,
+    "mcap_cr": 681.88,
+    "persistence": 4
+  },
+  {
+    "symbol": "TEJASNET",
+    "company": "Tejas Networks Ltd",
+    "industry": "telecom",
+    "close": 627.4,
+    "mcap_cr": 11239.51,
     "persistence": 4
   },
   {
@@ -392,6 +376,14 @@
     "persistence": 4
   },
   {
+    "symbol": "KIRLFER",
+    "company": "Kirloskar Ferrous Industries Ltd",
+    "industry": "metals & mining",
+    "close": 498.05,
+    "mcap_cr": 7863.46,
+    "persistence": 4
+  },
+  {
     "symbol": "MANBA",
     "company": "Manba Finance Ltd",
     "industry": "financials",
@@ -400,36 +392,12 @@
     "persistence": 4
   },
   {
-    "symbol": "GOKEX",
-    "company": "Gokaldas Exports Limited",
-    "industry": "consumer discretionary",
-    "close": 819.4,
-    "mcap_cr": 5996.75,
-    "persistence": 3
-  },
-  {
-    "symbol": "REDINGTON",
-    "company": "Redington (india) Limited",
-    "industry": "services",
-    "close": 279.88,
-    "mcap_cr": 21949.1,
-    "persistence": 3
-  },
-  {
-    "symbol": "INDIGO",
-    "company": "Interglobe Aviation Limited",
-    "industry": "transportation",
-    "close": 5021.1,
-    "mcap_cr": 194137.72,
-    "persistence": 3
-  },
-  {
-    "symbol": "LICI",
-    "company": "Life Insurance Corporation of India Ltd",
-    "industry": "financials",
-    "close": 442.4,
-    "mcap_cr": 556789.55,
-    "persistence": 3
+    "symbol": "BORORENEW",
+    "company": "Borosil Renewables Ltd",
+    "industry": "building materials",
+    "close": 604.35,
+    "mcap_cr": 8386.8,
+    "persistence": 4
   },
   {
     "symbol": "RCF",
@@ -437,22 +405,6 @@
     "industry": "chemicals",
     "close": 136.97,
     "mcap_cr": 7538.82,
-    "persistence": 3
-  },
-  {
-    "symbol": "OLECTRA",
-    "company": "Olectra Greentech Ltd",
-    "industry": "Auto - Bus/LCVs",
-    "close": 1523.2,
-    "mcap_cr": 12478.73,
-    "persistence": 3
-  },
-  {
-    "symbol": "NIACL",
-    "company": "New India Assurance Company Ltd",
-    "industry": "financials",
-    "close": 212.11,
-    "mcap_cr": 33340.69,
     "persistence": 3
   },
   {
@@ -464,6 +416,30 @@
     "persistence": 3
   },
   {
+    "symbol": "GPTINFRA",
+    "company": "Gpt Infraprojects Limited",
+    "industry": "realty",
+    "close": 135.56,
+    "mcap_cr": 1533.94,
+    "persistence": 3
+  },
+  {
+    "symbol": "REDINGTON",
+    "company": "Redington (india) Limited",
+    "industry": "services",
+    "close": 279.88,
+    "mcap_cr": 21949.1,
+    "persistence": 3
+  },
+  {
+    "symbol": "GOKEX",
+    "company": "Gokaldas Exports Limited",
+    "industry": "consumer discretionary",
+    "close": 819.4,
+    "mcap_cr": 5996.75,
+    "persistence": 3
+  },
+  {
     "symbol": "ASKAUTOLTD",
     "company": "ASK Automotive Ltd",
     "industry": "auto",
@@ -472,11 +448,35 @@
     "persistence": 3
   },
   {
-    "symbol": "GPTINFRA",
-    "company": "Gpt Infraprojects Limited",
-    "industry": "realty",
-    "close": 135.56,
-    "mcap_cr": 1533.94,
+    "symbol": "INDIGO",
+    "company": "Interglobe Aviation Limited",
+    "industry": "transportation",
+    "close": 5021.1,
+    "mcap_cr": 194137.72,
+    "persistence": 3
+  },
+  {
+    "symbol": "NIACL",
+    "company": "New India Assurance Company Ltd",
+    "industry": "financials",
+    "close": 212.11,
+    "mcap_cr": 33340.69,
+    "persistence": 3
+  },
+  {
+    "symbol": "OLECTRA",
+    "company": "Olectra Greentech Ltd",
+    "industry": "Auto - Bus/LCVs",
+    "close": 1523.2,
+    "mcap_cr": 12478.73,
+    "persistence": 3
+  },
+  {
+    "symbol": "LICI",
+    "company": "Life Insurance Corporation of India Ltd",
+    "industry": "financials",
+    "close": 442.4,
+    "mcap_cr": 556789.55,
     "persistence": 3
   }
 ]
