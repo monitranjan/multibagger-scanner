@@ -60,23 +60,23 @@
     "scans_count": 18
   },
   {
-    "symbol": "NAM-INDIA",
-    "company": "Nippon Life India Asset Management Ltd",
-    "industry": "financials",
-    "close": 1188.4,
-    "return_1d": 0.13,
-    "mcap_cr": 75737.99,
-    "signal": "52W Breakout",
-    "scans_count": 0
-  },
-  {
     "symbol": "HAPPYFORGE",
     "company": "Happy Forgings Ltd",
-    "industry": "industrials",
+    "industry": "Castings, Forgings & Fastners",
     "close": 1554.8,
     "return_1d": 6.13,
     "mcap_cr": 13822.34,
     "signal": "52W Breakout",
-    "scans_count": 0
+    "scans_count": 18
+  },
+  {
+    "symbol": "NAM-INDIA",
+    "company": "Nippon Life India Asset Management Ltd",
+    "industry": "Finance - AMC",
+    "close": 1188.4,
+    "return_1d": 0.13,
+    "mcap_cr": 75737.99,
+    "signal": "52W Breakout",
+    "scans_count": 18
   }
 ]

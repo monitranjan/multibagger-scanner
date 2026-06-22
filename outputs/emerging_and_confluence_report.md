@@ -17,8 +17,8 @@ Total triple-confluence candidates: **8**
 | `NYKAA` | FSN E-Commerce Ventures Ltd | New age - Platform - E-Retail | ₹304.35 | 0.68% | 86,555.4 | **52W Breakout** | **20** | 📝 **Sent on 19-Jun-2026** |
 | `CEMPRO` | Cemindia Projects Ltd | Infra - Construction & Contracting | ₹1,273.20 | 1.69% | 21,507.8 | **52W Breakout** | **19** | 📝 **Sent on 31-May-2026** |
 | `KPIL` | Kalpataru Projects International Ltd | Infra - Power - Generation/Distribution | ₹1,439.70 | 2.93% | 23,886.0 | **52W Breakout** | **18** | 📝 **Sent on 22-Jun-2026** |
-| `NAM-INDIA` | Nippon Life India Asset Management Ltd | financials | ₹1,188.40 | 0.13% | 75,738.0 | **52W Breakout** | **0** | 📝 **Sent on 22-Jun-2026** |
-| `HAPPYFORGE` | Happy Forgings Ltd | industrials | ₹1,554.80 | 6.13% | 13,822.3 | **52W Breakout** | **0** | 📝 **Sent on 22-Jun-2026** |
+| `HAPPYFORGE` | Happy Forgings Ltd | Castings, Forgings & Fastners | ₹1,554.80 | 6.13% | 13,822.3 | **52W Breakout** | **18** | 📝 **Sent on 22-Jun-2026** |
+| `NAM-INDIA` | Nippon Life India Asset Management Ltd | Finance - AMC | ₹1,188.40 | 0.13% | 75,738.0 | **52W Breakout** | **18** | 📝 **Sent on 22-Jun-2026** |
 
 ---
 
