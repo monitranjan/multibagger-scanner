@@ -50,6 +50,16 @@
     "scans_count": 19
   },
   {
+    "symbol": "NAM-INDIA",
+    "company": "Nippon Life India Asset Management Ltd",
+    "industry": "Finance - AMC",
+    "close": 1188.4,
+    "return_1d": 0.13,
+    "mcap_cr": 75737.99,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
     "symbol": "KPIL",
     "company": "Kalpataru Projects International Ltd",
     "industry": "Infra - Power - Generation/Distribution",
@@ -66,16 +76,6 @@
     "close": 1554.8,
     "return_1d": 6.13,
     "mcap_cr": 13822.34,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "NAM-INDIA",
-    "company": "Nippon Life India Asset Management Ltd",
-    "industry": "Finance - AMC",
-    "close": 1188.4,
-    "return_1d": 0.13,
-    "mcap_cr": 75737.99,
     "signal": "52W Breakout",
     "scans_count": 18
   }
