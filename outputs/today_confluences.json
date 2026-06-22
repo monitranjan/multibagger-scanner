@@ -1,61 +1,41 @@
 [
   {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 176.92,
-    "return_1d": 4.57,
-    "mcap_cr": 22750.31,
-    "signal": "52W Breakout",
-    "scans_count": 27
-  },
-  {
     "symbol": "SIGMAADV",
     "company": "Sigma Advanced System Ltd",
     "industry": "Aerospace & Defence - Equipments",
-    "close": 525.05,
+    "close": 551.3,
     "return_1d": 5.0,
-    "mcap_cr": 8812.87,
+    "mcap_cr": 9253.47,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 30
   },
   {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecom Services",
-    "close": 209.61,
-    "return_1d": 5.0,
-    "mcap_cr": 30555.42,
+    "symbol": "RRKABEL",
+    "company": "R R Kabel Ltd",
+    "industry": "Cables - Power",
+    "close": 2353.3,
+    "return_1d": 1.39,
+    "mcap_cr": 26252.92,
     "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "IBULLSLTD",
-    "company": "Indiabulls Limited",
-    "industry": "Diversified",
-    "close": 26.51,
-    "return_1d": 4.99,
-    "mcap_cr": 5869.06,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "NYKAA",
-    "company": "FSN E-Commerce Ventures Ltd",
-    "industry": "New age - Platform - E-Retail",
-    "close": 302.3,
-    "return_1d": 1.41,
-    "mcap_cr": 85352.81,
-    "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 24
   },
   {
     "symbol": "CEMPRO",
     "company": "Cemindia Projects Ltd",
     "industry": "Infra - Construction & Contracting",
-    "close": 1252.0,
+    "close": 1273.2,
+    "return_1d": 1.69,
+    "mcap_cr": 21507.81,
+    "signal": "52W Breakout",
+    "scans_count": 24
+  },
+  {
+    "symbol": "BHAGYANGR",
+    "company": "Bhagyanagar India",
+    "industry": "Recycling",
+    "close": 407.45,
     "return_1d": 5.0,
-    "mcap_cr": 20483.95,
+    "mcap_cr": 1241.57,
     "signal": "52W Breakout",
     "scans_count": 19
   }

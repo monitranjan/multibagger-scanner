@@ -641,10 +641,7 @@ def map_stockscans_index_to_yfinance(index_id: str, index_name: str) -> tuple[st
 
 def fetch_all_stockscans_indices(symbols: list[str]) -> dict[str, tuple[str, str]]:
     """Fetch indices list for all symbols from StockScans API in parallel."""
-    cookie = os.environ.get(
-        "STOCKSCANS_COOKIE", 
-        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
-    )
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
     headers = {
         "accept": "application/json",
         "cookie": cookie,
@@ -1158,10 +1155,7 @@ def load_scanner_symbols() -> list[str]:
 
 def fetch_single_stockscans_details(symbol: str) -> tuple[str, dict]:
     """Fetch StockScans search-company data dynamically using your authtoken."""
-    cookie = os.environ.get(
-        "STOCKSCANS_COOKIE", 
-        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
-    )
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
     headers = {
         "accept": "application/json",
         "cookie": cookie,
@@ -1207,10 +1201,7 @@ def get_stockscans_common_stocks_data() -> dict:
     global STOCKSCANS_STATUS
     import json
     
-    cookie = os.environ.get(
-        "STOCKSCANS_COOKIE", 
-        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
-    )
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
     
     # 1. Attempt to fetch dynamically from API
     try:
@@ -1501,48 +1492,8 @@ def generate_automated_reports(
     except Exception as e:
         print(f"⚠️ Error saving today's emerging leaders list JSON: {e}")
         
-    # Pre-fetch and cache today's live NSE delivery data for confluences and emerging leaders
-    try:
-        from generate_equity_reports import fetch_nse_delivery_data
-        
-        all_symbols = list(set([r["symbol"] for r in confluence_3_rows] + [r["symbol"] for r in emerging_rows]))
-        print(f"⚡ Pre-fetching live NSE delivery statistics locally for {len(all_symbols)} symbols...")
-        
-        # Load existing cache first to merge and prevent losing data if fetch fails
-        cache_path = Path("outputs") / "today_delivery_data.json"
-        cache = {}
-        if cache_path.exists():
-            try:
-                with open(cache_path, "r") as f:
-                    cache = json.load(f)
-            except Exception as read_err:
-                print(f"⚠️ Error reading existing delivery cache: {read_err}")
-                cache = {}
-                
-        import concurrent.futures
-        new_stats_count = 0
-        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-            future_to_symbol = {executor.submit(fetch_nse_delivery_data, sym): sym for sym in all_symbols}
-            for future in concurrent.futures.as_completed(future_to_symbol):
-                sym = future_to_symbol[future]
-                try:
-                    stats = future.result()
-                    if stats and "latest_delivery_pct" in stats:
-                        cache[sym] = stats
-                        new_stats_count += 1
-                        print(f"   ✅ Pre-fetched & cached delivery stats for {sym}")
-                    else:
-                        print(f"   ⚠️ No fresh stats returned for {sym}")
-                except Exception as exc:
-                    print(f"   ❌ Exception fetching stats for {sym}: {exc}")
-                    
-        # Write merged cache back to file
-        with open(cache_path, "w") as f:
-            json.dump(cache, f, indent=2)
-        print(f"✅ Successfully wrote delivery cache to {cache_path} ({new_stats_count} fresh of {len(all_symbols)} total)")
-        
-    except Exception as cache_err:
-        print(f"⚠️ Failed to pre-fetch and cache delivery data: {cache_err}")
+    print("✅ Delivery data is fully synchronized in SQLite database.")
+
         
     # 4. Format the HTML report content for Gmail
     html_confl_rows = ""
@@ -2140,6 +2091,15 @@ def init_and_seed_database() -> None:
             print("⚠️ SQLite database is empty and no baseline CSV 'Backtest Monit momentum (2).csv' was found to seed from.")
             
     conn.close()
+    
+    # Initialize and sync delivery history database
+    try:
+        from generate_equity_reports import sync_delivery_history
+        print("🔄 Synchronizing local delivery history database from bulk bhavcopy...")
+        sync_delivery_history(45)
+    except Exception as e:
+        print(f"⚠️ Error initializing/syncing delivery history database: {e}")
+
 
 
 def append_today_to_database(universe_df: pd.DataFrame) -> None:

@@ -44,6 +44,14 @@ echo -e "${GREEN}✅ Step 2 complete! Workbook rebuilt successfully.${NC}"
 # Find the latest workbook in outputs
 LATEST_EXCEL=$(ls -t outputs/monit_chartink_ranking_*.xlsx 2>/dev/null | head -n 1)
 
+# Step 3: Automatically commit and push local changes (delivery data cache and workbook) to GitHub
+echo -e "\n${YELLOW}🔄 Step 3/3: Committing and pushing delivery cache & workbook to GitHub...${NC}"
+git add logs/backtest.db outputs/
+git commit -m "chore: local auto-sync delivery cache and ranking workbook [skip ci]"
+git pull --rebase --autostash origin main
+git push origin main
+echo -e "${GREEN}✅ Step 3 complete! Local changes successfully synced to GitHub.${NC}"
+
 echo -e "\n${GREEN}=====================================================================${NC}"
 echo -e "${GREEN}🏆 SUCCESS! Daily pipeline finished execution flawlessly. 🏆${NC}"
 echo -e "${GREEN}=====================================================================${NC}"

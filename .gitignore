@@ -48,3 +48,15 @@ logs/*
 .idea/
 .vscode/
 *.log
+
+# Scratch folder for local testing
+scratch/
+
+# Local media and documents
+*.PDF
+*.pdf
+*.jpg
+*.jpeg
+*.png
+
+

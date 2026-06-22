@@ -11,7 +11,9 @@ import json
 import requests
 import time
 import re
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
+import sqlite3
+import pandas as pd
 from pathlib import Path
 
 def load_dotenv():
@@ -33,10 +35,7 @@ def fetch_stockscans_company_data(symbol: str) -> dict:
     """
     Fetch all available fundamental, peer, and card details from StockScans for a symbol.
     """
-    cookie = os.environ.get(
-        "STOCKSCANS_COOKIE", 
-        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
-    )
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
@@ -131,10 +130,7 @@ def fetch_peers_fundamentals_in_parallel(peer_ids: list[str]) -> dict:
         return results
         
     from concurrent.futures import ThreadPoolExecutor, as_completed
-    cookie = os.environ.get(
-        "STOCKSCANS_COOKIE", 
-        "ext_name=ojplmecpdpgccookcobabopnaifgidhf; theme=light; _clck=lwn8kd%5E2%5Eg5g%5E0%5E2304; authtoken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3ODA4MDU0NTAsInVzZXJJZCI6IjY2MjM3MGFkN2IyYzAyMDEwZjQ0NTU5NyJ9.fG9VwT-Gu8i8H0JBpT6WzJMgKiPeFF73x6QDS0DT7vA"
-    )
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
@@ -376,93 +372,274 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
     return formatted
 
 
+def init_delivery_db():
+    """Ensure the delivery_history table exists in logs/backtest.db."""
+    db_path = Path("logs") / "backtest.db"
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(str(db_path))
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS delivery_history (
+            date TEXT,
+            symbol TEXT,
+            series TEXT,
+            close_price REAL,
+            ttl_trd_qnty REAL,
+            turnover_lacs REAL,
+            deliv_qty REAL,
+            deliv_per REAL,
+            PRIMARY KEY (date, symbol)
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+
+def download_and_store_bhavcopy(target_date: date) -> bool:
+    """Download daily bulk bhavcopy from NSE and insert all symbols into SQLite database."""
+    date_str = target_date.strftime("%d%m%Y")
+    db_date_str = target_date.strftime("%Y-%m-%d")
+    url = f"https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_{date_str}.csv"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "*/*",
+        "Referer": "https://www.nseindia.com/"
+    }
+    db_path = Path("logs") / "backtest.db"
+    try:
+        r = requests.get(url, headers=headers, timeout=15)
+        if r.status_code != 200:
+            return False
+        
+        from io import StringIO
+        csv_data = StringIO(r.text)
+        df = pd.read_csv(csv_data)
+        
+        # Clean columns and strip strings
+        df.columns = df.columns.str.strip()
+        for col in df.select_dtypes(include=['object']).columns:
+            df[col] = df[col].astype(str).str.strip()
+            
+        # Keep standard equity and related series
+        if 'SERIES' in df.columns:
+            df = df[df['SERIES'].isin(['EQ', 'BE', 'SM', 'ST'])]
+            
+        if df.empty:
+            return False
+            
+        # Clean numeric columns
+        num_cols = ['CLOSE_PRICE', 'TTL_TRD_QNTY', 'TURNOVER_LACS', 'DELIV_QTY', 'DELIV_PER']
+        for col in num_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col].astype(str).str.replace(',', '', regex=False), errors='coerce')
+                
+        df = df.dropna(subset=['CLOSE_PRICE', 'TTL_TRD_QNTY', 'DELIV_QTY'])
+        
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+        
+        records = []
+        for _, row in df.iterrows():
+            sym = str(row['SYMBOL']).strip().upper()
+            series = str(row.get('SERIES', 'EQ')).strip()
+            records.append((
+                db_date_str,
+                sym,
+                series,
+                float(row['CLOSE_PRICE']),
+                float(row['TTL_TRD_QNTY']),
+                float(row['TURNOVER_LACS']),
+                float(row['DELIV_QTY']),
+                float(row['DELIV_PER'])
+            ))
+            
+        cursor.executemany("""
+            INSERT OR REPLACE INTO delivery_history 
+            (date, symbol, series, close_price, ttl_trd_qnty, turnover_lacs, deliv_qty, deliv_per)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, records)
+        
+        conn.commit()
+        conn.close()
+        print(f"✅ Successfully downloaded and stored bhavcopy for {db_date_str} ({len(records)} symbols)")
+        return True
+    except Exception as e:
+        print(f"⚠️ Error downloading/storing bhavcopy for {db_date_str}: {e}")
+        return False
+
+
+def sync_delivery_history(days_back: int = 45):
+    """Sync missing weekdays for the last days_back days and prune entries older than 30 trading dates."""
+    db_path = Path("logs") / "backtest.db"
+    init_delivery_db()
+    
+    conn = sqlite3.connect(str(db_path))
+    cursor = conn.cursor()
+    cursor.execute("SELECT DISTINCT date FROM delivery_history")
+    existing_dates = {row[0] for row in cursor.fetchall()}
+    conn.close()
+    
+    today = date.today()
+    synced_count = 0
+    
+    for i in range(days_back):
+        target_date = today - timedelta(days=i)
+        if target_date.weekday() >= 5:
+            continue
+            
+        db_date_str = target_date.strftime("%Y-%m-%d")
+        if db_date_str in existing_dates:
+            continue
+            
+        print(f"🔄 Syncing missing date: {db_date_str}")
+        success = download_and_store_bhavcopy(target_date)
+        if success:
+            synced_count += 1
+            
+    # Prune database to only keep the top 30 most recent trading dates
+    conn = sqlite3.connect(str(db_path))
+    cursor = conn.cursor()
+    cursor.execute("SELECT DISTINCT date FROM delivery_history ORDER BY date DESC LIMIT 30")
+    recent_dates = [row[0] for row in cursor.fetchall()]
+    if recent_dates:
+        # Delete any rows not in the top 30 dates
+        placeholders = ",".join("?" for _ in recent_dates)
+        cursor.execute(f"DELETE FROM delivery_history WHERE date NOT IN ({placeholders})", recent_dates)
+        pruned = cursor.rowcount
+        if pruned > 0:
+            print(f"🧹 Pruned {pruned} old rows from delivery_history (kept top 30 trading dates)")
+    conn.commit()
+    conn.close()
+    print(f"📊 Delivery history sync completed. Synced {synced_count} missing days.")
+
+
 def fetch_nse_delivery_data(symbol: str) -> dict:
     """
     Fetch historical delivery quantity and calculate weekly medians.
-    First checks outputs/today_delivery_data.json cache to bypass cloud IP blocks.
+    Queries the local SQLite database. If < 5 days are found (e.g. brand new equity),
+    falls back to live nselib fetch, inserts to DB, and re-queries.
     """
-    cache_path = Path("outputs") / "today_delivery_data.json"
-    if cache_path.exists():
+    symbol = symbol.strip().upper()
+    db_path = Path("logs") / "backtest.db"
+    
+    init_delivery_db()
+    
+    def query_local(sym):
+        conn = sqlite3.connect(str(db_path))
+        query = """
+            SELECT date, ttl_trd_qnty, deliv_qty, deliv_per, close_price, turnover_lacs
+            FROM delivery_history
+            WHERE symbol = ?
+            ORDER BY date DESC
+            LIMIT 5
+        """
         try:
-            with open(cache_path, "r") as f:
-                cache = json.load(f)
-            if symbol in cache and cache[symbol]:
-                if "latest_delivery_pct" in cache[symbol]:
-                    print(f"📦 [CACHE HIT] Loaded delivery data from cache for {symbol}")
-                    return cache[symbol]
+            df_local = pd.read_sql_query(query, conn, params=(sym,))
         except Exception as e:
-            print(f"⚠️ Error reading delivery cache for {symbol}: {e}")
+            print(f"⚠️ Error reading delivery_history from DB: {e}")
+            df_local = pd.DataFrame()
+        conn.close()
+        return df_local
 
-    # Fallback to live fetch
-    from datetime import datetime, timedelta
-    try:
-        from nselib import capital_market
-        import pandas as pd
-    except ImportError:
-        print("⚠️ nselib or pandas not available for delivery data fetch.")
+    df = query_local(symbol)
+    
+    # Fallback if less than 5 days of data
+    if df.empty or len(df) < 5:
+        print(f"ℹ️ Under 5 days of history in DB for {symbol} (found {len(df)}). Running fallback live fetch...")
+        try:
+            from nselib import capital_market
+            
+            end_date = datetime.today()
+            start_date = end_date - timedelta(days=20)
+            from_date_str = start_date.strftime("%d-%m-%Y")
+            to_date_str = end_date.strftime("%d-%m-%Y")
+            
+            df_live = capital_market.price_volume_and_deliverable_position_data(
+                symbol=symbol,
+                from_date=from_date_str,
+                to_date=to_date_str
+            )
+            
+            if not df_live.empty:
+                df_live.columns = [c.replace('ï»¿', '').replace('"', '').strip() for c in df_live.columns]
+                
+                df_live['ParsedDate'] = pd.to_datetime(df_live['Date'], format='%d-%b-%Y', errors='coerce')
+                if df_live['ParsedDate'].isna().all():
+                    df_live['ParsedDate'] = pd.to_datetime(df_live['Date'], format='%d-%m-%Y', errors='coerce')
+                    
+                df_live = df_live.dropna(subset=['ParsedDate']).sort_values('ParsedDate')
+                
+                for col in ['DeliverableQty', '%DlyQttoTradedQty', 'TotalTradedQuantity', 'ClosePrice', 'TurnoverInRs']:
+                    if col in df_live.columns:
+                        if df_live[col].dtype == object:
+                            df_live[col] = df_live[col].astype(str).str.replace(',', '', regex=False)
+                        df_live[col] = pd.to_numeric(df_live[col], errors='coerce')
+                        
+                df_live = df_live.dropna(subset=['DeliverableQty', '%DlyQttoTradedQty', 'TotalTradedQuantity', 'ClosePrice', 'TurnoverInRs'])
+                
+                if not df_live.empty:
+                    conn = sqlite3.connect(str(db_path))
+                    cursor = conn.cursor()
+                    records = []
+                    for _, row in df_live.iterrows():
+                        db_date = row['ParsedDate'].strftime('%Y-%m-%d')
+                        records.append((
+                            db_date,
+                            symbol,
+                            'EQ',
+                            float(row['ClosePrice']),
+                            float(row['TotalTradedQuantity']),
+                            float(row['TurnoverInRs']) / 100000.0,
+                            float(row['DeliverableQty']),
+                            float(row['%DlyQttoTradedQty'])
+                        ))
+                    cursor.executemany("""
+                        INSERT OR REPLACE INTO delivery_history
+                        (date, symbol, series, close_price, ttl_trd_qnty, turnover_lacs, deliv_qty, deliv_per)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """, records)
+                    conn.commit()
+                    conn.close()
+                    print(f"✅ Fallback successful: Backfilled {len(records)} days of history for {symbol}")
+                    
+                    # Re-query local DB
+                    df = query_local(symbol)
+        except Exception as fe:
+            print(f"⚠️ Fallback fetch failed for {symbol}: {fe}")
+            
+    if df.empty or len(df) == 0:
         return {}
+        
+    # Sort ascending for median and index logic
+    df = df.iloc[::-1].copy() # reverse order so that oldest is first and latest is last
+    latest_row = df.iloc[-1]
+    
+    # Calculate values in Rs. Cr
+    df['DeliveryValueCr'] = (df['deliv_qty'] * df['close_price']) / 10000000.0
+    df['TradedValueCr'] = (df['turnover_lacs'] * 100000.0) / 10000000.0
+    
+    # Parse latest_date to DD-Mon-YYYY to maintain UI compatibility
+    latest_db_date = latest_row['date'] # YYYY-MM-DD
+    try:
+        latest_date_obj = datetime.strptime(latest_db_date, "%Y-%m-%d")
+        latest_date_display = latest_date_obj.strftime("%d-%b-%Y")
+    except Exception:
+        latest_date_display = latest_db_date
+        
+    return {
+        "latest_date": latest_date_display,
+        "latest_traded_qty": float(latest_row['ttl_trd_qnty']),
+        "latest_delivery_qty": float(latest_row['deliv_qty']),
+        "latest_delivery_pct": float(latest_row['deliv_per']),
+        "latest_traded_val_cr": float(df['TradedValueCr'].iloc[-1]),
+        "latest_delivery_val_cr": float(df['DeliveryValueCr'].iloc[-1]),
+        "week_delivery_qty_median": float(df['deliv_qty'].median()),
+        "week_delivery_pct_median": float(df['deliv_per'].median()),
+        "week_traded_qty_median": float(df['ttl_trd_qnty'].median()),
+        "week_traded_val_median_cr": float(df['TradedValueCr'].median()),
+        "week_delivery_val_median_cr": float(df['DeliveryValueCr'].median())
+    }
 
-    end_date = datetime.today()
-    start_date = end_date - timedelta(days=20)
-    
-    from_date_str = start_date.strftime("%d-%m-%Y")
-    to_date_str = end_date.strftime("%d-%m-%Y")
-    
-    try:
-        df = capital_market.price_volume_and_deliverable_position_data(
-            symbol=symbol,
-            from_date=from_date_str,
-            to_date=to_date_str
-        )
-        if df.empty:
-            return {}
-            
-        df.columns = [c.replace('ï»¿', '').replace('"', '') for c in df.columns]
-        
-        df['ParsedDate'] = pd.to_datetime(df['Date'], format='%d-%b-%Y', errors='coerce')
-        if df['ParsedDate'].isna().all():
-            df['ParsedDate'] = pd.to_datetime(df['Date'], format='%d-%m-%Y', errors='coerce')
-            
-        df = df.dropna(subset=['ParsedDate']).sort_values('ParsedDate')
-        
-        # Clean commas and convert all numeric columns to float/numeric
-        for col in ['DeliverableQty', '%DlyQttoTradedQty', 'TotalTradedQuantity', 'ClosePrice', 'TurnoverInRs']:
-            if col in df.columns:
-                if df[col].dtype == object:
-                    df[col] = df[col].astype(str).str.replace(',', '', regex=False)
-                df[col] = pd.to_numeric(df[col], errors='coerce')
-        
-        df = df.dropna(subset=['DeliverableQty', '%DlyQttoTradedQty', 'TotalTradedQuantity', 'ClosePrice', 'TurnoverInRs'])
-        
-        if df.empty:
-            return {}
-            
-        df_week = df.tail(5)
-        latest_row = df.iloc[-1]
-        
-        # Calculate traded and deliverable value in Rs. Cr
-        df['DeliveryValueCr'] = (df['DeliverableQty'] * df['ClosePrice']) / 10000000.0
-        df['TradedValueCr'] = df['TurnoverInRs'] / 10000000.0
-        
-        df_week = df.tail(5)
-        latest_row = df.iloc[-1]
-        
-        return {
-            "latest_date": latest_row['Date'],
-            "latest_traded_qty": float(latest_row['TotalTradedQuantity']),
-            "latest_delivery_qty": float(latest_row['DeliverableQty']),
-            "latest_delivery_pct": float(latest_row['%DlyQttoTradedQty']),
-            "latest_traded_val_cr": float(latest_row['TradedValueCr']),
-            "latest_delivery_val_cr": float(latest_row['DeliveryValueCr']),
-            "week_delivery_qty_median": float(df_week['DeliverableQty'].median()),
-            "week_delivery_pct_median": float(df_week['%DlyQttoTradedQty'].median()),
-            "week_traded_qty_median": float(df_week['TotalTradedQuantity'].median()),
-            "week_traded_val_median_cr": float(df_week['TradedValueCr'].median()),
-            "week_delivery_val_median_cr": float(df_week['DeliveryValueCr'].median())
-        }
-    except Exception as e:
-        print(f"⚠️ Error fetching delivery data from nselib for {symbol}: {e}")
-        return {}
 
 
 def calculate_delivery_signal(stats: dict, cmp: float) -> dict:
@@ -1675,11 +1852,11 @@ def send_emerging_digest_email(compiled_reports):
           </td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
-          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif; white-space: nowrap;">{date_display}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
           {del_summary_td}
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f} (+{upside_pct:.1f}%)</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #4a5568; font-family: sans-serif;">₹{mcap:,.1f} Cr</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif; white-space: nowrap;">{date_display}</td>
         </tr>
         """)
         
@@ -1691,11 +1868,11 @@ def send_emerging_digest_email(compiled_reports):
           </td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif;">{company}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; color: #4a5568; font-family: sans-serif;">{sector}</td>
-          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif; white-space: nowrap;">{date_display}</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #2d3748; font-family: sans-serif;">₹{cmp:,.2f}</td>
           {del_summary_td}
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-weight: bold; color: #2e7d32; font-family: sans-serif;">₹{target_price:,.2f} (+{upside_pct:.1f}%)</td>
           <td style="border: 1px solid #e2e8f0; padding: 10px; text-align: right; color: #4a5568; font-family: sans-serif;">₹{mcap:,.1f} Cr</td>
+          <td style="border: 1px solid #e2e8f0; padding: 10px; color: #2d3748; font-family: sans-serif; white-space: nowrap;">{date_display}</td>
         </tr>
         """)
         
@@ -1707,11 +1884,11 @@ def send_emerging_digest_email(compiled_reports):
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Ticker</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Company Name</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Industry/Sector</th>
-            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Report Date</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">CMP</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: center; font-family: sans-serif; font-size: 14px;">Volume & Delivery (Live)</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">12M Target (Upside)</th>
             <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: right; font-family: sans-serif; font-size: 14px;">MCap (Cr)</th>
+            <th style="border: 1px solid #e2e8f0; padding: 12px 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Report Date</th>
           </tr>
         </thead>
         <tbody>
@@ -2151,6 +2328,13 @@ def main() -> None:
     print("🌟🚀 AUTOMATED MONIT DEEP EQUITY RESEARCH PIPELINE 🚀🌟")
     print("="*80)
     
+    # Sync local delivery history from bulk bhavcopy first
+    try:
+        print("🔄 Synchronizing local delivery history database from bulk bhavcopy...")
+        sync_delivery_history(45)
+    except Exception as e:
+        print(f"⚠️ Error running delivery history sync: {e}")
+        
     # 1. Verify Gemini API credentials
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not api_key:
@@ -2322,7 +2506,7 @@ def main() -> None:
             
             # --- PARALLEL NSE DELIVERY FETCHING FOR ALL EMERGING LEADERS ---
             import concurrent.futures
-            print(f"⚡ Fetching live NSE delivery statistics in parallel for {len(emerging_rows)} symbols...")
+            print(f"⚡ Loading local NSE delivery statistics in parallel for {len(emerging_rows)} symbols...")
             emerging_symbols = [row["symbol"] for row in emerging_rows]
             
             emerging_delivery_map = {}
@@ -2334,7 +2518,7 @@ def main() -> None:
                         stats = future.result()
                         if stats:
                             emerging_delivery_map[sym] = stats
-                            print(f"   ✅ Fetched live delivery data for {sym}")
+                            print(f"   ✅ Loaded delivery data for {sym}")
                         else:
                             emerging_delivery_map[sym] = {}
                             print(f"   ⚠️ No delivery data returned for {sym}")
