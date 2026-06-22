@@ -1432,16 +1432,31 @@ def generate_automated_reports(
     md.append(f"3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)")
     md.append(f"\nTotal triple-confluence candidates: **{len(confluence_3_rows)}**\n")
     
+    from generate_equity_reports import fetch_nse_delivery_data, calculate_delivery_signal
+
     if confluence_3_rows:
-        md.append("| Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Active Signal | Scans Count | Deep Research Report |")
-        md.append("|---|---|---|---|---|---|---|---|---|")
+        md.append("| Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Volume & Delivery (Live) | Active Signal | Scans Count | Deep Research Report |")
+        md.append("|---|---|---|---|---|---|---|---|---|---|")
         for r in confluence_3_rows:
+            sym = r['symbol']
             report_status = "_Pending separate pipeline run_"
-            if r['symbol'] in existing_reports:
-                report_status = f"📝 **Sent on {existing_reports[r['symbol']]['formatted']}**"
+            if sym in existing_reports:
+                report_status = f"📝 **Sent on {existing_reports[sym]['formatted']}**"
+                
+            del_plain_str = "N/A"
+            try:
+                stats = fetch_nse_delivery_data(sym)
+                if stats:
+                    latest_del_pct = stats.get("latest_delivery_pct", 0.0)
+                    sig = calculate_delivery_signal(stats, r['close'])
+                    del_badge_val = sig.get("badge_text", "Neutral")
+                    latest_del_val = stats.get("latest_delivery_val_cr", 0.0)
+                    del_plain_str = f"{latest_del_pct:.1f}% ({del_badge_val} | ₹{latest_del_val:.2f} Cr)"
+            except Exception as e:
+                pass
                 
             md.append(
-                f"| `{r['symbol']}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['return_1d']}% | {r['mcap_cr']:,.1f} | **{r['signal']}** | **{r['scans_count']}** | {report_status} |"
+                f"| `{sym}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['return_1d']}% | {r['mcap_cr']:,.1f} | {del_plain_str} | **{r['signal']}** | **{r['scans_count']}** | {report_status} |"
             )
     else:
         md.append("_No triple-confluence candidates detected in today's run._")
@@ -1453,11 +1468,24 @@ def generate_automated_reports(
     md.append(f"\nTotal emerging leaders: **{len(emerging_rows)}**\n")
     
     if emerging_rows:
-        md.append("| Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Persistence (Last 10D) |")
-        md.append("|---|---|---|---|---|---|---|")
+        md.append("| Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Volume & Delivery (Live) | Persistence (Last 10D) |")
+        md.append("|---|---|---|---|---|---|---|---|")
         for idx, r in enumerate(emerging_rows, start=1):
+            sym = r['symbol']
+            del_plain_str = "N/A"
+            try:
+                stats = fetch_nse_delivery_data(sym)
+                if stats:
+                    latest_del_pct = stats.get("latest_delivery_pct", 0.0)
+                    sig = calculate_delivery_signal(stats, r['close'])
+                    del_badge_val = sig.get("badge_text", "Neutral")
+                    latest_del_val = stats.get("latest_delivery_val_cr", 0.0)
+                    del_plain_str = f"{latest_del_pct:.1f}% ({del_badge_val} | ₹{latest_del_val:.2f} Cr)"
+            except Exception as e:
+                pass
+
             md.append(
-                f"| {idx} | `{r['symbol']}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['mcap_cr']:,.1f} | **{r['persistence']}/10 days** |"
+                f"| {idx} | `{sym}` | {r['company']} | {r['industry']} | ₹{r['close']:,.2f} | {r['mcap_cr']:,.1f} | {del_plain_str} | **{r['persistence']}/10 days** |"
             )
     else:
         md.append("_No emerging leaders detected in today's run._")
@@ -1499,40 +1527,97 @@ def generate_automated_reports(
     html_confl_rows = ""
     if confluence_3_rows:
         for r in confluence_3_rows:
+            sym = r['symbol']
             report_status = '<span style="color:#777;font-style:italic">Pending separate pipeline</span>'
-            if r['symbol'] in existing_reports:
-                report_status = f'<b style="color:#2e7d32">📝 Sent on {existing_reports[r["symbol"]]["formatted"]}</b>'
+            if sym in existing_reports:
+                report_status = f'<b style="color:#2e7d32">📝 Sent on {existing_reports[sym]["formatted"]}</b>'
                 
+            del_cell_html = '<td style="padding:8px;text-align:center;border:1px solid #ddd;font-size:12px;color:#777;">N/A</td>'
+            try:
+                stats = fetch_nse_delivery_data(sym)
+                if stats:
+                    latest_delivery_pct = stats.get("latest_delivery_pct", 0.0)
+                    week_delivery_pct_median = stats.get("week_delivery_pct_median", 0.0)
+                    latest_delivery_val_cr = stats.get("latest_delivery_val_cr", 0.0)
+                    week_delivery_val_median_cr = stats.get("week_delivery_val_median_cr", 0.0)
+                    
+                    sig = calculate_delivery_signal(stats, r['close'])
+                    badge_html = sig.get("badge_html", "Neutral")
+                    
+                    del_cell_html = f"""
+                    <td style="padding:8px;text-align:center;font-family:sans-serif;font-size:12px;border:1px solid #ddd;">
+                      {badge_html}
+                      <div style="font-size:10.5px;color:#4a5568;margin-top:4px;font-weight:500;">
+                        {latest_delivery_pct:.1f}% <span style="color:#718096;font-weight:normal;">(vs {week_delivery_pct_median:.1f}% med)</span>
+                      </div>
+                      <div style="font-size:10px;color:#166534;margin-top:3px;font-weight:600;">
+                        ₹{latest_delivery_val_cr:.2f} Cr <span style="color:#718096;font-weight:normal;font-size:9.5px;">(vs ₹{week_delivery_val_median_cr:.2f} Cr med)</span>
+                      </div>
+                    </td>
+                    """
+            except Exception as e:
+                print(f"⚠️ Error fetching delivery stats for confluence stock {sym}: {e}")
+
             html_confl_rows += f"""
             <tr style="background-color:#fffbee">
-              <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🏆 `{r['symbol']}`</td>
+              <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🏆 `{sym}`</td>
               <td style="padding:8px;border:1px solid #ddd">{r['company']}</td>
               <td style="padding:8px;border:1px solid #ddd">{r['industry']}</td>
               <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['close']:,.2f}</td>
               <td style="padding:8px;text-align:right;border:1px solid #ddd;color:{'#1a7a1a' if r['return_1d']>=0 else '#cc0000'}">{r['return_1d']}%</td>
               <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['mcap_cr']:,.1f}</td>
+              {del_cell_html}
               <td style="padding:8px;font-weight:bold;border:1px solid #ddd;color:#b25900">{r['signal']}</td>
               <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd;background-color:#ffe8cc">{r['scans_count']}</td>
               <td style="padding:8px;text-align:center;border:1px solid #ddd;font-size:12px">{report_status}</td>
             </tr>"""
     else:
-        html_confl_rows = """<tr><td colspan="9" style="padding:10px;text-align:center;font-style:italic">No triple-confluence candidates detected today.</td></tr>"""
+        html_confl_rows = """<tr><td colspan="10" style="padding:10px;text-align:center;font-style:italic">No triple-confluence candidates detected today.</td></tr>"""
         
     html_emg_rows = ""
     if emerging_rows:
         for idx, r in enumerate(emerging_rows, start=1):
+            sym = r['symbol']
+            
+            del_cell_html = '<td style="padding:8px;text-align:center;border:1px solid #ddd;font-size:12px;color:#777;">N/A</td>'
+            try:
+                stats = fetch_nse_delivery_data(sym)
+                if stats:
+                    latest_delivery_pct = stats.get("latest_delivery_pct", 0.0)
+                    week_delivery_pct_median = stats.get("week_delivery_pct_median", 0.0)
+                    latest_delivery_val_cr = stats.get("latest_delivery_val_cr", 0.0)
+                    week_delivery_val_median_cr = stats.get("week_delivery_val_median_cr", 0.0)
+                    
+                    sig = calculate_delivery_signal(stats, r['close'])
+                    badge_html = sig.get("badge_html", "Neutral")
+                    
+                    del_cell_html = f"""
+                    <td style="padding:8px;text-align:center;font-family:sans-serif;font-size:12px;border:1px solid #ddd;">
+                      {badge_html}
+                      <div style="font-size:10.5px;color:#4a5568;margin-top:4px;font-weight:500;">
+                        {latest_delivery_pct:.1f}% <span style="color:#718096;font-weight:normal;">(vs {week_delivery_pct_median:.1f}% med)</span>
+                      </div>
+                      <div style="font-size:10px;color:#166534;margin-top:3px;font-weight:600;">
+                        ₹{latest_delivery_val_cr:.2f} Cr <span style="color:#718096;font-weight:normal;font-size:9.5px;">(vs ₹{week_delivery_val_median_cr:.2f} Cr med)</span>
+                      </div>
+                    </td>
+                    """
+            except Exception as e:
+                print(f"⚠️ Error fetching delivery stats for emerging stock {sym}: {e}")
+
             html_emg_rows += f"""
             <tr style="background-color:#f6f9ff">
               <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd">{idx}</td>
-              <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🚀 `{r['symbol']}`</td>
+              <td style="padding:8px;font-weight:bold;border:1px solid #ddd">🚀 `{sym}`</td>
               <td style="padding:8px;border:1px solid #ddd">{r['company']}</td>
               <td style="padding:8px;border:1px solid #ddd">{r['industry']}</td>
               <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['close']:,.2f}</td>
               <td style="padding:8px;text-align:right;border:1px solid #ddd">₹{r['mcap_cr']:,.1f}</td>
+              {del_cell_html}
               <td style="padding:8px;text-align:center;font-weight:bold;border:1px solid #ddd;background-color:#d0e1fd;color:#004085">{r['persistence']}/10 days</td>
             </tr>"""
     else:
-        html_emg_rows = """<tr><td colspan="7" style="padding:10px;text-align:center;font-style:italic">No emerging leaders detected today.</td></tr>"""
+        html_emg_rows = """<tr><td colspan="8" style="padding:10px;text-align:center;font-style:italic">No emerging leaders detected today.</td></tr>"""
         
     CONFLUENCE_EMERGING_HTML = f"""
     <div style="margin-top:25px;border:1px solid #ffe4cc;background-color:#fffaf5;padding:15px;border-radius:6px;font-family:sans-serif">
@@ -1547,6 +1632,7 @@ def generate_automated_reports(
             <th style="padding:8px">Close</th>
             <th style="padding:8px">1D Ret</th>
             <th style="padding:8px">Mcap Cr</th>
+            <th style="padding:8px">Volume & Delivery (Live)</th>
             <th style="padding:8px">Scanner Signal</th>
             <th style="padding:8px">Scans</th>
             <th style="padding:8px">Deep Research Report</th>
@@ -1570,6 +1656,7 @@ def generate_automated_reports(
             <th style="padding:8px">Industry</th>
             <th style="padding:8px">Close</th>
             <th style="padding:8px">Mcap Cr</th>
+            <th style="padding:8px">Volume & Delivery (Live)</th>
             <th style="padding:8px">Persistence (10D)</th>
           </tr>
         </thead>
