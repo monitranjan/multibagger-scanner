@@ -1,6 +1,6 @@
 ### HEADER BLOCK
 
-| Rating | BUY | 12M Target Price | Rs. 580 | Upside % | 27.7% | CMP | Rs. 454.15 |
+| Rating | BUY | 12M Target Price | Rs. 580.00 | Upside % | 27.7% | CMP | Rs. 454.15 |
 |---|---|---|---|---|---|---|---|
 | Market Cap (Rs. Cr) | 7526.7 | 52W High/Low (Rs.) | 499.00 / 238.10 | P/E (TTM) | 129.5 | P/B (TTM) | 4.63 |
 | ROCE (%) | 1.87 | ROE (%) | 0.88 | EPS (FY24) | 3.51 | Book Value (Rs.) | 98.02 |
