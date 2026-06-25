@@ -20,16 +20,6 @@
     "scans_count": 27
   },
   {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 182.61,
-    "return_1d": 1.74,
-    "mcap_cr": 24133.97,
-    "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
     "symbol": "SKMEGGPROD",
     "company": "Skm Egg Products Export (india) Limited",
     "industry": "FMCG - Animal/Polutry",
@@ -40,12 +30,22 @@
     "scans_count": 26
   },
   {
-    "symbol": "WABAG",
-    "company": "Va Tech Wabag Limited",
-    "industry": "Water Treatment",
-    "close": 2110.8,
-    "return_1d": 0.56,
-    "mcap_cr": 13079.41,
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives/Protectives",
+    "close": 182.61,
+    "return_1d": 1.74,
+    "mcap_cr": 24133.97,
+    "signal": "52W Breakout",
+    "scans_count": 26
+  },
+  {
+    "symbol": "HFCL",
+    "company": "HFCL Ltd",
+    "industry": "Telecom Services",
+    "close": 215.0,
+    "return_1d": 5.0,
+    "mcap_cr": 31342.15,
     "signal": "52W Breakout",
     "scans_count": 23
   },
@@ -60,24 +60,14 @@
     "scans_count": 23
   },
   {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecom Services",
-    "close": 215.0,
-    "return_1d": 5.0,
-    "mcap_cr": 31342.15,
+    "symbol": "WABAG",
+    "company": "Va Tech Wabag Limited",
+    "industry": "Water Treatment",
+    "close": 2110.8,
+    "return_1d": 0.56,
+    "mcap_cr": 13079.41,
     "signal": "52W Breakout",
     "scans_count": 23
-  },
-  {
-    "symbol": "WHEELS",
-    "company": "Wheels India Limited",
-    "industry": "Auto Ancillaries - Wheels",
-    "close": 1674.4,
-    "return_1d": 6.89,
-    "mcap_cr": 3827.43,
-    "signal": "52W Breakout",
-    "scans_count": 21
   },
   {
     "symbol": "VENUSREM",
@@ -86,6 +76,16 @@
     "close": 1947.0,
     "return_1d": 4.99,
     "mcap_cr": 2478.77,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "WHEELS",
+    "company": "Wheels India Limited",
+    "industry": "Auto Ancillaries - Wheels",
+    "close": 1674.4,
+    "return_1d": 6.89,
+    "mcap_cr": 3827.43,
     "signal": "52W Breakout",
     "scans_count": 21
   },
@@ -110,22 +110,22 @@
     "scans_count": 19
   },
   {
-    "symbol": "RRKABEL",
-    "company": "R R Kabel Ltd",
-    "industry": "Cables - Power",
-    "close": 2488.3,
-    "return_1d": 2.06,
-    "mcap_cr": 27575.12,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
     "symbol": "ASTRAMICRO",
     "company": "Astra Microwave Products Limited",
     "industry": "Aerospace & Defence - Equipments",
     "close": 1721.7,
     "return_1d": 3.55,
     "mcap_cr": 15785.56,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "RRKABEL",
+    "company": "R R Kabel Ltd",
+    "industry": "Cables - Power",
+    "close": 2488.3,
+    "return_1d": 2.06,
+    "mcap_cr": 27575.12,
     "signal": "52W Breakout",
     "scans_count": 18
   }
