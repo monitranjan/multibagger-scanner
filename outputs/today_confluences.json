@@ -5,7 +5,7 @@
     "industry": "Trading",
     "close": 780.9,
     "return_1d": 2.47,
-    "mcap_cr": 5021.88,
+    "mcap_cr": 5146.1,
     "signal": "52W Breakout",
     "scans_count": 29
   },
@@ -15,7 +15,7 @@
     "industry": "Logistics",
     "close": 1140.65,
     "return_1d": 7.31,
-    "mcap_cr": 37307.79,
+    "mcap_cr": 40036.82,
     "signal": "52W Breakout",
     "scans_count": 27
   },
@@ -25,39 +25,9 @@
     "industry": "FMCG - Animal/Polutry",
     "close": 276.01,
     "return_1d": 2.99,
-    "mcap_cr": 1411.29,
+    "mcap_cr": 1453.47,
     "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 182.61,
-    "return_1d": 1.74,
-    "mcap_cr": 24133.97,
-    "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecom Services",
-    "close": 215.0,
-    "return_1d": 5.0,
-    "mcap_cr": 31342.15,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "RAMCOSYS",
-    "company": "Ramco Systems Limited",
-    "industry": "IT Product Companies",
-    "close": 709.8,
-    "return_1d": 5.34,
-    "mcap_cr": 2520.82,
-    "signal": "52W Breakout",
-    "scans_count": 23
+    "scans_count": 24
   },
   {
     "symbol": "WABAG",
@@ -65,19 +35,39 @@
     "industry": "Water Treatment",
     "close": 2110.8,
     "return_1d": 0.56,
-    "mcap_cr": 13079.41,
+    "mcap_cr": 13152.31,
     "signal": "52W Breakout",
     "scans_count": 23
   },
   {
-    "symbol": "VENUSREM",
-    "company": "Venus Remedies Limited",
-    "industry": "Pharmaceuticals - I V Fluids",
-    "close": 1947.0,
-    "return_1d": 4.99,
-    "mcap_cr": 2478.77,
+    "symbol": "HFCL",
+    "company": "HFCL Ltd",
+    "industry": "Telecom Services",
+    "close": 215.0,
+    "return_1d": 5.0,
+    "mcap_cr": 32907.95,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 23
+  },
+  {
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives/Protectives",
+    "close": 182.61,
+    "return_1d": 1.74,
+    "mcap_cr": 24554.85,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "RAMCOSYS",
+    "company": "Ramco Systems Limited",
+    "industry": "IT Product Companies",
+    "close": 709.8,
+    "return_1d": 5.34,
+    "mcap_cr": 2655.5,
+    "signal": "52W Breakout",
+    "scans_count": 22
   },
   {
     "symbol": "WHEELS",
@@ -85,7 +75,17 @@
     "industry": "Auto Ancillaries - Wheels",
     "close": 1674.4,
     "return_1d": 6.89,
-    "mcap_cr": 3827.43,
+    "mcap_cr": 4091.06,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "VENUSREM",
+    "company": "Venus Remedies Limited",
+    "industry": "Pharmaceuticals - I V Fluids",
+    "close": 1947.0,
+    "return_1d": 4.99,
+    "mcap_cr": 2602.55,
     "signal": "52W Breakout",
     "scans_count": 21
   },
@@ -95,7 +95,7 @@
     "industry": "Pharma - Formulators",
     "close": 491.95,
     "return_1d": 6.92,
-    "mcap_cr": 4867.35,
+    "mcap_cr": 5204.29,
     "signal": "52W Breakout",
     "scans_count": 20
   },
@@ -105,19 +105,9 @@
     "industry": "Auto Ancillaries - Diversified",
     "close": 670.45,
     "return_1d": 0.28,
-    "mcap_cr": 15984.85,
+    "mcap_cr": 16029.08,
     "signal": "52W Breakout",
     "scans_count": 19
-  },
-  {
-    "symbol": "ASTRAMICRO",
-    "company": "Astra Microwave Products Limited",
-    "industry": "Aerospace & Defence - Equipments",
-    "close": 1721.7,
-    "return_1d": 3.55,
-    "mcap_cr": 15785.56,
-    "signal": "52W Breakout",
-    "scans_count": 18
   },
   {
     "symbol": "RRKABEL",
@@ -125,7 +115,17 @@
     "industry": "Cables - Power",
     "close": 2488.3,
     "return_1d": 2.06,
-    "mcap_cr": 27575.12,
+    "mcap_cr": 28144.04,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "ASTRAMICRO",
+    "company": "Astra Microwave Products Limited",
+    "industry": "Aerospace & Defence - Equipments",
+    "close": 1721.7,
+    "return_1d": 3.55,
+    "mcap_cr": 16346.68,
     "signal": "52W Breakout",
     "scans_count": 18
   }
