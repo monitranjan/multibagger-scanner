@@ -1,132 +1,92 @@
 [
   {
-    "symbol": "RPTECH",
-    "company": "Rashi Peripherals Ltd",
-    "industry": "Trading",
-    "close": 780.9,
-    "return_1d": 2.47,
-    "mcap_cr": 5146.1,
-    "signal": "52W Breakout",
-    "scans_count": 29
-  },
-  {
     "symbol": "AEGISLOG",
     "company": "Aegis Logistics Ltd",
     "industry": "Logistics",
-    "close": 1140.65,
-    "return_1d": 7.31,
+    "close": 1174.1,
+    "return_1d": 2.93,
     "mcap_cr": 40036.82,
     "signal": "52W Breakout",
-    "scans_count": 27
+    "scans_count": 26
   },
   {
-    "symbol": "SKMEGGPROD",
-    "company": "Skm Egg Products Export (india) Limited",
-    "industry": "FMCG - Animal/Polutry",
-    "close": 276.01,
-    "return_1d": 2.99,
-    "mcap_cr": 1453.47,
+    "symbol": "ACUTAAS",
+    "company": "Acutaas Chemicals Ltd",
+    "industry": "Pharma - API & CRAMS",
+    "close": 3568.2,
+    "return_1d": 8.13,
+    "mcap_cr": 27017.47,
     "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "WABAG",
-    "company": "Va Tech Wabag Limited",
-    "industry": "Water Treatment",
-    "close": 2110.8,
-    "return_1d": 0.56,
-    "mcap_cr": 13152.31,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecom Services",
-    "close": 215.0,
-    "return_1d": 5.0,
-    "mcap_cr": 32907.95,
-    "signal": "52W Breakout",
-    "scans_count": 23
+    "scans_count": 26
   },
   {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 182.61,
-    "return_1d": 1.74,
+    "close": 188.4,
+    "return_1d": 3.17,
     "mcap_cr": 24554.85,
     "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "RAMCOSYS",
-    "company": "Ramco Systems Limited",
-    "industry": "IT Product Companies",
-    "close": 709.8,
-    "return_1d": 5.34,
-    "mcap_cr": 2655.5,
-    "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 25
   },
   {
     "symbol": "WHEELS",
     "company": "Wheels India Limited",
     "industry": "Auto Ancillaries - Wheels",
-    "close": 1674.4,
-    "return_1d": 6.89,
+    "close": 1772.0,
+    "return_1d": 5.83,
     "mcap_cr": 4091.06,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 24
   },
   {
-    "symbol": "VENUSREM",
-    "company": "Venus Remedies Limited",
-    "industry": "Pharmaceuticals - I V Fluids",
-    "close": 1947.0,
-    "return_1d": 4.99,
-    "mcap_cr": 2602.55,
+    "symbol": "BHAGYANGR",
+    "company": "Bhagyanagar India",
+    "industry": "Recycling",
+    "close": 411.75,
+    "return_1d": 5.0,
+    "mcap_cr": 1254.68,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 23
   },
   {
-    "symbol": "BLISSGVS",
-    "company": "Bliss Gvs Pharma Limited",
-    "industry": "Pharma - Formulators",
-    "close": 491.95,
-    "return_1d": 6.92,
-    "mcap_cr": 5204.29,
+    "symbol": "GLAND",
+    "company": "Gland Pharma Ltd",
+    "industry": "Pharma - API & CRAMS",
+    "close": 2373.0,
+    "return_1d": 2.51,
+    "mcap_cr": 38137.82,
     "signal": "52W Breakout",
     "scans_count": 20
   },
   {
-    "symbol": "MINDACORP",
-    "company": "Minda Corporation Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 670.45,
-    "return_1d": 0.28,
-    "mcap_cr": 16029.08,
+    "symbol": "MAHABANK",
+    "company": "Bank Of Maharashtra Ltd",
+    "industry": "Banks - PSU",
+    "close": 93.85,
+    "return_1d": 5.79,
+    "mcap_cr": 68231.78,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "ANANDRATHI",
+    "company": "Anand Rathi Wealth Ltd",
+    "industry": "Finance - Capital Markets - Wealth Management",
+    "close": 1988.7,
+    "return_1d": 2.91,
+    "mcap_cr": 32087.48,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "SETL",
+    "company": "Standard Enginnering Technology Ltd",
+    "industry": "Engineering - Heavy - Glass - lined Equipment",
+    "close": 233.43,
+    "return_1d": 9.1,
+    "mcap_cr": 4268.32,
     "signal": "52W Breakout",
     "scans_count": 19
-  },
-  {
-    "symbol": "RRKABEL",
-    "company": "R R Kabel Ltd",
-    "industry": "Cables - Power",
-    "close": 2488.3,
-    "return_1d": 2.06,
-    "mcap_cr": 28144.04,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "ASTRAMICRO",
-    "company": "Astra Microwave Products Limited",
-    "industry": "Aerospace & Defence - Equipments",
-    "close": 1721.7,
-    "return_1d": 3.55,
-    "mcap_cr": 16346.68,
-    "signal": "52W Breakout",
-    "scans_count": 18
   }
 ]
