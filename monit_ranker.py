@@ -3762,6 +3762,10 @@ def send_cloud_alerts(excel_path: Path, universe_len: int) -> None:
     """Send daily Excel workbook and summary report via Email and Telegram."""
     global STOCKSCANS_STATUS, CONFLUENCE_EMERGING_REPORT, CONFLUENCE_EMERGING_HTML
     import os
+    if os.environ.get("SKIP_NOTIFICATIONS", "false").lower() == "true":
+        print("ℹ️ SKIP_NOTIFICATIONS is set to true. Skipping Email, Telegram, and WhatsApp alerts.")
+        return
+        
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText

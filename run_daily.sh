@@ -21,6 +21,9 @@ if [ ! -d "venv" ]; then
     exit 1
 fi
 
+# Export environment variable to disable duplicate email/telegram alerts on local automated runs
+export SKIP_NOTIFICATIONS=true
+
 # Step 1: Run the Multibagger Scanner
 echo -e "\n${YELLOW}🔄 Step 1/2: Fetching live data from Chartink & screening signals...${NC}"
 venv/bin/python scanner.py

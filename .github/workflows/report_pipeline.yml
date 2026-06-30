@@ -1,9 +1,6 @@
 name: Automated Deep Equity Reports Pipeline
 
 on:
-  schedule:
-    # Run Monday through Friday at 10:52 AM UTC (which is 4:22 PM IST, 30 minutes after the main pipeline)
-    - cron: '52 10 * * 1-5'
   workflow_run:
     workflows: ["Daily Multibagger Pipeline"]
     types:
@@ -13,7 +10,7 @@ on:
 jobs:
   run-report-pipeline:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     permissions:
       contents: write
 
@@ -49,6 +46,9 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        # Clean up any stale rebase state from previous runs
+        git rebase --abort 2>/dev/null || true
+        rm -rf .git/rebase-merge .git/rebase-apply
         # Force add newly generated reports/markdowns if they exist, bypassing .gitignore
         [ -d "outputs/reports" ] && git add -f outputs/reports/ || echo "No reports directory found to sync"
         # Commit only if changes exist

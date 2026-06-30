@@ -52,6 +52,9 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        # Clean up any stale rebase state from previous runs
+        git rebase --abort 2>/dev/null || true
+        rm -rf .git/rebase-merge .git/rebase-apply
         # Force add database file and newly generated reports/markdowns
         git add -f logs/backtest.db outputs/
         # Commit only if changes exist
