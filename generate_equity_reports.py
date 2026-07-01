@@ -2320,15 +2320,27 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
             # If the pull conflicted (usually on binary sqlite logs/backtest.db file)
             if pull_res.returncode != 0:
                 print(f"⚠️ [GIT] Pull rebase conflicted. Resolving database cache conflict...")
-                # Resolve conflict in logs/backtest.db by checking out the remote version (ours in rebase)
-                subprocess.run(["git", "checkout", "--ours", "logs/backtest.db"], check=False)
-                subprocess.run(["git", "add", "logs/backtest.db"], check=False)
-                # Continue rebase
-                rebase_res = subprocess.run(["git", "-c", "core.editor=true", "rebase", "--continue"], capture_output=True, text=True)
-                if rebase_res.returncode != 0:
-                    print(f"❌ [GIT] Rebase continue failed: {rebase_res.stderr}. Aborting rebase.")
-                    subprocess.run(["git", "rebase", "--abort"], check=False)
-                    raise RuntimeError(f"Git rebase failed: {rebase_res.stderr}")
+                
+                # Check if rebase is in progress
+                rebase_in_progress = (
+                    Path(".git/rebase-merge").exists() or 
+                    Path(".git/rebase-apply").exists()
+                )
+                
+                if rebase_in_progress:
+                    # Resolve rebase conflict
+                    subprocess.run(["git", "checkout", "--ours", "logs/backtest.db"], check=False)
+                    subprocess.run(["git", "add", "logs/backtest.db"], check=False)
+                    # Continue rebase
+                    rebase_res = subprocess.run(["git", "-c", "core.editor=true", "rebase", "--continue"], capture_output=True, text=True)
+                    if rebase_res.returncode != 0:
+                        print(f"❌ [GIT] Rebase continue failed: {rebase_res.stderr}. Aborting rebase.")
+                        subprocess.run(["git", "rebase", "--abort"], check=False)
+                        raise RuntimeError(f"Git rebase failed: {rebase_res.stderr}")
+                else:
+                    # Resolve autostash apply conflict (no rebase in progress)
+                    subprocess.run(["git", "checkout", "--ours", "logs/backtest.db"], check=False)
+                    subprocess.run(["git", "reset", "logs/backtest.db"], check=False)
             
             # Push to the remote branch
             subprocess.run(["git", "push", "origin", "main"], check=True)
