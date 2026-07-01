@@ -2299,6 +2299,7 @@ def send_emerging_digest_email(compiled_reports):
 def git_commit_and_push(symbol: str, report_file: Path) -> None:
     """Commit and push a newly generated report immediately to prevent losing progress if the pipeline is cancelled or fails later."""
     import subprocess
+    from pathlib import Path
     try:
         print(f"📦 [GIT] Syncing {symbol} report to remote repository...")
         # Configure user details locally to prevent commit blocks on fresh VMs
@@ -2314,7 +2315,21 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
             # Commit the staged file
             subprocess.run(["git", "commit", "-m", f"chore: auto-publish equity report for {symbol} [skip ci]"], check=True)
             # Rebase autostash pull to ensure we integrate any concurrent remote updates safely
-            subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=True)
+            pull_res = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture_output=True, text=True)
+            
+            # If the pull conflicted (usually on binary sqlite logs/backtest.db file)
+            if pull_res.returncode != 0:
+                print(f"⚠️ [GIT] Pull rebase conflicted. Resolving database cache conflict...")
+                # Resolve conflict in logs/backtest.db by checking out the remote version (ours in rebase)
+                subprocess.run(["git", "checkout", "--ours", "logs/backtest.db"], check=False)
+                subprocess.run(["git", "add", "logs/backtest.db"], check=False)
+                # Continue rebase
+                rebase_res = subprocess.run(["git", "-c", "core.editor=true", "rebase", "--continue"], capture_output=True, text=True)
+                if rebase_res.returncode != 0:
+                    print(f"❌ [GIT] Rebase continue failed: {rebase_res.stderr}. Aborting rebase.")
+                    subprocess.run(["git", "rebase", "--abort"], check=False)
+                    raise RuntimeError(f"Git rebase failed: {rebase_res.stderr}")
+            
             # Push to the remote branch
             subprocess.run(["git", "push", "origin", "main"], check=True)
             print(f"🚀 [GIT] Successfully synced {symbol} report to GitHub!")
