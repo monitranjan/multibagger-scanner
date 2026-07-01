@@ -66,7 +66,7 @@
   {
     "symbol": "OLECTRA",
     "company": "Olectra Greentech Ltd",
-    "industry": "auto",
+    "industry": "Auto - Bus/LCVs",
     "close": 1512.4,
     "mcap_cr": 12308.83,
     "persistence": 10
@@ -177,10 +177,10 @@
   },
   {
     "symbol": "NCLIND",
-    "company": "NCLIND",
-    "industry": "unknown",
-    "close": 0.0,
-    "mcap_cr": 0.0,
+    "company": "NCL Industries Limited",
+    "industry": "Basic Materials",
+    "close": 192.53,
+    "mcap_cr": 864.986624,
     "persistence": 9
   },
   {
@@ -306,7 +306,7 @@
   {
     "symbol": "CARTRADE",
     "company": "Cartrade Tech Ltd",
-    "industry": "consumer discretionary",
+    "industry": "Platform - Others",
     "close": 2813.4,
     "mcap_cr": 12893.55,
     "persistence": 6
@@ -346,7 +346,7 @@
   {
     "symbol": "RAMCOIND",
     "company": "Ramco Industries Limited",
-    "industry": "building materials",
+    "industry": "Cement Products",
     "close": 334.1,
     "mcap_cr": 2942.63,
     "persistence": 5

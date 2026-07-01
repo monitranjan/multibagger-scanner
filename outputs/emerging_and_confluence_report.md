@@ -7,16 +7,9 @@ These stocks are at the absolute intersection of all three major momentum dimens
 2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)
 3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)
 
-Total triple-confluence candidates: **6**
+Total triple-confluence candidates: **0**
 
-| Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Volume & Delivery (Live) | Active Signal | Scans Count | Deep Research Report |
-|---|---|---|---|---|---|---|---|---|---|
-| `SKMEGGPROD` | Skm Egg Products Export (india) Limited | FMCG - Animal/Polutry | ₹317.30 | 8.29% | 1,543.0 | 27.9% (⚖️ Neutral | ₹13.71 Cr) | **52W Breakout** | **30** | 📝 **Sent on 31-May-2026** |
-| `MINDACORP` | Minda Corporation Limited | Auto Ancillaries - Diversified | ₹709.50 | 1.82% | 16,659.0 | 51.0% (🛡️ Strong Delivery (₹27.24 Cr) | ₹27.24 Cr) | **52W Breakout** | **27** | 📝 **Sent on 31-May-2026** |
-| `CEMPRO` | Cemindia Projects Ltd | Infra - Construction & Contracting | ₹1,363.30 | 4.97% | 22,310.0 | 50.2% (🛡️ Strong Delivery (₹54.83 Cr) | ₹54.83 Cr) | **52W Breakout** | **24** | 📝 **Sent on 31-May-2026** |
-| `VIYASH` | Viyash Scientific Ltd | Pharma - Animal | ₹288.20 | 4.14% | 12,089.9 | 44.4% (⚖️ Neutral | ₹70.27 Cr) | **52W Breakout** | **22** | 📝 **Sent on 30-Jun-2026** |
-| `IOLCP` | Iol Chemicals And Pharmaceuticals Limited | Pharma - API & CRAMS | ₹147.21 | 1.32% | 4,264.7 | 39.9% (⚖️ Neutral | ₹23.60 Cr) | **52W Breakout** | **20** | _Pending separate pipeline run_ |
-| `CUPID` | Cupid Limited | Contraceptives/Protectives | ₹193.38 | 1.82% | 25,539.1 | 32.2% (⚖️ Neutral | ₹104.16 Cr) | **52W Breakout** | **20** | 📝 **Sent on 05-Jun-2026** |
+_No triple-confluence candidates detected in today's run._
 
 ---
 
@@ -35,7 +28,7 @@ Total emerging leaders: **62**
 | 6 | `BLUSPRING` | Bluspring Enterprises Ltd | miscellaneous | ₹110.21 | 1,655.7 | 42.4% (⚖️ Neutral | ₹2.21 Cr) | **10/10 days** |
 | 7 | `REDINGTON` | Redington (india) Limited | services | ₹273.65 | 21,591.0 | 51.8% (🛡️ Strong Delivery (₹48.13 Cr) | ₹48.13 Cr) | **10/10 days** |
 | 8 | `GOKEX` | Gokaldas Exports Limited | consumer discretionary | ₹888.70 | 6,396.3 | 40.9% (⚖️ Neutral | ₹26.04 Cr) | **10/10 days** |
-| 9 | `OLECTRA` | Olectra Greentech Ltd | auto | ₹1,512.40 | 12,308.8 | 34.0% (🛡️ Strong Delivery (₹63.13 Cr) | ₹63.13 Cr) | **10/10 days** |
+| 9 | `OLECTRA` | Olectra Greentech Ltd | Auto - Bus/LCVs | ₹1,512.40 | 12,308.8 | 34.0% (🛡️ Strong Delivery (₹63.13 Cr) | ₹63.13 Cr) | **10/10 days** |
 | 10 | `PANACHE` | Panache Digilife Ltd | i.t | ₹411.25 | 692.2 | 68.1% (🛡️ Strong Delivery (₹1.03 Cr) | ₹1.03 Cr) | **10/10 days** |
 | 11 | `LICI` | Life Insurance Corporation of India Ltd | financials | ₹434.70 | 546,037.1 | 51.1% (🛡️ Strong Delivery (₹78.63 Cr) | ₹78.63 Cr) | **10/10 days** |
 | 12 | `NIACL` | New India Assurance Company Ltd | financials | ₹183.11 | 29,336.0 | 12.8% (⚠️ Speculative Churn | ₹30.24 Cr) | **9/10 days** |
@@ -49,7 +42,7 @@ Total emerging leaders: **62**
 | 20 | `HCC` | Hindustan Construction Company Limited | realty | ₹25.70 | 6,718.9 | 36.4% (⚖️ Neutral | ₹27.21 Cr) | **9/10 days** |
 | 21 | `RBA` | Restaurant Brands Asia Ltd | consumer discretionary | ₹77.09 | 5,633.2 | 59.8% (🛡️ Strong Delivery (₹20.62 Cr) | ₹20.62 Cr) | **9/10 days** |
 | 22 | `SCPL` | Sheetal Cool Products Ltd | fmcg | ₹539.05 | 500.9 | 45.9% (🛡️ Strong Delivery (₹4.59 Cr) | ₹4.59 Cr) | **9/10 days** |
-| 23 | `NCLIND` | NCLIND | unknown | ₹0.00 | 0.0 | 52.0% (🛡️ Strong Delivery (₹0.26 Cr) | ₹0.26 Cr) | **9/10 days** |
+| 23 | `NCLIND` | NCL Industries Limited | Basic Materials | ₹192.53 | 865.0 | 52.0% (🛡️ Strong Delivery (₹0.26 Cr) | ₹0.26 Cr) | **9/10 days** |
 | 24 | `ORBTEXP` | Orbit Exports Limited | Consumer Cyclical | ₹220.15 | 571.5 | 35.7% (⚖️ Neutral | ₹0.49 Cr) | **8/10 days** |
 | 25 | `RIIL` | Reliance Industrial Infrastructure Limited | Industrials | ₹815.15 | 1,239.0 | 37.0% (🛡️ Strong Delivery (₹2.14 Cr) | ₹2.14 Cr) | **8/10 days** |
 | 26 | `KIRLFER` | Kirloskar Ferrous Industries Limited | Industrials | ₹462.45 | 7,569.0 | 49.0% (🛡️ Strong Delivery (₹1.81 Cr) | ₹1.81 Cr) | **8/10 days** |
@@ -65,12 +58,12 @@ Total emerging leaders: **62**
 | 36 | `QUADFUTURE` | Quadrant Future Tek Ltd | industrials | ₹442.25 | 1,730.2 | 22.4% (⚖️ Neutral | ₹5.99 Cr) | **6/10 days** |
 | 37 | `5PAISA` | 5Paisa Capital Ltd | financials | ₹363.45 | 1,668.8 | 45.9% (🛡️ Strong Delivery (₹2.61 Cr) | ₹2.61 Cr) | **6/10 days** |
 | 38 | `SUNDRMFAST` | Sundram Fasteners Limited | auto | ₹937.35 | 19,629.1 | 54.5% (🛡️ Strong Delivery (₹5.18 Cr) | ₹5.18 Cr) | **6/10 days** |
-| 39 | `CARTRADE` | Cartrade Tech Ltd | consumer discretionary | ₹2,813.40 | 12,893.5 | 30.9% (⚖️ Neutral | ₹131.07 Cr) | **6/10 days** |
+| 39 | `CARTRADE` | Cartrade Tech Ltd | Platform - Others | ₹2,813.40 | 12,893.5 | 30.9% (⚖️ Neutral | ₹131.07 Cr) | **6/10 days** |
 | 40 | `GENUSPOWER` | Genus Power Infrastructures Limited | Industrials | ₹299.40 | 8,516.5 | 36.9% (⚖️ Neutral | ₹216.55 Cr) | **6/10 days** |
 | 41 | `FAZE3Q` | Faze Three Ltd | textiles | ₹607.05 | 1,456.6 | 61.6% (🛡️ Strong Delivery (₹0.60 Cr) | ₹0.60 Cr) | **6/10 days** |
 | 42 | `SADHNANIQ` | Sadhana Nitro Chem Ltd | chemicals | ₹2.82 | 850.9 | N/A | **5/10 days** |
 | 43 | `PAGEIND` | Page Industries Limited | consumer discretionary | ₹43,610.00 | 46,143.6 | 30.9% (⚖️ Neutral | ₹117.09 Cr) | **5/10 days** |
-| 44 | `RAMCOIND` | Ramco Industries Limited | building materials | ₹334.10 | 2,942.6 | 37.2% (⚖️ Neutral | ₹3.84 Cr) | **5/10 days** |
+| 44 | `RAMCOIND` | Ramco Industries Limited | Cement Products | ₹334.10 | 2,942.6 | 37.2% (⚖️ Neutral | ₹3.84 Cr) | **5/10 days** |
 | 45 | `MOREPENLAB` | Morepen Laboratories Limited | healthcare | ₹62.68 | 3,239.5 | 21.8% (⚖️ Neutral | ₹54.24 Cr) | **5/10 days** |
 | 46 | `ASKAUTOLTD` | ASKAUTOLTD | Consumer Cyclical | ₹449.25 | 8,767.9 | 55.9% (🛡️ Strong Delivery (₹3.65 Cr) | ₹3.65 Cr) | **5/10 days** |
 | 47 | `ACE` | Action Construction Equipment Limited | industrials | ₹999.10 | 12,194.1 | 53.9% (🛡️ Strong Delivery (₹29.40 Cr) | ₹29.40 Cr) | **5/10 days** |
