@@ -1,92 +1,62 @@
 [
   {
-    "symbol": "THANGAMAYL",
-    "company": "Thangamayil Jewellery Limited",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 6398.2,
-    "return_1d": 8.9,
-    "mcap_cr": 18261.0,
+    "symbol": "SKMEGGPROD",
+    "company": "Skm Egg Products Export (india) Limited",
+    "industry": "FMCG - Animal/Polutry",
+    "close": 317.3,
+    "return_1d": 8.29,
+    "mcap_cr": 1543.04,
     "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "WHEELS",
-    "company": "Wheels India Limited",
-    "industry": "Auto Ancillaries - Wheels",
-    "close": 1786.0,
-    "return_1d": 0.79,
-    "mcap_cr": 4329.53,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 189.93,
-    "return_1d": 0.81,
-    "mcap_cr": 25333.41,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "BHAGYANGR",
-    "company": "Bhagyanagar India",
-    "industry": "Recycling",
-    "close": 431.85,
-    "return_1d": 4.88,
-    "mcap_cr": 1317.39,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "VIYASH",
-    "company": "Viyash Scientific Ltd",
-    "industry": "Pharma - Animal",
-    "close": 276.75,
-    "return_1d": 2.58,
-    "mcap_cr": 11786.23,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "NYKAA",
-    "company": "FSN E-Commerce Ventures Ltd",
-    "industry": "New age - Platform - E-Retail",
-    "close": 310.85,
-    "return_1d": 2.91,
-    "mcap_cr": 86483.78,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "GMRAIRPORT",
-    "company": "GMR Airports Ltd",
-    "industry": "Miscellaneous",
-    "close": 112.09,
-    "return_1d": 2.44,
-    "mcap_cr": 115536.31,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "SETL",
-    "company": "Standard Enginnering Technology Ltd",
-    "industry": "Engineering - Heavy - Glass - lined Equipment",
-    "close": 256.77,
-    "return_1d": 10.0,
-    "mcap_cr": 4656.73,
-    "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 30
   },
   {
     "symbol": "MINDACORP",
     "company": "Minda Corporation Limited",
     "industry": "Auto Ancillaries - Diversified",
-    "close": 696.8,
-    "return_1d": 3.63,
-    "mcap_cr": 16075.7,
+    "close": 709.5,
+    "return_1d": 1.82,
+    "mcap_cr": 16659.05,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 27
+  },
+  {
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1363.3,
+    "return_1d": 4.97,
+    "mcap_cr": 22310.05,
+    "signal": "52W Breakout",
+    "scans_count": 24
+  },
+  {
+    "symbol": "VIYASH",
+    "company": "Viyash Scientific Ltd",
+    "industry": "Pharma - Animal",
+    "close": 288.2,
+    "return_1d": 4.14,
+    "mcap_cr": 12089.85,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "IOLCP",
+    "company": "Iol Chemicals And Pharmaceuticals Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 147.21,
+    "return_1d": 1.32,
+    "mcap_cr": 4264.66,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives/Protectives",
+    "close": 193.38,
+    "return_1d": 1.82,
+    "mcap_cr": 25539.14,
+    "signal": "52W Breakout",
+    "scans_count": 20
   }
 ]
