@@ -844,6 +844,10 @@ def enrich_stock_with_actuals(r: dict) -> dict:
         # 3. Extract target ratios for metadata
         ss_meta_ratios = {}
         fundamentals = ss_data.get("fundamentals", {})
+        q_data = fundamentals.get("quarterly", [])
+        if q_data and len(q_data) > 1:
+            r["latest_quarter"] = str(q_data[-1][0])
+            
         yearly = fundamentals.get("yearly", [])
         if yearly and len(yearly) > 1:
             headers = yearly[0]
@@ -1055,66 +1059,110 @@ def sanitize_report_header_block(report_md: str, cmp: float, target_price: float
                 
     return "\n".join(lines)
 
-def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[bool, str]:
-    """Check if a report for this symbol already exists in the same calendar quarter as today."""
-    if os.environ.get("FORCE_COMPILE", "false").lower() == "true":
-        return False, ""
-        
+def fetch_latest_stockscans_quarter(symbol: str) -> str:
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
+    headers = {
+        "accept": "application/json",
+        "cookie": cookie,
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    }
+    source = "C"
+    exchange = "NSE"
+    for ex in ["NSE", "BSE"]:
+        url = f"https://www.stockscans.in/api/company/scans/search-company/{ex}:{symbol}"
+        try:
+            r = requests.get(url, headers=headers, timeout=5)
+            if r.status_code == 200:
+                exchange = ex
+                meta = r.json().get("metaRatios", {})
+                source = meta.get("Fundamentals Source") or "C"
+                break
+        except Exception:
+            continue
+    url = f"https://www.stockscans.in/api/company/fundamentals/{exchange}:{symbol}/{source}"
+    try:
+        r = requests.get(url, headers=headers, timeout=5)
+        if r.status_code == 200:
+            q_data = r.json().get("quarterly", [])
+            if len(q_data) > 1:
+                return str(q_data[-1][0])
+    except Exception:
+        pass
+    return ""
+
+def find_matching_existing_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[Path, str]:
+    """
+    Search for an existing report for symbol.
+    If it exists:
+      - Read the report file.
+      - If it contains '<!-- latest_quarter: YYYYMM -->':
+        - Fetch the latest quarter from StockScans.
+        - If the latest quarter is the same, return the filepath and info.
+      - If it doesn't contain the comment:
+        - Fall back to 75-day cooldown check.
+    Returns (filepath, info) or (None, "").
+    """
     if not reports_dir.exists():
-        return False, ""
+        return None, ""
         
-    current_q, current_y = get_calendar_quarter(today)
     prefix = f"{symbol}_equity_report_"
+    latest_date = None
+    latest_filepath = None
     
     for filepath in reports_dir.glob(f"{prefix}*.md"):
         filename = filepath.name
-        # Format can be symbol_equity_report_YYYY-MM-DD.md
-        # Extract the date part
         try:
             date_str = filename.replace(prefix, "").replace(".md", "")
-            # Support YYYY-MM-DD format
             file_date = datetime.strptime(date_str, "%Y-%m-%d")
-            file_q, file_y = get_calendar_quarter(file_date)
-            
-            if file_q == current_q and file_y == current_y:
-                return True, f"Q{file_q} {file_y} (generated on {date_str})"
+            if latest_date is None or file_date > latest_date:
+                latest_date = file_date
+                latest_filepath = filepath
         except Exception:
-            # Fallback to file modification time if filename parsing fails
             try:
                 mtime = datetime.fromtimestamp(filepath.stat().st_mtime)
-                file_q, file_y = get_calendar_quarter(mtime)
-                if file_q == current_q and file_y == current_y:
-                    return True, f"Q{file_q} {file_y} (file modification time: {mtime.strftime('%Y-%m-%d')})"
+                if latest_date is None or mtime > latest_date:
+                    latest_date = mtime
+                    latest_filepath = filepath
             except Exception:
                 pass
                 
+    if latest_filepath is not None:
+        try:
+            with open(latest_filepath, "r") as f:
+                content = f.read()
+            match = re.search(r'<!-- latest_quarter:\s*(\d{6})\s*-->', content)
+            if match:
+                report_quarter = match.group(1)
+                # Fetch latest quarter from StockScans now
+                current_quarter = fetch_latest_stockscans_quarter(symbol)
+                if current_quarter and report_quarter == current_quarter:
+                    return latest_filepath, f"Latest results for {current_quarter} already reported."
+                elif current_quarter:
+                    # New results are out! Do not skip.
+                    return None, ""
+        except Exception as e:
+            print(f"⚠️ Error parsing existing report metadata for {symbol}: {e}")
+            
+        # Fallback to 75-day cooldown check
+        delta_days = (today - latest_date).days
+        if delta_days < 75:
+            return latest_filepath, f"Recent report exists (generated {delta_days} days ago on {latest_date.strftime('%Y-%m-%d')})"
+            
+    return None, ""
+
+def check_existing_quarter_report(symbol: str, reports_dir: Path, today: datetime) -> tuple[bool, str]:
+    """Check if a report for this symbol already exists and meets skip conditions (quarter results match or 75-day cooldown)."""
+    if os.environ.get("FORCE_COMPILE", "false").lower() == "true":
+        return False, ""
+    filepath, info = find_matching_existing_report(symbol, reports_dir, today)
+    if filepath:
+        return True, info
     return False, ""
 
 def get_existing_quarter_report_path(symbol, reports_dir, today):
-    """Return the Path of the existing report for this symbol in the same calendar quarter, if any."""
-    if not reports_dir.exists():
-        return None
-        
-    current_q, current_y = get_calendar_quarter(today)
-    prefix = f"{symbol}_equity_report_"
-    
-    for filepath in reports_dir.glob(f"{prefix}*.md"):
-        filename = filepath.name
-        try:
-            date_str = filename.replace(prefix, "").replace(".md", "")
-            file_date = datetime.strptime(date_str, "%Y-%m-%d")
-            file_q, file_y = get_calendar_quarter(file_date)
-            if file_q == current_q and file_y == current_y:
-                return filepath
-        except Exception:
-            try:
-                mtime = datetime.fromtimestamp(filepath.stat().st_mtime)
-                file_q, file_y = get_calendar_quarter(mtime)
-                if file_q == current_q and file_y == current_y:
-                    return filepath
-            except Exception:
-                pass
-    return None
+    """Return the Path of the existing matching report for this symbol, if any."""
+    filepath, info = find_matching_existing_report(symbol, reports_dir, today)
+    return filepath
 
 def get_report_date_str(filepath):
     """Extract report date from filepath name (YYYY-MM-DD) or modification time, formatted as %d %b %Y."""
@@ -2510,6 +2558,10 @@ def main() -> None:
             target_price, upside_pct = extract_target_and_upside(report_text, cmp)
             report_text = sanitize_report_header_block(report_text, cmp, target_price, upside_pct)
             
+            latest_q = r.get("latest_quarter", "")
+            if latest_q:
+                report_text += f"\n\n<!-- latest_quarter: {latest_q} -->\n"
+                
             with open(report_file, "w") as f:
                 f.write(report_text)
                 
@@ -2674,6 +2726,10 @@ def main() -> None:
                     target_price, upside_pct = extract_target_and_upside(report_text, cmp)
                     report_text = sanitize_report_header_block(report_text, cmp, target_price, upside_pct)
                     
+                    latest_q = r.get("latest_quarter", "")
+                    if latest_q:
+                        report_text += f"\n\n<!-- latest_quarter: {latest_q} -->\n"
+                        
                     with open(report_file, "w") as f:
                         f.write(report_text)
                         
