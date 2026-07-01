@@ -2373,7 +2373,6 @@ def main() -> None:
         
     if not confluence_3_rows:
         print("ℹ️ Today's confluence list is empty. No triple-confluence stocks detected today.")
-        sys.exit(0)
         
     # 3. Load prompt template
     prompt_path = Path("prompt.md")
