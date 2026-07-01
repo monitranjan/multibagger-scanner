@@ -2271,44 +2271,124 @@ def load_backtest_df() -> pd.DataFrame:
             return pd.DataFrame()
 
 
-def fetch_historical_prices(symbols: list[str]) -> dict[str, pd.Series]:
-    """Fetch up to 2y daily close prices for multiple symbols in parallel."""
-    from concurrent.futures import ThreadPoolExecutor, as_completed
+def fetch_latest_prices_bulk(symbols: list[str]) -> dict[str, float]:
+    """Fetch the latest close price for multiple symbols in bulk to avoid rate limits."""
+    import time
     results = {}
     
+    # 1. Query .NS suffix first for all symbols
+    ns_tickers = [sym + ".NS" for sym in symbols]
+    
+    # Chunk size of 200 (using internal threads=True for high-speed download!)
+    chunk_size = 200
+    print(f"📥 Bulk downloading latest price data for {len(symbols)} NSE (.NS) tickers in chunks of {chunk_size}...")
+    
+    for i in range(0, len(ns_tickers), chunk_size):
+        chunk = ns_tickers[i:i+chunk_size]
+        try:
+            time.sleep(0.3)
+            # Fetch 5 days to ensure we get the latest trading day price even on weekends
+            df = yf.download(chunk, period="5d", interval="1d", progress=False, auto_adjust=True, threads=True)
+            if df is not None and not df.empty:
+                if isinstance(df.columns, pd.MultiIndex):
+                    for col in df.columns:
+                        if col[0] == "Close":
+                            ticker = col[1]
+                            series = df[col].dropna()
+                            if not series.empty:
+                                latest_val = float(series.iloc[-1])
+                                sym = ticker[:-3]
+                                results[sym] = latest_val
+                else:
+                    if "Close" in df.columns:
+                        series = df["Close"].dropna()
+                        if not series.empty:
+                            if len(chunk) == 1:
+                                ticker = chunk[0]
+                                sym = ticker[:-3]
+                                results[sym] = float(series.iloc[-1])
+        except Exception as e:
+            print(f"⚠️ Error in bulk NSE price fetch chunk starting at index {i}: {e}")
+            
+    # 2. For any symbols that did NOT return NSE price data, query their .BO suffix
+    unresolved_symbols = [sym for sym in symbols if sym not in results]
+    if unresolved_symbols:
+        bo_tickers = [sym + ".BO" for sym in unresolved_symbols]
+        print(f"📥 Bulk downloading latest price data for {len(unresolved_symbols)} unresolved BSE (.BO) tickers in chunks of {chunk_size}...")
+        for i in range(0, len(bo_tickers), chunk_size):
+            chunk = bo_tickers[i:i+chunk_size]
+            try:
+                time.sleep(0.3)
+                df = yf.download(chunk, period="5d", interval="1d", progress=False, auto_adjust=True, threads=True)
+                if df is not None and not df.empty:
+                    if isinstance(df.columns, pd.MultiIndex):
+                        for col in df.columns:
+                            if col[0] == "Close":
+                                ticker = col[1]
+                                series = df[col].dropna()
+                                if not series.empty:
+                                    latest_val = float(series.iloc[-1])
+                                    sym = ticker[:-3]
+                                    results[sym] = latest_val
+                    else:
+                        if "Close" in df.columns:
+                            series = df["Close"].dropna()
+                            if not series.empty:
+                                if len(chunk) == 1:
+                                    ticker = chunk[0]
+                                    sym = ticker[:-3]
+                                    results[sym] = float(series.iloc[-1])
+            except Exception as e:
+                print(f"⚠️ Error in bulk BSE price fetch chunk starting at index {i}: {e}")
+                
+    return results
+
+
+def fetch_new_symbols_historical_prices(symbols: list[str]) -> dict[str, pd.Series]:
+    """Fetch 2y daily close prices for new symbols sequentially or with low workers to avoid rate limiting."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import random
+    results = {}
+    
+    if not symbols:
+        return results
+        
     def worker(sym: str):
-        # gentle sleep to rate limit
-        time.sleep(0.01)
+        # random delay to be gentle
+        time.sleep(random.uniform(0.1, 0.4))
         for suffix in [".NS", ".BO"]:
             ticker = sym + suffix
             try:
                 df = yf.download(ticker, period="2y", interval="1d", progress=False, auto_adjust=True, threads=False)
                 if df is not None and not df.empty:
-                    # Normalize index
                     if isinstance(df.columns, pd.MultiIndex):
                         if ticker in df.columns.get_level_values(-1):
                             df = df.xs(ticker, axis=1, level=-1)
                         else:
                             df.columns = [c[0] for c in df.columns]
-                    return sym, df["Close"].squeeze()
+                    close_series = df["Close"]
+                    if isinstance(close_series, pd.DataFrame):
+                        close_series = close_series.iloc[:, 0]
+                    return sym, close_series
             except Exception:
                 pass
         return sym, None
-        
-    print(f"📥 Downloading historical daily close prices for {len(symbols)} unique symbols in parallel (30 threads)...")
-    with ThreadPoolExecutor(max_workers=30) as ex:
+
+    # Max 3 workers for safety
+    print(f"📥 Downloading historical price history for {len(symbols)} new/unpriced symbols with 3 workers...")
+    with ThreadPoolExecutor(max_workers=3) as ex:
         futures = {ex.submit(worker, s): s for s in symbols}
         for i, f in enumerate(as_completed(futures), 1):
             sym = futures[f]
             try:
                 symbol, close_series = f.result()
-                if close_series is not None and not close_series.empty:
+                if close_series is not None and hasattr(close_series, "empty") and not close_series.empty:
                     results[symbol] = close_series
-                if i % 50 == 0 or i == len(symbols):
-                     print(f"  [{i}/{len(symbols)}] Fetched price history for {sym}")
-            except Exception:
-                pass
-                
+                    print(f"  [{i}/{len(symbols)}] Fetched price history for new symbol {sym}")
+                else:
+                    print(f"  [{i}/{len(symbols)}] No price history found for new symbol {sym}")
+            except Exception as e:
+                print(f"  [{i}/{len(symbols)}] Error fetching new symbol {sym}: {e}")
     return results
 
 
@@ -2345,14 +2425,16 @@ def rebuild_stock_analytics_table(yfinance_data: dict, scans_dict: dict, industr
     existing_cache = {}
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT symbol, industry, scan_match_count, company, sector, marketcap_cr FROM stock_analytics")
+        cursor.execute("SELECT symbol, industry, scan_match_count, company, sector, marketcap_cr, first_appeared_date, first_appeared_price FROM stock_analytics")
         for row in cursor.fetchall():
             existing_cache[row[0]] = {
                 "industry": row[1],
                 "scan_match_count": row[2],
                 "company": row[3],
                 "sector": row[4],
-                "marketcap_cr": row[5]
+                "marketcap_cr": row[5],
+                "first_appeared_date": row[6],
+                "first_appeared_price": row[7]
             }
     except Exception:
         pass
@@ -2389,8 +2471,20 @@ def rebuild_stock_analytics_table(yfinance_data: dict, scans_dict: dict, industr
     streaks = calculate_consecutive_streaks(df_history)
     emerging_leaders = set(detect_emerging_leaders(df_history))
     
-    # 2. Determine which symbols need price history download
-    historical_closes = fetch_historical_prices(unique_symbols)
+    # 2. Determine which symbols need full historical price download (for first appearance price)
+    unpriced_symbols = []
+    for sym in unique_symbols:
+        cache = existing_cache.get(sym) or {}
+        first_p = cache.get("first_appeared_price")
+        first_d = cache.get("first_appeared_date")
+        if first_p is None or first_p <= 0 or not first_d or first_d == "unknown":
+            unpriced_symbols.append(sym)
+            
+    # Fetch 2y history only for new/unpriced symbols
+    new_historical_closes = fetch_new_symbols_historical_prices(unpriced_symbols)
+    
+    # Bulk fetch today's latest close prices for all unique symbols
+    latest_prices = fetch_latest_prices_bulk(unique_symbols)
     
     # 3. Compile final rows for insertion
     insert_records = []
@@ -2429,21 +2523,52 @@ def rebuild_stock_analytics_table(yfinance_data: dict, scans_dict: dict, industr
         current_price = 0.0
         price_diff_pct = 0.0
         
-        closes = historical_closes.get(sym)
-        if closes is not None and not closes.empty:
-            if isinstance(closes, pd.DataFrame):
-                closes = closes.iloc[:, 0]
+        # 1. Retrieve first price from cache if available, else fetch from newly downloaded history
+        cache_first_price = cache.get("first_appeared_price")
+        if cache_first_price is not None and cache_first_price > 0:
+            first_price = cache_first_price
+            cached_date_str = cache.get("first_appeared_date")
+            if cached_date_str and cached_date_str != "unknown":
+                first_date_str = cached_date_str
+        else:
+            # Fallback to downloaded history for new/unpriced symbols
+            closes = new_historical_closes.get(sym)
+            if closes is not None and not closes.empty:
+                if isinstance(closes, pd.DataFrame):
+                    closes = closes.iloc[:, 0]
+                # Ensure tz-naive for index comparison
+                if closes.index.tz is not None:
+                    closes.index = closes.index.tz_localize(None)
                 
-            current_price = to_float_scalar(closes.iloc[-1])
-            if first_date:
-                matching_dates = closes.index[closes.index >= first_date]
-                if not matching_dates.empty:
-                    first_price = to_float_scalar(closes.loc[matching_dates[0]])
+                # Ensure first_date is tz-naive
+                check_date = first_date
+                if check_date and hasattr(check_date, "tzinfo") and check_date.tzinfo is not None:
+                    check_date = check_date.replace(tzinfo=None)
+                    
+                if check_date:
+                    matching_dates = closes.index[closes.index >= check_date]
+                    if not matching_dates.empty:
+                        first_price = to_float_scalar(closes.loc[matching_dates[0]])
+                    else:
+                        first_price = to_float_scalar(closes.iloc[-1])
                 else:
                     first_price = to_float_scalar(closes.iloc[-1])
-                    
-            if first_price > 0:
-                price_diff_pct = round(((current_price - first_price) / first_price) * 100, 2)
+        
+        # 2. Retrieve current price from bulk downloaded latest prices
+        current_price = latest_prices.get(sym) or 0.0
+        if current_price <= 0:
+            # Fallback to newly downloaded close if it was a new symbol
+            closes = new_historical_closes.get(sym)
+            if closes is not None and not closes.empty:
+                if isinstance(closes, pd.DataFrame):
+                    closes = closes.iloc[:, 0]
+                current_price = to_float_scalar(closes.iloc[-1])
+            else:
+                # Absolute fallback to first price or cache
+                current_price = first_price
+                
+        if first_price > 0:
+            price_diff_pct = round(((current_price - first_price) / first_price) * 100, 2)
                 
         # Rollup Metrics
         total_apps = df_counts.get(sym, 0)
