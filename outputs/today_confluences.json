@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "symbol": "KERNEX",
+    "company": "Kernex Microsystems (india) Limited",
+    "industry": "Railways - Kavach/Springs",
+    "close": 2389.1,
+    "return_1d": 4.16,
+    "mcap_cr": 3853.8,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "WABAG",
+    "company": "Va Tech Wabag Limited",
+    "industry": "Water Treatment",
+    "close": 2190.3,
+    "return_1d": 5.16,
+    "mcap_cr": 12977.84,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "IOLCP",
+    "company": "Iol Chemicals And Pharmaceuticals Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 150.31,
+    "return_1d": 2.11,
+    "mcap_cr": 4321.02,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1431.4,
+    "return_1d": 5.0,
+    "mcap_cr": 23419.8,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "SETL",
+    "company": "Standard Enginnering Technology Ltd",
+    "industry": "Engineering - Heavy - Glass - lined Equipment",
+    "close": 296.55,
+    "return_1d": 4.99,
+    "mcap_cr": 5634.64,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "ASTRAMICRO",
+    "company": "Astra Microwave Products Limited",
+    "industry": "Aerospace & Defence - Equipments",
+    "close": 1795.7,
+    "return_1d": 2.47,
+    "mcap_cr": 16639.11,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "NYKAA",
+    "company": "FSN E-Commerce Ventures Ltd",
+    "industry": "New age - Platform - E-Retail",
+    "close": 314.0,
+    "return_1d": 1.73,
+    "mcap_cr": 88373.51,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "RADICO",
+    "company": "Radico Khaitan Limited",
+    "industry": "Alcoholic Beverages",
+    "close": 3972.4,
+    "return_1d": 0.5,
+    "mcap_cr": 52924.5,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "RPEL",
+    "company": "Raghav Productivity Enhancers Ltd",
+    "industry": "Steel Products",
+    "close": 1294.9,
+    "return_1d": 3.99,
+    "mcap_cr": 5716.96,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  }
+]
