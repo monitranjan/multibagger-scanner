@@ -1,82 +1,112 @@
 [
   {
-    "symbol": "AADHARHFC",
-    "company": "Aadhar Housing Finance Ltd",
-    "industry": "Finance - Housing",
-    "close": 555.6,
-    "return_1d": 3.71,
-    "mcap_cr": 23340.65,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
     "symbol": "CGCL",
     "company": "Capri Global Capital Limited",
     "industry": "Finance & Investments - Gold Loan",
-    "close": 233.87,
-    "return_1d": 2.68,
-    "mcap_cr": 21914.02,
+    "close": 242.38,
+    "return_1d": 3.64,
+    "mcap_cr": 22501.89,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 24
   },
   {
-    "symbol": "SCHNEIDER",
-    "company": "Schneider Electric Infrastructure Limited",
-    "industry": "Capital Goods - Transformers",
-    "close": 1481.6,
-    "return_1d": 1.91,
-    "mcap_cr": 34763.34,
+    "symbol": "RAMCOSYS",
+    "company": "Ramco Systems Limited",
+    "industry": "IT Product Companies",
+    "close": 879.55,
+    "return_1d": 10.0,
+    "mcap_cr": 2991.46,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 23
   },
   {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 198.84,
-    "return_1d": 3.53,
-    "mcap_cr": 25825.55,
+    "close": 213.09,
+    "return_1d": 7.17,
+    "mcap_cr": 26737.23,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "CHOLAFIN",
+    "company": "Cholamandalam Investment And Finance Company Limited",
+    "industry": "Conglomerate Backed NBFC",
+    "close": 1850.5,
+    "return_1d": 3.39,
+    "mcap_cr": 152497.61,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1521.4,
+    "return_1d": 5.0,
+    "mcap_cr": 24892.02,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "HFCL",
+    "company": "HFCL Ltd",
+    "industry": "Telecom Services",
+    "close": 224.95,
+    "return_1d": 4.88,
+    "mcap_cr": 32828.36,
     "signal": "52W Breakout",
     "scans_count": 18
   },
   {
-    "symbol": "IBULLSLTD",
-    "company": "Indiabulls Limited",
-    "industry": "Diversified",
-    "close": 29.3,
-    "return_1d": 4.91,
-    "mcap_cr": 6492.0,
+    "symbol": "SPARC",
+    "company": "Sun Pharma Advanced Research Company Limited",
+    "industry": "Pharma - Others",
+    "close": 261.71,
+    "return_1d": 9.33,
+    "mcap_cr": 7768.07,
     "signal": "52W Breakout",
-    "scans_count": 18
+    "scans_count": 17
+  },
+  {
+    "symbol": "SCHNEIDER",
+    "company": "Schneider Electric Infrastructure Limited",
+    "industry": "Capital Goods - Transformers",
+    "close": 1501.0,
+    "return_1d": 1.31,
+    "mcap_cr": 35425.65,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "JAYBARMARU",
+    "company": "Jay Bharat Maruti Limited",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 180.12,
+    "return_1d": 5.0,
+    "mcap_cr": 1857.03,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "RADICO",
+    "company": "Radico Khaitan Limited",
+    "industry": "Alcoholic Beverages",
+    "close": 4106.7,
+    "return_1d": 5.51,
+    "mcap_cr": 52117.09,
+    "signal": "52W Breakout",
+    "scans_count": 16
   },
   {
     "symbol": "LTF",
     "company": "L&T Finance Ltd",
     "industry": "Conglomerate Backed NBFC",
-    "close": 327.0,
-    "return_1d": 3.73,
-    "mcap_cr": 78950.77,
-    "signal": "52W Breakout",
-    "scans_count": 17
-  },
-  {
-    "symbol": "LAURUSLABS",
-    "company": "Laurus Labs Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 1542.3,
-    "return_1d": 0.94,
-    "mcap_cr": 82490.09,
+    "close": 335.6,
+    "return_1d": 2.63,
+    "mcap_cr": 81893.42,
     "signal": "52W Breakout",
     "scans_count": 16
-  },
-  {
-    "symbol": "SANSERA",
-    "company": "Sansera Engineering Ltd",
-    "industry": "auto",
-    "close": 3251.5,
-    "return_1d": 0.98,
-    "mcap_cr": 20069.67,
-    "signal": "52W Breakout",
-    "scans_count": 0
   }
 ]
