@@ -1,51 +1,21 @@
 [
   {
-    "symbol": "CGCL",
-    "company": "Capri Global Capital Limited",
-    "industry": "Finance & Investments - Gold Loan",
-    "close": 242.38,
-    "return_1d": 3.64,
-    "mcap_cr": 22501.89,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "RAMCOSYS",
-    "company": "Ramco Systems Limited",
-    "industry": "IT Product Companies",
-    "close": 879.55,
-    "return_1d": 10.0,
-    "mcap_cr": 2991.46,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 213.09,
-    "return_1d": 7.17,
-    "mcap_cr": 26737.23,
+    "close": 221.11,
+    "return_1d": 3.76,
+    "mcap_cr": 28653.37,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "CHOLAFIN",
-    "company": "Cholamandalam Investment And Finance Company Limited",
-    "industry": "Conglomerate Backed NBFC",
-    "close": 1850.5,
-    "return_1d": 3.39,
-    "mcap_cr": 152497.61,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "CEMPRO",
-    "company": "Cemindia Projects Ltd",
-    "industry": "Infra - Construction & Contracting",
-    "close": 1521.4,
-    "return_1d": 5.0,
-    "mcap_cr": 24892.02,
+    "symbol": "SATIN",
+    "company": "Satin Creditcare Network Limited",
+    "industry": "Finance & Investments - Microfinance",
+    "close": 263.29,
+    "return_1d": 2.34,
+    "mcap_cr": 2842.09,
     "signal": "52W Breakout",
     "scans_count": 19
   },
@@ -53,60 +23,90 @@
     "symbol": "HFCL",
     "company": "HFCL Ltd",
     "industry": "Telecom Services",
-    "close": 224.95,
-    "return_1d": 4.88,
-    "mcap_cr": 32828.36,
+    "close": 226.04,
+    "return_1d": 0.48,
+    "mcap_cr": 34430.9,
     "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "SPARC",
-    "company": "Sun Pharma Advanced Research Company Limited",
-    "industry": "Pharma - Others",
-    "close": 261.71,
-    "return_1d": 9.33,
-    "mcap_cr": 7768.07,
-    "signal": "52W Breakout",
-    "scans_count": 17
-  },
-  {
-    "symbol": "SCHNEIDER",
-    "company": "Schneider Electric Infrastructure Limited",
-    "industry": "Capital Goods - Transformers",
-    "close": 1501.0,
-    "return_1d": 1.31,
-    "mcap_cr": 35425.65,
-    "signal": "52W Breakout",
-    "scans_count": 17
+    "scans_count": 19
   },
   {
     "symbol": "JAYBARMARU",
     "company": "Jay Bharat Maruti Limited",
     "industry": "Auto Ancillaries - Diversified",
-    "close": 180.12,
-    "return_1d": 5.0,
-    "mcap_cr": 1857.03,
+    "close": 187.6,
+    "return_1d": 4.15,
+    "mcap_cr": 1949.8,
     "signal": "52W Breakout",
-    "scans_count": 17
+    "scans_count": 19
   },
   {
-    "symbol": "RADICO",
-    "company": "Radico Khaitan Limited",
-    "industry": "Alcoholic Beverages",
-    "close": 4106.7,
-    "return_1d": 5.51,
-    "mcap_cr": 52117.09,
-    "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "LTF",
-    "company": "L&T Finance Ltd",
+    "symbol": "CHOLAFIN",
+    "company": "Cholamandalam Investment And Finance Company Limited",
     "industry": "Conglomerate Backed NBFC",
-    "close": 335.6,
-    "return_1d": 2.63,
-    "mcap_cr": 81893.42,
+    "close": 1853.4,
+    "return_1d": 0.16,
+    "mcap_cr": 157669.48,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "WABAG",
+    "company": "Va Tech Wabag Limited",
+    "industry": "Water Treatment",
+    "close": 2203.2,
+    "return_1d": 7.2,
+    "mcap_cr": 12806.49,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "RATEGAIN",
+    "company": "Rategain Travel Technologies Ltd",
+    "industry": "IT Product Companies",
+    "close": 949.75,
+    "return_1d": 0.6,
+    "mcap_cr": 11155.41,
     "signal": "52W Breakout",
     "scans_count": 16
+  },
+  {
+    "symbol": "RPEL",
+    "company": "Raghav Productivity Enhancers Ltd",
+    "industry": "Steel Products",
+    "close": 1307.9,
+    "return_1d": 0.95,
+    "mcap_cr": 5948.35,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "NYKAA",
+    "company": "FSN E-Commerce Ventures Ltd",
+    "industry": "New age - Platform - E-Retail",
+    "close": 315.2,
+    "return_1d": 0.54,
+    "mcap_cr": 89762.18,
+    "signal": "52W Breakout",
+    "scans_count": 15
+  },
+  {
+    "symbol": "GLAND",
+    "company": "Gland Pharma Ltd",
+    "industry": "Pharma - API & CRAMS",
+    "close": 2550.0,
+    "return_1d": 3.52,
+    "mcap_cr": 40582.8,
+    "signal": "52W Breakout",
+    "scans_count": 15
+  },
+  {
+    "symbol": "GMRAIRPORT",
+    "company": "GMR Airports Ltd",
+    "industry": "Miscellaneous",
+    "close": 114.98,
+    "return_1d": 1.35,
+    "mcap_cr": 119791.58,
+    "signal": "52W Breakout",
+    "scans_count": 15
   }
 ]
