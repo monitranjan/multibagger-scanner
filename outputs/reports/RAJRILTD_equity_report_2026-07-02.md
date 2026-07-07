@@ -12,7 +12,7 @@ YOUR RATING: BUY
 
 | Rating | 12M Target Price | Upside % | CMP | Market Cap (Rs. Cr) | 52W High/Low (Rs.) |
 |:---|:---|:---|:---|:---|:---|
-| BUY | 44.6% | 44.57% | 24.21 | 1348.5 | 29.41 / 19.41 |
+| BUY | 44.6% | 44.57% | 24.21 | 1348.5 | 35.00 / 19.41 |
 
 | P/E (TTM) | P/B (TTM) | ROCE | ROE | EPS (Rs.) | Book Value (Rs.) | Dividend Yield | Face Value (Rs.) | Promoter % | FII % | DII % | Public % |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
