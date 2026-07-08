@@ -1,111 +1,121 @@
 [
   {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 221.11,
-    "return_1d": 3.76,
-    "mcap_cr": 28653.37,
+    "symbol": "THANGAMAYL",
+    "company": "Thangamayil Jewellery Limited",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 6806.0,
+    "return_1d": 6.79,
+    "mcap_cr": 19808.57,
+    "signal": "52W Breakout",
+    "scans_count": 27
+  },
+  {
+    "symbol": "SKYGOLD",
+    "company": "Sky Gold Ltd",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 585.5,
+    "return_1d": 1.89,
+    "mcap_cr": 8899.83,
+    "signal": "52W Breakout",
+    "scans_count": 24
+  },
+  {
+    "symbol": "DIACABS",
+    "company": "Diamond Power Infrastructure Ltd",
+    "industry": "Cables - Power",
+    "close": 231.33,
+    "return_1d": 2.84,
+    "mcap_cr": 11854.21,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "SATIN",
-    "company": "Satin Creditcare Network Limited",
-    "industry": "Finance & Investments - Microfinance",
-    "close": 263.29,
-    "return_1d": 2.34,
-    "mcap_cr": 2842.09,
+    "symbol": "IOLCP",
+    "company": "Iol Chemicals And Pharmaceuticals Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 167.11,
+    "return_1d": 1.25,
+    "mcap_cr": 4844.38,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 21
   },
   {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecom Services",
-    "close": 226.04,
-    "return_1d": 0.48,
-    "mcap_cr": 34430.9,
+    "symbol": "RML",
+    "company": "Rane (madras) Limited",
+    "industry": "Auto Ancillaries - Gears",
+    "close": 1258.0,
+    "return_1d": 2.61,
+    "mcap_cr": 3388.31,
     "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "JAYBARMARU",
-    "company": "Jay Bharat Maruti Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 187.6,
-    "return_1d": 4.15,
-    "mcap_cr": 1949.8,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "CHOLAFIN",
-    "company": "Cholamandalam Investment And Finance Company Limited",
-    "industry": "Conglomerate Backed NBFC",
-    "close": 1853.4,
-    "return_1d": 0.16,
-    "mcap_cr": 157669.48,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "WABAG",
-    "company": "Va Tech Wabag Limited",
-    "industry": "Water Treatment",
-    "close": 2203.2,
-    "return_1d": 7.2,
-    "mcap_cr": 12806.49,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "RATEGAIN",
-    "company": "Rategain Travel Technologies Ltd",
-    "industry": "IT Product Companies",
-    "close": 949.75,
-    "return_1d": 0.6,
-    "mcap_cr": 11155.41,
-    "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "RPEL",
-    "company": "Raghav Productivity Enhancers Ltd",
-    "industry": "Steel Products",
-    "close": 1307.9,
-    "return_1d": 0.95,
-    "mcap_cr": 5948.35,
-    "signal": "52W Breakout",
-    "scans_count": 16
+    "scans_count": 20
   },
   {
     "symbol": "NYKAA",
     "company": "FSN E-Commerce Ventures Ltd",
     "industry": "New age - Platform - E-Retail",
-    "close": 315.2,
-    "return_1d": 0.54,
-    "mcap_cr": 89762.18,
+    "close": 317.95,
+    "return_1d": 0.87,
+    "mcap_cr": 90248.93,
     "signal": "52W Breakout",
-    "scans_count": 15
+    "scans_count": 19
   },
   {
-    "symbol": "GLAND",
-    "company": "Gland Pharma Ltd",
-    "industry": "Pharma - API & CRAMS",
-    "close": 2550.0,
-    "return_1d": 3.52,
-    "mcap_cr": 40582.8,
+    "symbol": "SIGNPOST",
+    "company": "Signpost India Ltd",
+    "industry": "Advertisement",
+    "close": 310.15,
+    "return_1d": 4.25,
+    "mcap_cr": 1590.14,
     "signal": "52W Breakout",
-    "scans_count": 15
+    "scans_count": 17
   },
   {
-    "symbol": "GMRAIRPORT",
-    "company": "GMR Airports Ltd",
-    "industry": "Miscellaneous",
-    "close": 114.98,
-    "return_1d": 1.35,
-    "mcap_cr": 119791.58,
+    "symbol": "AETHER",
+    "company": "Aether Industries Ltd",
+    "industry": "Speciality Chemicals",
+    "close": 1413.4,
+    "return_1d": 6.27,
+    "mcap_cr": 17646.42,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "ATHERENERG",
+    "company": "Ather Energy Ltd",
+    "industry": "Auto - 2 & 3 Wheelers",
+    "close": 1200.0,
+    "return_1d": 5.21,
+    "mcap_cr": 43647.7,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "SPARC",
+    "company": "Sun Pharma Advanced Research Company Limited",
+    "industry": "Pharma - Others",
+    "close": 269.98,
+    "return_1d": 1.37,
+    "mcap_cr": 8643.31,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "SENORES",
+    "company": "Senores Pharmaceuticals Ltd",
+    "industry": "Pharma - API",
+    "close": 1409.8,
+    "return_1d": 3.75,
+    "mcap_cr": 6257.76,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "SPAL",
+    "company": "S. P. Apparels Limited",
+    "industry": "Textiles - Readymade Apparel",
+    "close": 1161.0,
+    "return_1d": 0.83,
+    "mcap_cr": 2894.74,
     "signal": "52W Breakout",
     "scans_count": 15
   }
