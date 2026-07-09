@@ -1290,7 +1290,7 @@ Public %: {public_val:.2f}%
     
     # Dual-model routing support
     if not model:
-        model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+        model = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
         
     print(f"🤖 [MODEL] Route to: {model}")
     headers = {"Content-Type": "application/json"}
@@ -1308,13 +1308,24 @@ Public %: {public_val:.2f}%
         for attempt in range(1, max_retries + 1):
             try:
                 response = requests.post(stage_url, headers=headers, json=payload, timeout=180)
-                if response.status_code in [429, 503]:
-                    print(f"⚠️ [Attempt {attempt}/{max_retries}] API returned {response.status_code}. Retrying in {delay}s...")
-                    time.sleep(delay)
-                    delay *= 2
-                    continue
-                response.raise_for_status()
-                return response.json()
+                if response.status_code == 200:
+                    return response.json()
+                
+                # Check for permanent HTTP client errors (400, 401, 403, 404)
+                if response.status_code in [400, 401, 403, 404]:
+                    print(f"❌ [HTTP {response.status_code}] Permanent error. Bypassing retries for this model.")
+                    response.raise_for_status()
+                
+                print(f"⚠️ [Attempt {attempt}/{max_retries}] API returned {response.status_code}. Retrying in {delay}s...")
+                time.sleep(delay)
+                delay *= 2
+            except requests.exceptions.HTTPError as http_err:
+                if http_err.response is not None and http_err.response.status_code in [400, 401, 403, 404]:
+                    raise http_err
+                if attempt == max_retries:
+                    raise http_err
+                time.sleep(delay)
+                delay *= 2
             except Exception as e:
                 if attempt == max_retries:
                     raise e
@@ -1324,18 +1335,18 @@ Public %: {public_val:.2f}%
         return None
 
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
-        # We try primary_model first. If it's gemini-2.5-flash, we set thinkingBudget: 0.
+        # We try primary_model first.
         models_to_try = [primary_model]
-        # If the primary model is 2.5, add gemini-flash-latest as the fallback
-        if "2.5" in primary_model and "gemini-flash-latest" not in models_to_try:
+        # Fall back to gemini-flash-latest if it's not already in the list
+        if "gemini-flash-latest" not in models_to_try:
             models_to_try.append("gemini-flash-latest")
             
         for attempt_model in models_to_try:
             print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model}...")
             
-            # Setup payload with thinkingConfig if model is 2.5, latest, or pro
+            # Setup payload with thinkingConfig if model is latest or has thinking, but NOT for pro models (budget 0 invalid for pro)
             gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
-            if "2.5" in attempt_model or "latest" in attempt_model or "pro" in attempt_model:
+            if ("latest" in attempt_model or "thinking" in attempt_model) and "pro" not in attempt_model:
                 gen_config["thinkingConfig"] = {"thinkingBudget": 0}
                 
             payload = {
@@ -1345,7 +1356,11 @@ Public %: {public_val:.2f}%
             
             stage_url = f"https://generativelanguage.googleapis.com/v1beta/models/{attempt_model}:generateContent?key={api_key}"
             
-            res_json = call_gemini_with_retry(stage_url, payload)
+            try:
+                res_json = call_gemini_with_retry(stage_url, payload)
+            except Exception as exc:
+                print(f"⚠️ [STAGE {stage_num}] Exception calling {attempt_model}: {exc}. Trying next option...")
+                continue
             if not res_json or "candidates" not in res_json:
                 print(f"⚠️ [STAGE {stage_num}] Failed API call for {attempt_model}. Trying next option...")
                 continue
@@ -2512,7 +2527,7 @@ def main() -> None:
         reports_compiled += 1
         
         try:
-            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-2.5-flash")
+            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-3.1-flash-lite")
             
             # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
             max_attempts = 3
@@ -2680,7 +2695,7 @@ def main() -> None:
                 reports_compiled += 1
                 
                 try:
-                    emerg_model = os.environ.get("EMERGING_MODEL", "gemini-2.5-flash")
+                    emerg_model = os.environ.get("EMERGING_MODEL", "gemini-3.1-flash-lite")
                     
                     # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
                     max_attempts = 3
