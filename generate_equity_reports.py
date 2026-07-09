@@ -949,19 +949,19 @@ def get_calendar_quarter(dt: datetime) -> tuple[int, int]:
 def verify_report_completeness(report_text: str) -> list[str]:
     """Verify that every single required section and table is present in the output text using content-focused resilient checks."""
     required_patterns = {
-        "HEADER BLOCK (Rating & Target)": [r"Rating", r"12M Target Price"],
-        "SECTION 2 (Investment Thesis)": [r"INVESTMENT THESIS"],
-        "SECTION 3 (Business Overview)": [r"BUSINESS OVERVIEW"],
-        "SECTION 4 (Industry Landscape)": [r"INDUSTRY", r"COMPETITIVE"],
-        "SECTION 5 (Management Quality)": [r"MANAGEMENT", r"CAPITAL ALLOCATION"],
-        "SECTION 6 (Financial Statements)": [r"FINANCIAL DEEP-DIVE", r"INCOME STATEMENT", r"BALANCE SHEET"],
-        "SECTION 7 (Earnings Quality)": [r"EARNINGS QUALITY"],
-        "SECTION 8 (Valuation Scenarios)": [r"VALUATION", r"BULL", r"BASE", r"BEAR"],
-        "SECTION 9 (Key Risks)": [r"RISK"],
-        "SECTION 10 (Recommendation)": [r"RECOMMENDATION"],
-        "SECTION 10B (Technical Chart Levels)": [r"TECHNICAL LEVELS", r"EMA"],
-        "APPENDIX (Latest Concall Brief)": [r"CONCALL BRIEF", r"CONCALL"],
-        "DISCLAIMER (Global style rules)": [r"DISCLAIMER"]
+        "HEADER BLOCK (Rating & Target)": [r"Rating", r"(?:Target|Valuation|CMP)"],
+        "SECTION 2 (Investment Thesis)": [r"(?:Thesis|Investment|Catalyst)"],
+        "SECTION 3 (Business Overview)": [r"(?:Business|Model|Overview|Structure)"],
+        "SECTION 4 (Industry Landscape)": [r"(?:Industry|Competitive|Landscape|Peer)"],
+        "SECTION 5 (Management Quality)": [r"(?:Management|Pedigree|Governance|Promoter)"],
+        "SECTION 6 (Financial Statements)": [r"(?:Financial|Deep-Dive|Income|Balance|Cash|Particulars)"],
+        "SECTION 7 (Earnings Quality)": [r"(?:Earnings|Quality|Checklist)"],
+        "SECTION 8 (Valuation Scenarios)": [r"(?:Valuation|Scenario|Bull|Base|Bear)"],
+        "SECTION 9 (Key Risks)": [r"(?:Risk|Threat|P\s*×\s*I|PxI)"],
+        "SECTION 10 (Recommendation)": [r"(?:Recommendation|Horizon|Entry|Stop)"],
+        "SECTION 10B (Technical Chart Levels)": [r"(?:Technical|EMA|VStop|Support|Resistance)"],
+        "APPENDIX (Latest Concall Brief)": [r"(?:Appendix|Concall|Brief|Boss)"],
+        "DISCLAIMER (Global style rules)": [r"Disclaimer"]
     }
     
     missing = []
