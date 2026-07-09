@@ -21,6 +21,10 @@ if [ ! -d "venv" ]; then
     exit 1
 fi
 
+# Step 0: Pull the latest changes from GitHub to prevent merge conflicts
+echo -e "\n${YELLOW}🔄 Step 0: Pulling latest changes from GitHub...${NC}"
+git pull --rebase --autostash origin main
+
 # Export environment variable to disable duplicate email/telegram alerts on local automated runs
 export SKIP_NOTIFICATIONS=true
 
