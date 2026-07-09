@@ -1290,7 +1290,7 @@ Public %: {public_val:.2f}%
     
     # Dual-model routing support
     if not model:
-        model = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
+        model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
         
     print(f"🤖 [MODEL] Route to: {model}")
     headers = {"Content-Type": "application/json"}
@@ -1337,7 +1337,10 @@ Public %: {public_val:.2f}%
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
         # We try primary_model first.
         models_to_try = [primary_model]
-        # Fall back to gemini-flash-latest if it's not already in the list
+        # Fall back to gemini-3.1-flash-lite if it's not the primary
+        if primary_model != "gemini-3.1-flash-lite":
+            models_to_try.append("gemini-3.1-flash-lite")
+        # Also fall back to gemini-flash-latest as a last resort
         if "gemini-flash-latest" not in models_to_try:
             models_to_try.append("gemini-flash-latest")
             
@@ -2527,7 +2530,7 @@ def main() -> None:
         reports_compiled += 1
         
         try:
-            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-3.1-flash-lite")
+            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-3.5-flash")
             
             # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
             max_attempts = 3
@@ -2695,7 +2698,7 @@ def main() -> None:
                 reports_compiled += 1
                 
                 try:
-                    emerg_model = os.environ.get("EMERGING_MODEL", "gemini-3.1-flash-lite")
+                    emerg_model = os.environ.get("EMERGING_MODEL", "gemini-3.5-flash")
                     
                     # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
                     max_attempts = 3
