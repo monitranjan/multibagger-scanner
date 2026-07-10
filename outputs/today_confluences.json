@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "symbol": "INDNIPPON",
+    "company": "India Nippon Electricals Limited",
+    "industry": "Auto Ancillaries - Engine Parts",
+    "close": 1180.0,
+    "return_1d": 6.51,
+    "mcap_cr": 2506.23,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "SKMEGGPROD",
+    "company": "Skm Egg Products Export (india) Limited",
+    "industry": "FMCG - Animal/Polutry",
+    "close": 321.35,
+    "return_1d": 1.64,
+    "mcap_cr": 1664.85,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "BAJAJCON",
+    "company": "Bajaj Consumer Care Ltd",
+    "industry": "FMCG - Personal Care",
+    "close": 670.25,
+    "return_1d": 4.15,
+    "mcap_cr": 8405.94,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "WELCORP",
+    "company": "Welspun Corp Limited",
+    "industry": "DI Pipes/Saw Pipes",
+    "close": 1612.6,
+    "return_1d": 0.67,
+    "mcap_cr": 42256.62,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "NYKAA",
+    "company": "FSN E-Commerce Ventures Ltd",
+    "industry": "New age - Platform - E-Retail",
+    "close": 330.1,
+    "return_1d": 1.87,
+    "mcap_cr": 92782.88,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "GRANULES",
+    "company": "Granules India Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 889.85,
+    "return_1d": 0.88,
+    "mcap_cr": 21856.93,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "AZAD",
+    "company": "Azad Engineering Ltd",
+    "industry": "Aerospace & Defence - Equipments",
+    "close": 2479.5,
+    "return_1d": 0.14,
+    "mcap_cr": 15991.09,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "ATHERENERG",
+    "company": "Ather Energy Ltd",
+    "industry": "Auto - 2 & 3 Wheelers",
+    "close": 1225.8,
+    "return_1d": 0.61,
+    "mcap_cr": 46624.9,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "ANANDRATHI",
+    "company": "Anand Rathi Wealth Ltd",
+    "industry": "Finance - Capital Markets - Wealth Management",
+    "close": 2146.8,
+    "return_1d": 2.44,
+    "mcap_cr": 34795.61,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  }
+]
