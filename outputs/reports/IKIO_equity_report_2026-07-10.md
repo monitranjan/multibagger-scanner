@@ -2,7 +2,7 @@
 
 | Metric | Rating | 12M Target | Upside % | CMP | Market Cap | 52W High/Low | P/E (TTM) | P/B (TTM) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Value | BUY | Rs. 285.00 | 35.2%.2% | Rs. 210.75 | Rs. 1,598.8 Cr | Rs. 252.90 / 103.53 | 21.84x | 1.37x |
+| Value | BUY | Rs. 285.00 | 39.2%.2%.2% | Rs. 210.75 | Rs. 1,598.8 Cr | Rs. 252.90 / 103.53 | 21.84x | 1.37x |
 
 | Metric | ROCE | ROE | EPS (FY24) | Book Value | Dividend Yield | Face Value | Promoter % | FII / DII % |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
