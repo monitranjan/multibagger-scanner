@@ -1,91 +1,81 @@
 [
   {
-    "symbol": "INDNIPPON",
-    "company": "India Nippon Electricals Limited",
-    "industry": "Auto Ancillaries - Engine Parts",
-    "close": 1236.1,
-    "return_1d": 5.79,
-    "mcap_cr": 2643.31,
+    "symbol": "IOLCP",
+    "company": "Iol Chemicals And Pharmaceuticals Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 173.78,
+    "return_1d": 2.77,
+    "mcap_cr": 4963.26,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 24
   },
   {
-    "symbol": "IBULLSLTD",
-    "company": "Indiabulls Limited",
-    "industry": "Diversified",
-    "close": 31.1,
-    "return_1d": 4.96,
-    "mcap_cr": 6887.14,
+    "symbol": "CGCL",
+    "company": "Capri Global Capital Limited",
+    "industry": "Finance & Investments - Gold Loan",
+    "close": 257.32,
+    "return_1d": 0.26,
+    "mcap_cr": 24693.68,
     "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "CEMPRO",
-    "company": "Cemindia Projects Ltd",
-    "industry": "Infra - Construction & Contracting",
-    "close": 1583.7,
-    "return_1d": 1.08,
-    "mcap_cr": 26915.68,
-    "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 24
   },
   {
     "symbol": "WELCORP",
     "company": "Welspun Corp Limited",
     "industry": "DI Pipes/Saw Pipes",
-    "close": 1619.9,
-    "return_1d": 0.45,
-    "mcap_cr": 42538.88,
+    "close": 1683.4,
+    "return_1d": 3.92,
+    "mcap_cr": 42731.45,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1596.6,
+    "return_1d": 0.81,
+    "mcap_cr": 27206.0,
     "signal": "52W Breakout",
     "scans_count": 20
-  },
-  {
-    "symbol": "INDOBORAX",
-    "company": "Indo Borax & Chemicals Ltd",
-    "industry": "Chemicals - Inorganic",
-    "close": 472.65,
-    "return_1d": 4.15,
-    "mcap_cr": 1456.24,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "JAYBARMARU",
-    "company": "Jay Bharat Maruti Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 197.15,
-    "return_1d": 5.0,
-    "mcap_cr": 2032.61,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "GRANULES",
-    "company": "Granules India Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 897.65,
-    "return_1d": 0.88,
-    "mcap_cr": 22050.21,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "RPEL",
-    "company": "Raghav Productivity Enhancers Ltd",
-    "industry": "Steel Products",
-    "close": 1316.4,
-    "return_1d": 1.68,
-    "mcap_cr": 5945.51,
-    "signal": "52W Breakout",
-    "scans_count": 17
   },
   {
     "symbol": "SHYAMMETL",
     "company": "Shyam Metalics & Energy Ltd",
     "industry": "Steel Products",
-    "close": 1029.35,
-    "return_1d": 5.56,
-    "mcap_cr": 27218.15,
+    "close": 1035.95,
+    "return_1d": 0.64,
+    "mcap_cr": 28732.44,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "INDOBORAX",
+    "company": "Indo Borax & Chemicals Ltd",
+    "industry": "Chemicals - Inorganic",
+    "close": 486.7,
+    "return_1d": 2.97,
+    "mcap_cr": 1516.73,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "GNA",
+    "company": "Gna Axles Limited",
+    "industry": "Auto & Auto Ancl - CV",
+    "close": 555.7,
+    "return_1d": 5.0,
+    "mcap_cr": 2272.11,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "RATEGAIN",
+    "company": "Rategain Travel Technologies Ltd",
+    "industry": "IT Product Companies",
+    "close": 952.25,
+    "return_1d": 0.59,
+    "mcap_cr": 11186.72,
     "signal": "52W Breakout",
     "scans_count": 16
   }
