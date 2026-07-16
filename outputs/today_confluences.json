@@ -1,82 +1,82 @@
 [
   {
-    "symbol": "GRANULES",
-    "company": "Granules India Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 898.6,
-    "return_1d": 0.39,
-    "mcap_cr": 22180.3,
+    "symbol": "CGCL",
+    "company": "Capri Global Capital Limited",
+    "industry": "Finance & Investments - Gold Loan",
+    "close": 258.77,
+    "return_1d": 0.22,
+    "mcap_cr": 24843.78,
     "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "LLOYDSME",
-    "company": "Lloyds Metals & Energy Ltd",
-    "industry": "Mining/Minerals - Iron Ore",
-    "close": 1866.1,
-    "return_1d": 2.22,
-    "mcap_cr": 102736.42,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "ATHERENERG",
-    "company": "Ather Energy Ltd",
-    "industry": "Auto - 2 & 3 Wheelers",
-    "close": 1296.4,
-    "return_1d": 7.87,
-    "mcap_cr": 46043.48,
-    "signal": "52W Breakout",
-    "scans_count": 17
-  },
-  {
-    "symbol": "RPGLIFE",
-    "company": "Rpg Life Sciences Limited",
-    "industry": "Pharma - Formulators",
-    "close": 2978.1,
-    "return_1d": 8.68,
-    "mcap_cr": 4532.02,
-    "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "RATEGAIN",
-    "company": "Rategain Travel Technologies Ltd",
-    "industry": "IT Product Companies",
-    "close": 977.2,
-    "return_1d": 2.62,
-    "mcap_cr": 11252.3,
-    "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "TMB",
-    "company": "Tamilnad Mercantile Bank Ltd",
-    "industry": "Banks - Private",
-    "close": 815.75,
-    "return_1d": 4.54,
-    "mcap_cr": 12356.96,
-    "signal": "52W Breakout",
-    "scans_count": 16
+    "scans_count": 23
   },
   {
     "symbol": "MENONBE",
     "company": "Menon Bearings Limited",
     "industry": "Auto Ancillaries - Bearings",
-    "close": 181.12,
-    "return_1d": 1.37,
-    "mcap_cr": 1001.27,
+    "close": 190.17,
+    "return_1d": 5.0,
+    "mcap_cr": 1015.0,
     "signal": "52W Breakout",
-    "scans_count": 15
+    "scans_count": 22
   },
   {
-    "symbol": "SENORES",
-    "company": "Senores Pharmaceuticals Ltd",
-    "industry": "healthcare",
-    "close": 1480.0,
-    "return_1d": 1.94,
-    "mcap_cr": 6686.06,
+    "symbol": "BHEL",
+    "company": "Bharat Heavy Electricals Limited",
+    "industry": "Capital Goods - Engineering Heavy",
+    "close": 435.4,
+    "return_1d": 4.18,
+    "mcap_cr": 145532.84,
     "signal": "52W Breakout",
-    "scans_count": 0
+    "scans_count": 20
+  },
+  {
+    "symbol": "WELCORP",
+    "company": "Welspun Corp Limited",
+    "industry": "DI Pipes/Saw Pipes",
+    "close": 1684.0,
+    "return_1d": 0.23,
+    "mcap_cr": 44319.47,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "GNA",
+    "company": "Gna Axles Limited",
+    "industry": "Auto & Auto Ancl - CV",
+    "close": 592.0,
+    "return_1d": 7.66,
+    "mcap_cr": 2360.76,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "SHYAMMETL",
+    "company": "Shyam Metalics & Energy Ltd",
+    "industry": "Steel Products",
+    "close": 1040.5,
+    "return_1d": 0.65,
+    "mcap_cr": 28855.26,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "GRANULES",
+    "company": "Granules India Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 903.25,
+    "return_1d": 0.58,
+    "mcap_cr": 22253.4,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "HSCL",
+    "company": "Himadri Speciality Chemical Limited",
+    "industry": "Carbon Black",
+    "close": 722.35,
+    "return_1d": 5.99,
+    "mcap_cr": 34387.03,
+    "signal": "52W Breakout",
+    "scans_count": 16
   }
 ]
