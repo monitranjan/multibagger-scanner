@@ -1,11 +1,11 @@
 [
   {
-    "symbol": "CGCL",
-    "company": "Capri Global Capital Limited",
-    "industry": "Finance & Investments - Gold Loan",
-    "close": 258.77,
-    "return_1d": 0.22,
-    "mcap_cr": 24843.78,
+    "symbol": "SSWL",
+    "company": "Steel Strips Wheels Limited",
+    "industry": "Auto Ancillaries - Wheels",
+    "close": 266.21,
+    "return_1d": 0.29,
+    "mcap_cr": 4172.2,
     "signal": "52W Breakout",
     "scans_count": 23
   },
@@ -13,70 +13,80 @@
     "symbol": "MENONBE",
     "company": "Menon Bearings Limited",
     "industry": "Auto Ancillaries - Bearings",
-    "close": 190.17,
+    "close": 199.67,
     "return_1d": 5.0,
-    "mcap_cr": 1015.0,
+    "mcap_cr": 1065.71,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 21
   },
   {
-    "symbol": "BHEL",
-    "company": "Bharat Heavy Electricals Limited",
-    "industry": "Capital Goods - Engineering Heavy",
-    "close": 435.4,
-    "return_1d": 4.18,
-    "mcap_cr": 145532.84,
+    "symbol": "CEMPRO",
+    "company": "Cemindia Projects Ltd",
+    "industry": "Infra - Construction & Contracting",
+    "close": 1615.0,
+    "return_1d": 0.74,
+    "mcap_cr": 27540.99,
     "signal": "52W Breakout",
     "scans_count": 20
   },
   {
-    "symbol": "WELCORP",
-    "company": "Welspun Corp Limited",
-    "industry": "DI Pipes/Saw Pipes",
-    "close": 1684.0,
-    "return_1d": 0.23,
-    "mcap_cr": 44319.47,
+    "symbol": "SANGAMIND",
+    "company": "Sangam (india) Limited",
+    "industry": "Textiles - Spinning",
+    "close": 636.95,
+    "return_1d": 1.37,
+    "mcap_cr": 3157.24,
     "signal": "52W Breakout",
     "scans_count": 19
   },
   {
-    "symbol": "GNA",
-    "company": "Gna Axles Limited",
-    "industry": "Auto & Auto Ancl - CV",
-    "close": 592.0,
-    "return_1d": 7.66,
-    "mcap_cr": 2360.76,
+    "symbol": "INDIAGLYCO",
+    "company": "India Glycols Limited",
+    "industry": "Alcoholic Beverages",
+    "close": 1159.3,
+    "return_1d": 0.24,
+    "mcap_cr": 7751.98,
     "signal": "52W Breakout",
-    "scans_count": 17
+    "scans_count": 18
   },
   {
-    "symbol": "SHYAMMETL",
-    "company": "Shyam Metalics & Energy Ltd",
-    "industry": "Steel Products",
-    "close": 1040.5,
-    "return_1d": 0.65,
-    "mcap_cr": 28855.26,
+    "symbol": "KAPSTON",
+    "company": "Kapston Services Ltd",
+    "industry": "Services - Others",
+    "close": 423.0,
+    "return_1d": 0.67,
+    "mcap_cr": 1278.76,
     "signal": "52W Breakout",
-    "scans_count": 17
+    "scans_count": 18
   },
   {
-    "symbol": "GRANULES",
-    "company": "Granules India Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 903.25,
-    "return_1d": 0.58,
-    "mcap_cr": 22253.4,
+    "symbol": "BLSE",
+    "company": "BLS E-Services Ltd",
+    "industry": "IT - Software",
+    "close": 274.37,
+    "return_1d": 2.09,
+    "mcap_cr": 2441.77,
     "signal": "52W Breakout",
-    "scans_count": 17
+    "scans_count": 16
+  },
+  {
+    "symbol": "OFSS",
+    "company": "Oracle Financial Services Software Limited",
+    "industry": "IT Product Companies",
+    "close": 11771.0,
+    "return_1d": 0.77,
+    "mcap_cr": 101708.97,
+    "signal": "52W Breakout",
+    "scans_count": 15
   },
   {
     "symbol": "HSCL",
     "company": "Himadri Speciality Chemical Limited",
     "industry": "Carbon Black",
-    "close": 722.35,
-    "return_1d": 5.99,
-    "mcap_cr": 34387.03,
+    "close": 741.55,
+    "return_1d": 2.66,
+    "mcap_cr": 36445.56,
     "signal": "52W Breakout",
-    "scans_count": 16
+    "scans_count": 15
   }
 ]

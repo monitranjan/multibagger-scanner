@@ -1,5 +1,5 @@
 # 📊 Monit High-Conviction Confluences & Emerging Leaders Report
-Generated on **16 Jul 2026** | Premium Quantitative Watchlist Analysis
+Generated on **17 Jul 2026** | Premium Quantitative Watchlist Analysis
 
 ## 🏆 1. High-Conviction Confluences (Common Count = 3)
 These stocks are at the absolute intersection of all three major momentum dimensions:
@@ -7,78 +7,73 @@ These stocks are at the absolute intersection of all three major momentum dimens
 2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)
 3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)
 
-Total triple-confluence candidates: **8**
+Total triple-confluence candidates: **9**
 
 | Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Volume & Delivery (Live) | Active Signal | Scans Count | Deep Research Report |
 |---|---|---|---|---|---|---|---|---|---|
-| `CGCL` | Capri Global Capital Limited | Finance & Investments - Gold Loan | ₹258.77 | 0.22% | 24,843.8 | 31.6% (⚖️ Neutral | ₹20.79 Cr) | **52W Breakout** | **23** | 📝 **Sent on 03-Jul-2026** |
-| `MENONBE` | Menon Bearings Limited | Auto Ancillaries - Bearings | ₹190.17 | 5.0% | 1,015.0 | 50.8% (🔥 High Accumulation (₹1.79 Cr) | ₹1.79 Cr) | **52W Breakout** | **22** | 📝 **Sent on 15-Jul-2026** |
-| `BHEL` | Bharat Heavy Electricals Limited | Capital Goods - Engineering Heavy | ₹435.40 | 4.18% | 145,532.8 | 22.0% (⚖️ Neutral | ₹533.91 Cr) | **52W Breakout** | **20** | _Pending separate pipeline run_ |
-| `WELCORP` | Welspun Corp Limited | DI Pipes/Saw Pipes | ₹1,684.00 | 0.23% | 44,319.5 | 63.6% (🛡️ Strong Delivery (₹138.49 Cr) | ₹138.49 Cr) | **52W Breakout** | **19** | 📝 **Sent on 10-Jul-2026** |
-| `GNA` | Gna Axles Limited | Auto & Auto Ancl - CV | ₹592.00 | 7.66% | 2,360.8 | 16.5% (⚖️ Neutral | ₹29.00 Cr) | **52W Breakout** | **17** | 📝 **Sent on 14-Jul-2026** |
-| `SHYAMMETL` | Shyam Metalics & Energy Ltd | Steel Products | ₹1,040.50 | 0.65% | 28,855.3 | 55.5% (🛡️ Strong Delivery (₹28.39 Cr) | ₹28.39 Cr) | **52W Breakout** | **17** | 📝 **Sent on 04-Jun-2026** |
-| `GRANULES` | Granules India Limited | Pharma - API & CRAMS | ₹903.25 | 0.58% | 22,253.4 | 61.1% (🛡️ Strong Delivery (₹40.83 Cr) | ₹40.83 Cr) | **52W Breakout** | **17** | 📝 **Sent on 10-Jul-2026** |
-| `HSCL` | Himadri Speciality Chemical Limited | Carbon Black | ₹722.35 | 5.99% | 34,387.0 | 21.1% (⚖️ Neutral | ₹433.55 Cr) | **52W Breakout** | **16** | 📝 **Sent on 05-Jun-2026** |
+| `SSWL` | Steel Strips Wheels Limited | Auto Ancillaries - Wheels | ₹266.21 | 0.29% | 4,172.2 | 34.0% (⚖️ Neutral | ₹13.80 Cr) | **52W Breakout** | **23** | 📝 **Sent on 06-Jun-2026** |
+| `MENONBE` | Menon Bearings Limited | Auto Ancillaries - Bearings | ₹199.67 | 5.0% | 1,065.7 | 50.8% (🔥 High Accumulation (₹1.79 Cr) | ₹1.79 Cr) | **52W Breakout** | **21** | 📝 **Sent on 15-Jul-2026** |
+| `CEMPRO` | Cemindia Projects Ltd | Infra - Construction & Contracting | ₹1,615.00 | 0.74% | 27,541.0 | 82.2% (🔥 High Accumulation (₹91.20 Cr) | ₹91.20 Cr) | **52W Breakout** | **20** | 📝 **Sent on 01-Jul-2026** |
+| `SANGAMIND` | Sangam (india) Limited | Textiles - Spinning | ₹636.95 | 1.37% | 3,157.2 | 49.0% (🛡️ Strong Delivery (₹3.95 Cr) | ₹3.95 Cr) | **52W Breakout** | **19** | _Pending separate pipeline run_ |
+| `INDIAGLYCO` | India Glycols Limited | Alcoholic Beverages | ₹1,159.30 | 0.24% | 7,752.0 | 33.3% (⚖️ Neutral | ₹17.38 Cr) | **52W Breakout** | **18** | _Pending separate pipeline run_ |
+| `KAPSTON` | Kapston Services Ltd | Services - Others | ₹423.00 | 0.67% | 1,278.8 | 61.1% (🛡️ Strong Delivery (₹0.31 Cr) | ₹0.31 Cr) | **52W Breakout** | **18** | _Pending separate pipeline run_ |
+| `BLSE` | BLS E-Services Ltd | IT - Software | ₹274.37 | 2.09% | 2,441.8 | 24.2% (⚖️ Neutral | ₹7.20 Cr) | **52W Breakout** | **16** | _Pending separate pipeline run_ |
+| `OFSS` | Oracle Financial Services Software Limited | IT Product Companies | ₹11,771.00 | 0.77% | 101,709.0 | 41.4% (⚖️ Neutral | ₹145.81 Cr) | **52W Breakout** | **15** | _Pending separate pipeline run_ |
+| `HSCL` | Himadri Speciality Chemical Limited | Carbon Black | ₹741.55 | 2.66% | 36,445.6 | 16.4% (⚠️ Speculative Churn | ₹222.85 Cr) | **52W Breakout** | **15** | 📝 **Sent on 05-Jun-2026** |
 
 ---
 
 ## 🚀 2. Emerging Multibagger Leaders (Fresh Momentum Expansion)
 These stocks show a fresh institutional footprint. They have minimal historical appearances (`<= 2` counts over the prior months) but have erupted recently (`>= 3` appearances in the last 10 days). This highlights **early stage-2 momentum expansion** before they double!
 
-Total emerging leaders: **53**
+Total emerging leaders: **47**
 
 | Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Volume & Delivery (Live) | Persistence (Last 10D) |
 |---|---|---|---|---|---|---|---|
-| 1 | `GODREJPROP` | Godrej Properties Limited | realty | ₹2,090.30 | 63,385.9 | 44.8% (⚖️ Neutral | ₹31.70 Cr) | **10/10 days** |
-| 2 | `CEATLTD` | Ceat Limited | auto | ₹3,829.60 | 15,326.9 | 39.7% (⚖️ Neutral | ₹21.26 Cr) | **10/10 days** |
-| 3 | `POONAWALLA` | Poonawalla Fincorp Ltd | financials | ₹472.15 | 41,872.1 | 45.9% (🛡️ Strong Delivery (₹9.50 Cr) | ₹9.50 Cr) | **10/10 days** |
-| 4 | `POLYPLEX` | Polyplex Corporation Limited | industrials | ₹1,068.00 | 3,357.4 | 58.1% (🛡️ Strong Delivery (₹2.37 Cr) | ₹2.37 Cr) | **10/10 days** |
-| 5 | `AEGISVOPAK` | Aegis Vopak Terminals Ltd | Miscellaneous | ₹269.26 | 31,239.8 | 39.4% (🛡️ Strong Delivery (₹22.55 Cr) | ₹22.55 Cr) | **10/10 days** |
-| 6 | `CCAVENUE` | AvenuesAI Ltd | i.t | ₹17.44 | 6,213.1 | 46.2% (🛡️ Strong Delivery (₹7.69 Cr) | ₹7.69 Cr) | **9/10 days** |
-| 7 | `RGL` | Renaissance Global Ltd | consumer discretionary | ₹119.30 | 1,288.9 | 64.2% (🛡️ Strong Delivery (₹0.98 Cr) | ₹0.98 Cr) | **9/10 days** |
-| 8 | `TTKPRESTIG` | Ttk Prestige Limited | consumer discretionary | ₹677.70 | 9,167.5 | 64.9% (🛡️ Strong Delivery (₹2.38 Cr) | ₹2.38 Cr) | **9/10 days** |
-| 9 | `SHREECEM` | Shree Cements Limited | building materials | ₹26,710.00 | 97,147.4 | 69.8% (🔥 High Accumulation (₹70.26 Cr) | ₹70.26 Cr) | **9/10 days** |
-| 10 | `ARROWGREEN` | Arrow Greentech Limited | plastic products | ₹690.20 | 1,035.6 | 51.3% (🛡️ Strong Delivery (₹1.10 Cr) | ₹1.10 Cr) | **8/10 days** |
-| 11 | `MOSCHIP` | Moschip Technologies Ltd | i.t | ₹247.61 | 4,807.5 | 28.3% (⚖️ Neutral | ₹56.40 Cr) | **8/10 days** |
-| 12 | `VISAKAIND` | Visaka Industries Limited | building materials | ₹82.44 | 722.1 | 57.4% (🛡️ Strong Delivery (₹0.41 Cr) | ₹0.41 Cr) | **8/10 days** |
-| 13 | `RBZJEWEL` | RBZ Jewellers Ltd | consumer discretionary | ₹148.84 | 603.2 | 41.8% (⚖️ Neutral | ₹0.52 Cr) | **7/10 days** |
-| 14 | `SHAREINDIA` | Share India Securities Ltd | financials | ₹171.27 | 3,818.7 | 28.9% (⚖️ Neutral | ₹5.33 Cr) | **7/10 days** |
-| 15 | `SUBEXLTD` | Subex Ltd | i.t | ₹13.33 | 750.3 | N/A | **7/10 days** |
-| 16 | `GANESHHOU` | Ganesh Housing Ltd | realty | ₹834.40 | 7,070.8 | 52.2% (🛡️ Strong Delivery (₹1.53 Cr) | ₹1.53 Cr) | **7/10 days** |
-| 17 | `UNICHEMLAB` | Unichem Laboratories Limited | healthcare | ₹604.85 | 4,189.9 | 25.0% (⚖️ Neutral | ₹4.07 Cr) | **7/10 days** |
-| 18 | `OMAXE` | Omaxe Limited | realty | ₹96.30 | 1,773.0 | 35.3% (⚖️ Neutral | ₹1.71 Cr) | **7/10 days** |
-| 19 | `MANAKSTEEL` | Manaksia Steels Limited | metals & mining | ₹78.00 | 513.9 | N/A | **7/10 days** |
-| 20 | `M&MFIN` | Mahindra & Mahindra Financial Services Limited | Financial Services | ₹324.95 | 44,722.5 | 58.8% (🛡️ Strong Delivery (₹37.92 Cr) | ₹37.92 Cr) | **7/10 days** |
-| 21 | `IKIO` | IKIO Lighting Ltd | consumer discretionary | ₹212.79 | 1,666.6 | 19.9% (⚖️ Neutral | ₹2.66 Cr) | **7/10 days** |
-| 22 | `MIRZAINT` | Mirza International Limited | consumer discretionary | ₹37.29 | 517.1 | 55.0% (🛡️ Strong Delivery (₹0.54 Cr) | ₹0.54 Cr) | **6/10 days** |
-| 23 | `IIFL` | IIFL Finance Ltd | financials | ₹567.10 | 23,118.7 | 49.5% (🛡️ Strong Delivery (₹128.25 Cr) | ₹128.25 Cr) | **6/10 days** |
-| 24 | `PICCADIL` | Piccadily Agro Industries Ltd | Alcoholic Beverages | ₹740.55 | 7,172.6 | 46.6% (🛡️ Strong Delivery (₹12.33 Cr) | ₹12.33 Cr) | **6/10 days** |
-| 25 | `HDBFS` | HDB Financial Services Ltd | financials | ₹752.25 | 62,415.7 | 42.5% (⚖️ Neutral | ₹115.28 Cr) | **6/10 days** |
-| 26 | `SARLAPOLY` | Sarla Performance Fibers Limited | Consumer Cyclical | ₹98.57 | 779.2 | 53.4% (🛡️ Strong Delivery (₹1.20 Cr) | ₹1.20 Cr) | **6/10 days** |
-| 27 | `BAJAJFINSV` | Bajaj Finserv Ltd. | Financial Services | ₹1,849.60 | 293,943.1 | 70.4% (🔥 High Accumulation (₹215.98 Cr) | ₹215.98 Cr) | **6/10 days** |
-| 28 | `CANTABIL` | Cantabil Retail India Limited | Consumer Cyclical | ₹257.52 | 2,140.0 | 41.2% (⚖️ Neutral | ₹0.87 Cr) | **5/10 days** |
-| 29 | `ARE&M` | Amara Raja Energy & Mobility Ltd | auto | ₹901.45 | 16,487.8 | 45.5% (🛡️ Strong Delivery (₹28.43 Cr) | ₹28.43 Cr) | **5/10 days** |
-| 30 | `RAYMOND` | Raymond Limited | transportation | ₹613.65 | 4,056.3 | 34.4% (⚖️ Neutral | ₹9.00 Cr) | **5/10 days** |
-| 31 | `HOMEFIRST` | Home First Finance Company India Ltd | financials | ₹1,225.00 | 13,010.8 | 47.7% (🛡️ Strong Delivery (₹6.81 Cr) | ₹6.81 Cr) | **5/10 days** |
-| 32 | `SAMBHV` | Sambhv Steel Tubes Ltd | metals & mining | ₹120.61 | 3,552.0 | 40.3% (⚖️ Neutral | ₹5.39 Cr) | **4/10 days** |
-| 33 | `SMCGLOBAL` | SMC Global Securities Ltd | financials | ₹81.48 | 1,677.1 | 42.0% (⚖️ Neutral | ₹3.31 Cr) | **4/10 days** |
-| 34 | `BHARTIHEXA` | Bharti Hexacom Ltd | telecom-service | ₹1,621.00 | 81,990.0 | 44.7% (⚖️ Neutral | ₹5.54 Cr) | **4/10 days** |
-| 35 | `LODHA` | Lodha Developers Ltd | realty | ₹1,178.10 | 116,113.9 | 47.8% (🛡️ Strong Delivery (₹115.35 Cr) | ₹115.35 Cr) | **4/10 days** |
-| 36 | `ASIANHOTNR` | Asian Hotels (North) Limited | Consumer Cyclical | ₹305.40 | 1,274.5 | 66.2% (🛡️ Strong Delivery (₹0.40 Cr) | ₹0.40 Cr) | **4/10 days** |
-| 37 | `INDIANHUME` | Indian Hume Pipe Company Limited | realty | ₹404.70 | 2,182.6 | 43.1% (⚖️ Neutral | ₹4.47 Cr) | **4/10 days** |
-| 38 | `KALYANKJIL` | Kalyan Jewellers India Ltd | Diamond, Gems & Jewellery | ₹546.60 | 56,604.5 | 11.7% (⚖️ Neutral | ₹273.99 Cr) | **4/10 days** |
-| 39 | `HEG` | Heg Limited | industrials | ₹608.45 | 11,300.8 | 37.4% (⚖️ Neutral | ₹66.40 Cr) | **4/10 days** |
-| 40 | `ETHOSLTD` | Ethos Ltd | consumer discretionary | ₹2,633.30 | 7,077.1 | 31.7% (⚖️ Neutral | ₹2.58 Cr) | **4/10 days** |
-| 41 | `SUMEETINDS` | Sumeet Industries Limited | textiles | ₹33.26 | 1,735.8 | 4.8% (⚖️ Neutral | ₹1.26 Cr) | **4/10 days** |
-| 42 | `SUMICHEM` | Sumitomo Chemical India Ltd | chemicals | ₹540.00 | 26,948.9 | 46.2% (🛡️ Strong Delivery (₹13.10 Cr) | ₹13.10 Cr) | **3/10 days** |
-| 43 | `HUHTAMAKI` | Huhtamaki India Ltd | industrials | ₹232.69 | 1,678.8 | 41.0% (⚖️ Neutral | ₹8.01 Cr) | **3/10 days** |
-| 44 | `NAUKRI` | Info Edge (india) Limited | i.t | ₹1,207.00 | 76,899.4 | 53.4% (🛡️ Strong Delivery (₹70.71 Cr) | ₹70.71 Cr) | **3/10 days** |
-| 45 | `APOLLOTYRE` | Apollo Tyres Limited | Consumer Cyclical | ₹427.00 | 27,330.7 | 50.8% (🛡️ Strong Delivery (₹20.28 Cr) | ₹20.28 Cr) | **3/10 days** |
-| 46 | `INDIGOPNTS` | Indigo Paints Limited | Basic Materials | ₹1,084.40 | 5,076.5 | 36.6% (⚖️ Neutral | ₹1.23 Cr) | **3/10 days** |
-| 47 | `BANSALWIRE` | BANSALWIRE | Basic Materials | ₹319.25 | 4,951.9 | 51.9% (🛡️ Strong Delivery (₹0.95 Cr) | ₹0.95 Cr) | **3/10 days** |
-| 48 | `JGCHEM` | JGCHEM | Basic Materials | ₹443.80 | 1,737.9 | 53.8% (🛡️ Strong Delivery (₹1.16 Cr) | ₹1.16 Cr) | **3/10 days** |
-| 49 | `DDEVPLSTIK` | Ddev Plastiks Industries Limited | Basic Materials | ₹291.35 | 2,969.8 | 49.4% (🛡️ Strong Delivery (₹0.82 Cr) | ₹0.82 Cr) | **3/10 days** |
-| 50 | `TCPLPACK` | TCPL Packaging Ltd | industrials | ₹3,280.10 | 2,988.8 | 53.6% (🛡️ Strong Delivery (₹2.49 Cr) | ₹2.49 Cr) | **3/10 days** |
-| 51 | `JUSTDIAL` | Just Dial Limited | i.t | ₹793.35 | 6,838.0 | 7.3% (⚖️ Neutral | ₹60.74 Cr) | **3/10 days** |
-| 52 | `PLASTIBLEN` | Plastiblends India Limited | chemicals | ₹202.33 | 511.4 | 26.2% (⚖️ Neutral | ₹5.09 Cr) | **3/10 days** |
-| 53 | `APLLTD` | Alembic Pharmaceuticals Limited | healthcare | ₹842.85 | 16,708.8 | 44.4% (⚖️ Neutral | ₹3.46 Cr) | **3/10 days** |
+| 1 | `POLYPLEX` | Polyplex Corporation Limited | industrials | ₹1,061.00 | 3,339.5 | 58.0% (🛡️ Strong Delivery (₹2.89 Cr) | ₹2.89 Cr) | **10/10 days** |
+| 2 | `GODREJPROP` | Godrej Properties Limited | realty | ₹2,102.10 | 62,961.2 | 47.2% (🛡️ Strong Delivery (₹89.31 Cr) | ₹89.31 Cr) | **10/10 days** |
+| 3 | `ARROWGREEN` | Arrow Greentech Limited | plastic products | ₹670.55 | 1,046.4 | 51.3% (🛡️ Strong Delivery (₹1.10 Cr) | ₹1.10 Cr) | **9/10 days** |
+| 4 | `RGL` | Renaissance Global Ltd | consumer discretionary | ₹119.40 | 1,286.9 | 72.2% (🔥 High Accumulation (₹4.61 Cr) | ₹4.61 Cr) | **9/10 days** |
+| 5 | `CCAVENUE` | AvenuesAI Ltd | i.t | ₹17.06 | 6,097.8 | 50.3% (🛡️ Strong Delivery (₹10.46 Cr) | ₹10.46 Cr) | **9/10 days** |
+| 6 | `SHREECEM` | Shree Cements Limited | building materials | ₹26,520.00 | 97,418.0 | 54.9% (🛡️ Strong Delivery (₹18.57 Cr) | ₹18.57 Cr) | **9/10 days** |
+| 7 | `MOSCHIP` | Moschip Technologies Ltd | i.t | ₹240.10 | 4,800.3 | 33.3% (⚖️ Neutral | ₹31.95 Cr) | **9/10 days** |
+| 8 | `GANESHHOU` | Ganesh Housing Ltd | realty | ₹822.55 | 6,957.8 | 54.4% (🔥 High Accumulation (₹1.85 Cr) | ₹1.85 Cr) | **8/10 days** |
+| 9 | `SUBEXLTD` | Subex Ltd | i.t | ₹13.33 | 749.1 | N/A | **8/10 days** |
+| 10 | `OMAXE` | Omaxe Limited | realty | ₹92.56 | 1,761.2 | 31.3% (⚖️ Neutral | ₹1.11 Cr) | **8/10 days** |
+| 11 | `SHAREINDIA` | Share India Securities Ltd | financials | ₹177.24 | 3,747.8 | 12.9% (⚠️ Speculative Churn | ₹12.69 Cr) | **8/10 days** |
+| 12 | `RBZJEWEL` | RBZ Jewellers Ltd | consumer discretionary | ₹151.45 | 595.4 | 43.1% (⚖️ Neutral | ₹0.79 Cr) | **8/10 days** |
+| 13 | `UNICHEMLAB` | Unichem Laboratories Limited | healthcare | ₹589.05 | 4,258.5 | 31.4% (⚖️ Neutral | ₹2.93 Cr) | **8/10 days** |
+| 14 | `IIFL` | IIFL Finance Ltd | financials | ₹555.20 | 24,118.2 | 48.4% (🛡️ Strong Delivery (₹55.17 Cr) | ₹55.17 Cr) | **7/10 days** |
+| 15 | `IKIO` | IKIO Lighting Ltd | Capital Goods - Electric General | ₹219.37 | 1,644.5 | 5.8% (⚠️ Speculative Churn | ₹14.23 Cr) | **7/10 days** |
+| 16 | `MIRZAINT` | Mirza International Limited | consumer discretionary | ₹38.74 | 513.8 | 18.3% (⚠️ Speculative Churn | ₹2.45 Cr) | **7/10 days** |
+| 17 | `MANAKSTEEL` | Manaksia Steels Limited | Basic Materials | ₹78.16 | 501.9 | N/A | **7/10 days** |
+| 18 | `PICCADIL` | Piccadily Agro Industries Ltd | fmcg | ₹729.55 | 7,299.8 | 48.2% (🛡️ Strong Delivery (₹16.81 Cr) | ₹16.81 Cr) | **7/10 days** |
+| 19 | `HOMEFIRST` | Home First Finance Company India Ltd | financials | ₹1,241.80 | 12,779.1 | 47.1% (🛡️ Strong Delivery (₹3.88 Cr) | ₹3.88 Cr) | **6/10 days** |
+| 20 | `ARE&M` | Amara Raja Energy & Mobility Ltd | auto | ₹907.40 | 16,498.8 | 38.3% (⚖️ Neutral | ₹35.05 Cr) | **6/10 days** |
+| 21 | `HDBFS` | HDBFS | Financial Services | ₹752.25 | 60,684.3 | 50.7% (🛡️ Strong Delivery (₹17.59 Cr) | ₹17.59 Cr) | **6/10 days** |
+| 22 | `RAYMOND` | Raymond Limited | Industrials | ₹613.65 | 4,024.7 | 38.3% (⚖️ Neutral | ₹9.98 Cr) | **5/10 days** |
+| 23 | `LODHA` | Lodha Developers Ltd | realty | ₹1,188.75 | 117,682.2 | 44.1% (⚖️ Neutral | ₹59.96 Cr) | **5/10 days** |
+| 24 | `SARLAPOLY` | Sarla Performance Fibers Limited | Consumer Cyclical | ₹98.01 | 796.5 | 53.9% (🛡️ Strong Delivery (₹0.33 Cr) | ₹0.33 Cr) | **5/10 days** |
+| 25 | `SMCGLOBAL` | SMC Global Securities Ltd | financials | ₹81.64 | 1,706.2 | 43.1% (⚖️ Neutral | ₹2.74 Cr) | **5/10 days** |
+| 26 | `INDIANHUME` | Indian Hume Pipe Company Limited | realty | ₹398.00 | 2,132.0 | 40.7% (⚖️ Neutral | ₹1.73 Cr) | **5/10 days** |
+| 27 | `KALYANKJIL` | Kalyan Jewellers India Ltd | Diamond, Gems & Jewellery | ₹574.40 | 56,449.6 | 13.2% (⚖️ Neutral | ₹409.36 Cr) | **5/10 days** |
+| 28 | `BAJAJFINSV` | Bajaj Finserv Ltd. | Financial Services | ₹1,838.60 | 296,405.1 | 50.4% (🛡️ Strong Delivery (₹65.93 Cr) | ₹65.93 Cr) | **5/10 days** |
+| 29 | `HEG` | Heg Limited | industrials | ₹587.35 | 11,741.7 | 49.1% (🛡️ Strong Delivery (₹43.86 Cr) | ₹43.86 Cr) | **5/10 days** |
+| 30 | `SUMEETINDS` | Sumeet Industries Limited | textiles | ₹33.98 | 1,750.6 | 3.9% (⚖️ Neutral | ₹1.38 Cr) | **5/10 days** |
+| 31 | `BHARTIHEXA` | Bharti Hexacom Ltd | telecom-service | ₹1,595.00 | 81,390.0 | 49.0% (🛡️ Strong Delivery (₹4.92 Cr) | ₹4.92 Cr) | **5/10 days** |
+| 32 | `ETHOSLTD` | Ethos Ltd | consumer discretionary | ₹2,643.60 | 7,046.1 | 44.3% (⚖️ Neutral | ₹2.25 Cr) | **5/10 days** |
+| 33 | `CANTABIL` | Cantabil Retail India Limited | Consumer Cyclical | ₹255.87 | 2,129.1 | 48.9% (🛡️ Strong Delivery (₹6.08 Cr) | ₹6.08 Cr) | **4/10 days** |
+| 34 | `DDEVPLSTIK` | DDev Plastiks Industries Ltd | chemicals | ₹288.55 | 2,969.8 | 48.3% (🛡️ Strong Delivery (₹1.02 Cr) | ₹1.02 Cr) | **4/10 days** |
+| 35 | `SAMBHV` | SAMBHV | Basic Materials | ₹120.61 | 3,505.4 | 47.4% (🛡️ Strong Delivery (₹5.02 Cr) | ₹5.02 Cr) | **4/10 days** |
+| 36 | `TCPLPACK` | TCPL Packaging Ltd | industrials | ₹3,235.00 | 2,971.4 | 41.7% (⚖️ Neutral | ₹0.42 Cr) | **4/10 days** |
+| 37 | `JUSTDIAL` | Just Dial Limited | i.t | ₹767.30 | 6,747.0 | 12.5% (⚖️ Neutral | ₹23.75 Cr) | **4/10 days** |
+| 38 | `HUHTAMAKI` | Huhtamaki India Ltd | industrials | ₹237.44 | 1,757.3 | 58.1% (🛡️ Strong Delivery (₹5.69 Cr) | ₹5.69 Cr) | **4/10 days** |
+| 39 | `SUMICHEM` | Sumitomo Chemical India Ltd | chemicals | ₹538.55 | 26,981.3 | 50.7% (🔥 High Accumulation (₹20.85 Cr) | ₹20.85 Cr) | **4/10 days** |
+| 40 | `PLASTIBLEN` | Plastiblends India Limited | chemicals | ₹198.57 | 525.8 | 50.0% (🛡️ Strong Delivery (₹1.10 Cr) | ₹1.10 Cr) | **4/10 days** |
+| 41 | `OPTIEMUS` | Optiemus Infracom Ltd | telecom | ₹588.95 | 5,172.8 | 51.9% (🛡️ Strong Delivery (₹7.96 Cr) | ₹7.96 Cr) | **3/10 days** |
+| 42 | `NAUKRI` | Info Edge (India) Limited | Communication Services | ₹1,207.00 | 76,902.6 | 62.7% (🔥 High Accumulation (₹124.25 Cr) | ₹124.25 Cr) | **3/10 days** |
+| 43 | `ASIANHOTNR` | Asian Hotels (North) Limited | Consumer Cyclical | ₹298.95 | 1,258.7 | 52.0% (🛡️ Strong Delivery (₹0.28 Cr) | ₹0.28 Cr) | **3/10 days** |
+| 44 | `JGCHEM` | JGCHEM | Basic Materials | ₹443.50 | 1,745.5 | 48.3% (🛡️ Strong Delivery (₹1.76 Cr) | ₹1.76 Cr) | **3/10 days** |
+| 45 | `APLLTD` | Alembic Pharmaceuticals Limited | Healthcare | ₹839.75 | 16,218.4 | 50.1% (🛡️ Strong Delivery (₹2.92 Cr) | ₹2.92 Cr) | **3/10 days** |
+| 46 | `INDIGOPNTS` | Indigo Paints Limited | Basic Materials | ₹1,064.80 | 5,077.9 | 44.5% (⚖️ Neutral | ₹1.54 Cr) | **3/10 days** |
+| 47 | `APTUS` | Aptus Value Housing Finance India Ltd | financials | ₹306.85 | 15,019.8 | 53.0% (🛡️ Strong Delivery (₹25.99 Cr) | ₹25.99 Cr) | **3/10 days** |
