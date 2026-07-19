@@ -1696,7 +1696,7 @@ def markdown_to_html(md_text: str) -> str:
                 in_table = False
                 table_headers, table_rows = [], []
             h_text = line_strip.lstrip("#").strip()
-            html_lines.append(f'<h4 style="color: #2d3748; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #1b365d; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
+            html_lines.append(f'<h4 style="color: #0f52ba; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #1b365d; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
             continue
         elif line_strip.startswith("###"):
             if in_table:

@@ -103,9 +103,14 @@ def fetch_stockscans_documents(symbol: str, exchange: str) -> dict:
             r = requests.get(url, headers=headers, timeout=10)
             if r.status_code == 200:
                 data = r.json()
-                items = data if isinstance(data, list) else data.get("documents", [])
-                if not isinstance(items, list):
-                    items = []
+                items = []
+                if isinstance(data, list):
+                    items = data
+                elif isinstance(data, dict):
+                    for k, v in data.items():
+                        if isinstance(v, list):
+                            items.extend(v)
+                
                 for item in items:
                     if not isinstance(item, dict):
                         continue
@@ -116,14 +121,18 @@ def fetch_stockscans_documents(symbol: str, exchange: str) -> dict:
                     # Format as clickable StockScans download links
                     if not ss_url.startswith("http"):
                         prefix = "document" if doc_type == "documents" else "announcement"
-                        full_url = f"https://www.stockscans.in/download/{prefix}/{ss_url}"
+                        full_url = f"https://www.stockscans.in/{prefix}/{ss_url}"
                     else:
                         full_url = ss_url
                         
-                    doc_class = item.get("documentType", "").lower()
+                    doc_class = str(item.get("documentType", "")).lower()
+                    if not doc_class:
+                        # Fallback to matching keywords in URL/filename
+                        doc_class = full_url.lower()
+                        
                     date_str = str(item.get("date", ""))
                     
-                    if "annual" in doc_class or "ar" in doc_class or doc_class == "report":
+                    if "annual" in doc_class or "ar" in doc_class or "report" in doc_class:
                         ar_links.append((full_url, date_str))
                     elif "ppt" in doc_class or "presentation" in doc_class or "investor" in doc_class:
                         ip_links.append((full_url, date_str))
