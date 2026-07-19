@@ -1938,7 +1938,7 @@ REPORT_STYLESHEET = """
             font-family: sans-serif;
           }
           .report-h3 {
-            color: #0f52ba;
+            color: #1b365d;
             font-size: 18px;
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 6px;
@@ -1948,9 +1948,9 @@ REPORT_STYLESHEET = """
             font-family: sans-serif;
           }
           .report-h2 {
-            color: #0f52ba;
+            color: #1b365d;
             font-size: 20px;
-            border-bottom: 3px solid #0f52ba;
+            border-bottom: 3px solid #1b365d;
             padding-bottom: 8px;
             margin: 30px 0 15px 0;
             font-weight: bold;
@@ -1985,12 +1985,12 @@ REPORT_STYLESHEET = """
           }
           .report-callout {
             background-color: #f4f6f9;
-            border-left: 4px solid #0f52ba;
+            border-left: 4px solid #1b365d;
             padding: 12px;
             margin: 15px 0;
             border-radius: 4px;
             font-weight: bold;
-            color: #0f52ba;
+            color: #1b365d;
             font-family: sans-serif;
           }
           .report-table-wrapper {
@@ -2006,7 +2006,7 @@ REPORT_STYLESHEET = """
           .report-th {
             border: 1px solid #e2e8f0;
             padding: 10px 12px;
-            background-color: #0f52ba;
+            background-color: #1b365d;
             color: white;
             font-weight: bold;
             text-align: left;
@@ -2043,7 +2043,7 @@ def markdown_to_html(md_text: str) -> str:
     md_text = re.sub(r"\*\*(.*?)\*\*", r'<strong style="color: #0f52ba;">\1</strong>', md_text)
     md_text = re.sub(
         r"\[(.*?)\]\((.*?)\)",
-        r'<a href="\2" style="color: #0f52ba; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #0f52ba;">\1</a>',
+        r'<a href="\2" style="color: #1b365d; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #1b365d;">\1</a>',
         md_text
     )
     md_text = re.sub(
@@ -2061,7 +2061,7 @@ def markdown_to_html(md_text: str) -> str:
     def format_html_table(headers, rows) -> str:
         if not headers:
             return ""
-        header_html = "".join([f'<th style="border: 1px solid #e2e8f0; padding: 10px 12px; background-color: #0f52ba; color: white; font-weight: bold; text-align: left; font-size: 13px;">{h}</th>' for h in headers])
+        header_html = "".join([f'<th style="border: 1px solid #e2e8f0; padding: 10px 12px; background-color: #1b365d; color: white; font-weight: bold; text-align: left; font-size: 13px;">{h}</th>' for h in headers])
         
         row_html_list = []
         for idx, r in enumerate(rows):
@@ -2111,7 +2111,7 @@ def markdown_to_html(md_text: str) -> str:
                 in_table = False
                 table_headers, table_rows = [], []
             h_text = line_strip.lstrip("#").strip()
-            html_lines.append(f'<h4 style="color: #0f52ba; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #0f52ba; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
+            html_lines.append(f'<h4 style="color: #0f52ba; font-size: 15px; margin: 20px 0 10px 0; border-left: 3px solid #1b365d; padding-left: 10px; font-weight: bold; font-family: sans-serif;">{h_text}</h4>')
             continue
         elif line_strip.startswith("###"):
             if in_table:
@@ -2119,7 +2119,7 @@ def markdown_to_html(md_text: str) -> str:
                 in_table = False
                 table_headers, table_rows = [], []
             h_text = line_strip.lstrip("#").strip()
-            html_lines.append(f'<h3 style="color: #0f52ba; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
+            html_lines.append(f'<h3 style="color: #1b365d; font-size: 18px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
             continue
         elif line_strip.startswith("##"):
             if in_table:
@@ -2127,7 +2127,7 @@ def markdown_to_html(md_text: str) -> str:
                 in_table = False
                 table_headers, table_rows = [], []
             h_text = line_strip.lstrip("#").strip()
-            html_lines.append(f'<h3 style="color: #0f52ba; font-size: 19px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
+            html_lines.append(f'<h3 style="color: #1b365d; font-size: 19px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin: 30px 0 15px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif;">{h_text}</h3>')
             continue
         elif line_strip.startswith("#"):
             if in_table:
@@ -2135,7 +2135,7 @@ def markdown_to_html(md_text: str) -> str:
                 in_table = False
                 table_headers, table_rows = [], []
             h_text = line_strip.lstrip("#").strip()
-            html_lines.append(f'<h2 style="color: #0f52ba; font-size: 22px; border-bottom: 3px solid #0f52ba; padding-bottom: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif; text-align: center;">{h_text}</h2>')
+            html_lines.append(f'<h2 style="color: #1b365d; font-size: 22px; border-bottom: 3px solid #1b365d; padding-bottom: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; font-family: sans-serif; text-align: center;">{h_text}</h2>')
             continue
             
         # 3. Handle tables
