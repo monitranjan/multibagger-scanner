@@ -5,7 +5,7 @@
     "industry": "Auto Ancillaries - Wheels",
     "close": 266.21,
     "return_1d": 0.29,
-    "mcap_cr": 4172.2,
+    "mcap_cr": 4184.3,
     "signal": "52W Breakout",
     "scans_count": 23
   },
@@ -15,7 +15,7 @@
     "industry": "Auto Ancillaries - Bearings",
     "close": 199.67,
     "return_1d": 5.0,
-    "mcap_cr": 1065.71,
+    "mcap_cr": 1118.95,
     "signal": "52W Breakout",
     "scans_count": 21
   },
@@ -25,19 +25,19 @@
     "industry": "Infra - Construction & Contracting",
     "close": 1615.0,
     "return_1d": 0.74,
-    "mcap_cr": 27540.99,
+    "mcap_cr": 27743.69,
     "signal": "52W Breakout",
     "scans_count": 20
   },
   {
-    "symbol": "SANGAMIND",
-    "company": "Sangam (india) Limited",
-    "industry": "Textiles - Spinning",
-    "close": 636.95,
-    "return_1d": 1.37,
-    "mcap_cr": 3157.24,
+    "symbol": "KAPSTON",
+    "company": "Kapston Services Ltd",
+    "industry": "Services - Others",
+    "close": 422.75,
+    "return_1d": 0.61,
+    "mcap_cr": 1286.52,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 18
   },
   {
     "symbol": "INDIAGLYCO",
@@ -45,17 +45,7 @@
     "industry": "Alcoholic Beverages",
     "close": 1159.3,
     "return_1d": 0.24,
-    "mcap_cr": 7751.98,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "KAPSTON",
-    "company": "Kapston Services Ltd",
-    "industry": "Services - Others",
-    "close": 423.0,
-    "return_1d": 0.67,
-    "mcap_cr": 1278.76,
+    "mcap_cr": 7770.41,
     "signal": "52W Breakout",
     "scans_count": 18
   },
@@ -65,7 +55,27 @@
     "industry": "IT - Software",
     "close": 274.37,
     "return_1d": 2.09,
-    "mcap_cr": 2441.77,
+    "mcap_cr": 2492.83,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "SANGAMIND",
+    "company": "Sangam (india) Limited",
+    "industry": "Textiles - Spinning",
+    "close": 636.95,
+    "return_1d": 1.37,
+    "mcap_cr": 3200.45,
+    "signal": "52W Breakout",
+    "scans_count": 16
+  },
+  {
+    "symbol": "HSCL",
+    "company": "Himadri Speciality Chemical Limited",
+    "industry": "Carbon Black",
+    "close": 741.55,
+    "return_1d": 2.66,
+    "mcap_cr": 37414.28,
     "signal": "52W Breakout",
     "scans_count": 16
   },
@@ -75,17 +85,7 @@
     "industry": "IT Product Companies",
     "close": 11771.0,
     "return_1d": 0.77,
-    "mcap_cr": 101708.97,
-    "signal": "52W Breakout",
-    "scans_count": 15
-  },
-  {
-    "symbol": "HSCL",
-    "company": "Himadri Speciality Chemical Limited",
-    "industry": "Carbon Black",
-    "close": 741.55,
-    "return_1d": 2.66,
-    "mcap_cr": 36445.56,
+    "mcap_cr": 102492.61,
     "signal": "52W Breakout",
     "scans_count": 15
   }
