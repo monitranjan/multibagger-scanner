@@ -33,7 +33,9 @@ jobs:
         GMAIL_USER: ${{ secrets.GMAIL_USER }}
         GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
         ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-        CONFLUENCE_MODEL: "nvidia/nemotron-3-ultra-550b-a55b:free"
+        CONFLUENCE_MODEL: ${{ secrets.CONFLUENCE_MODEL || 'nvidia/nemotron-3-ultra-550b-a55b:free' }}
+        EMERGING_MODEL: ${{ secrets.EMERGING_MODEL }}
+        FALLBACK_MODELS: ${{ secrets.FALLBACK_MODELS }}
       run: |
         python -u scratch/compile_cdsl.py
 

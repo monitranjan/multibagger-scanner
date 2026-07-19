@@ -1337,12 +1337,19 @@ Public %: {public_val:.2f}%
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
         # We try primary_model first.
         models_to_try = [primary_model]
-        # Only fall back to Gemini models if the primary model is a Gemini model
-        if "gemini" in primary_model.lower():
-            if primary_model != "gemini-3.1-flash-lite":
-                models_to_try.append("gemini-3.1-flash-lite")
-            if "gemini-flash-latest" not in models_to_try:
-                models_to_try.append("gemini-flash-latest")
+        # Read fallback models from environment secret (comma-separated) or use defaults
+        fallback_env = os.environ.get("FALLBACK_MODELS")
+        if fallback_env:
+            for m in fallback_env.split(","):
+                m_clean = m.strip()
+                if m_clean and m_clean not in models_to_try:
+                    models_to_try.append(m_clean)
+        else:
+            if "gemini" in primary_model.lower():
+                if primary_model != "gemini-3.1-flash-lite":
+                    models_to_try.append("gemini-3.1-flash-lite")
+                if "gemini-flash-latest" not in models_to_try:
+                    models_to_try.append("gemini-flash-latest")
             
         for attempt_model in models_to_try:
             print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model}...")
@@ -2578,7 +2585,7 @@ def main() -> None:
         reports_compiled += 1
         
         try:
-            confl_model = os.environ.get("CONFLUENCE_MODEL", "gemini-3.5-flash")
+            confl_model = os.environ.get("CONFLUENCE_MODEL") or "gemini-3.5-flash"
             
             # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
             max_attempts = 3
@@ -2746,7 +2753,7 @@ def main() -> None:
                 reports_compiled += 1
                 
                 try:
-                    emerg_model = os.environ.get("EMERGING_MODEL", "gemini-3.5-flash")
+                    emerg_model = os.environ.get("EMERGING_MODEL") or "gemini-3.5-flash"
                     
                     # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
                     max_attempts = 3

@@ -37,6 +37,10 @@ jobs:
         GMAIL_USER: ${{ secrets.GMAIL_USER }}
         GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
         ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        CONFLUENCE_MODEL: ${{ secrets.CONFLUENCE_MODEL }}
+        EMERGING_MODEL: ${{ secrets.EMERGING_MODEL }}
+        FALLBACK_MODELS: ${{ secrets.FALLBACK_MODELS }}
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports
         python -u generate_equity_reports.py
