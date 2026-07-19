@@ -50,8 +50,8 @@ logs/*
 *.log
 
 # Scratch folder for local testing
-scratch/
-
+scratch/*
+!scratch/compile_cdsl.py
 # Local media and documents
 *.PDF
 *.pdf
