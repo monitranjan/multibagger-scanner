@@ -213,6 +213,35 @@ def clean_company_name(name: str) -> str:
     cleaned = re.sub(r'\s+', ' ', cleaned).strip()
     return cleaned
 
+def fetch_valuepickr_thread(company_name: str) -> str:
+    """Search ValuePickr forum API directly and return the matched topic thread URL."""
+    cleaned = clean_company_name(company_name)
+    # Perform direct search query to ValuePickr Discourse backend
+    term = cleaned.replace(" ", "%20")
+    url = f"https://forum.valuepickr.com/search/query?term={term}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "Accept": "application/json"
+    }
+    try:
+        print(f"🔍 [ValuePickr API] Querying thread search for: {cleaned}")
+        r = requests.get(url, headers=headers, timeout=12)
+        if r.status_code == 200:
+            data = r.json()
+            topics = data.get("topics", [])
+            if topics:
+                # Find the most relevant topic (first returned match is typically the most active/relevant)
+                best_topic = topics[0]
+                slug = best_topic.get("slug")
+                topic_id = best_topic.get("id")
+                if slug and topic_id:
+                    full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
+                    print(f"🎯 ValuePickr thread matched: {full_thread_url}")
+                    return full_thread_url
+    except Exception as e:
+        print(f"⚠️ ValuePickr API search error: {e}")
+    return "https://forum.valuepickr.com/"
+
 def get_company_web_context(company_name: str, symbol: str) -> dict:
     """Gather company overview, plants, and PDF presentation/annual report links."""
     cleaned_name = clean_company_name(company_name)
@@ -304,9 +333,7 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
     if not res_substack:
         res_substack = [{"url": "https://substack.com", "snippet": f"Substack articles on {cleaned_name}"}]
         
-    print(f"🔍 Searching ValuePickr thread for {cleaned_name}...")
-    val_res = fetch_ddg_search_results(f"site:forum.valuepickr.com {cleaned_name}", 1)
-    val_url = val_res[0]["url"] if val_res else "https://forum.valuepickr.com/"
+    val_url = fetch_valuepickr_thread(cleaned_name)
     final_ip = ip_pdf if ip_pdf else "https://nseindia.com/"
     final_ar = ar_pdf if ar_pdf else "https://nseindia.com/"
     final_cc = concall_pdf if concall_pdf else "https://concall.in/"
