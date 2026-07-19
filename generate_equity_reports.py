@@ -1337,33 +1337,81 @@ Public %: {public_val:.2f}%
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
         # We try primary_model first.
         models_to_try = [primary_model]
-        # Fall back to gemini-3.1-flash-lite if it's not the primary
-        if primary_model != "gemini-3.1-flash-lite":
-            models_to_try.append("gemini-3.1-flash-lite")
-        # Also fall back to gemini-flash-latest as a last resort
-        if "gemini-flash-latest" not in models_to_try:
-            models_to_try.append("gemini-flash-latest")
+        # Only fall back to Gemini models if the primary model is a Gemini model
+        if "gemini" in primary_model.lower():
+            if primary_model != "gemini-3.1-flash-lite":
+                models_to_try.append("gemini-3.1-flash-lite")
+            if "gemini-flash-latest" not in models_to_try:
+                models_to_try.append("gemini-flash-latest")
             
         for attempt_model in models_to_try:
             print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model}...")
             
-            # Setup payload with thinkingConfig if model is latest or has thinking, but NOT for pro models (budget 0 invalid for pro)
-            gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
-            if ("latest" in attempt_model or "thinking" in attempt_model) and "pro" not in attempt_model:
-                gen_config["thinkingConfig"] = {"thinkingBudget": 0}
+            # Setup payload / call logic based on model router (Gemini vs OpenRouter)
+            if "/" in attempt_model or not attempt_model.lower().startswith("gemini"):
+                # OpenRouter API call path
+                or_key = os.environ.get("OPENROUTER_API_KEY")
+                if not or_key:
+                    print(f"❌ [STAGE {stage_num}] Missing OPENROUTER_API_KEY for {attempt_model}")
+                    continue
+                or_url = "https://openrouter.ai/api/v1/chat/completions"
+                or_headers = {
+                    "Authorization": f"Bearer {or_key}",
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": "https://github.com/monitranjan/multibagger-scanner",
+                    "X-Title": "Multibagger Scanner"
+                }
+                or_payload = {
+                    "model": attempt_model,
+                    "messages": [{"role": "user", "content": prompt_text}],
+                    "temperature": 0.2,
+                    "max_tokens": 25000
+                }
+                try:
+                    r_post = requests.post(or_url, json=or_payload, headers=or_headers, timeout=180)
+                    if r_post.status_code == 200:
+                        choices = r_post.json().get("choices", [])
+                        if choices:
+                            candidate_text = choices[0].get("message", {}).get("content", "")
+                            if candidate_text:
+                                res_json = {
+                                    "candidates": [{
+                                        "finishReason": "STOP",
+                                        "content": {
+                                            "parts": [{"text": candidate_text}]
+                                        }
+                                    }]
+                                }
+                            else:
+                                print(f"⚠️ [STAGE {stage_num}] Empty response from OpenRouter {attempt_model}")
+                                continue
+                        else:
+                            print(f"⚠️ [STAGE {stage_num}] No choices in OpenRouter response")
+                            continue
+                    else:
+                        print(f"⚠️ [STAGE {stage_num}] OpenRouter HTTP {r_post.status_code}: {r_post.text}")
+                        continue
+                except Exception as exc:
+                    print(f"⚠️ [STAGE {stage_num}] Exception calling OpenRouter {attempt_model}: {exc}")
+                    continue
+            else:
+                # Standard Gemini API path
+                gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
+                if ("latest" in attempt_model or "thinking" in attempt_model) and "pro" not in attempt_model:
+                    gen_config["thinkingConfig"] = {"thinkingBudget": 0}
+                    
+                payload = {
+                    "contents": [{"parts": [{"text": prompt_text}]}],
+                    "generationConfig": gen_config
+                }
                 
-            payload = {
-                "contents": [{"parts": [{"text": prompt_text}]}],
-                "generationConfig": gen_config
-            }
-            
-            stage_url = f"https://generativelanguage.googleapis.com/v1beta/models/{attempt_model}:generateContent?key={api_key}"
-            
-            try:
-                res_json = call_gemini_with_retry(stage_url, payload)
-            except Exception as exc:
-                print(f"⚠️ [STAGE {stage_num}] Exception calling {attempt_model}: {exc}. Trying next option...")
-                continue
+                stage_url = f"https://generativelanguage.googleapis.com/v1beta/models/{attempt_model}:generateContent?key={api_key}"
+                
+                try:
+                    res_json = call_gemini_with_retry(stage_url, payload)
+                except Exception as exc:
+                    print(f"⚠️ [STAGE {stage_num}] Exception calling {attempt_model}: {exc}. Trying next option...")
+                    continue
             if not res_json or "candidates" not in res_json:
                 print(f"⚠️ [STAGE {stage_num}] Failed API call for {attempt_model}. Trying next option...")
                 continue
