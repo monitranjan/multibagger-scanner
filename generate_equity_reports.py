@@ -1530,6 +1530,7 @@ Public %: {public_val:.2f}%
         return None
 
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
+        primary_model = primary_model.strip() if primary_model else ""
         # We try primary_model first.
         models_to_try = [primary_model]
         # Read fallback models from environment secret (comma-separated) or use defaults
