@@ -88,9 +88,12 @@ def extract_pdf_urls_from_json(data) -> list[str]:
     return urls
 
 def fetch_stockscans_documents(symbol: str, exchange: str) -> dict:
-    """Query StockScans documents APIs and resolve links to fully qualified, clickable URLs."""
+    """Query StockScans documents APIs and resolve links based on documentType classification."""
     headers = {"accept": "application/json", "content-type": "application/json"}
-    pdf_links = []
+    
+    ip_links = []
+    ar_links = []
+    cc_links = []
     
     # Check documents and announcements endpoints
     for doc_type in ["documents", "announcements"]:
@@ -100,33 +103,61 @@ def fetch_stockscans_documents(symbol: str, exchange: str) -> dict:
             r = requests.get(url, headers=headers, timeout=10)
             if r.status_code == 200:
                 data = r.json()
-                urls_found = extract_pdf_urls_from_json(data)
-                for u in urls_found:
-                    if not u.startswith("http"):
-                        # Format as clickable StockScans download links
+                items = data if isinstance(data, list) else data.get("documents", [])
+                if not isinstance(items, list):
+                    items = []
+                for item in items:
+                    if not isinstance(item, dict):
+                        continue
+                    ss_url = item.get("ssUrl") or item.get("url") or item.get("pdf")
+                    if not ss_url or not isinstance(ss_url, str):
+                        continue
+                        
+                    # Format as clickable StockScans download links
+                    if not ss_url.startswith("http"):
                         prefix = "document" if doc_type == "documents" else "announcement"
-                        u = f"https://www.stockscans.in/download/{prefix}/{u}"
-                    pdf_links.append(u)
+                        full_url = f"https://www.stockscans.in/download/{prefix}/{ss_url}"
+                    else:
+                        full_url = ss_url
+                        
+                    doc_class = item.get("documentType", "").lower()
+                    date_str = str(item.get("date", ""))
+                    
+                    if "annual" in doc_class or "ar" in doc_class or doc_class == "report":
+                        ar_links.append((full_url, date_str))
+                    elif "ppt" in doc_class or "presentation" in doc_class or "investor" in doc_class:
+                        ip_links.append((full_url, date_str))
+                    elif "transcript" in doc_class or "concall" in doc_class:
+                        cc_links.append((full_url, date_str))
         except Exception as e:
             print(f"⚠️ Error querying StockScans {doc_type} endpoint: {e}")
             
-    # Helper to extract year score from URL
-    def get_year_score(url):
-        url_clean = url.split("?")[0] # remove query params
+    # Helper to extract year score from URL or date string
+    def get_item_date_score(item_tuple):
+        url, date_str = item_tuple
+        if date_str:
+            digits = re.findall(r'\d+', date_str)
+            if digits:
+                d_val = digits[0]
+                if len(d_val) >= 4:
+                    year = int(d_val[:4])
+                    if 2018 <= year <= 2028:
+                        return year
+                elif len(d_val) == 2:
+                    year = 2000 + int(d_val)
+                    if 2018 <= year <= 2028:
+                        return year
+                        
+        # Fallback to filename parsing
+        url_clean = url.split("?")[0]
         years = re.findall(r'20\d{2}|\b\d{2}\b', url_clean)
-        # Filter years to a reasonable range e.g. 2018 to 2028
         valid_years = [int(y) if len(y) == 4 else 2000 + int(y) for y in years]
         valid_years = [y for y in valid_years if 2018 <= y <= 2028]
         return max(valid_years) if valid_years else 0
 
-    # Classify found PDFs by always choosing the latest year
-    ip_links = [l for l in pdf_links if "presentation" in l.lower() or "investor" in l.lower() or "ppt" in l.lower()]
-    ar_links = [l for l in pdf_links if "annual" in l.lower() or "ar" in l.lower() or "report" in l.lower()]
-    cc_links = [l for l in pdf_links if "concall" in l.lower() or "transcript" in l.lower()]
-
-    ip_pdf = max(ip_links, key=get_year_score) if ip_links else None
-    ar_pdf = max(ar_links, key=get_year_score) if ar_links else None
-    concall_pdf = max(cc_links, key=get_year_score) if cc_links else None
+    ip_pdf = max(ip_links, key=get_item_date_score)[0] if ip_links else None
+    ar_pdf = max(ar_links, key=get_item_date_score)[0] if ar_links else None
+    concall_pdf = max(cc_links, key=get_item_date_score)[0] if cc_links else None
             
     return {"ip_pdf": ip_pdf, "ar_pdf": ar_pdf, "concall_pdf": concall_pdf}
 
