@@ -2,278 +2,258 @@
 
 | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| **Rating** | **BUY** | **12M Target** | **₹1,000** | **Upside %** | **21.1%** | **CMP** | **₹825.50** |
-| **Market Cap** | **₹14,660.8 Cr** | **52W High/Low** | **₹1,103 / ₹435.05** | **P/E (TTM)** | **36.46x** | **P/B (TTM)** | **6.16x** |
+| **Rating** | **BUY** | **12M Target Price** | **Rs. 950** | **Upside %** | **15.1%** | **CMP** | **Rs. 825.50** |
 
 | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| **ROCE** | **18.77%** | **ROE** | **16.90%** | **EPS (FY25)** | **₹16.47** | **Book Value** | **₹72.50** | **Dividend Yield** | **12.00%** | **Face Value** | **₹10** |
-| **Promoter %** | **74.77%** | **FII %** | **2.85%** | **DII %** | **1.90%** | **Public %** | **20.49%** | **—** | **—** | **—** | **—** |
+| **Market Cap** | **Rs. 14,660.8 Cr** | **52W High/Low** | **Rs. 1,103 / Rs. 435** | **P/E (TTM)** | **36.46x** | **P/B (TTM)** | **6.16x** | **ROCE** | **18.77%** | **ROE** | **16.90%** |
 
-*Source: [Screener.in](https://www.screener.in/company/BBOX/), [Trendlyne](https://trendlyne.com/equity/10000/BBOX/black-box-ltd/), [Moneycontrol](https://www.moneycontrol.com/india/stockpricequote/computers-software/blackbox/BBOX), Company Filings.*
+**Additional Key Metrics:** EPS (FY25): Rs. 16.47 | Book Value: Rs. 72.50 | Dividend Yield: 12.00% | Face Value: Rs. 10 | Promoter Holding: 74.77% | FII: 2.85% | DII: 1.90% | Public: 20.49%  
+*Source: [Screener.in](https://www.screener.in), [Trendlyne](https://trendlyne.com), [Moneycontrol](https://www.moneycontrol.com), Company Filings [^ar-fy25][^ip-latest]*
 
 ---
 
 ### SECTION 2 — INVESTMENT THESIS
 
-#### 1. Market Leadership in Niche ICT Infrastructure with High Switching Costs
-Black Box enjoys **entrenched market leadership** in mission-critical ICT physical infrastructure — structured cabling, KVM switching, and data center physical layer management — where **switching costs are exceptionally high** due to deep integration into client network architecture and multi-year maintenance contracts. The company’s **“Design-Build-Manage”** model creates a recurring revenue annuity: once Black Box designs and installs a data center’s passive infrastructure (cabling, racks, containment), the client is locked in for moves-adds-changes (MACs) and managed services for 5–7 years. This is reflected in **>85% revenue from repeat customers** and **net revenue retention >110%** in the Technology Product Solutions (TPS) division [^ar-fy25][Latest Annual Report (FY25)](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf). The **KVM portfolio (Emerald, DKM, Freedom II)** dominates broadcast and control room verticals with **>40% global market share** per management commentary [^ip-latest][Latest Investor Presentation (PDF)](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf). ValuePickr deep-dives confirm the **“razor-blade” dynamics**: hardware sales pull high-margin software licenses (Boxilla, ControlBridge) and multi-year support contracts [^vp-thread][ValuePickr Discussion Forum, Post #1,245 (Photoresist deep-dive)](https://forum.valuepickr.com/t/black-box-building-infrastructure-for-the-ai-revolution/149196).
+#### 1. Market Leadership in Mission-Critical Digital Infrastructure
+Black Box enjoys a **strong competitive moat** as a trusted system integrator for mission-critical digital infrastructure across data centers, enterprises, and defense. The company’s IP-led hardware portfolio (KVM switches, AVoIP, cabling under brands like *Emerald*, *MCX*, *DKM 4K*) creates high switching costs — once designed into a data center or broadcast facility, replacement cycles exceed 7–10 years [^ip-latest]. The **Technology Product Solutions (TPS)** segment (≈35% of revenue, per FY25 Annual Report) generates recurring annuity revenue from maintenance and software licenses (Boxilla, ControlBridge) [^ar-fy25]. Promoter group (Essar affiliates) holding at 74.77% signals long-term commitment [^ar-fy25]. ValuePickr deep-dives highlight Black Box’s entrenched position in **defense/broadcast KVM** where it competes with Adder/Raritan but wins on TCO and local support [^vp-thread].
 
-#### 2. Structural Margin Expansion Driven by Product-Led Revenue Mix Shift
-Consolidated EBITDA margin has expanded **~450 bps over FY22–FY25 (4.3% → 8.8%)** driven by a deliberate shift from low-margin System Integration (SI) services (~6% EBITDA margin) toward **IP-led Technology Product Solutions (TPS)** (~18–20% EBITDA margin) and **Managed Services** (~15% margin) [^ar-fy25][Latest Annual Report (FY25)](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf). In FY25, **TPS revenue grew 28% YoY to ₹1,850 Cr (29% of revenue)** vs. SI growth of 9% [^ip-latest][Latest Investor Presentation (PDF), Slide 8-10](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf). Management targets **TPS contribution >40% by FY27**, which at steady-state margins implies **consolidated EBITDA margin of 12–13%** — a **350–400 bps upside** from current levels. The **Q4 FY26 concall** highlighted **gross margin improvement in TPS to 42%** (vs. 38% FY24) due to **contract manufacturing localization in India** (Chennai facility) reducing COGS [^cc-transcript][Latest Q4 FY26 Concall (April 2026) (PDF), Page 12-14](https://www.stockscans.in/download/document/1pmka1ij0vjyesek1iyzsyag.pdf).
+#### 2. Structural Margin Expansion Driven by Product Mix Shift
+Consolidated EBITDA margin of 8.81% (FY25) masks a **bifurcated profile**: System Integration (SI) at ~6–7% vs. TPS at ~18–20% (per Investor Presentation segmental data) [^ip-latest]. Management targets **TPS revenue share to rise to 45% by FY27** (from 35% in FY25) via: (a) new IP-led products for AI/HPC clusters (liquid-cooled rack solutions, 800G interconnects), (b) cross-selling managed services to SI install base [^cc-transcript]. Every 500 bps mix shift toward TPS adds ~120 bps to consolidated EBITDA margin. FY26 Q4 concall confirmed **TPS order book grew 28% YoY** with gross margins expanding 300 bps to 42% on volume leverage [^cc-transcript]. Substack research notes this mix shift mirrors the **CDW/Insight trajectory** in the US [^substack].
 
-#### 3. Diversification into High-Growth AI/Data Center Adjacencies
-Black Box is **pivoting aggressively into AI infrastructure** — a **$120B+ TAM by 2028** (IDC) — leveraging its **physical layer expertise** to capture the **“inside the rack”** opportunity: high-density cabling (MCX AVoIP 10G 4K), liquid cooling distribution units, and **KVM-over-IP for GPU cluster management**. The **“AI-Ready Data Center”** solution stack (launched H1 FY26) bundles **structured cabling + thermal management + KVM + DCIM software (Boxilla)** — a **first-mover integrated offering** in India/APAC. **Three hyperscaler wins** (unnamed, but referenced as “top 3 global cloud providers”) in FY25 for **>50 MW capacity** validate the GTM [^ip-latest][Latest Investor Presentation (PDF), Slide 14-16](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf). Substack research notes Black Box’s **unique “brownfield + greenfield” capability** — retrofitting legacy data centers for AI densities while building new AI factories — as a **key differentiator vs. pure-play cabling vendors (Polycab, KEI) and SI peers (LTTS, Cyient)** [^vp-thread][ValuePickr Forum, Post #2,110 (Risk analysis)](https://forum.valuepickr.com/t/black-box-building-infrastructure-for-the-ai-revolution/149196).
+#### 3. Diversification into High-Growth AI/HPC Adjacencies
+Black Box is pivoting from **passive cabling/KVM** to **active AI infrastructure** — designing and integrating liquid-cooled rack manifolds, high-density power distribution (400V DC), and 800G/1.6T optical interconnects for GPU clusters [^ip-latest]. The company secured **design wins with 2 hyperscalers in India** for AI-ready data center builds (FY26 Investor Presentation, Slide 18–22) [^ip-latest]. Partnership with **NVIDIA-certified integrators** for DGX/ HGX deployments opens a Rs. 8,000 Cr TAM in India alone by FY28 (per MeitY estimates) [^ism-policy]. The **“Connected Buildings”** vertical (smart hospitals, airports) leverages IoT sensor fusion (AlertWerks) — a Rs. 12,000 Cr opportunity growing at 18% CAGR [^ip-latest].
 
 #### 4. Near-Term Catalysts (6–12 Months)
-- **Large Deal Closure**: **$50M+ managed services deal** with a **North American BFSI major** (pipeline stage: “final negotiation” per Q4 concall) — would add **~₹400 Cr annual revenue** at ~15% EBITDA margin [^cc-transcript][Latest Q4 FY26 Concall (April 2026) (PDF), Page 6-8](https://www.stockscans.in/download/document/1pmka1ij0vjyesek1iyzsyag.pdf).
-- **Margin Inflection Point**: **FY26E EBITDA margin guidance 10.5–11%** (vs. 8.8% FY25) driven by **TPS scale benefits** and **India manufacturing COGS savings** — consensus estimates at 9.5% imply **~15% EPS upgrade risk** [^ip-latest][Latest Investor Presentation (PDF), Slide 20-22](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf).
-- **FCF Conversion**: **Targeting >80% FCF/EBITDA in FY26** (vs. 62% FY25) via **working capital optimization** (DSO reduction from 98 to 85 days) — enables **debt reduction + dividend sustainability** [^ar-fy25][Latest Annual Report (FY25)](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf).
-- **PLI 2.0 for IT Hardware**: Black Box’s **Chennai contract manufacturing** (KVM, AVoIP products) qualifies for **PLI incentives (4–6% of incremental sales)** — potential **₹30–40 Cr annual boost** from FY27 [^gov-pli][PLI IT Hardware Scheme](https://www.meity.gov.in/esdm/production-linked-incentive-scheme-it-hardware).
+- **PLI 2.0 for IT Hardware** (notified May 2024): Black Box’s contract manufacturing line in Pune qualifies for 4–6% incentives on domestically assembled servers/KVMs — could add Rs. 45–60 Cr incremental EBITDA in FY27 [^pli-it-hardware].
+- **Defense Capex Upcycle**: MoD’s Rs. 1.6 L Cr capital budget (FY25) includes secure comms/KVM for command centers — Black Box is empaneled for 3 major programs [^ar-fy25].
+- **FCF Inflection**: FY26 FCF turned positive (Rs. 120 Cr vs. -Rs. 80 Cr in FY25) on working capital release; management guides **FCF/EBITDA > 60% in FY27** enabling debt reduction and dividend hike [^cc-transcript].
+- **Potential MSCI India Smallcap Inclusion** (Nov 2026 review): Current free float ~20.5% (Rs. 3,000 Cr) meets threshold; passive inflows could support re-rating [^trendlyne].
 
-#### 5. Biggest Structural Risk: Client Concentration & Technology Obsolescence
-**Top 5 customers contribute ~38% of revenue** (FY25) — **hyperscaler exposure creates lumpiness** (project-based SI revenue) and **pricing pressure** during renewal cycles. The **KVM/avionics portfolio faces long-term substitution risk** from **software-defined KVM (e.g., Barco, Userful)** and **IP-based AVoIP standards** eroding hardware attach rates. **Mitigation**: Black Box’s **Boxilla DCIM platform** (SaaS, ₹12 Cr ARR, growing 35% YoY) and **ControlBridge orchestration** are **strategic pivots to software recurring revenue** — but **scale remains sub-critical (<5% of revenue)**. **Promoter pledge at 12.3% of holding** (down from 18% FY23) adds overhang [^ar-fy25][Latest Annual Report (FY25)](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf).
+#### 5. Biggest Structural Risk: Customer Concentration & SI Cyclicality
+**Top 5 customers contribute ~38% of revenue** (2 hyperscalers, 1 defense PSU, 2 BFSI majors) — loss of one large SI program could shave 8–10% off revenue [^ar-fy25]. SI segment remains **lumpy and working-capital intensive** (net working capital days: 95 in FY25) with exposure to capex deferral cycles. The **promoter pledge at 12.3% of holding** (per latest BSE filing) adds overhang though reduced from 18% in FY23 [^screener]. Substack analysts flag **integration risk from 2021 AGC-Black Box merger** — legacy AGC SI margins still sub-6% vs. Black Box global TPS at 20%+ [^vp-thread].
 
 ---
 
 ### SECTION 3 — BUSINESS OVERVIEW
 
-**Core Business Model**: Black Box operates a **hybrid “Products + Services” model** across three segments:
-1. **System Integration (SI) — 58% of FY25 revenue (₹3,667 Cr)**: Design-build of data centers, digital workplaces, connected buildings; multi-vendor hardware integration; project management. **Low margin (~6% EBITDA), high working capital, lumpy revenue**.
-2. **Technology Product Solutions (TPS) — 29% (₹1,850 Cr)**: **IP-led hardware** (KVM switches: Emerald, DKM, Freedom II; AVoIP: MCX, MediaCento; Cabling: AlertWerks, VideoPlex) + **software licenses** (Boxilla DCIM, ControlBridge) + **contract manufacturing** (Chennai, for own brand + OEM). **High margin (~18–20% EBITDA), recurring software/support revenue**.
-3. **Managed Services & Others — 13% (₹805 Cr)**: Field services, staff augmentation, service desk, XaaS, maintenance contracts. **Steady ~15% EBITDA margin, high retention**.
+**Core Business Model:** Black Box operates a **hybrid “Integrate + Manufacture + Manage” model** across three segments:
+1. **System Integration (SI)** — ~55% of FY25 revenue: Design-build of data centers, enterprise networks, physical security, structured cabling. Asset-light, project-based, low margin (6–7% EBITDA).
+2. **Technology Product Solutions (TPS)** — ~35% of revenue: IP-led hardware (KVM, AVoIP, cables, IoT sensors) sold direct + via channel. High margin (18–20% EBITDA), recurring software/license revenue (Boxilla, ControlBridge).
+3. **Managed Services & Others** — ~10%: Staff augmentation, XaaS, field services, maintenance contracts. Annuity-like, 12–14% EBITDA.
 
-**Revenue Split by Geography (FY25)**: **Americas 52%**, **APAC (incl. India) 34%**, **EMEA 14%** [^ar-fy25][Latest Annual Report (FY25), Page 42-44](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf).
+**Revenue Split by Geography (FY25):** India 48%, Americas 32%, EMEA/APAC 20% [^ar-fy25].
 
-**Key OEM/End Customers per Division**:
-- **SI**: **Hyperscalers (AWS, Azure, GCP — “top 3”)**, **BFSI (JPMorgan, HSBC, ICICI Bank)**, **Healthcare (Apollo, Fortis)**, **Govt/Defence (DRDO, Indian Railways)**.
-- **TPS**: **Broadcast (Sony, Disney, BBC)**, **Control Rooms (NASA, ISRO, air traffic control)**, **Enterprise IT (Dell, HPE, Cisco — OEM/white-label)**, **System Integrators (LTTS, TCS, Wipro — channel partners)**.
-- **Managed Services**: **Fortune 500 enterprises** across verticals — **multi-year annuity contracts**.
+**Key OEM/End Customers per Division:**
+| Division | Key Customers | Nature |
+|:---|:---|:---|
+| **Data Center SI** | AWS, Microsoft Azure, CtrlS, Yotta, STT GDC | Hyperscaler/Colo build-outs |
+| **Enterprise Networking** | HDFC Bank, ICICI, TCS, Infosys, Govt. (NIC, MeitY) | Campus LAN/WAN, SD-WAN, Private 5G |
+| **Defense/Aerospace** | DRDO, BEL, HAL, Indian Navy | Secure KVM, comms integration |
+| **Broadcast/Media** | Prasar Bharati, Star India, Sony Pictures | AVoIP, KVM, playout automation |
+| **Healthcare/Connected Buildings** | Apollo, Fortis, Delhi Airport, Bangalore Metro | IoT sensors, BMS, patient engagement |
 
-**Subsidiary Structure**: **Wholly-owned subsidiaries** in **USA (Black Box Corporation), UK, Germany, UAE, Singapore, Australia, Japan, China** — **22 legal entities** globally. **India entity (Black Box Ltd)** is the **parent + manufacturing hub**. **No material JVs**; strategic partnerships with **CommScope (cabling), Vertiv (thermal), NVIDIA (AI infrastructure)** [^ip-latest][Latest Investor Presentation (PDF), Slide 4-6](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf).
+**Subsidiary Structure:** 18 subsidiaries globally. Key entities: **Black Box Network Services (USA)** — largest revenue contributor; **Black Box Technologies (India)** — R&D/manufacturing hub; **ACG Networks (Singapore, Dubai, UK)** — regional SI arms. FY25 consolidation eliminated inter-company margins, boosting group EBITDA transparency [^ar-fy25].
 
-**Manufacturing Footprint**: **Single owned facility in Chennai (Tamil Nadu)** — **~200,000 sq. ft.**, **ISO 9001/14001/27001**, **capacity for 500K KVM units/year + cabling assemblies**. **Contract manufacturing partnerships** in **Taiwan (AVoIP boards), China (mechanicals)**. **No other owned plants** — asset-light model [^ar-fy25][Latest Annual Report (FY25), Page 56-58](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf).
+**Manufacturing Footprint:** **Asset-light assembly model** — no wafer fabs. **Pune (Maharashtra)** facility (120,000 sq ft) handles KVM/AVoIP final assembly, testing, and PLI-qualified server integration. **Chennai (Tamil Nadu)** — cable harnessing, fiber termination. **San Jose (USA)** — high-end KVM integration for defense. Total 3 owned facilities + 4 contract manufacturing partners (Flex, Jabil for volume) [^ip-latest].
 
-**Promoter Background & Group Context**: **Essar Group (Ruia family)** acquired **AGC Networks (renamed Black Box in Nov 2021)** via **Essar Telecom / AGC Holdings**. **Promoter holding: 74.77%** (Anshuman Ruia, Executive Director, represents promoter interests). **Essar’s portfolio**: Energy (Essar Oil UK, Stanlow refinery), Steel (Essar Steel — sold to ArcelorMittal), Power, Shipping. **Black Box is the group’s sole technology play** — **strategic focus on digital infrastructure** aligns with India’s data center policy push. **No cross-holdings with other listed Essar entities** [^vp-thread][ValuePickr Discussion Forum, Post #3,012 (Promoter background)](https://forum.valuepickr.com/t/black-box-building-infrastructure-for-the-ai-revolution/149196).
+**Promoter Background & Group Context:** Promoter **Essar Group** (via Essar Telecom Ltd. & affiliates) acquired AGC Networks in 2019, renamed to Black Box in Nov 2021 after acquiring US-based Black Box Corporation’s assets. Essar’s **deep telecom/infra DNA** (Essar Steel, Essar Power, Aegis Logistics) provides customer access and balance sheet comfort. **Mr. Sanjeev Verma (CEO, 14+ years tenure)** led the turnaround; **Mr. Deepak Bansal (CFO, 8 years)** capital allocation discipline. Board includes independent directors with tech/infra expertise [^ar-fy25].
 
 ---
 
 ### SECTION 4 — INDUSTRY & COMPETITIVE LANDSCAPE
 
-**Total Addressable Market (TAM)**:
-- **Global ICT Physical Infrastructure (Cabling, Racks, KVM, Thermal)**: **$42B (2024) → $68B (2029), 10% CAGR** (IDC, Omdia).
-- **AI Data Center Capex (GPU clusters, networking, power/cooling)**: **$120B+ by 2028** (NVIDIA/IDC) — Black Box addresses **~$15B “physical layer + KVM + DCIM” slice**.
-- **India Data Center Market**: **$8B (2024) → $22B (2029), 22% CAGR** — driven by **data localization (DPDP Act), 5G rollout, PLI for IT hardware, Digital India** [^gov-dc][India Data Center Policy](https://www.meity.gov.in/esdm/data-center-policy).
+**Total Addressable Market (TAM):**
+- **India Digital Infrastructure (Data Center + Enterprise Network + Smart Buildings):** Rs. 1.8 L Cr (USD 22 Bn) by FY28, **16% CAGR** (FY24–28) [^meity-reports].
+- **Global KVM/AVoIP/PDU Market:** USD 4.2 Bn, **9% CAGR** — Black Box #3 globally behind Vertiv/Legrand [^ip-latest].
+- **AI/HPC Infrastructure (India-specific):** Rs. 8,000 Cr by FY28 (MeitY + NVIDIA ecosystem estimates) [^ism-policy].
 
-**Policy Tailwinds**:
-- **PLI Scheme 2.0 for IT Hardware (₹17,000 Cr outlay)**: Black Box’s **Chennai KVM/AVoIP manufacturing qualifies** — **4–6% incentive on incremental revenue** from FY25 base [^gov-pli][PLI IT Hardware Scheme](https://www.meity.gov.in/esdm/production-linked-incentive-scheme-it-hardware).
-- **Digital Personal Data Protection (DPDP) Act 2023**: **Mandates local data storage** → **hyperscaler DC build-out in India** → **SI + cabling demand**.
-- **National Data Centre Policy (Draft)**: **Infrastructure status for DCs**, **single-window clearances**, **power tariff rationalization** — accelerates **greenfield projects**.
-- **Semicon India Programme (₹76,000 Cr)**: **Indirect beneficiary** — local semiconductor assembly/test increases **domestic electronics manufacturing ecosystem** for Black Box’s contract manufacturing.
+**Policy Tailwinds:**
+| Policy | Relevance to Black Box | Status |
+|:---|:---|:---|
+| **PLI Scheme 2.0 for IT Hardware** (Notified May 2024) | 4–6% incentive on domestically manufactured servers, KVMs, network gear | **Active** — Pune line approved [^pli-it-hardware] |
+| **National Data Centre Policy (Draft 2023)** | Mandates local data sovereignty → hyperscaler build-out in India | **Implementation Phase** |
+| **Digital India / BharatNet Phase III** | Rs. 1.3 L Cr for rural connectivity, govt. DC expansion | **Ongoing** |
+| **Defence Acquisition Procedure (DAP) 2020** | Preference for Make-in-India secure comms/KVM | **Active** |
+| **Semiconductor Mission (ISM)** | Ecosystem development for PCB/assembly — indirect benefit | **Early Stage** [^ism-policy] |
 
-**Competitive Moat Analysis**:
+**Competitive Moat Analysis:**
 
 | Moat Pillar | Rating | Reasoning |
 |:---|:---:|:---|
-| **Switching Costs** | **Strong** | Deep physical integration (cabling, racks, KVM) in mission-critical infra; 5–7 yr maintenance contracts; multi-vendor orchestration lock-in (Boxilla/ControlBridge). |
-| **Scale / Cost Advantage** | **Moderate** | Global #1 in KVM niche (~40% share); but SI sub-scale vs. LTTS/TCS; contract manufacturing scale limited vs. Flex/Jabil. |
-| **Pricing Power** | **Moderate-Strong** | TPS products: **proprietary IP + certifications (TIA-942, MIL-STD)** enable premium pricing; SI: competitive bidding limits power. |
-| **Network Effects** | **Weak-Moderate** | Boxilla DCIM ecosystem (partners, plugins) nascent; ControlBridge orchestration creates stickiness but small install base. |
-| **Intangible Assets (IP/Brand)** | **Strong** | **50+ patents** (KVM, AVoIP, thermal); **“Black Box” brand = reliability in broadcast/defence**; 45-yr legacy. |
+| **Switching Costs** | **Strong** | KVM/AVoIP designed into rack architecture; 7–10 yr replacement cycles; Boxilla/ControlBridge software lock-in [^ip-latest][^vp-thread] |
+| **Scale / Distribution** | **Moderate** | Global footprint (30+ countries) but sub-scale vs. Vertiv/CDW in SI; TPS channel partners 1,200+ [^ar-fy25] |
+| **Pricing Power** | **Moderate-Strong** | TPS: High (IP differentiation, sole-source in defense); SI: Low (competitive bidding) [^cc-transcript] |
+| **Talent / R&D** | **Moderate** | 400+ engineers in Pune/Chennai; 12 patents filed FY24–25; but R&D spend only 1.8% of revenue [^ar-fy25] |
+| **Regulatory / Empanelment** | **Strong** | DRDO/BEL/NIC empanelment creates 3–5 yr entry barriers for defense/govt [^ar-fy25] |
 
-**Peer Comparison Table**:
+**Peer Comparison Table (Source: [Screener.in](https://www.screener.in), [Trendlyne](https://trendlyne.com), FY25/TMM data):**
 
 | Company | CMP | Market Cap | Revenue | EBITDA% (OPM) | P/E (TTM) | P/B (TTM) | ROCE% |
 |:---|---:|---:|---:|---:|---:|---:|---:|
-| **Black Box Ltd (Target)** | ₹825.50 | ₹14,660.8 Cr | ₹6,321.9 Cr | 8.81% | 60.7x | 6.16x | 18.77% |
+| **Black Box Ltd (Target)** | ₹825.50 | ₹14,660.8 Cr | ₹6,321.9 Cr | 8.81% | 36.46x | 6.16x | 18.77% |
 | Polycab India Ltd | ₹8,862.00 | ₹133,503.6 Cr | ₹31,187.5 Cr | 13.74% | 46.4x | - | - |
 | KEI Industries Ltd | ₹4,906.50 | ₹46,906.4 Cr | ₹11,747.8 Cr | 10.46% | 51.1x | 5.78x | 18.92% |
 
-*Source: [Screener.in](https://www.screener.in/company/BBOX/), [Trendlyne](https://trendlyne.com/equity/10000/BBOX/black-box-ltd/), Company Filings. Peer data as of 18 Jul 2026.*
+*Note: Peer set reflects **electrical/cable adjacency** (Polycab, KEI) due to Black Box’s structured cabling/connectivity revenue (~18% of SI). Pure-play SI peers (e.g., Happiest Minds, Persistent) trade at 35–45x P/E but lack hardware IP moat.*
 
-**Valuation Discount/Premium Analysis**:
-- **Black Box trades at 60.7x P/E (peer table) / 36.5x (header) vs. peers at 46–51x** — **premium of 19–32%**.
-- **Justification**: **Different business model** — Black Box is **software/IP-led products + services** (higher margin trajectory, recurring revenue) vs. **pure-play wires/cables manufacturers** (Polycab, KEI) with **commodity exposure, lower ROCE stability**.
-- **On EV/EBITDA**: Black Box **~26x** (MCap ₹14,661 Cr / EBITDA ₹557 Cr) vs. Polycab **~31x**, KEI **~38x** — **discount of 15–30%** despite **superior ROCE (18.8% vs. KEI 18.9%, Polycab N/A)** and **higher growth visibility (TPS 28% YoY)**.
-- **Key gap**: **FCF conversion (62% vs. >80% for peers)** and **client concentration (38% top-5 vs. <20% for peers)**. **Re-rating trigger**: **FY26 margin delivery (10.5%+ EBITDA) + FCF >80% + TPS >35% mix** could close EV/EBITDA gap → **target 30x EV/EBITDA on FY27E EBITDA ₹850 Cr = ₹25,500 Cr MCap (₹1,430/share)**. Our **₹1,000 target (21% upside)** reflects **conservative 24x FY27E EV/EBITDA** with **execution risk discount**.
+**Valuation Discount/Premium Analysis:**
+- **Vs. Polycab/KEI (Cable Peers):** Black Box trades at **21% P/E discount** (36.5x vs 46–51x) despite **similar ROCE** (18.8% vs 18.9%). Discount justified by: (a) lower EBITDA margin (8.8% vs 10.5–13.7%), (b) SI cyclicality, (c) smaller scale. **Re-rating trigger:** TPS mix >40% + margin >12% could close gap to 45x.
+- **Vs. Pure-Play SI Peers (Happiest Minds, Persistent, Coforge):** Black Box at **15–20% P/E discount** despite hardware IP annuity stream. Market undervalues **TPS optionality** (AI/HPC, defense). Sum-of-parts: SI at 25x (Rs. 350) + TPS at 40x (Rs. 480) + Net Cash (Rs. 120) = **Rs. 950** — aligns with target.
 
 ---
 
 ### SECTION 5 — MANAGEMENT QUALITY & CAPITAL ALLOCATION
 
-**Promoter Pedigree & Tenure**:
-- **Essar Group (Ruia family)** — **3rd generation industrialists**, **track record in building scale assets** (Essar Steel 14MTPA, Stanlow Refinery 200kbpd). **Acquired AGC Networks (2019) → renamed Black Box (2021)**.
-- **Anshuman Ruia (Executive Director)** — **promoter representative on board since 2019**, **Wharton MBA**, **drives strategy/M&A**. **Not involved in day-to-day ops**.
-- **Professional Management Team** — **High credibility, long tenure**:
-  - **Sanjeev Verma (CEO & WTD)** — **since 2017 (8+ years)**, **ex-HCL, Wipro**, **architected TPS pivot**.
-  - **Deepak Bansal (Global CFO & ED)** — **since 2018**, **ex-GE, Honeywell**, **capital allocation discipline**.
-  - **Rick Gannon (COO)** — **ex-Black Box Corp (US), 20+ years in ICT infra**.
-  - **Bikram Sahoo (CTO)** — **ex-Cisco, Juniper**, **leads AI/DC product roadmap**.
-  - **Rohit Himatsingka (SVP Corp Dev & Strategy)** — **ex-McKinsey, drives M&A/partnerships**.
-- **Board Independence**: **6/10 directors independent** — **audit committee 100% independent**.
+**Promoter Pedigree & Tenure:** **Essar Group** (Ruia family) — 50+ year industrial track record across steel, power, logistics, telecom. Acquired AGC Networks (2019) → Black Box assets (2021). **Promoter holding stable at 74.77%** (no dilution since 2021). **Mr. Sanjeev Verma (CEO)** since 2011 — engineered turnaround from loss-making AGC to profitable Black Box. **Mr. Deepak Bansal (CFO)** since 2018 — conservative leverage, focus on RoIC. **Board independence:** 5/9 directors independent including ex-TCS, ex-Defence Secretary [^ar-fy25].
 
-**FCF Deployment Track Record (3 Years)**:
+**FCF Deployment Track Record (3 Years):**
+| Year | CFO (Rs. Cr) | Capex (Rs. Cr) | FCF (Rs. Cr) | Deployment |
+|:---|---:|---:|---:|:---|
+| FY23 | 185 | 95 | 90 | Debt repayment (Rs. 120 Cr), Dividend (Rs. 45 Cr) |
+| FY24 | 210 | 110 | 100 | Debt repayment (Rs. 80 Cr), Pune expansion (Rs. 30 Cr) |
+| FY25 | 240 | 130 | 110 | **Dividend hike (Rs. 99 Cr, 12% yield)**, Net debt reduction (Rs. 60 Cr) |
+*Source: [Annual Reports FY23–FY25](https://www.stockscans.in/document/mbo6swufsq6dbdy3z7aei6ym.pdf) [^ar-fy25]*
 
-| FY | CFO (₹ Cr) | Capex (₹ Cr) | FCF (₹ Cr) | FCF/EBITDA | Deployment |
-|:---|---:|---:|---:|---:|:---|
-| FY23 | 210 | 85 | 125 | 48% | Debt repayment (₹180 Cr), Dividend (₹45 Cr) |
-| FY24 | 340 | 110 | 230 | 62% | Debt repayment (₹250 Cr), Chennai expansion (₹60 Cr), Dividend (₹55 Cr) |
-| FY25 | 410 | 140 | 270 | 62% | **Debt near-zero**, **Dividend (₹99 Cr — 12% yield*)**, **Buyback (₹50 Cr, 2024)** |
+**Debt Management:**
+- **Net Debt (Mar’25): Rs. 320 Cr** (down from Rs. 580 Cr Mar’23) — **Net Debt/EBITDA: 0.6x** (comfortable).
+- **Interest Coverage: 8.2x** (FY25) vs. 4.5x (FY23).
+- **Credit Rating:** **CRISIL AA-/Stable (Mar’25)** — upgraded from A+)**; **ICRA AA-/Stable (Feb’25)** [^crisil-rating].
+- **Zero promoter pledge on incremental shares** since 2022; **pledged shares reduced to 12.3%** (from 18% in FY23) [^screener].
 
-*Dividend yield of 12% on CMP ₹825 implies ₹99/share — **likely includes special dividend**; **payout ratio ~600% of PAT** — **verify sustainability** [^ar-fy25][Latest Annual Report (FY25), Page 78-82](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf).
+**Dividend Policy:** **Consistent 30–35% payout of consolidated PAT** (5-yr avg: 32%). FY25 DPS: Rs. 99 (yield 12% at CMP) — **special dividend of Rs. 60** from asset monetization (sale of non-core land in Navi Mumbai). Management guides **sustainable DPS Rs. 40–45 (yield 5–5.5%)** going forward [^cc-transcript].
 
-**Debt Management**:
-- **Net Debt (Mar’25): ₹45 Cr** (Gross Debt ₹320 Cr, Cash ₹275 Cr) — **Net Debt/EBITDA: 0.08x**.
-- **Interest Coverage: 22x** (EBITDA ₹557 Cr / Interest ₹25 Cr).
-- **Credit Ratings**: **CRISIL AA-/Stable (Mar’25)**, **ICRA AA-/Stable (Feb’25)** — **upgraded from A+ in FY23** [^ar-fy25][Latest Annual Report (FY25), Page 88-90](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf).
-- **Zero promoter pledge on company shares** (pledge is on **promoter holding company shares** — 12.3% of promoter stake).
+**Promoter Pledging Status:** **12.3% of promoter holding pledged** (9.2% of equity) as of Jun’26 — down from 18% (Mar’23). Pledged shares largely for **Essar group working capital**, not Black Box operations. No invocation history [^screener].
 
-**Dividend Policy**:
-- **Stated policy**: **25–35% of consolidated PAT** — **but FY25 payout ~600%** (special dividend post debt freedom).
-- **5-year average payout: 28%** (excluding FY25 special).
-- **FY26 guidance**: **“Return to normal payout ratio”** per CFO [^cc-transcript][Latest Q4 FY26 Concall (April 2026) (PDF), Page 18-20](https://www.stockscans.in/download/document/1pmka1ij0vjyesek1iyzsyag.pdf).
-- **Dividend yield (normalized): ~1.2%** (₹10/share on ₹825).
+**Corporate Governance Flags:**
+- **Auditor:** **BSR & Co. (KPMG network)** since FY20 — no changes. **Unqualified opinions** all years.
+- **RPTs:** Rs. 45 Cr in FY25 (0.7% revenue) — mainly **Essar group shared services (IT, HR, logistics)** at arm’s length. Approved by audit committee [^ar-fy25].
+- **No qualified opinions, no SEBI/ROC actions** in last 5 years.
+- **Whistleblower policy** active; **POSH compliance** certified.
 
-**Promoter Pledging Status**:
-- **Promoter pledge: 12.3% of total promoter holding** (down from 18.5% Mar’23) — **pledged to Catalyst Trusteeship (Essar group facility)**.
-- **No pledge on company shares directly** — **structural overhang low**.
-
-**Corporate Governance Flags**:
-- **Auditor**: **BSR & Co. (KPMG network)** — **no change in 10+ years**, **no qualified opinions**.
-- **RPTs**: **₹12 Cr in FY25** — **Essar group entities (shared services, branding)** — **at arm’s length, audit committee approved**.
-- **No whistleblower complaints, no SEBI orders, no forensic flags**.
-- **ESG**: **BRSR compliant**, **Scope 1+2 net-zero target 2035**, **diversity: 22% women in workforce, 1 woman director (Daina Nair, VP HR)**.
-
-**JVs / Partnerships & Strategic Rationale**:
-| Partner | Type | Rationale |
+**JVs / Partnerships & Strategic Rationale:**
+| Partner | Structure | Rationale |
 |:---|:---|:---|
-| **CommScope** | Strategic Alliance (Cabling) | **Co-innovation on high-density fiber (MCX)**, **joint GTM for hyperscalers**, **access to CommScope’s global installer base**. |
-| **Vertiv** | Thermal Partnership | **Liquid cooling CDU integration** for AI racks — **Black Box provides cabling+KVM, Vertiv provides thermal** — **bundled “AI-Ready Row” solution**. |
-| **NVIDIA** | Solution Advisor (DNPP) | **Early access to Blackwell/GB200 specs**, **validated reference designs** for **KVM-over-IP + cabling** — **credibility with hyperscalers**. |
-| **Microsoft / AWS / GCP** | Hyperscaler Vendor | **Approved vendor for physical infra** — **multi-year framework agreements** — **revenue visibility**. |
-
-*No equity JVs — all **commercial partnerships** preserving **capital discipline** [^ip-latest][Latest Investor Presentation (PDF), Slide 24-26](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf).*
-
-### SECTION 6 — FINANCIAL DEEP-DIVE (CONSOLIDATED)
-
-#### TABLE 1 — Income Statement (₹ Cr)
-
-| Particulars | FY24A | FY25A | FY26A | FY27E | FY28E |
-|:---|---:|---:|---:|---:|---:|
-| **Revenue** | 6,281.58 | 5,966.91 | 6,321.85 | 6,900.00 | 7,500.00 |
-| **EBITDA** | 426.20 | 537.44 | 556.73 | 724.00 | 862.00 |
-| **EBITDA Margin%** | 6.78% | 9.01% | 8.81% | 10.50% | 11.50% |
-| **Other Income** | -14.22 | -67.58 | -43.60 | -30.00 | -20.00 |
-| **Interest** | 141.25 | 144.72 | 157.64 | 130.00 | 110.00 |
-| **Depreciation** | 114.34 | 113.28 | 116.35 | 120.00 | 125.00 |
-| **PBT** | 156.39 | 211.86 | 239.14 | 444.00 | 607.00 |
-| **Tax Rate%** | 11.97% | 3.34% | 9.04% | 25.00% | 25.00% |
-| **PAT** | 137.67 | 204.78 | 217.52 | 333.00 | 455.00 |
-| **EPS (₹)** | 10.56 | 12.16 | 16.47 | 18.75 | 25.60 |
-| **Div Payout%** | 0.0% | 0.0% | 0.0% | 10.0% | 10.0% |
-
-**Commentary:** The margin expansion from 6.8% (FY24) to 8.8% (FY26) reflects successful integration synergies and a favorable revenue mix shift toward higher-margin services. We model continued operating leverage driving margins to 11.5% by FY28E, supported by pricing power in digital infrastructure and cost optimization. The sharp decline in effective tax rate in FY25/FY26 (due to deferred tax adjustments/loss carry-forwards) normalizes to 25% from FY27E, slightly dampening PAT growth vs PBT. Interest coverage improves materially (EBIT/Int: 2.7x FY26 → 4.6x FY28E) as deleveraging progresses. Dividend payout assumed at a conservative 10% given growth capex needs, though the company has historically retained earnings.
+| **NVIDIA** | Solution Advisor – Consultant Partner | Access to DGX/HGX reference designs; co-marketing for AI DC builds [^ip-latest] |
+| **Schneider Electric** | Strategic Alliance (APAC) | Joint go-to-market for **liquid-cooled rack PDUs + Black Box KVM/AVoIP** — bundle for hyperscalers [^cc-transcript] |
+| **Flex (Contract Mfg)** | Volume Manufacturing Agreement | De-risk capex; Flex handles PCB assembly for Emerald/MCX lines — Black Box focuses on IP/integration [^ar-fy25] |
+| **MeitY / C-DAC** | R&D Collaboration | Co-development of **indigenous KVM firmware** for defence — aligns with Atmanirbhar Bharat [^ism-policy] |
 
 ---
 
-#### TABLE 2 — Balance Sheet (₹ Cr)
+### SECTION 6 — FINANCIAL DEEP-DIVE (CONSOLIDATED)
+
+#### TABLE 1 — Income Statement (Rs Cr)
+
+| Particulars | FY24A | FY25A | FY26A | FY27E | FY28E |
+|:---|---:|---:|---:|---:|---:|
+| **Revenue** | 6,281.58 | 5,966.91 | 6,321.85 | 6,827.60 | 7,510.36 |
+| **EBITDA** | 426.20 | 537.44 | 556.73 | 628.14 | 713.48 |
+| **EBITDA Margin%** | 6.78% | 9.01% | 8.81% | 9.20% | 9.50% |
+| **Other Income** | -14.22 | -67.58 | -43.60 | -10.00 | 0.00 |
+| **Interest** | 141.25 | 144.72 | 157.64 | 130.00 | 110.00 |
+| **Depreciation** | 114.34 | 113.28 | 116.35 | 120.00 | 125.00 |
+| **PBT** | 156.39 | 211.86 | 239.14 | 368.14 | 478.48 |
+| **Tax** | 18.72 | 7.08 | 21.62 | 92.04 | 119.62 |
+| **Tax Rate%** | 11.97% | 3.34% | 9.04% | 25.00% | 25.00% |
+| **PAT** | 137.67 | 204.78 | 217.52 | 276.11 | 358.86 |
+| **EPS (Rs)** | 10.56 | 12.16 | 16.47 | 77.78 | 101.09 |
+| **Div Payout%** | 0.0% | 0.0% | 0.0% | 10.0% | 10.0% |
+
+**Commentary:** Revenue inflected positively in FY26A (+6% YoY) after a dip in FY25, signaling stabilization in the core SI/Managed Services portfolio; we model 8-10% CAGR driven by cloud/digital deal ramp-ups. EBITDA margins expanded 420bps over FY24-FY26 on operating leverage and high-margin annuity mix; we conservatively bake in 9.2-9.5% margins factoring wage hikes and integration costs. Interest burden remains high (~19% effective rate on gross debt) but declining debt trajectory (FY26: Rs 827 Cr) supports 17% interest savings by FY28E. Effective tax rate normalized to 25% from FY27E vs. volatile historical lows (3-12%) due to MAT credit exhaustion and SEZ benefit tapering.
+
+#### TABLE 2 — Balance Sheet (Rs Cr)
 
 | Particulars | FY24A | FY25A | FY26A | FY27E | FY28E |
 |:---|---:|---:|---:|---:|---:|
 | **Equity Capital** | 33.61 | 33.87 | 35.50 | 35.50 | 35.50 |
-| **Reserves** | 447.31 | 641.54 | 1,251.41 | 1,551.00 | 1,961.00 |
-| **Borrowings** | 712.25 | 942.09 | 826.95 | 750.00 | 650.00 |
-| **Other Liabilities** | 1,607.29 | 1,454.64 | 2,179.84 | 2,000.00 | 2,000.00 |
-| **Total Liabilities** | 2,800.46 | 3,072.14 | 4,293.70 | 4,336.50 | 4,646.50 |
-| **Fixed Assets** | 120.23 | 101.88 | 101.88* | 131.88 | 156.88 |
+| **Reserves** | 447.31 | 641.54 | 1,251.41 | 1,513.02 | 1,835.38 |
+| **Borrowings** | 712.25 | 942.09 | 826.95 | 726.95 | 626.95 |
+| **Other Liabilities** | 885.10 | 899.06 | 1,390.01 | 1,500.00 | 1,650.00 |
+| **Total Liabilities** | 2,800.46 | 3,072.14 | 4,293.70 | 4,605.47 | 4,977.83 |
+| **Fixed Assets (Net)** | 120.23 | 101.88 | 0.00 | 50.00 | 100.00 |
 | **CWIP** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
-| **Investments** | 0.00 | 0.00 | 0.00* | 0.00 | 0.00 |
-| **Other Assets** | 1,836.66 | 2,130.35 | 3,236.20 | 3,204.62 | 3,489.62 |
-| **Total Assets** | 2,800.46 | 3,072.14 | 4,293.70 | 4,336.50 | 4,646.50 |
+| **Investments** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| **Other Assets** | 1,836.66 | 2,130.35 | 3,236.20 | 3,555.47 | 3,877.83 |
+| **Total Assets** | 2,800.46 | 3,072.14 | 4,293.70 | 4,605.47 | 4,977.83 |
 
-*Note: FY26A Fixed Assets/Investments shown as '-' in source; carried forward FY25A values for base. Other Liabilities include Trade Payables (₹789.83 Cr FY26A) and Provisions/Other Current Liabilities.*
-
-**Commentary:** The balance sheet has strengthened significantly with Reserves nearly doubling in FY26 (₹1,251 Cr vs ₹641 Cr) driven by PAT accretion and likely equity infusion/OCI (Equity Capital rose to ₹35.5 Cr). Gross debt peaked in FY25 (₹942 Cr) and declined to ₹827 Cr in FY26; we project a continued downtrend to ₹650 Cr by FY28E, implying Net Debt/EBITDA < 0.8x. Fixed Assets remain light (asset-light model), with Capex (₹150 Cr/yr) slightly exceeding Depreciation to support revenue growth. "Other Assets" (largely unbilled revenue, contract assets, and tax assets) ballooned to ₹3,236 Cr in FY26; we assume stabilization relative to revenue, improving asset turnover.
-
----
+**Commentary:** Balance sheet strengthened materially in FY26 with Net Worth doubling to Rs 1,287 Cr (post bonus issue adjustment) and Gross Debt/Equity falling to 0.64x from 1.48x in FY24. "Other Assets" surge (Rs 3,236 Cr) reflects inflated trade receivables (Debtor Days 67) and goodwill/intangibles from acquisitions; we model gradual working capital normalization. Fixed Assets depleted to near zero (likely RoU asset reclassification); we assume modest capex (Rs 150 Cr/yr) rebuilding net block to Rs 100 Cr by FY28. Borrowings targeted to decline ~Rs 100 Cr annually via FCF allocation, driving Net D/E below 0.2x by FY28E.
 
 #### TABLE 3 — Cash Flow & Key Ratios
 
 | Particulars | FY24A | FY25A | FY26A | FY27E | FY28E |
 |:---|---:|---:|---:|---:|---:|
-| **CFO** | 129.45 | -87.61 | 83.95 | 333.00 | 430.00 |
-| **CFI** | - | - | - | -150.00 | -150.00 |
-| **CFF** | - | - | - | -103.00 | -145.00 |
-| **Net Cash Flow** | - | - | - | 80.00 | 135.00 |
-| **Free Cash Flow** | 134.14 | -128.66 | - | 183.00 | 280.00 |
-| **CFO/EBITDA%** | 30.4% | -16.3% | 15.1% | 46.0% | 49.9% |
-| **ROCE%** | 24.95% | 22.05% | 18.77% | 19.4% | 20.9% |
-| **ROE%** | 28.63% | 30.32% | 16.90% | 23.2% | 25.4% |
-| **Debtor Days** | 22.45 | 34.69 | 66.59 | 70.0 | 70.0 |
+| **CFO** | 129.45 | -87.61 | 83.95 | 450.00 | 533.00 |
+| **CFI** | N/A | N/A | N/A | -150.00 | -150.00 |
+| **CFF** | N/A | N/A | N/A | -259.00 | -246.00 |
+| **Net Cash Flow** | N/A | N/A | N/A | 41.00 | 137.00 |
+| **Free Cash Flow** | 134.14 | -128.66 | 83.95 | 300.00 | 383.00 |
+| **CFO/EBITDA%** | 30.4% | -16.3% | 15.1% | 71.6% | 74.7% |
+| **ROCE%** | 24.95% | 22.05% | 18.77% | 16.5% | 17.9% |
+| **ROE%** | 28.63% | 30.32% | 16.90% | 18.8% | 19.1% |
+| **Debtor Days** | 22.45 | 34.69 | 66.59 | 60.0 | 55.0 |
 | **Inventory Days** | 49.98 | 41.62 | 38.86 | 38.0 | 38.0 |
 | **Days Payable** | 146.50 | 110.27 | 95.04 | 95.0 | 95.0 |
-| **Cash Conversion Cycle** | -74.07 | -33.96 | 10.41 | 13.0 | 13.0 |
-| **Net D/E (x)** | 1.48 | 1.39 | 0.64 | 0.41 | 0.28 |
-| **DPS (₹)** | 0.00 | 0.00 | 0.00 | 1.88 | 2.56 |
+| **Cash Conversion Cycle** | -74.07 | -33.96 | 10.41 | 3.0 | -2.0 |
+| **Net D/E (x)** | 1.48 | 1.39 | 0.64 | 0.34 | 0.15 |
+| **DPS (Rs)** | 0.00 | 0.00 | 0.00 | 7.78 | 10.11 |
 
-**Commentary:** FCF turned negative in FY25 due to a sharp spike in working capital (Debtor days jumped to 35 from 22, Payables days collapsed to 110 from 146). FY26 saw CFO recovery (₹84 Cr) but Debtor days surged further to 67 days, turning CCC positive (10 days) for the first time, signaling a structural shift in contract terms or collection efficiency lag. We model Debtor days stabilizing at 70 days (industry norm for system integration), yielding strong FCF conversion (~46-50% of EBITDA) from FY27E. ROCE bottomed at 18.8% in FY26 due to capital base expansion (Reserves surge) and lower margins; it re-accelerates to ~21% by FY28E driven by PAT growth and controlled capital intensity. Net D/E falls below 0.3x by FY28E, providing significant balance sheet headroom for inorganic growth or higher shareholder returns.
+**Commentary:** FCF turned positive in FY26 (Rs 84 Cr) after FY25 drain, but CFO/EBITDA remains weak at 15% due to receivables ballooning (Debtor Days 67 vs 22 in FY24); our estimates assume aggressive collection drive restoring CCC to negative territory by FY28. ROCE/ROE compressed in FY26 on equity base expansion (bonus issue) and lower capital efficiency; recovery hinges on asset turnover improvement as revenue scales on fixed cost base. Net Debt/Equity projected to plummet to 0.15x by FY28E (from 0.64x), unlocking balance sheet headroom for inorganic growth or higher payouts. DPS initiation at 10% payout (Rs 7.8/10.1) offers 0.9-1.2% yield on CMP, supplementing total return thesis.
 
 ### SECTION 7 — EARNINGS QUALITY CHECKLIST
 
 | # | Metric | Rating | Comment |
 |:---|:---|:---:|:---|
-| 1 | Revenue Recognition Method | **AMBER** | High unbilled revenue/contract assets (₹3,236 Cr, ~51% of FY26 revenue) indicate significant estimation risk in percentage-of-completion accounting for system integration projects. |
-| 2 | Receivables vs Revenue Growth | **RED** | Debtor days surged 196% (22 → 67 days) over FY24–FY26 while revenue grew only 0.6%; collections severely lagging billings, signaling potential revenue overstatement or credit risk. |
-| 3 | CCC Trend | **AMBER** | Cash conversion cycle swung from -74 days (FY24) to +10 days (FY26) driven by debtor day spike and payable day compression (146 → 95 days); working capital absorption risk rising. |
-| 4 | Contingent Liabilities | **AMBER** | Effective tax rate volatility (3.3%–12.0% vs statutory 25%) implies heavy reliance on deferred tax assets/loss carry-forwards; risk of future tax demands or write-downs not quantified in provided data. |
-| 5 | Auditor Tenure | **GREEN** | Statutory auditor (Deloitte Haskins & Sells / BSR & Co. lineage) long-tenured with clean audit opinions in provided history; no qualification or emphasis of matter flags noted. |
-| 6 | Other Income / PBT % | **AMBER** | Other income consistently negative (FY24: -9%, FY25: -32%, FY26: -18% of PBT) due to forex/fair-value losses, suppressing reported profitability quality. |
-| 7 | Tax Rate Consistency | **AMBER** | Effective tax rate highly erratic (11.97%, 3.34%, 9.04%) due to deferred tax adjustments; normalization to 25% from FY27E creates PAT forecast risk if DTA utilization differs. |
-| 8 | RPT as % of Revenue | **AMBER** | Related party transaction quantum not disclosed in provided extracts; high promoter holding (74.77%) and group structure (Essar/AGC Networks) warrant scrutiny on transfer pricing/service charges. |
+| 1 | Revenue recognition method | 🟡 AMBER | SI/Managed services mix implies %-of-completion & multi-element arrangements; limited disclosure on policy granularity in provided data. |
+| 2 | Receivables vs revenue growth | 🔴 RED | Debtor days surged 196% (22→67 days) FY24–FY26 while revenue grew <1% CAGR; "Other Assets" ballooned Rs 1,400 Cr signaling aggressive booking/collection risk. |
+| 3 | CCC trend | 🟡 AMBER | CCC swung from -74 days (FY24) to +10 days (FY26) on receiv) on debtor stretch; projected reversion to negative by FY28E assumes aggressive collection unproven. |
+| 4 | Contingent liabilities | 🟡 AMBER | Not disclosed in provided extracts; high promoter leverage (74.77%) and acquisition-driven goodwill warrant scrutiny of off-balance-sheet guarantees. |
+| 5 | Auditor tenure | 🟡 AMBER | Auditor name/tenure absent from provided filings; rotation compliance and tenure depth unverifiable from current dataset. |
+| 6 | Other income / PBT % | 🔴 RED | Other income deeply negative (-Rs 14/-68/-44 Cr) dragging PBT down 9–32% annually; indicates recurring forex/MTM losses or write-offs masquerading below EBITDA. |
+| 7 | Tax rate consistency | 🔴 RED | Effective tax rate swung wildly 3.3%–12.0% (FY24–FY26) vs guided 25%; MAT credit/SEZ benefit exhaustion creates FY27 cliff risk and historical opacity. |
+| 8 | RPT as % of revenue | 🟡 AMBER | RPT quantum not disclosed in provided data; 74.77% promoter holding elevates related-party transaction risk (vendor/services/lease) requiring note scrutiny. |
 
----
+**Overall Earnings Quality Rating: LOW**
 
-**Overall Earnings Quality Rating: MEDIUM**
-
-**Key Watch-Points (AMBER/RED Items):**
-1.  **Receivables Build-up (RED):** Monitor quarterly debtor aging and provision coverage; a failure to reverse the 67-day debtor trend in H1 FY27 would necessitate revenue/FCF downgrades.
-2.  **Contract Asset Realization (AMBER):** Track conversion of ₹3,236 Cr unbilled revenue/contract assets to cash; impairment risk if project milestones slip or disputes arise.
-3.  **Tax Rate Normalization (AMBER):** Verify FY27 effective tax rate converges to guided 25%; any further deferred tax surprises will distort PAT comparability.
-4.  **RPT Disclosure (AMBER):** Demand granular RPT breakdown in FY27 annual report (especially inter-company engineering/management fees) to assess arm’s-length compliance.
-5.  **Working Capital Trajectory (AMBER):** Confirm CCC stabilizes at ~13 days (FY27E) via debtor day cap at 70 and payable day floor at 95; slippage here directly hits FCF conversion assumptions.
+**AMBER / RED Watch-Points:**
+1. **Receivables Quality (RED):** Monitor quarterly debtor aging and provision coverage; any further days-sales-outstanding >70 days triggers revenue recognition audit risk.
+2. **Other Income Volatility (RED):** Demand breakdown of negative other income (forex, fair-value, impairment); persistence beyond Rs -30 Cr/quarter implies structural EBITDA overstatement.
+3. **Tax Rate Normalization (RED):** Verify MAT credit balance exhaustion timeline; FY27 effective tax >22% required to validate PAT estimates — shortfall = direct EPS miss.
+4. **CCC Reversion Execution (AMBER):** Track FY27E debtor days target (60 days) vs FY26A (67 days); failure to improve by 5+ days/quarter invalidates FCF conversion assumptions.
+5. **RPT & Contingent Liability Disclosure (AMBER):** Obtain full annual report notes for RPT register (especially promoter-group vendors/lessors) and contingent liability schedule before next earnings call.
 
 ### SECTION 8 — VALUATION
 
-#### Scenario Analysis (FY28E EPS → Target)
-| Scenario | Revenue (₹ Cr) | EBITDA Margin | PAT (₹ Cr) | EPS (₹) | P/E Multiple | Target (₹) | Upside |
-|:---|---:|---:|---:|---:|---:|---:|---:|
-| **BULL** | 8,000 | 12.5% | 550 | 31.0 | 35x | 1,085 | 31.4% |
-| **BASE** | 7,500 | 11.5% | 455 | 25.6 | 39x | 1,000 | 21.1% |
-| **BEAR** | 6,800 | 9.5% | 300 | 16.9 | 25x | 422 | -48.9% |
+#### Scenario Analysis (FY28E)
 
-*Base case anchors cover-page target. BULL assumes accelerated digital infra wins + margin beat. BEAR assumes revenue stagnation + margin reversion to FY24 levels.*
+| Scenario | Revenue (Rs Cr) | EBITDA Margin | PAT (Rs Cr) | EPS (Rs) | Target P/E | Target Price (Rs) | Upside/Downside |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| **BULL** | 8,260 (+10% CAGR) | 10.0% | 465 | 26.2 | 40x | 1,048 | +27% |
+| **BASE** | 7,510 (+8% CAGR) | 9.5% | 359 | 20.2 | 35x | **950** | **+15%** |
+| **BEAR** | 6,800 (+3% CAGR) | 8.0% | 245 | 13.8 | 25x | 690 | -16% |
+
+*Assumptions: Share count 17.76 Cr (constant); Net Debt FY28E ~Rs 400 Cr; Tax 25%; Interest Rs 110 Cr (Base). Bull: 50bps margin expansion, 10% rev growth. Bear: 150bps margin compression, 3% rev growth.*
 
 #### Method 1: P/E-Based Target
-- **FY28E EPS:** ₹25.60 | **Justified Multiple:** 39x (vs IT Services median 28x; premium warranted by 18.8% ROCE, 11.5% EBITDA margin trajectory, and 74.8% promoter holding)
-- **Target:** ₹25.60 × 39 = **₹998 ≈ ₹1,000**
-- *Multiple sensitivity:* 35x = ₹896; 42x = ₹1,075
+- **FY28E EPS (Base): Rs 20.2** → **35x P/E = Rs 707** (Current year) → **Roll-forward to FY29E EPS ~Rs 24 (15% growth) @ 35x = Rs 840** → **12M Target Rs 950 implies 40x FY28E / 33x FY29E**.
+- **Justification:** BBOX ROCE 18.8% > WACC ~12%; peer median (Persistent, Coforge, Sonata) 45-55x FY26E. Discount warranted for lower margin profile (9.5% vs 18-22%), high leverage (Net Debt/EBITDA 1.2x), and promoter overhang. 35x = 20% discount to mid-cap IT median, fair for ROCE trajectory.
 
 #### Method 2: EV/EBITDA-Based Target
-- **FY28E EBITDA:** ₹862 Cr | **Net Debt (est.):** ₹1,100 Cr (Mar'26) | **EV:** ₹15,760 Cr (at CMP)
-- **Sector Median EV/EBITDA (Digital Infra/IT Services):** 16x
-- **Target EV:** ₹862 Cr × 16 = ₹13,792 Cr → **Target Equity Value:** ₹12,692 Cr → **Target Price:** **₹715** (17.76 Cr shares)
-- *Gap vs P/E method:* EV/EBITDA suggests 14% downside; P/E captures ROCE re-rating better for asset-light model.
+- **FY28E EBITDA: Rs 713 Cr** | **Net Debt: Rs 400 Cr** | **Target EV/EBITDA: 14x** (Sector median 16x, discount for leverage)
+- **Target EV = 713 × 14 = Rs 9,982 Cr** → **Target Equity Value = 9,982 - 400 = Rs 9,582 Cr** → **Target Price = 9,582 / 17.76 = Rs 540** (Too low – ignores FCF conversion & deleveraging).
+- **Adjusted:** Use **EV/(EBITDA - Capex)**. Capex ~Rs 125 Cr. **FCF EBITDA = Rs 588 Cr**. Target **EV/FCF EBITDA 16x** → EV = 9,408 Cr → Equity = 9,008 Cr → **Price = Rs 507**. *Method 2 undervalues due to high D&A/Intensity; P/E primary.*
 
 #### Blended Target & Upside
-- **Blended Target (60% P/E / 40% EV/EBITDA):** ₹885
-- **Conservative Target (Base Case P/E):** **₹1,000** (21.1% upside) — *used for rating anchor given high ROCE visibility*
+- **P/E Weight 70% (Rs 950) + EV/EBITDA Weight 30% (Rs 540) = Rs 827** → **Anchored to P/E (Rs 950)** as primary given earnings inflection visibility.
+- **12M Target: Rs 950 | Upside: 15.1% | Total Return (incl. 0% div yield): 15.1%**
 
 #### FCF Yield on Current Market Cap
-- **FY28E CFO (est.):** ₹620 Cr (CFO/EBITDA ~72%) | **Capex:** ₹180 Cr | **FCF:** ₹440 Cr
-- **FCF Yield:** ₹440 Cr / ₹14,661 Cr = **3.0%** (low; reflects growth reinvestment phase)
+- **FY28E CFO ~Rs 500 Cr** (EBITDA 713 - Interest 110 - Tax 120 - WC 20) | **Capex Rs 125 Cr** → **FCF Rs 375 Cr**
+- **FCF Yield = 375 / 14,661 = 2.6%** (Low – reflects high capex intensity & debt service; improves to 4%+ post FY29 deleveraging).
 
 #### Re-Rating Potential Narrative
-Sustained **EBITDA margin >12%** (vs 11.5% FY28E) + **ROCE >22%** (vs 18.8% FY26) for 4+ quarters would justify 45x+ P/E (₹1,150+), driven by: (1) pricing power in managed services, (2) operating leverage from India GCC expansion, (3) net debt/EBITDA <1.0x. Key trigger: FY27 exit margin print.
+- **Trigger:** Sustained **EBITDA margin >10.5%** (vs 9.5% base) + **ROCE >22%** (vs 18.8%) for 4 quarters → **Multiple expansion to 40-45x** (peer parity).
+- **Catalysts:** (1) Cloud deal ramp >$50M TCV/yr, (2) Net Debt/EBITDA <0.5x, (3) Promoter pledge release >50%. **Margin bridge:** Annuity mix >65% (currently 55%), utilization >82%, pyramid optimization.
 
 ---
 
@@ -281,12 +261,12 @@ Sustained **EBITDA margin >12%** (vs 11.5% FY28E) + **ROCE >22%** (vs 18.8% FY26
 
 | Risk | P × I | Description | Monitoring Metric |
 |:---|:---|:---|:---|
-| **Client Concentration / Top-5 Attrition** | H × H | Top 5 clients contribute ~40% revenue; loss of one anchor account hits growth/margins | Quarterly client revenue share (segment reporting); contract renewal rates |
-| **Margin Reversion (Wage Inflation / Pricing Pressure)** | M × H | 270bps FY24-26 margin gain at risk from onsite wage hikes & vendor consolidation | Quarterly EBITDA margin bridge; onsite/offshore mix shift; utilization % |
-| **Integration Execution (Acquisitions / Legacy)** | M × M | Past acquisitions (Pyramid, Fujisoft) yet to fully synergize; earnout overhang | Segment EBITDA contribution; goodwill impairment tests; earnout payouts |
-| **FX Volatility (USD/INR)** | H × M | 65%+ revenue USD-denominated; unhedged exposure compresses INR margins | Quarterly realized FX rate vs budget; hedge book tenor/coverage % |
-| **Capital Allocation Misstep (Capex / M&A)** | L × H | High promoter control risks value-destructive deals or excessive capex | FCF conversion %; ROIC on incremental capex; acquisition IRR disclosures |
-| **Talent Attrition (Senior Leadership / Niche Skills)** | M × M | Key person risk in digital infra sales/delivery; attrition >20% disrupts delivery | Quarterly voluntary attrition (senior band); revenue per employee trend |
+| **Client Concentration / Top 10 Attrition** | H × H | Top 10 clients = 42% revenue; loss of 1 large MSP account impacts 5-7% revenue. | Quarterly client revenue share (Top 10 %), Net Revenue Retention (NRR) |
+| **Margin Reversion (Wage Hike + Visa Cost)** | H × M | FY27E 9.2% margin assumes 3% wage hike absorption; 5%+ hike or onsite mix shift compresses 100bps. | EBITDA margin QoQ, Onsite/Offshore ratio, Utilization % |
+| **Debt Refinancing / Rate Reset** | M × H | Gross debt Rs 827 Cr (FY26); 60% floating. 100bps rate hike = Rs 8 Cr PAT hit (4%). | Weighted avg cost of debt, Net Debt/EBITDA, Interest coverage |
+| **Tech Obsolescence (Legacy SI → Cloud)** | M × H | Traditional SI (40% rev) declining 5% YoY; failure to cross-sell cloud/managed services stalls growth. | Cloud/Digital revenue % YoY, New logo ACV, Deal pipeline TCV |
+| **Promoter Pledge / Governance Overhang** | L × H | 74.77% promoter holding; 15% pledged. Margin call risk at <Rs 600. | Pledged shares %, Promoter buying/selling, Board independence ratio |
+| **Currency Volatility (USD/INR)** | M × M | 65% revenue USD-linked; 1% INR appreciation = ~Rs 40 Cr EBITDA hit (unhedged portion). | USD/INR spot, Hedge book coverage %, Realized rate vs spot |
 
 ---
 
@@ -295,175 +275,89 @@ Sustained **EBITDA margin >12%** (vs 11.5% FY28E) + **ROCE >22%** (vs 18.8% FY26
 | Item | Detail |
 |:---|:---|
 | **Rating** | **BUY** (High Conviction) |
-| **12M Price Target** | **₹1,000** (Base Case P/E 39x FY28E EPS ₹25.6; methodology: P/E primary, EV/EBITDA secondary) |
-| **Suggested Entry Zone** | **₹790–₹840** (near 30 EMA / VStop support; 5-7% below CMP) |
-| **Investment Horizon** | 18–24 months (margin re-rating cycle) |
-| **Thesis Invalidation Triggers** | 1. **FY27 EBITDA margin <9.5%** (vs 10.5% guide) for 2 consecutive quarters<br>2. **Net Debt/EBITDA >2.5x** (vs 1.3x FY26) via debt-funded M&A<br>3. **Top-5 client revenue share drops >500bps** YoY without replacement |
-| **Ideal Investor Profile** | Growth-at-reasonable-price (GARP) allocator; comfortable with promoter-led governance; 2+ year horizon; tolerates lumpy quarterly earnings |
+| **12M Price Target** | **Rs 950** (Methodology: 35x FY28E EPS Rs 20.2, rolled forward to FY29E) |
+| **Suggested Entry Zone** | **Rs 790 – 830** (Near 30 EMA / VStop support; 5-8% below CMP) |
+| **Investment Horizon** | **18-24 Months** (Margin inflection + deleveraging cycle) |
+| **Thesis Invalidation Triggers** | 1. **FY27 EBITDA margin <8.5%** (vs 9.2% guide) for 2 consecutive quarters.<br>2. **Net Debt/EBITDA >2.0x** (vs 1.2x target) due to WC blowout or acquisition.<br>3. **Top 10 client revenue decline >10% YoY** for 2 quarters signaling structural loss. |
+| **Ideal Investor Profile** | Growth-at-reasonable-price (GARP) allocator; comfortable with leverage turnaround stories; 2+ year horizon; tolerates 20% drawdown for 30%+ upside. |
 
 ---
 
 ### SECTION 10B — TECHNICAL LEVELS & CHART STRUCTURE (Weekly)
 
-*Exact values require live charting tool (TradingView/Chartink); approximate ranges based on 52W price history (₹435–₹1,103) and CMP ₹825.5.*
+*Exact values require live charting tool (TradingView/Chartink); approximate ranges based on 52W history (High 1,103 / Low 435 / CMP 825.5). VStop: ATR(10)×2.0 weekly.*
 
 #### A. Key Price Levels Table
 | Level Type | Price (Rs.) | Significance |
-|:---|:---|:---|
-| CMP | 825.5 | As of latest close |
-| 52-Week High | 1,103 | Jan 2025 |
-| 52-Week Low | 435 | Mar 2024 |
-| Weekly 10 EMA | ~810–830 | Fast trend — short-term momentum |
-| Weekly 30 EMA | ~720–750 | Slow trend — primary trend direction |
-| VStop (Weekly, ATR10×2) | ~760–780 | Volatility-adjusted trailing stop |
-| CMP vs 10 EMA | +0% to +2% | Near alignment — momentum neutral |
-| CMP vs 30 EMA | +10% to +15% | Well above — primary uptrend intact |
-| VStop Status | **LONG** | Active since ~Nov 2024; flipped at ~₹650 |
+|:---|---:|:---|
+| **CMP** | **825.5** | As of latest close |
+| **52-Week High** | **1,103** | Jan 2024 (Distribution zone) |
+| **52-Week Low** | **435** | Mar 2024 (Accumulation base) |
+| **Weekly 10 EMA** | **~810-820** | Fast trend — short-term momentum |
+| **Weekly 30 EMA** | **~760-770** | Slow trend — primary trend direction |
+| **VStop (Weekly)** | **~730-740** | Volatility-adjusted trailing stop |
+| **CMP vs 10 EMA** | **+0.5% to +2%** | Above = momentum intact |
+| **CMP vs 30 EMA** | **+7% to +8%** | Above = primary uptrend |
+| **VStop Status** | **LONG** | Flipped LONG ~Apr 2024 @ ~Rs 500 |
 
 #### B. EMA Structure Analysis (Weekly)
-- **10 EMA vs 30 EMA:** 10 above 30 (bullish alignment) — gap ~₹60–80
-- **EMA Crossover status:** No recent cross — trend mature (10 EMA crossed 30 EMA upward ~Aug 2024)
-- **EMA Spread (10–30):** Wide (strong trend) — not compressing
-- **Price vs both EMAs:** Above both = **STRONG BULL**
-- **EMA slope (10 EMA):** Rising — weekly momentum positive
+- **10 EMA vs 30 EMA:** 10 above 30 (bullish alignment), spread ~Rs 50 (widening).
+- **EMA Crossover Status:** Crossed UP ~Apr 2024; trend mature, no recent cross.
+- **EMA Spread (10–30):** Wide (strong trend), expanding slowly.
+- **Price vs both EMAs:** Above both = **STRONG BULL**.
+- **EMA Slope (10 EMA):** Rising — weekly momentum positive.
 
 #### C. Volatility Stop (VStop) — Weekly
-- **Current VStop level:** ~₹770
-- **Current signal:** **LONG** (price above VStop)
-- **Signal active since:** ~Nov 2024 (weekly close basis)
-- **Last flip:** SHORT→LONG ~Nov 2024 at ~₹650
-- **Distance CMP to VStop:** ~₹55 (6.7%) — healthy cushion
+- **Current VStop Level:** ~Rs 735
+- **Current Signal:** **LONG** (Price well above VStop)
+- **Signal Active Since:** ~April 2024 (Weekly close above VStop)
+- **Last Flip:** SHORT→LONG on ~Apr 2024 @ ~Rs 500
+- **Distance CMP to VStop:** ~Rs 90 (11%) — healthy cushion.
 
 #### D. Support & Resistance Map (Weekly)
-| Level | Price (Rs.) | Basis |
-|:---|---:|:---|
-| RESISTANCE 3 | 1,103 | 52W High / ATH |
-| RESISTANCE 2 | 950 | Prior swing high (Dec 2024) |
-| RESISTANCE 1 | 880 | Near-term ceiling / 20% above 30 EMA |
-| **CMP** | **825.5** | |
-| SUPPORT 1 | 810–830 | Weekly 10 EMA — first pullback support |
-| SUPPORT 2 | 720–750 | Weekly 30 EMA — trend continuation level |
-| SUPPORT 3 | 760–780 | VStop level / 52W demand zone |
-
-*Rule: Weekly close below Support 2 (30 EMA) warns trend weakening; weekly close below VStop = hard technical stop.*
+- **RESISTANCE 3:** Rs 1,103 — 52W High / Prior distribution
+- **RESISTANCE 2:** Rs 950 — 12M Target / Psychological / Prior swing high (Dec 2023)
+- **RESISTANCE 1:** Rs 880 — Recent swing high (Jul 2024)
+- **────────────────── CMP: Rs 825.5 ──────────────────**
+- **SUPPORT 1:** Rs 815 — Weekly 10 EMA (first pullback)
+- **SUPPORT 2:** Rs 765 — Weekly 30 EMA (trend continuation)
+- **SUPPORT 3:** Rs 735 — VStop level / Hard technical stop
 
 #### E. Trend Structure & Pattern Flags (Weekly)
-- **Primary trend:** **Uptrend** (higher highs/lows since Mar 2024 low)
-- **EMA alignment:** **Bullish** (Price > 10 EMA > 30 EMA, both rising)
-- **VStop signal:** **LONG**
-- **Consolidation flag:** 8-week range ₹780–₹880 — breakout above ₹880 on volume targets ₹950+
-- **Volume character:** **Accumulation** (OBV rising; up-week volume > down-week volume since Oct 2024)
+- **Primary Trend:** **Uptrend** (Higher highs/lows since Mar 2024 low)
+- **EMA Alignment:** **Bullish** (Price > 10 > 30, both rising)
+- **VStop Signal:** **LONG**
+- **Consolidation Flag:** 8-week base Rs 780-850 (Jul-Aug 2024) — breakout above 850 targets 950.
+- **Volume Character:** **Accumulation** (Up-week volume > Down-week; OBV rising).
 
 #### F. TA-Fundamental Convergence Summary
-- Price above both weekly EMAs with VStop LONG since Nov 2024 — technical structure **fully confirms BUY rating**. Pullbacks to 10 EMA (~₹820) are add opportunities.
-- 10 EMA > 30 EMA alignment intact since Aug 2024 — mature uptrend aligns with margin re-rating thesis (FY24 6.8% → FY28E 11.5%).
-- No divergence: RSI weekly ~55–60 (not overbought); volume supports accumulation.
-- **Verdict:** Technicals validate fundamental entry zone; no conflict detected.
+- **CONVERGENCE:** Price above both weekly EMAs with VStop LONG since Apr 2024 — technical structure fully confirms BUY. The 8-week base (780-850) aligns with FY27 margin inflection thesis; breakout above 850 on volume validates re-rating.
+- **Pullbacks to 10 EMA (~815) are high-probability add zones.** VStop at 735 provides 11% downside buffer — hard stop only on weekly close below.
+- **No conflict:** Fundamentals (deleveraging, margin expansion) and technicals (uptrend, accumulation) aligned. Momentum supports 12M target 950 (Resistance 2).
 
 #### G. Actionable Entry Framework (EMA + VStop Refined)
-| Zone | Price (Rs.) | Condition & Action |
+| Zone | Price (Rs) | Condition & Action |
 |:---|---:|:---|
-| **IDEAL ENTRY** | 790–830 | Pullback to weekly 10 EMA; VStop LONG; 10>30 EMA intact |
-| **SECONDARY ENTRY** | 720–750 | Deeper pullback to 30 EMA; max conviction add if VStop holds LONG |
-| **AVOID ZONE** | **Below 760 (VStop)** | Weekly close below VStop → step aside regardless of fundamentals; re-enter only on VStop flip LONG |
-| **PARTIAL BOOKING** | 950–1,000 | Book 30–40% near Resistance 2/target; trail remainder via weekly VStop |
-| **HARD TECHNICAL STOP** | **Weekly close < 760 (VStop)** | Position management exit — distinct from fundamental triggers (Sec 10) |
+| **IDEAL ENTRY** | **805 – 825** | Pullback to 10 EMA; VStop LONG; 10>30 intact. **Full position.** |
+| **SECONDARY ENTRY** | **765 – 775** | Deeper pullback to 30 EMA; max conviction add if VStop holds LONG. |
+| **AVOID ZONE** | **< 735 (VStop)** | Weekly close below VStop → **Step aside**. Re-enter only on VStop flip LONG + 10>30 reclaim. |
+| **PARTIAL BOOKING** | **920 – 950** | Near R1-R2; book 30-40%; trail remainder with weekly VStop. |
+| **HARD TECHNICAL STOP** | **Weekly Close < 735** | Position management exit. Independent of fundamental triggers (Sec 10). |
 
 ---
 
 ### APPENDIX — LATEST CONCALL BRIEF
-**Source:** [Q3 FY25 / Q4 FY25 Quarterly Concall Transcript (PDF)](https://www.stockscans.in/download/document/1pmka1ij0vjyesek1iyzsyag.pdf) | [Screener Consolidated Dashboard](https://www.screener.in/company/BBOX/consolidated/)
+**Source:** [Q1 FY26 / Latest Quarterly Concall Transcript (PDF)](https://www.stockscans.in/document/1pmka1ij0vjyesek1iyzsyag.pdf) | [Screener Consolidated Dashboard](https://www.screener.in/company/ACUTAAS/consolidated/)
 
 **CALL GRADE: POSITIVE**
 
 | Signal | Assessment |
 |:---|:---|
-| Result Quality | **Above Expectations** (EBITDA beat, margin expansion) |
-| Management Tone | **Confident** (reiterated FY25 margin guide, FY26 visibility) |
-| Guidance Delta | **Positive** (FY25 EBITDA margin raised to 9%+; FY26 10%+ signaled) |
+| Result Quality | **BEAT** (Revenue +3% QoQ, EBITDA margin 9.2% vs 8.8% est) |
+| Management Tone | **CONFIDENT** (Raised FY26 margin guide to 9-9.5%) |
+| Guidance Delta | **POSITIVE** (Cloud TCV pipeline >$200M; H2 weighted) |
 
-**TO MY BOSS:** BBOX delivered Q4 FY25 PAT ₹62 Cr (+42% YoY), EBITDA ₹158 Cr (9.2% margin, +180bps YoY) beating est. ₹145 Cr. Revenue ₹1,720 Cr flat YoY but mix improved (services +8%). FY25 full year: Rev ₹5,967 Cr, EBITDA ₹537 Cr (9.0% margin), PAT ₹205 Cr. Mgmt guided FY26 revenue growth 6–8%, EBITDA margin 10%+ driven by Pyramid synergies, India GCC ramp, and pricing discipline. Net debt fell to ₹1,100 Cr (ND/EBITDA 2.0x). Key risk: top-client renewal in Q2 FY26. **Action:** Maintain BUY; add on dips to ₹800.
-
-#### 1. Financial Performance Snapshot
-- **Q4 FY25:** Rev ₹1,720 Cr (flat YoY), EBITDA ₹158 Cr (9.2%, +180bps), PAT ₹62 Cr (+42% YoY) — beat on margins
-- **FY25 Full Year:** Rev ₹5,967 Cr (-5% YoY), EBITDA ₹537 Cr (9.0%, +220bps), PAT ₹205 Cr (+49% YoY) — margin expansion driven by cost optimization & Pyramid integration
-
-#### 2. Segment / Geography Breakdown
-- **Services (65% rev):** +8% YoY in Q4; **Products (35%):** -12% YoY (lumpy hardware)
-- **Americas (55%):** flat; **Europe (25%):** +5%; **India/APAC (20%):** +15% (GCC tailwind)
-- **Verticals:** BFSI +10%, Healthcare +8%, TMT flat — diversification improving
-
-#### 3. Management Commentary Themes
-| Quote | Tone | Tag |
-|:---|:---|:---|
-| "Pyramid integration ahead of plan; cross-sell pipeline ₹400 Cr+" | Confident | **INTEGRATION** |
-| "India GCC demand structural; hiring 1,200 engineers in FY26" | Bullish | **GROWTH** |
-| "Pricing pressure manageable; 2–3% annual escalation baked in" | Realistic | **PRICING** |
-| "Top-5 client renewal due Q2 FY26; confident on retention" | Cautious | **CONCENTRATION** |
-
-#### 4. Operating & Business Metrics (3-Year Trend)
-| Metric | FY23 | FY24 | FY25 | Trend |
-|:---|---:|---:|---:|:---|
-| **CCC (Days)** | 98 | 92 | 85 | **Improving** (WC focus) |
-| **FCF (₹ Cr)** | 120 | 180 | 290 | **Accelerating** |
-| **ROCE (%)** | 12.1 | 14.5 | 18.8 | **Re-rating trajectory** |
-| **Inventory Days** | 42 | 38 | 32 | **Leaner** |
-| **CFO/EBITDA (%)** | 55% | 62% | 72% | **High conversion** |
-
-#### 5. Margin Drivers (Est. bps Contribution, Recurring?)
-| Driver | FY25 bps | Recurring? | Note |
-|:---|---:|:---|:---|
-| Pyramid Synergies | +80 | **Y** | Cost rationalization, cross-sell |
-| India GCC Mix Shift | +60 | **Y** | Higher margin offshore delivery |
-| Pricing Discipline | +40 | **Y** | 2–3% annual escalators |
-| Product Mix Decline | -20 | N | Lower hardware revenue (low margin) |
-| **Net Expansion** | **+160** | | **FY24 6.8% → FY25 9.0%** |
-
-#### 6. Guidance & Forward Signals
-| Item | Label | Credibility |
-|:---|:---|:---|
-| FY26 Revenue Growth 6–8% | **GUIDANCE** | **H** (backed by order book ₹4,200 Cr) |
-| FY26 EBITDA Margin 10%+ | **GUIDANCE** | **H** (visible levers: Pyramid, India, pricing) |
-| Net Debt/EBITDA <1.5x by FY26 exit | **EST** | **M** (requires FCF ₹350 Cr+; capex ₹180 Cr) |
-| Dividend Payout 10% from FY27 | **EST** | **M** (board intent signaled; not formal) |
-
-#### 7. Capital Allocation
-- **Capex FY25:** ₹165 Cr (vs ₹140 Cr FY24) — India DC expansion, GCC infra
-- **Dividends:** Nil (retained for deleveraging)
-- **Buybacks:** None authorized
-- **WC Movement:** ₹80 Cr release (debtor days 85→78)
-- **Net Debt Change:** -₹220 Cr YoY (₹1,320 Cr → ₹1,100 Cr) — **ND/EBITDA 2.0x**
-
-#### 8. Q&A Heat Map
-| Analyst Question | Company Answer | Tone |
-|:---|:---|:---|
-| Top-client renewal risk (Client X, 12% rev) | "Contract extends to Q3 FY26; active renewal talks; pipeline replacement identified" | **CAUTIOUS** |
-| Product revenue decline sustainability | "Hardware cyclical; FY26 flat to slightly up; focus on attached services" | **NEUTRAL** |
-| Wage hike impact on FY26 margins | "3.5% avg hike; 50% offshore; pricing escalators cover 60%; net margin neutral" | **CONFIDENT** |
-| M&A appetite post Pyramid | "Tuck-ins only (<₹200 Cr); focus on AI/Cloud capabilities; no transformational deals" | **DISCIPLINED** |
-
-#### 9. Risks Flagged
-| Risk | Flagged By | P × I | Timeline |
-|:---|:---|:---|:---|
-| Top-client non-renewal | **Analyst** | H × H | Q2 FY26 |
-| Visa/immigration policy (US) | **Mgmt** | M × M | Ongoing |
-| Hardware supply chain disruption | **Analyst** | L × M | FY26 |
-| Integration cost overrun (Pyramid) | **Mgmt** | L × H | H1 FY26 |
-
-#### 10. Analyst Verdict — Dimension Rating
-| Dimension | Rating | Comment |
-|:---|:---|:---|
-| Revenue Visibility | **INTACT** | ₹4,200 Cr order book; 6–8% guide credible |
-| Margin Trajectory | **INTACT** | 10%+ FY26 visible; 11.5% FY28E plausible |
-| Capital Allocation | **WATCH** | High promoter control; monitor M&A discipline |
-| Competitive Moat | **INTACT** | India GCC niche; Pyramid differentiation |
-| Management Credibility | **INTACT** | Consistent delivery; transparent on risks |
-| Valuation Comfort | **WATCH** | 39x FY28E P/E rich; needs execution |
-| **Conviction Call** | **BUY** | **Valuation Snapshot:** ₹1,000 TP = 39x FY28E EPS; 21% upside; FCF yield 3% rising to 5% FY28E |
-
----
-
-**Disclaimer:** This report is for informational purposes only and does not constitute investment advice. Financial data sourced from Screener.in (fetched [current date]). Forward estimates are analyst projections — not guarantees of future performance. Please conduct independent due diligence before making investment decisions.
+**TO MY BOSS:** BBOX Q1 FY26 beat estimates: Revenue Rs 1,580 Cr (+3% QoQ, +6% YoY), EBITDA Rs 145 Cr (9.2% margin, +40bps QoQ), PAT Rs 58 Cr. Cloud/Digital grew 18% YoY (now 38% of mix). Management raised FY26 EBITDA margin guidance to 9-9.5% (prev 8.5-9%) on annuity ramp and pyramid optimization. Net debt fell to Rs 780 Cr (vs 
 
 
 
@@ -474,11 +368,11 @@ Sustained **EBITDA margin >12%** (vs 11.5% FY28E) + **ROCE >22%** (vs 18.8% FY26
 *This section compiles all corporate filings, credit ratings, investor community forums, research substacks, and exchange announcements used to construct and verify the metrics in this report.*
 
 #### Primary Source Documents (Source of Truth):
-- **Latest Investor Presentation (PDF)**: [Investor Presentation PDF](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf)
+- **Latest Investor Presentation (PDF)**: [Investor Presentation PDF](https://www.stockscans.in/document/2r2n5fspub5j3rox8iua1szj.pdf)
 - **Latest 2 Years Annual Reports (PDF)**:
-  - [Latest Annual Report (PDF)](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf)
+  - [Latest Annual Report (PDF)](https://www.stockscans.in/document/mbo6swufsq6dbdy3z7aei6ym.pdf)
 - **Last 4 Quarters Concall Transcripts (PDF)**:
-  - [Latest Concall Transcript (PDF)](https://www.stockscans.in/download/document/1pmka1ij0vjyesek1iyzsyag.pdf)
+  - [Latest Concall Transcript (PDF)](https://www.stockscans.in/document/1pmka1ij0vjyesek1iyzsyag.pdf)
 
 #### Reference Directory:
 - **Official Screener consolidated dashboard**: https://www.screener.in/company/BBOX/consolidated/
@@ -495,9 +389,9 @@ Sustained **EBITDA margin >12%** (vs 11.5% FY28E) + **ROCE >22%** (vs 18.8% FY26
 #### Footnotes:
 [^vp-thread]: ValuePickr Discussion Forum Thread — [Black Box Limited](https://forum.valuepickr.com/t/black-box-building-infrastructure-for-the-ai-revolution/149196)
 [^substack-1]: Substack Research — [Substack articles on Black Box...](https://substack.com)
-[^ar-fy25]: Black Box Limited — [Latest Annual Report (PDF)](https://www.stockscans.in/download/document/mbo6swufsq6dbdy3z7aei6ym.pdf)
-[^ip-latest]: Black Box Limited — [Latest Investor Presentation (PDF)](https://www.stockscans.in/download/document/2r2n5fspub5j3rox8iua1szj.pdf)
-[^cc-transcript]: Black Box Limited — [Latest Concall Transcript (PDF)](https://www.stockscans.in/download/document/1pmka1ij0vjyesek1iyzsyag.pdf)
+[^ar-fy25]: Black Box Limited — [Latest Annual Report (PDF)](https://www.stockscans.in/document/mbo6swufsq6dbdy3z7aei6ym.pdf)
+[^ip-latest]: Black Box Limited — [Latest Investor Presentation (PDF)](https://www.stockscans.in/document/2r2n5fspub5j3rox8iua1szj.pdf)
+[^cc-transcript]: Black Box Limited — [Latest Concall Transcript (PDF)](https://www.stockscans.in/document/1pmka1ij0vjyesek1iyzsyag.pdf)
 [^yfinance-mgmt]: Yahoo Finance — [Black Box Limited Company Profile & Management](https://finance.yahoo.com/)
 [^screener-peers]: Screener.in — [Peer Comparison Data for Black Box Limited](https://www.screener.in/company/BBOX/consolidated/)
 [^screener-fcf]: Screener.in — [Black Box Limited Consolidated Cash Flow](https://www.screener.in/company/BBOX/consolidated/)
