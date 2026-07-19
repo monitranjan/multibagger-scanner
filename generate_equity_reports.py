@@ -1295,8 +1295,8 @@ def clean_company_name(name: str) -> str:
     cleaned = re.sub(r'\s+', ' ', cleaned).strip()
     return cleaned
 
-def fetch_valuepickr_thread(company_name: str) -> str:
-    """Search ValuePickr forum API directly and return the matched topic thread URL."""
+def fetch_valuepickr_thread(company_name: str) -> tuple:
+    """Search ValuePickr forum API directly and return the matched topic thread URL and topic ID."""
     cleaned = clean_company_name(company_name)
     term = cleaned.replace(" ", "%20")
     url = f"https://forum.valuepickr.com/search/query?term={term}"
@@ -1327,11 +1327,58 @@ def fetch_valuepickr_thread(company_name: str) -> str:
                     if slug and topic_id:
                         full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
                         print(f"🎯 ValuePickr thread matched: {full_thread_url}")
-                        return full_thread_url
+                        return full_thread_url, topic_id
                 print(f"⚠️ ValuePickr topic check: No matching topic titles found for query terms {query_terms}")
     except Exception as e:
         print(f"⚠️ ValuePickr API search error: {e}")
-    return "https://forum.valuepickr.com/"
+    return "https://forum.valuepickr.com/", None
+
+def fetch_valuepickr_posts(topic_id: int) -> str:
+    """Fetch the top 5 and bottom 5 posts from the ValuePickr thread to feed to the LLM context."""
+    url = f"https://forum.valuepickr.com/t/{topic_id}.json"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "Accept": "application/json"
+    }
+    try:
+        print(f"📖 [ValuePickr API] Fetching posts for topic ID: {topic_id}")
+        r = requests.get(url, headers=headers, timeout=15)
+        if r.status_code == 200:
+            data = r.json()
+            post_stream = data.get("post_stream", {})
+            posts = post_stream.get("posts", [])
+            if not posts:
+                return ""
+            
+            # Select top 5 and bottom 5 posts
+            selected_posts = []
+            
+            # Top 5 posts (or all if total posts < 5)
+            top_count = min(5, len(posts))
+            for i in range(top_count):
+                selected_posts.append((i + 1, posts[i]))
+                
+            # Bottom 5 posts (avoiding overlap with top 5)
+            if len(posts) > 5:
+                bottom_start = max(5, len(posts) - 5)
+                for i in range(bottom_start, len(posts)):
+                    selected_posts.append((i + 1, posts[i]))
+            
+            # Clean and compile text
+            compiled_text = ""
+            for idx, post in selected_posts:
+                username = post.get("username", "User")
+                raw_cooked = post.get("cooked", "")
+                # Simple HTML tag stripper
+                clean_text = re.sub(r'<[^>]*>', ' ', raw_cooked)
+                clean_text = re.sub(r'\s+', ' ', clean_text).strip()
+                if len(clean_text) > 1200:
+                    clean_text = clean_text[:1200] + "... (truncated)"
+                compiled_text += f"Post #{idx} by @{username}:\n{clean_text}\n\n"
+            return compiled_text.strip()
+    except Exception as e:
+        print(f"⚠️ ValuePickr posts fetching error: {e}")
+    return ""
 
 def get_company_web_context(company_name: str, symbol: str) -> dict:
     """Gather company overview, plants, and PDF presentation/annual report links directly without DDG fallback."""
@@ -1356,12 +1403,18 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
         ar_pdf = "https://nseindia.com/"
     if not concall_pdf:
         concall_pdf = "https://concall.in/"
-    val_url = fetch_valuepickr_thread(cleaned_name)
+        
+    val_url, topic_id = fetch_valuepickr_thread(cleaned_name)
+    val_posts_context = ""
+    if topic_id:
+        val_posts_context = fetch_valuepickr_posts(topic_id)
+        
     return {
         "ip_pdf": ip_pdf,
         "ar_pdf": ar_pdf,
         "concall_pdf": concall_pdf,
-        "valuepickr_url": val_url
+        "valuepickr_url": val_url,
+        "valuepickr_posts": val_posts_context
     }
 
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
@@ -1438,6 +1491,8 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
     concall_pdf = web_context.get("concall_pdf", "https://concall.in/")
     valuepickr_url = web_context.get("valuepickr_url", "https://forum.valuepickr.com/")
 
+    valuepickr_posts = web_context.get("valuepickr_posts", "")
+
     # Build metadata block with formatted actuals and verified sources
     metadata = f"""
 COMPANY: {company}
@@ -1456,6 +1511,9 @@ YOUR RATING: BUY
 
 --- VERIFIED INVESTOR COMMUNITY DISCUSSION FORUM ---
 - ValuePickr Discussion Forum Thread: {valuepickr_url}
+
+--- VERIFIED VALUEPICKR DISCUSSION FORUM POSTS (TOP 5 AND BOTTOM 5 REPLIES) ---
+{valuepickr_posts or "No active forum discussion posts details available."}
 
 --- ACTUAL FINANCIAL RATIOS AND DATA FOR HEADER BLOCK ---
 P/E (TTM): {pe:.2f}x
