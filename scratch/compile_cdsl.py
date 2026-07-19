@@ -239,14 +239,24 @@ def fetch_valuepickr_thread(company_name: str) -> str:
             data = r.json()
             topics = data.get("topics", [])
             if topics:
-                # Find the most relevant topic (first returned match is typically the most active/relevant)
-                best_topic = topics[0]
-                slug = best_topic.get("slug")
-                topic_id = best_topic.get("id")
-                if slug and topic_id:
-                    full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
-                    print(f"🎯 ValuePickr thread matched: {full_thread_url}")
-                    return full_thread_url
+                # Filter to verify the topic title contains any term of our query
+                query_terms = [t.lower() for t in cleaned.split() if len(t) >= 3]
+                best_topic = None
+                for t in topics:
+                    t_title = t.get("title", "").lower()
+                    t_slug = t.get("slug", "").lower()
+                    # Check if query terms are matching the topic metadata
+                    if not query_terms or any(term in t_title or term in t_slug for term in query_terms):
+                        best_topic = t
+                        break
+                if best_topic:
+                    slug = best_topic.get("slug")
+                    topic_id = best_topic.get("id")
+                    if slug and topic_id:
+                        full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
+                        print(f"🎯 ValuePickr thread matched: {full_thread_url}")
+                        return full_thread_url
+                print(f"⚠️ ValuePickr topic check: No matching topic titles found for query terms {query_terms}")
     except Exception as e:
         print(f"⚠️ ValuePickr API search error: {e}")
     return "https://forum.valuepickr.com/"
