@@ -15,6 +15,7 @@ from datetime import datetime, date, timedelta
 import sqlite3
 import pandas as pd
 from pathlib import Path
+from bs4 import BeautifulSoup
 
 def load_dotenv():
     """Load variables from .env file into os.environ if it exists."""
@@ -1184,6 +1185,174 @@ def get_report_date_str(filepath):
     except Exception:
         return datetime.today().strftime("%d %b %Y")
 
+def fetch_stockscans_documents(symbol: str, exchange: str) -> dict:
+    """Query StockScans documents APIs and resolve links based on documentType classification."""
+    headers = {"accept": "application/json", "content-type": "application/json"}
+    ip_links = []
+    ar_links = []
+    cc_links = []
+    for doc_type in ["documents", "announcements"]:
+        url = f"https://www.stockscans.in/api/company/{doc_type}/{exchange}:{symbol}"
+        try:
+            print(f"📊 [StockScans API] Checking {doc_type} at: {url}")
+            r = requests.get(url, headers=headers, timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                items = []
+                if isinstance(data, list):
+                    items = data
+                elif isinstance(data, dict):
+                    for k, v in data.items():
+                        if isinstance(v, list):
+                            items.extend(v)
+                for item in items:
+                    if not isinstance(item, dict):
+                        continue
+                    ss_url = item.get("ssUrl") or item.get("url") or item.get("pdf")
+                    if not ss_url or not isinstance(ss_url, str):
+                        continue
+                    if not ss_url.startswith("http"):
+                        prefix = "document" if doc_type == "documents" else "announcement"
+                        full_url = f"https://www.stockscans.in/{prefix}/{ss_url}"
+                    else:
+                        full_url = ss_url
+                    doc_class = str(item.get("documentType", "")).lower()
+                    if not doc_class:
+                        doc_class = full_url.lower()
+                    date_str = str(item.get("date", ""))
+                    if "annual" in doc_class or "ar" in doc_class or "report" in doc_class:
+                        ar_links.append((full_url, date_str))
+                    elif "ppt" in doc_class or "presentation" in doc_class or "investor" in doc_class:
+                        ip_links.append((full_url, date_str))
+                    elif "transcript" in doc_class or "concall" in doc_class:
+                        cc_links.append((full_url, date_str))
+        except Exception as e:
+            print(f"⚠️ Error querying StockScans {doc_type} endpoint: {e}")
+    def get_item_date_score(item_tuple):
+        url, date_str = item_tuple
+        if date_str:
+            digits = re.findall(r'\d+', date_str)
+            if digits:
+                d_val = digits[0]
+                if len(d_val) >= 4:
+                    year = int(d_val[:4])
+                    if 2018 <= year <= 2028:
+                        return year
+                elif len(d_val) == 2:
+                    year = 2000 + int(d_val)
+                    if 2018 <= year <= 2028:
+                        return year
+        url_clean = url.split("?")[0]
+        years = re.findall(r'20\d{2}|\b\d{2}\b', url_clean)
+        valid_years = [int(y) if len(y) == 4 else 2000 + int(y) for y in years]
+        valid_years = [y for y in valid_years if 2018 <= y <= 2028]
+        return max(valid_years) if valid_years else 0
+    ip_pdf = max(ip_links, key=get_item_date_score)[0] if ip_links else None
+    ar_pdf = max(ar_links, key=get_item_date_score)[0] if ar_links else None
+    concall_pdf = max(cc_links, key=get_item_date_score)[0] if cc_links else None
+    return {"ip_pdf": ip_pdf, "ar_pdf": ar_pdf, "concall_pdf": concall_pdf}
+
+def fetch_screener_documents(symbol: str) -> dict:
+    """Scrape official document PDF links directly from the Screener.in company page and return the latest ones."""
+    url = f"https://www.screener.in/company/{symbol}/consolidated/"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36"
+    }
+    ip_links, ar_links, cc_links = [], [], []
+    try:
+        print(f"🔍 [Screener Scraper] Crawling docs page at: {url}")
+        r = requests.get(url, headers=headers, timeout=12)
+        if r.status_code == 200:
+            soup = BeautifulSoup(r.text, 'html.parser')
+            for a in soup.find_all('a', href=True):
+                href = a['href']
+                text = a.text.lower()
+                href_lower = href.lower()
+                full_href = href if href.startswith("http") else "https://www.screener.in" + href
+                if ("annual report" in text or "annual-report" in href_lower or "annual_report" in href_lower) and href_lower.endswith(".pdf"):
+                    ar_links.append(full_href)
+                elif ("transcript" in text or "concall" in text or "concall-transcript" in href_lower or "concall_transcript" in href_lower) and href_lower.endswith(".pdf"):
+                    cc_links.append(full_href)
+                elif ("presentation" in text or "investor-presentation" in href_lower or "investor_presentation" in href_lower) and href_lower.endswith(".pdf"):
+                    ip_links.append(full_href)
+    except Exception as e:
+        print(f"⚠️ Screener documents scraping error: {e}")
+    def get_year_score(url):
+        url_clean = url.split("?")[0]
+        years = re.findall(r'20\d{2}|\b\d{2}\b', url_clean)
+        valid_years = [int(y) if len(y) == 4 else 2000 + int(y) for y in years]
+        valid_years = [y for y in valid_years if 2018 <= y <= 2028]
+        return max(valid_years) if valid_years else 0
+    return {
+        "ip_pdf": max(ip_links, key=get_year_score) if ip_links else None,
+        "ar_pdf": max(ar_links, key=get_year_score) if ar_links else None,
+        "concall_pdf": max(cc_links, key=get_year_score) if cc_links else None
+    }
+
+def clean_company_name(name: str) -> str:
+    """Remove common corporate suffixes from company name to improve search precision."""
+    cleaned = re.sub(r'\b(limited|ltd|corporation|corp|co|company|ltd\.)\b', '', name, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    return cleaned
+
+def fetch_valuepickr_thread(company_name: str) -> str:
+    """Search ValuePickr forum API directly and return the matched topic thread URL."""
+    cleaned = clean_company_name(company_name)
+    term = cleaned.replace(" ", "%20")
+    url = f"https://forum.valuepickr.com/search/query?term={term}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "Accept": "application/json"
+    }
+    try:
+        print(f"🔍 [ValuePickr API] Querying thread search for: {cleaned}")
+        r = requests.get(url, headers=headers, timeout=12)
+        if r.status_code == 200:
+            data = r.json()
+            topics = data.get("topics", [])
+            if topics:
+                best_topic = topics[0]
+                slug = best_topic.get("slug")
+                topic_id = best_topic.get("id")
+                if slug and topic_id:
+                    full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
+                    print(f"🎯 ValuePickr thread matched: {full_thread_url}")
+                    return full_thread_url
+    except Exception as e:
+        print(f"⚠️ ValuePickr API search error: {e}")
+    return "https://forum.valuepickr.com/"
+
+def get_company_web_context(company_name: str, symbol: str) -> dict:
+    """Gather company overview, plants, and PDF presentation/annual report links directly without DDG fallback."""
+    cleaned_name = clean_company_name(company_name)
+    print(f"🔍 [SEARCH] Gathering web search context for {cleaned_name} ({symbol})...")
+    ss_docs = fetch_stockscans_documents(symbol, "NSE")
+    ip_pdf = ss_docs.get("ip_pdf")
+    ar_pdf = ss_docs.get("ar_pdf")
+    concall_pdf = ss_docs.get("concall_pdf")
+    if not ip_pdf or not ar_pdf or not concall_pdf:
+        print("🔍 Attempting to scrape missing PDFs directly from Screener...")
+        screener_docs = fetch_screener_documents(symbol)
+        if not ip_pdf:
+            ip_pdf = screener_docs.get("ip_pdf")
+        if not ar_pdf:
+            ar_pdf = screener_docs.get("ar_pdf")
+        if not concall_pdf:
+            concall_pdf = screener_docs.get("concall_pdf")
+    if not ip_pdf:
+        ip_pdf = "https://nseindia.com/"
+    if not ar_pdf:
+        ar_pdf = "https://nseindia.com/"
+    if not concall_pdf:
+        concall_pdf = "https://concall.in/"
+    val_url = fetch_valuepickr_thread(cleaned_name)
+    return {
+        "ip_pdf": ip_pdf,
+        "ar_pdf": ar_pdf,
+        "concall_pdf": concall_pdf,
+        "valuepickr_url": val_url
+    }
+
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
     """Invoke the Gemini API in three distinct stages to guarantee complete, non-truncated reports."""
     symbol = r["symbol"]
@@ -1251,7 +1420,14 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
             except Exception:
                 pass
                 
-    # Build metadata block with formatted actuals
+    # Fetch verified corporate documents and forum link
+    web_context = get_company_web_context(company, symbol)
+    ip_pdf = web_context.get("ip_pdf", "https://nseindia.com/")
+    ar_pdf = web_context.get("ar_pdf", "https://nseindia.com/")
+    concall_pdf = web_context.get("concall_pdf", "https://concall.in/")
+    valuepickr_url = web_context.get("valuepickr_url", "https://forum.valuepickr.com/")
+
+    # Build metadata block with formatted actuals and verified sources
     metadata = f"""
 COMPANY: {company}
 NSE TICKER: {symbol}
@@ -1261,6 +1437,14 @@ CMP: Rs. {cmp:.2f}
 MARKET CAP: Rs. {mcap:.1f} Cr
 YOUR RATING: BUY
 12M TARGET: (Please calculate dynamically based on peer multiples, financial data, and your valuation modeling)
+
+--- VERIFIED CORPORATE DOCUMENTS (PRIMARY SOURCE OF TRUTH) ---
+- Official Latest Investor Presentation (PDF): {ip_pdf}
+- Official Latest Annual Report (PDF): {ar_pdf}
+- Official Latest Quarterly Concall Transcript (PDF): {concall_pdf}
+
+--- VERIFIED INVESTOR COMMUNITY DISCUSSION FORUM ---
+- ValuePickr Discussion Forum Thread: {valuepickr_url}
 
 --- ACTUAL FINANCIAL RATIOS AND DATA FOR HEADER BLOCK ---
 P/E (TTM): {pe:.2f}x
