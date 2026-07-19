@@ -1380,6 +1380,42 @@ def fetch_valuepickr_posts(topic_id: int) -> str:
         print(f"⚠️ ValuePickr posts fetching error: {e}")
     return ""
 
+def fetch_stockscans_announcements_scan(symbol: str) -> list[dict]:
+    """Query StockScans announcements scan API for latest corporate announcements."""
+    url = "https://www.stockscans.in/api/company/announcements/scan"
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36"
+    }
+    payload = {
+        "scan": {
+            "scanId": "797b00d9ba9ce9fbe3f95511",
+            "scanName": symbol,
+            "filters": [],
+            "industry": [],
+            "index": [],
+            "watchlistIds": [],
+            "searchFilters": [symbol],
+            "announcementType": "All",
+            "alerts": False,
+            "searchMode": "full",
+            "companyIds": [],
+            "companyFilters": []
+        },
+        "offset": 0,
+        "quarterDate": "202609"
+    }
+    try:
+        print(f"📊 [StockScans Scan API] Querying announcements for {symbol}...")
+        r = requests.post(url, json=payload, headers=headers, timeout=10)
+        if r.status_code == 200:
+            data = r.json()
+            return data.get("announcements", [])
+    except Exception as e:
+        print(f"⚠️ Error querying announcements scan: {e}")
+    return []
+
 def get_company_web_context(company_name: str, symbol: str) -> dict:
     """Gather company overview, plants, and PDF presentation/annual report links directly without DDG fallback."""
     cleaned_name = clean_company_name(company_name)
@@ -1409,12 +1445,24 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
     if topic_id:
         val_posts_context = fetch_valuepickr_posts(topic_id)
         
+    # Fetch recent corporate announcements via search scan API
+    announcements_list = fetch_stockscans_announcements_scan(symbol)
+    announcements_context = ""
+    for idx, item in enumerate(announcements_list[:6]):  # Keep the top 6 latest announcements
+        date_str = item.get("date", "")
+        title = item.get("title", "")
+        desc = item.get("description", "")
+        ss_url = item.get("ssUrl", "")
+        full_url = f"https://www.stockscans.in/announcement/{ss_url}" if ss_url else ""
+        announcements_context += f"- **Date**: {date_str}\n  **Title**: {title}\n  **Description**: {desc}\n  **Document Link**: [{title} PDF]({full_url})\n\n"
+        
     return {
         "ip_pdf": ip_pdf,
         "ar_pdf": ar_pdf,
         "concall_pdf": concall_pdf,
         "valuepickr_url": val_url,
-        "valuepickr_posts": val_posts_context
+        "valuepickr_posts": val_posts_context,
+        "announcements": announcements_context.strip()
     }
 
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
@@ -1492,6 +1540,7 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
     valuepickr_url = web_context.get("valuepickr_url", "https://forum.valuepickr.com/")
 
     valuepickr_posts = web_context.get("valuepickr_posts", "")
+    announcements = web_context.get("announcements", "")
 
     # Build metadata block with formatted actuals and verified sources
     metadata = f"""
@@ -1508,6 +1557,9 @@ YOUR RATING: BUY
 - Official Latest Investor Presentation (PDF): {ip_pdf}
 - Official Latest Annual Report (PDF): {ar_pdf}
 - Official Latest Quarterly Concall Transcript (PDF): {concall_pdf}
+
+--- VERIFIED RECENT CORPORATE ANNOUNCEMENTS ---
+{announcements or "No recent critical corporate announcements found."}
 
 --- VERIFIED INVESTOR COMMUNITY DISCUSSION FORUM ---
 - ValuePickr Discussion Forum Thread: {valuepickr_url}
@@ -1591,118 +1643,105 @@ Public %: {public_val:.2f}%
         primary_model = primary_model.strip() if primary_model else ""
         # We try primary_model first.
         models_to_try = [primary_model]
-        # Read fallback models from environment secret (comma-separated) or use defaults
+        # Read fallback models from environment secret (comma-separated)
         fallback_env = os.environ.get("FALLBACK_MODELS")
         if fallback_env:
             for m in fallback_env.split(","):
                 m_clean = m.strip()
                 if m_clean and m_clean not in models_to_try:
                     models_to_try.append(m_clean)
-        else:
-            if "gemini" in primary_model.lower():
-                if primary_model != "gemini-3.1-flash-lite":
-                    models_to_try.append("gemini-3.1-flash-lite")
-                if "gemini-flash-latest" not in models_to_try:
-                    models_to_try.append("gemini-flash-latest")
             
-        for attempt_model in models_to_try:
-            print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model}...")
+        for model_idx, attempt_model in enumerate(models_to_try):
+            # 3 retries for primary model (model_idx == 0), 1 retry for fallback models
+            max_model_attempts = 3 if model_idx == 0 else 1
             
-            # Setup payload / call logic based on model router (Gemini vs OpenRouter)
-            if "/" in attempt_model or not attempt_model.lower().startswith("gemini"):
-                # OpenRouter API call path
-                or_key = os.environ.get("OPENROUTER_API_KEY")
-                if not or_key:
-                    print(f"❌ [STAGE {stage_num}] Missing OPENROUTER_API_KEY for {attempt_model}")
-                    continue
-                or_url = "https://openrouter.ai/api/v1/chat/completions"
-                or_headers = {
-                    "Authorization": f"Bearer {or_key}",
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": "https://github.com/monitranjan/multibagger-scanner",
-                    "X-Title": "Multibagger Scanner"
-                }
-                or_payload = {
-                    "model": attempt_model,
-                    "messages": [{"role": "user", "content": prompt_text}],
-                    "temperature": 0.2,
-                    "max_tokens": 25000
-                }
-                try:
-                    r_post = requests.post(or_url, json=or_payload, headers=or_headers, timeout=180)
-                    if r_post.status_code == 200:
-                        choices = r_post.json().get("choices", [])
-                        if choices:
-                            candidate_text = choices[0].get("message", {}).get("content", "")
-                            if candidate_text:
-                                res_json = {
-                                    "candidates": [{
-                                        "finishReason": "STOP",
-                                        "content": {
-                                            "parts": [{"text": candidate_text}]
-                                        }
-                                    }]
-                                }
-                            else:
-                                print(f"⚠️ [STAGE {stage_num}] Empty response from OpenRouter {attempt_model}")
-                                continue
-                        else:
-                            print(f"⚠️ [STAGE {stage_num}] No choices in OpenRouter response")
-                            continue
-                    else:
-                        print(f"⚠️ [STAGE {stage_num}] OpenRouter HTTP {r_post.status_code}: {r_post.text}")
-                        continue
-                except Exception as exc:
-                    print(f"⚠️ [STAGE {stage_num}] Exception calling OpenRouter {attempt_model}: {exc}")
-                    continue
-            else:
-                # Standard Gemini API path
-                gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
-                if ("latest" in attempt_model or "thinking" in attempt_model) and "pro" not in attempt_model:
-                    gen_config["thinkingConfig"] = {"thinkingBudget": 0}
+            for model_attempt in range(1, max_model_attempts + 1):
+                print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model} (Attempt {model_attempt}/{max_model_attempts})...")
+                
+                # Setup payload / call logic based on model router (Gemini vs OpenRouter)
+                res_json = None
+                if "/" in attempt_model or not attempt_model.lower().startswith("gemini"):
+                    # OpenRouter API call path
+                    or_key = os.environ.get("OPENROUTER_API_KEY")
+                    if not or_key:
+                        print(f"❌ [STAGE {stage_num}] Missing OPENROUTER_API_KEY for {attempt_model}")
+                        break
+                    or_url = "https://openrouter.ai/api/v1/chat/completions"
+                    or_headers = {
+                        "Authorization": f"Bearer {or_key}",
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": "https://github.com/monitranjan/multibagger-scanner",
+                        "X-Title": "Multibagger Scanner"
+                    }
+                    or_payload = {
+                        "model": attempt_model,
+                        "messages": [{"role": "user", "content": prompt_text}],
+                        "temperature": 0.2,
+                        "max_tokens": 25000
+                    }
+                    try:
+                        r_post = requests.post(or_url, json=or_payload, headers=or_headers, timeout=180)
+                        if r_post.status_code == 200:
+                            choices = r_post.json().get("choices", [])
+                            if choices:
+                                candidate_text = choices[0].get("message", {}).get("content", "")
+                                if candidate_text:
+                                    res_json = {
+                                        "candidates": [{
+                                            "finishReason": "STOP",
+                                            "content": {
+                                                "parts": [{"text": candidate_text}]
+                                            }
+                                        }]
+                                    }
+                    except Exception as exc:
+                        print(f"⚠️ [STAGE {stage_num}] Exception calling OpenRouter {attempt_model}: {exc}")
+                else:
+                    # Standard Gemini API path
+                    gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
+                    if ("latest" in attempt_model or "thinking" in attempt_model) and "pro" not in attempt_model:
+                        gen_config["thinkingConfig"] = {"thinkingBudget": 0}
+                        
+                    payload = {
+                        "contents": [{"parts": [{"text": prompt_text}]}],
+                        "generationConfig": gen_config
+                    }
                     
-                payload = {
-                    "contents": [{"parts": [{"text": prompt_text}]}],
-                    "generationConfig": gen_config
-                }
-                
-                stage_url = f"https://generativelanguage.googleapis.com/v1beta/models/{attempt_model}:generateContent?key={api_key}"
-                
-                try:
-                    res_json = call_gemini_with_retry(stage_url, payload)
-                except Exception as exc:
-                    print(f"⚠️ [STAGE {stage_num}] Exception calling {attempt_model}: {exc}. Trying next option...")
-                    continue
-            if not res_json or "candidates" not in res_json:
-                print(f"⚠️ [STAGE {stage_num}] Failed API call for {attempt_model}. Trying next option...")
-                continue
-                
-            candidate = res_json["candidates"][0]
-            finish_reason = candidate.get("finishReason")
-            
-            if "content" not in candidate or "parts" not in candidate["content"]:
-                print(f"⚠️ [STAGE {stage_num}] No content in candidate from {attempt_model}. Trying next option...")
-                continue
-                
-            text = candidate["content"]["parts"][0]["text"].strip()
-            
-            # Validate completion
-            missing_headers = []
-            for h in expected_headers:
-                if not re.search(h, text, re.IGNORECASE):
-                    missing_headers.append(h)
+                    stage_url = f"https://generativelanguage.googleapis.com/v1beta/models/{attempt_model}:generateContent?key={api_key}"
                     
-            if finish_reason == "MAX_TOKENS" or missing_headers:
-                print(f"⚠️ [STAGE {stage_num}] Incomplete output using {attempt_model} (finishReason: {finish_reason}, missing headers: {missing_headers})")
-                if len(models_to_try) > 1 and attempt_model == primary_model:
-                    print(f"🔄 [STAGE {stage_num}] Falling back from {primary_model} to {models_to_try[1]}...")
+                    try:
+                        res_json = call_gemini_with_retry(stage_url, payload)
+                    except Exception as exc:
+                        print(f"⚠️ [STAGE {stage_num}] Exception calling {attempt_model}: {exc}")
+                        
+                if not res_json or "candidates" not in res_json:
+                    print(f"⚠️ [STAGE {stage_num}] Failed API call for {attempt_model}. Trying next attempt...")
                     continue
-            
-            # Successful run
-            print(f"✅ [STAGE {stage_num}] Successfully generated via {attempt_model}!")
-            return text
-            
-        raise RuntimeError(f"Stage {stage_num} failed completely on all available models.")
+                    
+                candidate = res_json["candidates"][0]
+                finish_reason = candidate.get("finishReason")
+                
+                if "content" not in candidate or "parts" not in candidate["content"]:
+                    print(f"⚠️ [STAGE {stage_num}] No content in candidate from {attempt_model}. Trying next attempt...")
+                    continue
+                    
+                text = candidate["content"]["parts"][0]["text"].strip()
+                
+                # Validate completion
+                missing_headers = []
+                for h in expected_headers:
+                    if not re.search(h, text, re.IGNORECASE):
+                        missing_headers.append(h)
+                        
+                if finish_reason == "MAX_TOKENS" or missing_headers:
+                    print(f"⚠️ [STAGE {stage_num}] Incomplete output using {attempt_model} (finishReason: {finish_reason}, missing headers: {missing_headers})")
+                    continue
+                
+                # Successful run
+                print(f"✅ [STAGE {stage_num}] Successfully generated via {attempt_model}!")
+                return text
+                
+        raise RuntimeError(f"Stage {stage_num} failed completely on all available models and retry limits.")
 
     # Split prompt template into three clean stages
     parts1 = prompt_template.split("### SECTION 6 — FINANCIAL DEEP-DIVE")
@@ -1727,8 +1766,28 @@ Public %: {public_val:.2f}%
         f"1. You are tasked with generating PART 1 of the equity research report for {company} ({symbol}).\n"
         f"2. You MUST ONLY generate the HEADER BLOCK and SECTIONS 2 to 5.\n"
         f"3. Under no circumstances should you generate SECTION 6 or beyond in this call. Stop generating immediately after Section 5.\n"
-        f"4. Format the Header Block metrics as exactly two wide horizontal tables stacked vertically.\n"
-        f"5. {whitespace_rule}\n\n"
+        f"4. Format the Header Block metrics as exactly two wide horizontal tables stacked vertically. You MUST use this exact markdown template format (no other fields or columns):\n"
+        f"\n"
+        f"   Table 1: Valuation & Returns Snapshot\n"
+        f"   | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value |\n"
+        f"   | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        f"   | Rating | BUY | 12M Target | Rs. [Target] | Upside | [Upside]% | CMP | Rs. [CMP] |\n"
+        f"   | Market Cap | Rs. [MCap] Cr | 52W High | Rs. [High] | 52W Low | Rs. [Low] | | |\n"
+        f"\n"
+        f"   Table 2: Fundamentals & Shareholding\n"
+        f"   | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value |\n"
+        f"   | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        f"   | P/E (TTM) | [PE]x | P/B (TTM) | [PB]x | ROCE | [ROCE]% | ROE | [ROE]% | EPS (FY25A) | Rs. [EPS] |\n"
+        f"   | Div Yield | [DY]% | Face Value | Rs. [FV] | Promoter % | [Prom]% | FII % | [FII]% | DII % | [DII]% |\n"
+        f"\n"
+        f"5. CITATION REQUIREMENT: You MUST actively cite your sources inside the text of SECTIONS 2, 3, 4, and 5 by appending standard footnote markers at the end of relevant sentences:\n"
+        f"   - Use `[^ip-latest]` for facts sourced from the Investor Presentation.\n"
+        f"   - Use `[^ar-fy25]` for facts sourced from the Annual Report.\n"
+        f"   - Use `[^cc-transcript]` for concall commentary/details.\n"
+        f"   - Use `[^vp-thread]` for investor community discussion arguments.\n"
+        f"   Be diligent and ensure almost every major point or metric has a citation marker!\n"
+        f"6. NO FOOTNOTE DEFINITIONS OR BIBLIOGRAPHY: Absolutely DO NOT generate any footnote definition blocks (e.g., [^ip-latest]: ...) or bibliography list or disclaimers at the end of this stage. Only output the footnote markers inside the text. Stop generating immediately after Section 5.\n"
+        f"7. {whitespace_rule}\n\n"
         f"Generate PART 1 (Header Block up to end of Section 5) for:\n\n"
         f"{metadata}"
     )
@@ -1800,11 +1859,17 @@ Public %: {public_val:.2f}%
         f"2. You MUST cover the remaining sections: SECTION 8 (Valuation scenarios), SECTION 9 (Key Risks), SECTION 10 (Recommendations), SECTION 10B (Technical Chart Levels EMA map), APPENDIX (Latest Concall Brief), and Global Disclaimer.\n"
         f"3. START DIRECTLY with the header '### SECTION 8 — VALUATION'. Do NOT repeat any header, title, metadata, or preceding sections from PART 1 or PART 2.\n"
         f"4. Maintain absolute mathematical and analytical consistency with the rating, financials, and valuation established in PART 1 and PART 2.\n"
-        f"5. CRITICAL DENSITY RULE: Keep all Stage 3 sections extremely dense and concise to prevent text truncation:\n"
+        f"5. CITATION REQUIREMENT: You MUST actively cite your sources inside the text of Stage 3 (especially inside the Valuation narrative and the APPENDIX Concall Brief) by appending standard footnote markers at the end of relevant sentences:\n"
+        f"   - Use `[^ip-latest]` for facts sourced from the Investor Presentation.\n"
+        f"   - Use `[^ar-fy25]` for facts sourced from the Annual Report.\n"
+        f"   - Use `[^cc-transcript]` for concall commentary/details.\n"
+        f"   - Use `[^vp-thread]` for investor community discussion arguments.\n"
+        f"6. NO FOOTNOTE DEFINITIONS: Absolutely DO NOT write any footnote definition blocks (e.g., [^ip-latest]: ...) or bibliography list at the end of your response. These are appended programmatically in python. Stop generating immediately after the global disclaimer.\n"
+        f"7. CRITICAL DENSITY RULE: Keep all Stage 3 sections extremely dense and concise to prevent text truncation:\n"
         f"   - SECTION 9 (Key Risks): List exactly 5-6 core risks with a 1-line description and 1-line monitoring metric each.\n"
         f"   - SECTION 10B (Technical EMAs & Chart Levels): Provide highly precise, compact, single-line answers for all indicators.\n"
         f"   - APPENDIX (Latest Concall Brief): Summarize each of the 10 subsections in exactly 1-2 punchy, data-filled bullet points. Keep it extremely dense and free of empty transition phrases.\n"
-        f"6. {whitespace_rule}\n\n"
+        f"8. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 and PART 2 generated previously for consistency:\n"
         f"--- START OF CONTEXT ---\n"
         f"{compact_context_part3}\n"
@@ -1816,8 +1881,49 @@ Public %: {public_val:.2f}%
     stage3_headers = ["SECTION 8", "SECTION 9", "SECTION 10", "TECHNICAL LEVELS|SECTION 10B", "CONCALL BRIEF|APPENDIX", "DISCLAIMER"]
     part3_text = call_stage_with_fallback(3, stage3_prompt, stage3_headers, model)
     
-    # Combine all three parts beautifully
-    full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text
+    # Build reference directory section programmatically
+    ref_directory = f"""
+
+---
+
+### SECTION 11 — DOCUMENT REFERENCE DIRECTORY
+
+*This section compiles all corporate filings, credit ratings, investor community forums, research substacks, and exchange announcements used to construct and verify the metrics in this report.*
+
+#### Primary Source Documents (Source of Truth):
+- **Latest Investor Presentation (PDF)**: [Investor Presentation PDF]({ip_pdf})
+- **Latest 2 Years Annual Reports (PDF)**:
+  - [Latest Annual Report (PDF)]({ar_pdf})
+- **Last 4 Quarters Concall Transcripts (PDF)**:
+  - [Latest Concall Transcript (PDF)]({concall_pdf})
+
+#### Recent Corporate Announcements:
+{announcements or "- No recent critical corporate announcements found."}
+
+#### Reference Directory:
+- **Official Screener consolidated dashboard**: https://www.screener.in/company/{symbol}/consolidated/
+- **ValuePickr Discussion Forum Thread**: {valuepickr_url}
+- **Credit Ratings filings**:
+  - CRISIL Rating Rationale ({company}): https://www.crisilratings.com/
+  - ICRA Rating Rationale ({company}): https://www.icra.in/
+- **Exchange Corporate Announcements**:
+  - NSE {symbol} Corporate Announcements: https://www.nseindia.com/get-quotes/equity?symbol={symbol}#corporate-announcements
+  - BSE {symbol} Corporate Announcements: https://www.bseindia.com/
+
+#### Footnotes:
+[^vp-thread]: ValuePickr Discussion Forum Thread — [{company}]({valuepickr_url})
+[^ar-fy25]: {company} — [Latest Annual Report (PDF)]({ar_pdf})
+[^ip-latest]: {company} — [Latest Investor Presentation (PDF)]({ip_pdf})
+[^cc-transcript]: {company} — [Latest Concall Transcript (PDF)]({concall_pdf})
+[^yfinance-mgmt]: Yahoo Finance — [{company} Company Profile & Management](https://finance.yahoo.com/)
+[^screener-peers]: Screener.in — [Peer Comparison Data for {company}](https://www.screener.in/company/{symbol}/consolidated/)
+[^screener-fcf]: Screener.in — [{company} Consolidated Cash Flow](https://www.screener.in/company/{symbol}/consolidated/)
+[^screener-debt]: Screener.in — [{company} Debt & Credit Ratings](https://www.screener.in/company/{symbol}/consolidated/)
+[^bse-shp]: BSE India — [Shareholding Pattern {company}](https://www.bseindia.com/)
+"""
+
+    # Combine all three parts and append reference directory
+    full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text + "\n\n" + ref_directory
     return full_report
 
 
@@ -1934,7 +2040,7 @@ REPORT_STYLESHEET = """
 
 def markdown_to_html(md_text: str) -> str:
     # Pre-process bold, links, and code blocks
-    md_text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", md_text)
+    md_text = re.sub(r"\*\*(.*?)\*\*", r'<strong style="color: #1b365d;">\1</strong>', md_text)
     md_text = re.sub(
         r"\[(.*?)\]\((.*?)\)",
         r'<a href="\2" style="color: #1b365d; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #1b365d;">\1</a>',
@@ -2034,7 +2140,7 @@ def markdown_to_html(md_text: str) -> str:
             
         # 3. Handle tables
         if line_strip.startswith("|") and line_strip.endswith("|"):
-            if ":---" in line_strip or "---:" in line_strip or "-|-" in line_strip:
+            if "--" in line_strip or "-|-" in line_strip:
                 continue
             cells = [c.strip() for c in line_strip.split("|")[1:-1]]
             if not in_table:
