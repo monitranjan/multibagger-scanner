@@ -1,362 +1,466 @@
 [
   {
-    "symbol": "ARROWGREEN",
-    "company": "Arrow Greentech Limited",
-    "industry": "plastic products",
-    "close": 670.0,
-    "mcap_cr": 1010.89,
+    "symbol": "KANORICHEM",
+    "company": "Kanoria Chemicals & Industries Limited",
+    "industry": "chemicals",
+    "close": 146.5,
+    "mcap_cr": 618.87,
     "persistence": 10
   },
   {
-    "symbol": "UNICHEMLAB",
-    "company": "Unichem Laboratories Limited",
-    "industry": "healthcare",
-    "close": 589.05,
-    "mcap_cr": 4147.25,
-    "persistence": 9
-  },
-  {
-    "symbol": "MOSCHIP",
-    "company": "Moschip Technologies Ltd",
-    "industry": "i.t",
-    "close": 240.1,
-    "mcap_cr": 4669.22,
-    "persistence": 9
-  },
-  {
-    "symbol": "RBZJEWEL",
-    "company": "RBZ Jewellers Ltd",
-    "industry": "consumer discretionary",
-    "close": 150.74,
-    "mcap_cr": 602.96,
-    "persistence": 9
-  },
-  {
-    "symbol": "SHAREINDIA",
-    "company": "Share India Securities Ltd",
-    "industry": "financials",
-    "close": 177.24,
-    "mcap_cr": 3878.46,
-    "persistence": 9
-  },
-  {
-    "symbol": "SUBEXLTD",
-    "company": "Subex Ltd",
-    "industry": "i.t",
-    "close": 13.27,
-    "mcap_cr": 745.78,
-    "persistence": 9
-  },
-  {
-    "symbol": "GANESHHOU",
-    "company": "Ganesh Housing Ltd",
-    "industry": "realty",
-    "close": 822.7,
-    "mcap_cr": 6860.26,
-    "persistence": 9
-  },
-  {
-    "symbol": "CCAVENUE",
-    "company": "AvenuesAI Ltd",
-    "industry": "i.t",
-    "close": 17.06,
-    "mcap_cr": 5964.89,
-    "persistence": 9
-  },
-  {
-    "symbol": "IKIO",
-    "company": "IKIO Lighting Ltd",
-    "industry": "Capital Goods - Electric General",
-    "close": 219.37,
-    "mcap_cr": 1695.31,
-    "persistence": 8
-  },
-  {
-    "symbol": "OMAXE",
-    "company": "Omaxe Limited",
-    "industry": "realty",
-    "close": 93.5,
-    "mcap_cr": 1710.12,
-    "persistence": 8
-  },
-  {
-    "symbol": "MIRZAINT",
-    "company": "Mirza International Limited",
-    "industry": "consumer discretionary",
-    "close": 38.74,
-    "mcap_cr": 535.39,
-    "persistence": 8
-  },
-  {
-    "symbol": "PICCADIL",
-    "company": "Piccadily Agro Industries Ltd",
-    "industry": "fmcg",
-    "close": 729.55,
-    "mcap_cr": 7191.33,
-    "persistence": 8
-  },
-  {
-    "symbol": "IIFL",
-    "company": "IIFL Finance Ltd",
-    "industry": "financials",
-    "close": 555.2,
-    "mcap_cr": 23614.04,
-    "persistence": 8
-  },
-  {
-    "symbol": "ARE&M",
-    "company": "Amara Raja Energy & Mobility Ltd",
-    "industry": "auto",
-    "close": 907.4,
-    "mcap_cr": 16607.72,
-    "persistence": 7
-  },
-  {
-    "symbol": "MANAKSTEEL",
-    "company": "Manaksia Steels Limited",
-    "industry": "metals & mining",
-    "close": 76.58,
-    "mcap_cr": 501.86,
-    "persistence": 7
-  },
-  {
-    "symbol": "HOMEFIRST",
-    "company": "Home First Finance Company India Ltd",
-    "industry": "financials",
-    "close": 1241.8,
-    "mcap_cr": 12955.45,
-    "persistence": 7
-  },
-  {
-    "symbol": "HDBFS",
-    "company": "HDBFS",
-    "industry": "Financial Services",
-    "close": 752.25,
-    "mcap_cr": 60684.2978304,
-    "persistence": 6
-  },
-  {
-    "symbol": "HEG",
-    "company": "Heg Limited",
+    "symbol": "GREAVESCOT",
+    "company": "Greaves Cotton Limited",
     "industry": "industrials",
-    "close": 587.35,
-    "mcap_cr": 11334.54,
-    "persistence": 6
+    "close": 245.72,
+    "mcap_cr": 5811.21,
+    "persistence": 10
   },
   {
-    "symbol": "KALYANKJIL",
-    "company": "Kalyan Jewellers India Ltd",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 574.4,
-    "mcap_cr": 59320.6,
-    "persistence": 6
-  },
-  {
-    "symbol": "ETHOSLTD",
-    "company": "Ethos Ltd",
-    "industry": "consumer discretionary",
-    "close": 2663.1,
-    "mcap_cr": 7125.84,
-    "persistence": 6
-  },
-  {
-    "symbol": "INDIANHUME",
-    "company": "Indian Hume Pipe Company Limited",
-    "industry": "realty",
-    "close": 398.05,
-    "mcap_cr": 2097.0,
-    "persistence": 6
-  },
-  {
-    "symbol": "SUMEETINDS",
-    "company": "Sumeet Industries Limited",
-    "industry": "textiles",
-    "close": 33.98,
-    "mcap_cr": 1788.45,
-    "persistence": 6
-  },
-  {
-    "symbol": "SMCGLOBAL",
-    "company": "SMC Global Securities Ltd",
+    "symbol": "MANBA",
+    "company": "Manba Finance Ltd",
     "industry": "financials",
-    "close": 81.67,
-    "mcap_cr": 1710.17,
-    "persistence": 6
+    "close": 137.76,
+    "mcap_cr": 687.22,
+    "persistence": 10
   },
   {
-    "symbol": "LODHA",
-    "company": "Lodha Developers Ltd",
-    "industry": "realty",
-    "close": 1188.75,
-    "mcap_cr": 118746.03,
-    "persistence": 6
-  },
-  {
-    "symbol": "BHARTIHEXA",
-    "company": "Bharti Hexacom Ltd",
-    "industry": "telecom-service",
-    "close": 1605.5,
-    "mcap_cr": 80275.0,
-    "persistence": 6
-  },
-  {
-    "symbol": "HUHTAMAKI",
-    "company": "Huhtamaki India Ltd",
+    "symbol": "RELTD",
+    "company": "Ravindra Energy Ltd",
     "industry": "industrials",
-    "close": 237.44,
-    "mcap_cr": 1793.19,
-    "persistence": 5
+    "close": 175.86,
+    "mcap_cr": 3525.44,
+    "persistence": 10
   },
   {
-    "symbol": "JUSTDIAL",
-    "company": "Just Dial Limited",
-    "industry": "i.t",
-    "close": 767.3,
-    "mcap_cr": 6525.48,
-    "persistence": 5
+    "symbol": "GOKEX",
+    "company": "Gokaldas Exports Limited",
+    "industry": "consumer discretionary",
+    "close": 845.35,
+    "mcap_cr": 6063.41,
+    "persistence": 10
   },
   {
-    "symbol": "RAYMOND",
-    "company": "Raymond Limited",
+    "symbol": "JASH",
+    "company": "Jash Engineering Ltd",
+    "industry": "industrials",
+    "close": 528.5,
+    "mcap_cr": 3288.92,
+    "persistence": 10
+  },
+  {
+    "symbol": "INDIGO",
+    "company": "Interglobe Aviation Limited",
+    "industry": "transportation",
+    "close": 5229.0,
+    "mcap_cr": 202913.83,
+    "persistence": 9
+  },
+  {
+    "symbol": "BLUSPRING",
+    "company": "Bluspring Enterprises Limited",
     "industry": "Industrials",
-    "close": 613.65,
-    "mcap_cr": 4024.6976512,
-    "persistence": 5
+    "close": 111.65,
+    "mcap_cr": 1643.850752,
+    "persistence": 9
   },
   {
-    "symbol": "PLASTIBLEN",
-    "company": "Plastiblends India Limited",
-    "industry": "chemicals",
-    "close": 198.57,
-    "mcap_cr": 516.07,
-    "persistence": 5
+    "symbol": "VMART",
+    "company": "V-mart Retail Limited",
+    "industry": "consumer discretionary",
+    "close": 785.1,
+    "mcap_cr": 5929.18,
+    "persistence": 9
   },
   {
-    "symbol": "TCPLPACK",
-    "company": "TCPL Packaging Ltd",
-    "industry": "industrials",
-    "close": 3215.8,
-    "mcap_cr": 2926.38,
-    "persistence": 5
+    "symbol": "RBA",
+    "company": "Restaurant Brands Asia Limited",
+    "industry": "Consumer Cyclical",
+    "close": 66.48,
+    "mcap_cr": 4750.7234816,
+    "persistence": 9
   },
   {
-    "symbol": "SUMICHEM",
-    "company": "Sumitomo Chemical India Ltd",
-    "industry": "chemicals",
-    "close": 538.55,
-    "mcap_cr": 26881.49,
-    "persistence": 5
+    "symbol": "HCC",
+    "company": "Hindustan Construction Company Limited",
+    "industry": "Industrials",
+    "close": 22.37,
+    "mcap_cr": 5946.1926912,
+    "persistence": 9
   },
   {
-    "symbol": "DDEVPLSTIK",
-    "company": "DDev Plastiks Industries Ltd",
-    "industry": "chemicals",
-    "close": 288.55,
-    "mcap_cr": 2985.82,
-    "persistence": 5
-  },
-  {
-    "symbol": "BAJAJFINSV",
-    "company": "Bajaj Finserv Ltd.",
-    "industry": "Financial Services",
-    "close": 1838.6,
-    "mcap_cr": 296405.1460096,
-    "persistence": 4
-  },
-  {
-    "symbol": "APTUS",
-    "company": "Aptus Value Housing Finance India Ltd",
+    "symbol": "KICL",
+    "company": "Kalyani Investment Company Limited",
     "industry": "financials",
-    "close": 306.85,
-    "mcap_cr": 15366.83,
-    "persistence": 4
+    "close": 5529.0,
+    "mcap_cr": 2408.99,
+    "persistence": 9
   },
   {
-    "symbol": "OPTIEMUS",
-    "company": "Optiemus Infracom Ltd",
-    "industry": "telecom",
-    "close": 588.95,
-    "mcap_cr": 5223.33,
-    "persistence": 4
+    "symbol": "BORORENEW",
+    "company": "Borosil Renewables Limited",
+    "industry": "Glass & Glass Products",
+    "close": 604.55,
+    "mcap_cr": 8374.3768576,
+    "persistence": 9
   },
   {
-    "symbol": "SAMBHV",
-    "company": "SAMBHV",
-    "industry": "Basic Materials",
-    "close": 120.61,
-    "mcap_cr": 3505.4112768,
-    "persistence": 4
+    "symbol": "PDSL",
+    "company": "PDS Ltd",
+    "industry": "textiles",
+    "close": 364.35,
+    "mcap_cr": 5118.08,
+    "persistence": 9
   },
   {
-    "symbol": "NAUKRI",
-    "company": "Info Edge (India) Limited",
-    "industry": "Communication Services",
-    "close": 1207.0,
-    "mcap_cr": 76902.6228224,
-    "persistence": 3
+    "symbol": "SPECIALITY",
+    "company": "Speciality Restaurants Limited",
+    "industry": "services",
+    "close": 135.49,
+    "mcap_cr": 622.53,
+    "persistence": 9
   },
   {
-    "symbol": "IZMO",
-    "company": "Izmo Limited",
-    "industry": "i.t",
-    "close": 1124.0,
-    "mcap_cr": 1681.79,
-    "persistence": 3
+    "symbol": "JLHL",
+    "company": "Jupiter Life Line Hospitals Ltd",
+    "industry": "Hospitals",
+    "close": 1558.0,
+    "mcap_cr": 10182.4,
+    "persistence": 9
   },
   {
-    "symbol": "JGCHEM",
-    "company": "JGCHEM",
-    "industry": "Basic Materials",
-    "close": 443.5,
-    "mcap_cr": 1745.543168,
-    "persistence": 3
+    "symbol": "MAHLIFE",
+    "company": "Mahindra Lifespace Developers Limited",
+    "industry": "realty",
+    "close": 373.2,
+    "mcap_cr": 7968.35,
+    "persistence": 9
   },
   {
-    "symbol": "ORICONENT",
-    "company": "Oricon Enterprises Limited",
-    "industry": "industrials",
-    "close": 59.95,
-    "mcap_cr": 941.5,
-    "persistence": 3
+    "symbol": "REDINGTON",
+    "company": "Redington Limited",
+    "industry": "Technology",
+    "close": 275.05,
+    "mcap_cr": 21068.8196608,
+    "persistence": 9
   },
   {
-    "symbol": "MRPL",
-    "company": "Mangalore Refinery And Petrochemicals Limited",
-    "industry": "energy",
-    "close": 174.49,
-    "mcap_cr": 30581.1,
-    "persistence": 3
+    "symbol": "LICI",
+    "company": "Life Insurance Corporation of India",
+    "industry": "Financial Services",
+    "close": 433.1,
+    "mcap_cr": 547744.8024064,
+    "persistence": 9
   },
   {
-    "symbol": "TIMETECHNO",
-    "company": "Time Technoplast Limited",
-    "industry": "plastic products",
-    "close": 204.03,
-    "mcap_cr": 10071.64,
-    "persistence": 3
+    "symbol": "OLECTRA",
+    "company": "Olectra Greentech Limited",
+    "industry": "Industrials",
+    "close": 1346.7,
+    "mcap_cr": 11045.6045568,
+    "persistence": 9
   },
   {
-    "symbol": "JSL",
-    "company": "Jindal Stainless Limited",
+    "symbol": "SCPL",
+    "company": "Sheetal Cool Products Limited",
+    "industry": "Consumer Defensive",
+    "close": 490.15,
+    "mcap_cr": 507.4650112,
+    "persistence": 8
+  },
+  {
+    "symbol": "NIACL",
+    "company": "The New India Assurance Company Limited",
+    "industry": "Financial Services",
+    "close": 174.82,
+    "mcap_cr": 29136.6404096,
+    "persistence": 8
+  },
+  {
+    "symbol": "ORIENTHOT",
+    "company": "Oriental Hotels Limited",
+    "industry": "services",
+    "close": 143.68,
+    "mcap_cr": 2261.24,
+    "persistence": 8
+  },
+  {
+    "symbol": "KIRLFER",
+    "company": "Kirloskar Ferrous Industries Ltd",
     "industry": "metals & mining",
-    "close": 737.5,
-    "mcap_cr": 60800.94,
-    "persistence": 3
+    "close": 483.35,
+    "mcap_cr": 7766.16,
+    "persistence": 8
   },
   {
-    "symbol": "INDIACEM",
-    "company": "The India Cements Limited",
+    "symbol": "KIRLOSIND",
+    "company": "Kirloskar Industries Limited",
+    "industry": "Industrials",
+    "close": 3824.8,
+    "mcap_cr": 4069.1376128,
+    "persistence": 8
+  },
+  {
+    "symbol": "LIKHITHA",
+    "company": "Likhitha Infrastructure Limited",
+    "industry": "Energy",
+    "close": 240.6,
+    "mcap_cr": 928.9903104,
+    "persistence": 8
+  },
+  {
+    "symbol": "CARTRADE",
+    "company": "Cartrade Tech Ltd",
+    "industry": "consumer discretionary",
+    "close": 2755.4,
+    "mcap_cr": 12924.2,
+    "persistence": 7
+  },
+  {
+    "symbol": "SUNDRMFAST",
+    "company": "Sundram Fasteners Limited",
+    "industry": "auto",
+    "close": 955.65,
+    "mcap_cr": 20284.74,
+    "persistence": 7
+  },
+  {
+    "symbol": "5PAISA",
+    "company": "5Paisa Capital Ltd",
+    "industry": "financials",
+    "close": 374.05,
+    "mcap_cr": 1714.02,
+    "persistence": 7
+  },
+  {
+    "symbol": "KIRLOSBROS",
+    "company": "Kirloskar Brothers Limited",
+    "industry": "Industrials",
+    "close": 1868.2,
+    "mcap_cr": 15081.3425664,
+    "persistence": 7
+  },
+  {
+    "symbol": "RAMCOIND",
+    "company": "Ramco Industries Limited",
     "industry": "building materials",
-    "close": 410.3,
-    "mcap_cr": 12715.08,
+    "close": 354.35,
+    "mcap_cr": 3069.41,
+    "persistence": 6
+  },
+  {
+    "symbol": "FAZE3Q",
+    "company": "Faze Three Limited",
+    "industry": "Consumer Cyclical",
+    "close": 560.6,
+    "mcap_cr": 1369.3654016,
+    "persistence": 6
+  },
+  {
+    "symbol": "QUADFUTURE",
+    "company": "QUADFUTURE",
+    "industry": "Industrials",
+    "close": 405.0,
+    "mcap_cr": 1633.0000384,
+    "persistence": 6
+  },
+  {
+    "symbol": "GENUSPOWER",
+    "company": "Genus Power Infrastructures Limited",
+    "industry": "Industrials",
+    "close": 317.05,
+    "mcap_cr": 8692.1158656,
+    "persistence": 6
+  },
+  {
+    "symbol": "ASKAUTOLTD",
+    "company": "ASK Automotive Ltd",
+    "industry": "auto",
+    "close": 477.35,
+    "mcap_cr": 9504.24,
+    "persistence": 5
+  },
+  {
+    "symbol": "PAGEIND",
+    "company": "Page Industries Limited",
+    "industry": "Consumer Cyclical",
+    "close": 39900.0,
+    "mcap_cr": 44977.995776,
+    "persistence": 5
+  },
+  {
+    "symbol": "SADHNANIQ",
+    "company": "Sadhana Nitro Chem Limited",
+    "industry": "Basic Materials",
+    "close": 2.63,
+    "mcap_cr": 782.679296,
+    "persistence": 5
+  },
+  {
+    "symbol": "MOREPENLAB",
+    "company": "Morepen Laboratories Limited",
+    "industry": "Healthcare",
+    "close": 58.9,
+    "mcap_cr": 3190.7344384,
+    "persistence": 5
+  },
+  {
+    "symbol": "ACE",
+    "company": "Action Construction Equipment Limited",
+    "industry": "Industrials",
+    "close": 987.4,
+    "mcap_cr": 11802.8050432,
+    "persistence": 5
+  },
+  {
+    "symbol": "PATELENG",
+    "company": "Patel Engineering Limited",
+    "industry": "Industrials",
+    "close": 29.59,
+    "mcap_cr": 2879.4687488,
+    "persistence": 4
+  },
+  {
+    "symbol": "NELCO",
+    "company": "Nelco Limited",
+    "industry": "telecom",
+    "close": 889.6,
+    "mcap_cr": 1978.7,
+    "persistence": 4
+  },
+  {
+    "symbol": "BHARTIARTL",
+    "company": "Bharti Airtel Limited",
+    "industry": "telecom-service",
+    "close": 1940.1,
+    "mcap_cr": 1191311.54,
+    "persistence": 4
+  },
+  {
+    "symbol": "LLOYDSENT",
+    "company": "Lloyds Enterprises Ltd",
+    "industry": "Trading",
+    "close": 82.23,
+    "mcap_cr": 11891.84,
+    "persistence": 4
+  },
+  {
+    "symbol": "STCINDIA",
+    "company": "The State Trading Corporation of India Limited",
+    "industry": "Industrials",
+    "close": 120.2,
+    "mcap_cr": 716.16,
+    "persistence": 4
+  },
+  {
+    "symbol": "VISAKAIND",
+    "company": "Visaka Industries Limited",
+    "industry": "building materials",
+    "close": 82.5,
+    "mcap_cr": 699.45,
     "persistence": 3
   },
   {
-    "symbol": "APLLTD",
-    "company": "Alembic Pharmaceuticals Limited",
+    "symbol": "RESPONIND",
+    "company": "Responsive Industries Limited",
+    "industry": "Basic Materials",
+    "close": 220.6,
+    "mcap_cr": 5139.412992,
+    "persistence": 3
+  },
+  {
+    "symbol": "SREEL",
+    "company": "Sreeleathers Limited",
+    "industry": "Consumer Cyclical",
+    "close": 212.76,
+    "mcap_cr": 492.9701888,
+    "persistence": 3
+  },
+  {
+    "symbol": "GICHSGFIN",
+    "company": "GIC Housing Finance Limited",
+    "industry": "Financial Services",
+    "close": 151.45,
+    "mcap_cr": 809.6507904,
+    "persistence": 3
+  },
+  {
+    "symbol": "AHLWEST",
+    "company": "Asian Hotels (West) Limited",
+    "industry": "Consumer Cyclical",
+    "close": 573.85,
+    "mcap_cr": 652.4677632,
+    "persistence": 3
+  },
+  {
+    "symbol": "EXICOM",
+    "company": "Exicom Tele-Systems Ltd",
+    "industry": "industrials",
+    "close": 168.22,
+    "mcap_cr": 2246.28,
+    "persistence": 3
+  },
+  {
+    "symbol": "BIL",
+    "company": "Bhartiya International Ltd.",
+    "industry": "Consumer Cyclical",
+    "close": 724.75,
+    "mcap_cr": 999.8132224,
+    "persistence": 3
+  },
+  {
+    "symbol": "GULFOILLUB",
+    "company": "Gulf Oil Lubricants India Limited",
+    "industry": "Basic Materials",
+    "close": 1012.8,
+    "mcap_cr": 4954.5617408,
+    "persistence": 3
+  },
+  {
+    "symbol": "ONMOBILE",
+    "company": "OnMobile Global Limited",
+    "industry": "Communication Services",
+    "close": 62.71,
+    "mcap_cr": 645.1579904,
+    "persistence": 3
+  },
+  {
+    "symbol": "RAJRILTD",
+    "company": "Raj Rayon Industries Limited",
+    "industry": "Consumer Cyclical",
+    "close": 21.54,
+    "mcap_cr": 1205.0122752,
+    "persistence": 3
+  },
+  {
+    "symbol": "QUESS",
+    "company": "Quess Corp Limited",
+    "industry": "miscellaneous",
+    "close": 294.95,
+    "mcap_cr": 4345.62,
+    "persistence": 3
+  },
+  {
+    "symbol": "ZOTA",
+    "company": "Zota Health Care Limited",
     "industry": "Healthcare",
-    "close": 839.75,
-    "mcap_cr": 16218.423296,
+    "close": 1349.7,
+    "mcap_cr": 4037.8830848,
+    "persistence": 3
+  },
+  {
+    "symbol": "KABRAEXTRU",
+    "company": "Kabra Extrusion Technik Limited",
+    "industry": "Capital Goods - Engineering Heavy",
+    "close": 351.65,
+    "mcap_cr": 1156.55,
+    "persistence": 3
+  },
+  {
+    "symbol": "HINDPETRO",
+    "company": "Hindustan Petroleum Corporation Limited",
+    "industry": "Energy",
+    "close": 400.4,
+    "mcap_cr": 86261.92384,
     "persistence": 3
   }
 ]
