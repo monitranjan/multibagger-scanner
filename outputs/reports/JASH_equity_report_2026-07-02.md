@@ -19,7 +19,7 @@ Target Price = 36x * Rs. 20.75 = Rs. 747
 
 | Rating | 12M Target Price | Upside % | CMP (Rs.) | Market Cap (Rs. Cr) | 52W High/Low (Rs.) |
 |:---|:---|:---|:---|:---|:---|
-| BUY | 747 | 48.18% | 504.10 | 3205.8 | 622.90 / 327.10 |
+| BUY | 747.00 | 48.18% | 504.10 | 3205.8 | 622.90 / 327.10 |
 
 | P/E (TTM) | P/B (TTM) | ROCE (%) | ROE (%) | EPS (Latest FY) | Book Value (Rs.) | Dividend Yield (%) | Face Value (Rs.) |
 |:---|:---|:---|:---|:---|:---|:---|:---|

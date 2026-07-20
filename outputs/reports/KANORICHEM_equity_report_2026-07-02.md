@@ -2,7 +2,7 @@ For Kanoria Chemicals & Industries Limited (KANORICHEM), we initiate coverage wi
 
 ### HEADER BLOCK
 
-| Rating | BUY | 12M Target Price | Rs. 205 | Upside % | 56.6% | CMP | Rs. 130.88 | Market Cap | Rs. 585.6 Cr | 52W High/Low | Rs. 136.25 / Rs. 56.00 |
+| Rating | BUY | 12M Target Price | Rs. 205.00 | Upside % | 56.6% | CMP | Rs. 130.88 | Market Cap | Rs. 585.6 Cr | 52W High/Low | Rs. 136.25 / Rs. 56.00 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | P/E (TTM) | 2.03x | P/B (TTM) | 0.43x | ROCE | 6.79% | ROE | 19.76% | EPS (latest full year) | 27.64 | Book Value | Rs. 131.12 |
 | Dividend Yield | 0.00% | Face Value | Rs. 10 | Promoter % | 77.23% | FII % | 0.00% | DII % | 0.00% | Public % | 22.77% |
