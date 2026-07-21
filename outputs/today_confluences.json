@@ -1,51 +1,41 @@
 [
   {
-    "symbol": "SKYGOLD",
-    "company": "Sky Gold Ltd",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 658.35,
-    "return_1d": 5.96,
-    "mcap_cr": 9622.31,
-    "signal": "52W Breakout",
-    "scans_count": 25
-  },
-  {
-    "symbol": "TATVA",
-    "company": "Tatva Chintan Pharma Chem Ltd",
-    "industry": "Speciality Chemicals",
-    "close": 1713.7,
-    "return_1d": 20.0,
-    "mcap_cr": 3340.62,
-    "signal": "52W Breakout",
-    "scans_count": 25
-  },
-  {
     "symbol": "MENONBE",
     "company": "Menon Bearings Limited",
     "industry": "Auto Ancillaries - Bearings",
-    "close": 209.65,
+    "close": 220.13,
     "return_1d": 5.0,
-    "mcap_cr": 1118.95,
+    "mcap_cr": 1174.88,
     "signal": "52W Breakout",
     "scans_count": 22
+  },
+  {
+    "symbol": "DIACABS",
+    "company": "Diamond Power Infrastructure Ltd",
+    "industry": "Cables - Power",
+    "close": 269.07,
+    "return_1d": 10.0,
+    "mcap_cr": 12890.24,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "NOVARTIND",
+    "company": "Novartis India Ltd",
+    "industry": "Pharma - MNC bulk Drugs",
+    "close": 1701.9,
+    "return_1d": 2.04,
+    "mcap_cr": 4118.18,
+    "signal": "52W Breakout",
+    "scans_count": 20
   },
   {
     "symbol": "CEMPRO",
     "company": "Cemindia Projects Ltd",
     "industry": "Infra - Construction & Contracting",
-    "close": 1627.0,
-    "return_1d": 0.74,
-    "mcap_cr": 27743.69,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "TINNARUBR",
-    "company": "Tinna Rubber & Infrastructure Ltd",
-    "industry": "Rubber Processing/Rubber Products",
-    "close": 1189.9,
-    "return_1d": 20.0,
-    "mcap_cr": 1786.44,
+    "close": 1639.6,
+    "return_1d": 0.77,
+    "mcap_cr": 27949.84,
     "signal": "52W Breakout",
     "scans_count": 20
   },
@@ -53,9 +43,9 @@
     "symbol": "LLOYDSME",
     "company": "Lloyds Metals & Energy Ltd",
     "industry": "Mining/Minerals - Iron Ore",
-    "close": 1907.9,
-    "return_1d": 2.28,
-    "mcap_cr": 105004.66,
+    "close": 1936.4,
+    "return_1d": 1.49,
+    "mcap_cr": 107397.02,
     "signal": "52W Breakout",
     "scans_count": 19
   },
@@ -63,59 +53,29 @@
     "symbol": "KAPSTON",
     "company": "Kapston Services Ltd",
     "industry": "Services - Others",
-    "close": 434.0,
-    "return_1d": 2.66,
-    "mcap_cr": 1286.52,
+    "close": 451.95,
+    "return_1d": 4.56,
+    "mcap_cr": 1315.43,
     "signal": "52W Breakout",
     "scans_count": 18
   },
   {
-    "symbol": "ADOR",
-    "company": "Ador Welding Ltd",
-    "industry": "Welding Equipments",
-    "close": 1455.3,
-    "return_1d": 5.14,
-    "mcap_cr": 2408.72,
+    "symbol": "RAIN",
+    "company": "Rain Industries Limited",
+    "industry": "Cement",
+    "close": 223.4,
+    "return_1d": 5.37,
+    "mcap_cr": 7131.2,
     "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "MBAPL",
-    "company": "Madhya Bharat Agro Products Ltd",
-    "industry": "Fertilisers",
-    "close": 145.55,
-    "return_1d": 6.86,
-    "mcap_cr": 1193.48,
-    "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "RPGLIFE",
-    "company": "Rpg Life Sciences Limited",
-    "industry": "Pharma - Formulators",
-    "close": 3017.1,
-    "return_1d": 5.5,
-    "mcap_cr": 4729.83,
-    "signal": "52W Breakout",
-    "scans_count": 16
-  },
-  {
-    "symbol": "RADICO",
-    "company": "Radico Khaitan Limited",
-    "industry": "Alcoholic Beverages",
-    "close": 4132.4,
-    "return_1d": 0.84,
-    "mcap_cr": 54870.03,
-    "signal": "52W Breakout",
-    "scans_count": 16
+    "scans_count": 18
   },
   {
     "symbol": "MUTHOOTMF",
     "company": "Muthoot Microfin Ltd",
     "industry": "Finance & Investments - Microfinance",
-    "close": 253.29,
-    "return_1d": 5.51,
-    "mcap_cr": 4092.84,
+    "close": 254.3,
+    "return_1d": 0.4,
+    "mcap_cr": 4318.4,
     "signal": "52W Breakout",
     "scans_count": 16
   }
