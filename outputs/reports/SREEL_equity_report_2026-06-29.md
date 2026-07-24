@@ -2,7 +2,7 @@
 
 | Rating | 12M Target Price | Upside % | CMP (Rs.) | Market Cap (Rs. Cr) | 52W High/Low (Rs.) |
 |:---|:---|:---|:---|:---|:---|
-| BUY | 320 | 50.15% | 213.12 | 505.3 | 258.00 / 165.25 |
+| BUY | 412.50 | 50.15% | 213.12 | 505.3 | 258.00 / 165.25 |
 
 | P/E (TTM) | P/B (TTM) | ROCE (%) | ROE (%) | EPS (Rs.) | Book Value (Rs.) | Dividend Yield (%) | Face Value (Rs.) |
 |:---|:---|:---|:---|:---|:---|:---|:---|
