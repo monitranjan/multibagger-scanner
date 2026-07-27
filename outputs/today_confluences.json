@@ -1,41 +1,31 @@
 [
   {
-    "symbol": "GANDHAR",
-    "company": "Gandhar Oil Refinery (India) Ltd",
-    "industry": "Refineries",
-    "close": 282.46,
-    "return_1d": 0.18,
-    "mcap_cr": 2759.71,
-    "signal": "52W Breakout",
-    "scans_count": 33
-  },
-  {
     "symbol": "E2E",
     "company": "E2E Networks Ltd",
     "industry": "Data Centre",
-    "close": 516.7,
-    "return_1d": 5.0,
-    "mcap_cr": 10115.85,
+    "close": 542.5,
+    "return_1d": 4.99,
+    "mcap_cr": 10621.54,
     "signal": "52W Breakout",
-    "scans_count": 25
+    "scans_count": 28
   },
   {
-    "symbol": "SSWL",
-    "company": "Steel Strips Wheels Limited",
-    "industry": "Auto Ancillaries - Wheels",
-    "close": 288.31,
-    "return_1d": 0.55,
-    "mcap_cr": 4506.83,
+    "symbol": "TFCILTD",
+    "company": "Tourism Finance Corporation Of India Limited",
+    "industry": "Finance - PSU Lending",
+    "close": 94.8,
+    "return_1d": 8.63,
+    "mcap_cr": 4040.4,
     "signal": "52W Breakout",
     "scans_count": 24
   },
   {
-    "symbol": "TATVA",
-    "company": "Tatva Chintan Pharma Chem Ltd",
-    "industry": "Speciality Chemicals",
-    "close": 1722.4,
-    "return_1d": 1.27,
-    "mcap_cr": 3978.52,
+    "symbol": "THANGAMAYL",
+    "company": "Thangamayil Jewellery Limited",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 7309.5,
+    "return_1d": 5.84,
+    "mcap_cr": 21466.8,
     "signal": "52W Breakout",
     "scans_count": 24
   },
@@ -43,89 +33,39 @@
     "symbol": "KRISHANA",
     "company": "Krishana Phoschem Ltd",
     "industry": "Fertilisers",
-    "close": 162.05,
-    "return_1d": 4.04,
-    "mcap_cr": 962.96,
+    "close": 167.65,
+    "return_1d": 3.46,
+    "mcap_cr": 1001.92,
     "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "KARURVYSYA",
-    "company": "Karur Vysya Bank Limited",
-    "industry": "Banks - Private",
-    "close": 338.9,
-    "return_1d": 0.59,
-    "mcap_cr": 32566.31,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "UJJIVANSFB",
-    "company": "Ujjivan Small Finance Bank Ltd",
-    "industry": "Banks - Small Finance",
-    "close": 70.72,
-    "return_1d": 2.82,
-    "mcap_cr": 13379.47,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "THANGAMAYL",
-    "company": "Thangamayil Jewellery Limited",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 6906.5,
-    "return_1d": 0.52,
-    "mcap_cr": 21356.46,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "DIACABS",
-    "company": "Diamond Power Infrastructure Ltd",
-    "industry": "Cables - Power",
-    "close": 295.15,
-    "return_1d": 7.75,
-    "mcap_cr": 14435.32,
-    "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 24
   },
   {
     "symbol": "LAURUSLABS",
     "company": "Laurus Labs Limited",
     "industry": "Pharma - API & CRAMS",
-    "close": 1601.2,
-    "return_1d": 2.1,
-    "mcap_cr": 84727.34,
+    "close": 1713.4,
+    "return_1d": 7.01,
+    "mcap_cr": 86504.76,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 22
   },
   {
-    "symbol": "TFCILTD",
-    "company": "Tourism Finance Corporation Of India Limited",
-    "industry": "Finance - PSU Lending",
-    "close": 87.27,
-    "return_1d": 6.31,
-    "mcap_cr": 3800.58,
+    "symbol": "DIACABS",
+    "company": "Diamond Power Infrastructure Ltd",
+    "industry": "Cables - Power",
+    "close": 307.17,
+    "return_1d": 4.07,
+    "mcap_cr": 15553.55,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 22
   },
   {
-    "symbol": "SOTL",
-    "company": "Savita Oil Technologies Limited",
-    "industry": "Petrochem - Others",
-    "close": 645.75,
-    "return_1d": 0.1,
-    "mcap_cr": 4422.83,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "FILATEX",
-    "company": "Filatex India Limited",
-    "industry": "Textiles - Manmade Fibre - PFY/PSF",
-    "close": 73.83,
-    "return_1d": 2.54,
-    "mcap_cr": 3197.22,
+    "symbol": "SJS",
+    "company": "S J S Enterprises Ltd",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 2419.3,
+    "return_1d": 3.58,
+    "mcap_cr": 7475.12,
     "signal": "52W Breakout",
     "scans_count": 20
   },
@@ -133,50 +73,20 @@
     "symbol": "LLOYDSME",
     "company": "Lloyds Metals & Energy Ltd",
     "industry": "Mining/Minerals - Iron Ore",
-    "close": 1940.5,
-    "return_1d": 0.51,
-    "mcap_cr": 108674.82,
+    "close": 2014.9,
+    "return_1d": 3.83,
+    "mcap_cr": 109232.09,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 20
   },
   {
-    "symbol": "RAIN",
-    "company": "Rain Industries Limited",
-    "industry": "Cement",
-    "close": 225.23,
-    "return_1d": 0.8,
-    "mcap_cr": 7515.31,
+    "symbol": "APCOTEXIND",
+    "company": "Apcotex Industries Limited",
+    "industry": "Rubber Processing/Rubber Products",
+    "close": 588.5,
+    "return_1d": 4.89,
+    "mcap_cr": 2908.76,
     "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "SPORTKING",
-    "company": "Sportking India Ltd",
-    "industry": "Textiles - Spinning",
-    "close": 213.74,
-    "return_1d": 3.32,
-    "mcap_cr": 2628.74,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "SJS",
-    "company": "S J S Enterprises Ltd",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 2335.6,
-    "return_1d": 2.65,
-    "mcap_cr": 7281.81,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "MBAPL",
-    "company": "Madhya Bharat Agro Products Ltd",
-    "industry": "Fertilisers",
-    "close": 148.25,
-    "return_1d": 0.99,
-    "mcap_cr": 1286.36,
-    "signal": "52W Breakout",
-    "scans_count": 17
+    "scans_count": 16
   }
 ]
