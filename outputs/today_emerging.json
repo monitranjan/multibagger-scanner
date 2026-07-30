@@ -10,7 +10,7 @@
   {
     "symbol": "QUESS",
     "company": "Quess Corp Limited",
-    "industry": "miscellaneous",
+    "industry": "Facility Management",
     "close": 309.7,
     "mcap_cr": 4591.32,
     "persistence": 10
@@ -18,7 +18,7 @@
   {
     "symbol": "KABRAEXTRU",
     "company": "Kabra Extrusion Technik Limited",
-    "industry": "industrials",
+    "industry": "Capital Goods - Engineering Heavy",
     "close": 365.2,
     "mcap_cr": 1364.47,
     "persistence": 10
@@ -26,7 +26,7 @@
   {
     "symbol": "TTKPRESTIG",
     "company": "Ttk Prestige Limited",
-    "industry": "consumer discretionary",
+    "industry": "Domestic Appliances",
     "close": 656.6,
     "mcap_cr": 9273.64,
     "persistence": 9
@@ -34,7 +34,7 @@
   {
     "symbol": "HUHTAMAKI",
     "company": "Huhtamaki India Ltd",
-    "industry": "industrials",
+    "industry": "Packaging - FMCG/Consumers",
     "close": 298.58,
     "mcap_cr": 2242.17,
     "persistence": 8
@@ -74,7 +74,7 @@
   {
     "symbol": "IIFL",
     "company": "IIFL Finance Ltd",
-    "industry": "financials",
+    "industry": "Finance & Investments - Gold Loan",
     "close": 607.85,
     "mcap_cr": 25311.09,
     "persistence": 8
@@ -90,7 +90,7 @@
   {
     "symbol": "KALYANKJIL",
     "company": "Kalyan Jewellers India Ltd",
-    "industry": "consumer discretionary",
+    "industry": "Diamond, Gems & Jewellery",
     "close": 634.6,
     "mcap_cr": 64918.05,
     "persistence": 8
@@ -130,7 +130,7 @@
   {
     "symbol": "TVSHLTD",
     "company": "TVS Holdings Ltd",
-    "industry": "financials",
+    "industry": "Finance - Holding Company",
     "close": 14987.0,
     "mcap_cr": 29949.58,
     "persistence": 7
@@ -146,7 +146,7 @@
   {
     "symbol": "M&MFIN",
     "company": "Mahindra & Mahindra Financial Services Limited",
-    "industry": "financials",
+    "industry": "Finance & Investments - CV Finance",
     "close": 392.55,
     "mcap_cr": 54730.11,
     "persistence": 7
@@ -162,7 +162,7 @@
   {
     "symbol": "NILKAMAL",
     "company": "Nilkamal Limited",
-    "industry": "plastic products",
+    "industry": "Plastics - Plastic & Plastic Products",
     "close": 1753.4,
     "mcap_cr": 2791.11,
     "persistence": 7
@@ -226,7 +226,7 @@
   {
     "symbol": "MPSLTD",
     "company": "Mps Limited",
-    "industry": "i.t",
+    "industry": "E-Commerce - Platform - Utility",
     "close": 2650.2,
     "mcap_cr": 4590.17,
     "persistence": 6
@@ -298,7 +298,7 @@
   {
     "symbol": "LODHA",
     "company": "Lodha Developers Ltd",
-    "industry": "realty",
+    "industry": "Realty - National",
     "close": 1287.15,
     "mcap_cr": 131515.79,
     "persistence": 5
@@ -306,7 +306,7 @@
   {
     "symbol": "DPABHUSHAN",
     "company": "D. P. Abhushan Limited",
-    "industry": "Consumer Cyclical",
+    "industry": "Diamond, Gems & Jewellery",
     "close": 1402.65,
     "mcap_cr": 3062.9361664,
     "persistence": 5
@@ -378,7 +378,7 @@
   {
     "symbol": "FAIRCHEMOR",
     "company": "Fairchem Organics Ltd",
-    "industry": "chemicals",
+    "industry": "Chemicals - Organic",
     "close": 813.35,
     "mcap_cr": 1045.33,
     "persistence": 3
