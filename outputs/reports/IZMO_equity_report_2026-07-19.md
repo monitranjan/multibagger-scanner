@@ -10,7 +10,7 @@
 ### Table 1 — Valuation & Market Snapshot
 
 | Metric | Rating | 12M Target | Upside | CMP | Market Cap | 52W High | 52W Low | P/E (TTM) | P/B (TTM) |
-| Value | BUY | Rs. 1,400 | +24.6% | Rs. 1,124.00 | Rs. 1,681.8 Cr | Rs. 1,374.70 | Rs. 18.5%0.05 | 19.40x | 2.26x |
+| Value | BUY | Rs. 1332.00 | +24.6% | Rs. 1,124.00 | Rs. 1,681.8 Cr | Rs. 1332.00 | Rs. 18.5%0.05 | 19.40x | 2.26x |
 
 ### Table 2 — Returns, Per-Share Data & Shareholding Pattern
 

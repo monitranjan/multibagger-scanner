@@ -2,7 +2,7 @@
 
 | Rating | 12M Target | Upside % | CMP | Market Cap | 52W High | 52W Low |
 |:---|:---|:---|:---|:---|:---|:---|
-| BUY | Rs. 935.00 | 33.6% | Rs. 688.50 | Rs. 1026.0 Cr | Rs. 817.95 | Rs. 341.95 |
+| BUY | Rs. 935.00 | 33.6% | Rs. 688.50 | Rs. 935.00 Cr | Rs. 817.95 | Rs. 341.95 |
 
 | P/E (TTM) | P/B (TTM) | ROCE | ROE | EPS (FY24) | Book Value | Div Yield | Face Value | Prom % | FII % | DII % |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
