@@ -1,12 +1,112 @@
 [
   {
-    "symbol": "ARTEMISMED",
-    "company": "Artemis Medicare Services Ltd",
-    "industry": "Hospitals",
-    "close": 302.15,
-    "return_1d": 1.19,
-    "mcap_cr": 4727.02,
+    "symbol": "TFCILTD",
+    "company": "Tourism Finance Corporation Of India Limited",
+    "industry": "Finance - PSU Lending",
+    "close": 101.87,
+    "return_1d": 0.86,
+    "mcap_cr": 4676.07,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "YASHO",
+    "company": "Yasho Industries Ltd",
+    "industry": "Speciality Chemicals",
+    "close": 3858.7,
+    "return_1d": 20.0,
+    "mcap_cr": 3875.5,
+    "signal": "52W Breakout",
+    "scans_count": 24
+  },
+  {
+    "symbol": "LAURUSLABS",
+    "company": "Laurus Labs Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 1816.2,
+    "return_1d": 1.96,
+    "mcap_cr": 96234.66,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "UJJIVANSFB",
+    "company": "Ujjivan Small Finance Bank Ltd",
+    "industry": "Banks - Small Finance",
+    "close": 71.75,
+    "return_1d": 2.02,
+    "mcap_cr": 13680.98,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "TVSMOTOR",
+    "company": "Tvs Motor Company Limited",
+    "industry": "Auto - 2 & 3 Wheelers",
+    "close": 4313.1,
+    "return_1d": 2.49,
+    "mcap_cr": 199935.66,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "KARURVYSYA",
+    "company": "Karur Vysya Bank Limited",
+    "industry": "Banks - Private",
+    "close": 342.45,
+    "return_1d": 0.63,
+    "mcap_cr": 32895.74,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "SSWL",
+    "company": "Steel Strips Wheels Limited",
+    "industry": "Auto Ancillaries - Wheels",
+    "close": 310.36,
+    "return_1d": 4.43,
+    "mcap_cr": 4671.25,
     "signal": "52W Breakout",
     "scans_count": 20
+  },
+  {
+    "symbol": "RPTECH",
+    "company": "Rashi Peripherals Ltd",
+    "industry": "Trading",
+    "close": 833.55,
+    "return_1d": 2.53,
+    "mcap_cr": 5357.64,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "BLSE",
+    "company": "BLS E-Services Ltd",
+    "industry": "IT - Software",
+    "close": 300.66,
+    "return_1d": 2.02,
+    "mcap_cr": 2677.72,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "BAJFINANCE",
+    "company": "Bajaj Finance Limited",
+    "industry": "Conglomerate Backed NBFC",
+    "close": 1141.2,
+    "return_1d": 8.32,
+    "mcap_cr": 655904.29,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "SONACOMS",
+    "company": "Sona BLW Precision Forgings Ltd",
+    "industry": "Castings, Forgings & Fastners",
+    "close": 769.4,
+    "return_1d": 0.74,
+    "mcap_cr": 47507.91,
+    "signal": "52W Breakout",
+    "scans_count": 18
   }
 ]
