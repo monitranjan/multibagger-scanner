@@ -1,102 +1,72 @@
 [
   {
-    "symbol": "NAVINFLUOR",
-    "company": "Navin Fluorine International Limited",
-    "industry": "Chemicals - Flourine",
-    "close": 8650.0,
-    "return_1d": 13.67,
-    "mcap_cr": 39030.01,
+    "symbol": "UNIPARTS",
+    "company": "Uniparts India Ltd",
+    "industry": "Castings, Forgings & Fastners",
+    "close": 814.6,
+    "return_1d": 4.24,
+    "mcap_cr": 3527.93,
+    "signal": "52W Breakout",
+    "scans_count": 29
+  },
+  {
+    "symbol": "SKYGOLD",
+    "company": "Sky Gold Ltd",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 719.4,
+    "return_1d": 4.09,
+    "mcap_cr": 10704.11,
+    "signal": "52W Breakout",
+    "scans_count": 27
+  },
+  {
+    "symbol": "FIEMIND",
+    "company": "Fiem Industries Limited",
+    "industry": "Auto Ancillaries - 2&3 Wheelers",
+    "close": 2580.3,
+    "return_1d": 4.07,
+    "mcap_cr": 6525.96,
     "signal": "52W Breakout",
     "scans_count": 25
   },
   {
-    "symbol": "SJS",
-    "company": "S J S Enterprises Ltd",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 2437.7,
-    "return_1d": -2.89,
-    "mcap_cr": 8034.25,
+    "symbol": "SBCL",
+    "company": "Shivalik Bimetal Controls Ltd",
+    "industry": "Shunt Resistors",
+    "close": 920.9,
+    "return_1d": 19.99,
+    "mcap_cr": 4420.83,
     "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 21
   },
   {
-    "symbol": "GRWRHITECH",
-    "company": "Garware Hi Tech Films Ltd",
-    "industry": "Packaging - Films",
-    "close": 7338.5,
-    "return_1d": -0.96,
-    "mcap_cr": 17214.04,
+    "symbol": "LLOYDSME",
+    "company": "Lloyds Metals & Energy Ltd",
+    "industry": "Mining/Minerals - Iron Ore",
+    "close": 2109.9,
+    "return_1d": 2.47,
+    "mcap_cr": 115902.54,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 20
   },
   {
     "symbol": "UEL",
     "company": "Ujaas Energy Ltd",
     "industry": "Capital Goods - Transformers",
-    "close": 245.52,
-    "return_1d": 10.0,
-    "mcap_cr": 2977.44,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "PAYTM",
-    "company": "One 97 Communications Ltd",
-    "industry": "E-Commerce - Platform - Utility",
-    "close": 1442.0,
-    "return_1d": 0.91,
-    "mcap_cr": 91504.16,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "AETHER",
-    "company": "Aether Industries Ltd",
-    "industry": "Speciality Chemicals",
-    "close": 1584.4,
-    "return_1d": -0.31,
-    "mcap_cr": 21093.34,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "SIGMAADV",
-    "company": "Sigma Advanced System Ltd",
-    "industry": "Aerospace & Defence - Equipments",
-    "close": 692.05,
-    "return_1d": -1.77,
-    "mcap_cr": 13350.01,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 262.61,
-    "return_1d": 4.16,
-    "mcap_cr": 33900.24,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "KERNEX",
-    "company": "Kernex Microsystems (india) Limited",
-    "industry": "Railways - Kavach/Springs",
-    "close": 2432.5,
-    "return_1d": -4.58,
-    "mcap_cr": 4283.58,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "DIACABS",
-    "company": "Diamond Power Infrastructure Ltd",
-    "industry": "Cables - Power",
-    "close": 348.8,
+    "close": 257.79,
     "return_1d": 5.0,
-    "mcap_cr": 17505.98,
+    "mcap_cr": 3275.18,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 20
+  },
+  {
+    "symbol": "HAPPYFORGE",
+    "company": "Happy Forgings Ltd",
+    "industry": "industrials",
+    "close": 1895.0,
+    "return_1d": 1.34,
+    "mcap_cr": 17648.82,
+    "signal": "52W Breakout",
+    "scans_count": 0
   }
 ]
