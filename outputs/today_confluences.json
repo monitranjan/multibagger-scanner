@@ -1,72 +1,72 @@
 [
   {
-    "symbol": "UNIPARTS",
-    "company": "Uniparts India Ltd",
+    "symbol": "MACPOWER",
+    "company": "Macpower CNC Machines Ltd",
+    "industry": "CNC - Machines",
+    "close": 1824.3,
+    "return_1d": 8.52,
+    "mcap_cr": 1681.8,
+    "signal": "52W Breakout",
+    "scans_count": 28
+  },
+  {
+    "symbol": "PAYTM",
+    "company": "One 97 Communications Ltd",
+    "industry": "E-Commerce - Platform - Utility",
+    "close": 1584.1,
+    "return_1d": 9.88,
+    "mcap_cr": 92310.98,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "SYRMA",
+    "company": "Syrma SGS Technology Ltd",
+    "industry": "Consumer Electronics - EMS",
+    "close": 1516.4,
+    "return_1d": 6.44,
+    "mcap_cr": 27472.56,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "COMSYN",
+    "company": "Commercial Syn Bags Ltd",
+    "industry": "Packaging - Polysacks",
+    "close": 269.03,
+    "return_1d": 19.66,
+    "mcap_cr": 906.95,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "MMFL",
+    "company": "Mm Forgings Limited",
     "industry": "Castings, Forgings & Fastners",
-    "close": 814.6,
-    "return_1d": 4.24,
-    "mcap_cr": 3527.93,
+    "close": 658.25,
+    "return_1d": 4.63,
+    "mcap_cr": 3037.4,
     "signal": "52W Breakout",
-    "scans_count": 29
-  },
-  {
-    "symbol": "SKYGOLD",
-    "company": "Sky Gold Ltd",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 719.4,
-    "return_1d": 4.09,
-    "mcap_cr": 10704.11,
-    "signal": "52W Breakout",
-    "scans_count": 27
-  },
-  {
-    "symbol": "FIEMIND",
-    "company": "Fiem Industries Limited",
-    "industry": "Auto Ancillaries - 2&3 Wheelers",
-    "close": 2580.3,
-    "return_1d": 4.07,
-    "mcap_cr": 6525.96,
-    "signal": "52W Breakout",
-    "scans_count": 25
+    "scans_count": 21
   },
   {
     "symbol": "SBCL",
     "company": "Shivalik Bimetal Controls Ltd",
     "industry": "Shunt Resistors",
-    "close": 920.9,
-    "return_1d": 19.99,
-    "mcap_cr": 4420.83,
+    "close": 1105.05,
+    "return_1d": 20.0,
+    "mcap_cr": 5304.77,
     "signal": "52W Breakout",
     "scans_count": 21
-  },
-  {
-    "symbol": "LLOYDSME",
-    "company": "Lloyds Metals & Energy Ltd",
-    "industry": "Mining/Minerals - Iron Ore",
-    "close": 2109.9,
-    "return_1d": 2.47,
-    "mcap_cr": 115902.54,
-    "signal": "52W Breakout",
-    "scans_count": 20
   },
   {
     "symbol": "UEL",
     "company": "Ujaas Energy Ltd",
     "industry": "Capital Goods - Transformers",
-    "close": 257.79,
+    "close": 270.67,
     "return_1d": 5.0,
-    "mcap_cr": 3275.18,
+    "mcap_cr": 3438.86,
     "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "HAPPYFORGE",
-    "company": "Happy Forgings Ltd",
-    "industry": "industrials",
-    "close": 1895.0,
-    "return_1d": 1.34,
-    "mcap_cr": 17648.82,
-    "signal": "52W Breakout",
-    "scans_count": 0
+    "scans_count": 19
   }
 ]
