@@ -9,7 +9,7 @@
 
 | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Rating | BUY | 12M Target | Rs. 395 | Upside | 26.0% | CMP | Rs. 313.50 |
+| Rating | BUY | 12M Target | Rs. 395.00 | Upside | 26.0% | CMP | Rs. 313.50 |
 | Market Cap | Rs. 1,581 Cr | 52W High | Rs. 379.95 | 52W Low | Rs. 164.45 | | |
 
 | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value | Particulars | Value |
