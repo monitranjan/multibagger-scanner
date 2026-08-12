@@ -785,7 +785,8 @@ def calculate_oneil_relative_strength(
     and O'Neil Weighted Score (2*q4 + q3 + q2 + q1)/5 based on weekly series.
     Returns: (stock_1y_ret, bench_1y_ret, rs_spread, rs_line_now, weighted_score)
     """
-    if stock_series is None or len(stock_series) < 2 or bench_series is None or len(bench_series) < 2:
+    if (stock_series is None or not isinstance(stock_series, pd.Series) or len(stock_series) < 2 or
+        bench_series is None or not isinstance(bench_series, pd.Series) or len(bench_series) < 2):
         return None, None, None, None, None
         
     # Align by intersecting the date indices
