@@ -1,5 +1,5 @@
 # 📊 Monit High-Conviction Confluences & Emerging Leaders Report
-Generated on **11 Aug 2026** | Premium Quantitative Watchlist Analysis
+Generated on **12 Aug 2026** | Premium Quantitative Watchlist Analysis
 
 ## 🏆 1. High-Conviction Confluences (Common Count = 3)
 These stocks are at the absolute intersection of all three major momentum dimensions:
@@ -7,108 +7,112 @@ These stocks are at the absolute intersection of all three major momentum dimens
 2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)
 3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)
 
-Total triple-confluence candidates: **9**
+Total triple-confluence candidates: **6**
 
 | Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Volume & Delivery (Live) | Active Signal | Scans Count | Deep Research Report |
 |---|---|---|---|---|---|---|---|---|---|
-| `LUMAXTECH` | Lumax Auto Technologies Limited | Auto Ancillaries - Diversified | ₹2,076.30 | 19.45% | 11,847.2 | 52.4% (🛡️ Strong Delivery (₹16.51 Cr) | ₹16.51 Cr) | **52W Breakout** | **27** | _Pending separate pipeline run_ |
-| `SHILPAMED` | Shilpa Medicare Limited | Pharma - API & CRAMS | ₹819.70 | 1.5% | 15,794.2 | 26.9% (🛡️ Strong Delivery (₹138.69 Cr) | ₹138.69 Cr) | **52W Breakout** | **26** | 📝 **Sent on 02-Jun-2026** |
-| `INDSWFTLAB` | Ind-swift Laboratories Limited | Pharma - API | ₹284.68 | 20.0% | 2,063.1 | 49.0% (🛡️ Strong Delivery (₹11.98 Cr) | ₹11.98 Cr) | **52W Breakout** | **26** | _Pending separate pipeline run_ |
-| `CUPID` | Cupid Limited | Contraceptives/Protectives | ₹276.65 | 5.31% | 35,325.6 | 27.2% (⚖️ Neutral | ₹184.84 Cr) | **52W Breakout** | **25** | 📝 **Sent on 01-Jul-2026** |
-| `DEEPINDS` | Deep Industries Ltd | Oil Drilling & Exploration | ₹670.05 | 3.41% | 4,146.9 | 50.8% (🛡️ Strong Delivery (₹8.16 Cr) | ₹8.16 Cr) | **52W Breakout** | **23** | _Pending separate pipeline run_ |
-| `KRISHANA` | Krishana Phoschem Ltd | Fertilisers | ₹186.45 | 1.59% | 1,134.8 | 44.4% (⚖️ Neutral | ₹4.11 Cr) | **52W Breakout** | **22** | 📝 **Sent on 24-Jun-2026** |
-| `E2E` | E2E Networks Ltd | Data Centre | ₹627.40 | 4.08% | 12,391.5 | 35.6% (⚖️ Neutral | ₹72.56 Cr) | **52W Breakout** | **22** | 📝 **Sent on 23-Jul-2026** |
-| `LAURUSLABS` | Laurus Labs Limited | Pharma - API & CRAMS | ₹1,858.00 | 0.22% | 100,162.3 | 49.2% (🛡️ Strong Delivery (₹126.61 Cr) | ₹126.61 Cr) | **52W Breakout** | **21** | 📝 **Sent on 24-Jul-2026** |
-| `RRKABEL` | R R Kabel Ltd | Cables - Power | ₹2,812.80 | 2.03% | 31,182.1 | 39.4% (⚖️ Neutral | ₹23.51 Cr) | **52W Breakout** | **19** | 📝 **Sent on 31-May-2026** |
+| `SKYGOLD` | Sky Gold Ltd | Diamond, Gems & Jewellery | ₹833.10 | 5.45% | 12,235.8 | 36.5% (⚖️ Neutral | ₹60.25 Cr) | **52W Breakout** | **34** | 📝 **Sent on 02-Jun-2026** |
+| `PRICOLLTD` | Pricol Ltd. | Auto Ancillaries - 2 Wheelers | ₹783.25 | 6.25% | 8,984.5 | 31.7% (⚖️ Neutral | ₹33.93 Cr) | **52W Breakout** | **25** | 📝 **Sent on 04-Aug-2026** |
+| `CUPID` | Cupid Limited | Contraceptives/Protectives | ₹289.87 | 4.78% | 37,200.0 | 22.7% (⚖️ Neutral | ₹317.51 Cr) | **52W Breakout** | **24** | 📝 **Sent on 01-Jul-2026** |
+| `UJJIVANSFB` | Ujjivan Small Finance Bank Ltd | Banks - Small Finance | ₹72.38 | 3.19% | 13,644.0 | 51.4% (🛡️ Strong Delivery (₹67.14 Cr) | ₹67.14 Cr) | **52W Breakout** | **22** | 📝 **Sent on 23-Jul-2026** |
+| `HAPPYFORGE` | Happy Forgings Ltd | Castings, Forgings & Fastners | ₹2,022.70 | 6.02% | 18,005.6 | 43.1% (⚖️ Neutral | ₹21.29 Cr) | **52W Breakout** | **21** | 📝 **Sent on 22-Jun-2026** |
+| `SENORES` | Senores Pharmaceuticals Ltd | Pharma - API | ₹1,492.40 | 1.13% | 6,796.1 | 48.3% (🛡️ Strong Delivery (₹19.31 Cr) | ₹19.31 Cr) | **52W Breakout** | **20** | 📝 **Sent on 12-Jun-2026** |
 
 ---
 
 ## 🚀 2. Emerging Multibagger Leaders (Fresh Momentum Expansion)
 These stocks show a fresh institutional footprint. They have minimal historical appearances (`<= 2` counts over the prior months) but have erupted recently (`>= 3` appearances in the last 10 days). This highlights **early stage-2 momentum expansion** before they double!
 
-Total emerging leaders: **82**
+Total emerging leaders: **89**
 
 | Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Volume & Delivery (Live) | Persistence (Last 10D) |
 |---|---|---|---|---|---|---|---|
-| 1 | `ETERNAL` | Eternal Ltd | i.t | ₹318.00 | 299,402.1 | 48.3% (🛡️ Strong Delivery (₹247.03 Cr) | ₹247.03 Cr) | **10/10 days** |
-| 2 | `VRLLOG` | Vrl Logistics Limited | transportation | ₹305.25 | 4,983.9 | 60.4% (🛡️ Strong Delivery (₹5.59 Cr) | ₹5.59 Cr) | **10/10 days** |
-| 3 | `GLAXO` | Glaxosmithkline Pharmaceuticals Limited | healthcare | ₹2,601.90 | 44,062.5 | 58.4% (🛡️ Strong Delivery (₹4.44 Cr) | ₹4.44 Cr) | **10/10 days** |
-| 4 | `PERSISTENT` | Persistent Systems Limited | i.t | ₹5,536.00 | 86,352.4 | 51.8% (🔥 High Accumulation (₹119.73 Cr) | ₹119.73 Cr) | **10/10 days** |
-| 5 | `COFORGE` | Coforge (Niit Tech) Ltd | IT - Software | ₹1,819.00 | 80,127.0 | 47.0% (🛡️ Strong Delivery (₹222.90 Cr) | ₹222.90 Cr) | **10/10 days** |
-| 6 | `PFIZER` | Pfizer Limited | healthcare | ₹4,898.50 | 22,313.9 | 80.2% (🔥 High Accumulation (₹20.24 Cr) | ₹20.24 Cr) | **9/10 days** |
-| 7 | `INDIGOPNTS` | Indigo Paints Ltd | building materials | ₹1,127.00 | 5,440.8 | 52.5% (🛡️ Strong Delivery (₹4.38 Cr) | ₹4.38 Cr) | **9/10 days** |
-| 8 | `KILITCH` | Kilitch Drugs (india) Limited | healthcare | ₹192.99 | 672.0 | 59.3% (🛡️ Strong Delivery (₹1.59 Cr) | ₹1.59 Cr) | **9/10 days** |
-| 9 | `SMLMAH` | SML Mahindra Ltd | auto | ₹5,208.50 | 7,564.3 | 43.6% (🛡️ Strong Delivery (₹33.87 Cr) | ₹33.87 Cr) | **9/10 days** |
-| 10 | `BALKRISIND` | Balkrishna Industries Limited | auto | ₹2,500.00 | 48,804.9 | 71.8% (🔥 High Accumulation (₹79.98 Cr) | ₹79.98 Cr) | **9/10 days** |
-| 11 | `ANTHEM` | Anthem Biosciences Ltd | healthcare | ₹891.65 | 48,056.7 | 53.7% (🛡️ Strong Delivery (₹57.31 Cr) | ₹57.31 Cr) | **9/10 days** |
-| 12 | `KOLTEPATIL` | Kolte - Patil Developers Limited | Realty - Construction & Contracting | ₹516.60 | 4,098.8 | 43.1% (⚖️ Neutral | ₹9.56 Cr) | **8/10 days** |
-| 13 | `KOTHARIPET` | Kothari Petrochemicals Limited | energy | ₹145.65 | 856.3 | 65.9% (🛡️ Strong Delivery (₹0.76 Cr) | ₹0.76 Cr) | **8/10 days** |
-| 14 | `LTFOODS` | L T Foods Ltd | fmcg | ₹419.30 | 14,680.1 | 40.9% (⚖️ Neutral | ₹4.25 Cr) | **8/10 days** |
-| 15 | `APLAPOLLO` | Apl Apollo Tubes Limited | industrials | ₹2,012.70 | 56,087.0 | 51.0% (🛡️ Strong Delivery (₹60.58 Cr) | ₹60.58 Cr) | **8/10 days** |
-| 16 | `MARUTI` | Maruti Suzuki India Limited | Consumer Cyclical | ₹14,097.00 | 439,849.2 | 63.0% (🛡️ Strong Delivery (₹266.03 Cr) | ₹266.03 Cr) | **8/10 days** |
-| 17 | `TARSONS` | Tarsons Products Limited | Healthcare | ₹313.50 | 1,581.3 | 36.9% (⚖️ Neutral | ₹2.80 Cr) | **8/10 days** |
-| 18 | `RBZJEWEL` | RBZ Jewellers Ltd | consumer discretionary | ₹154.46 | 609.1 | 56.8% (🛡️ Strong Delivery (₹0.59 Cr) | ₹0.59 Cr) | **8/10 days** |
-| 19 | `THEJO` | Thejo Engineering Ltd | Capital Goods - Others | ₹2,180.00 | 2,402.9 | 60.4% (🛡️ Strong Delivery (₹1.27 Cr) | ₹1.27 Cr) | **8/10 days** |
-| 20 | `63MOONS` | 63 Moons Technologies Ltd | i.t | ₹858.65 | 3,967.8 | 43.7% (🛡️ Strong Delivery (₹9.13 Cr) | ₹9.13 Cr) | **8/10 days** |
-| 21 | `DOLPHIN` | Dolphin Offshore Enterprises (India) Ltd | energy | ₹437.10 | 1,670.2 | 81.6% (🔥 High Accumulation (₹1.03 Cr) | ₹1.03 Cr) | **7/10 days** |
-| 22 | `BCLIND` | BCL Industries Ltd | fmcg | ₹37.08 | 1,102.1 | 45.0% (🛡️ Strong Delivery (₹1.62 Cr) | ₹1.62 Cr) | **7/10 days** |
-| 23 | `SHALPAINTS` | Shalimar Paints Limited | building materials | ₹83.87 | 706.3 | 34.3% (⚖️ Neutral | ₹7.35 Cr) | **7/10 days** |
-| 24 | `UEL` | Ujaas Energy Ltd | power & utilities | ₹273.12 | 3,610.7 | 62.5% (🛡️ Strong Delivery (₹0.63 Cr) | ₹0.63 Cr) | **7/10 days** |
-| 25 | `UTTAMSUGAR` | Uttam Sugar Mills Limited | fmcg | ₹252.30 | 986.7 | 45.4% (🛡️ Strong Delivery (₹3.43 Cr) | ₹3.43 Cr) | **7/10 days** |
-| 26 | `CEATLTD` | Ceat Limited | auto | ₹3,750.20 | 15,345.1 | 53.9% (🛡️ Strong Delivery (₹18.97 Cr) | ₹18.97 Cr) | **6/10 days** |
-| 27 | `BOSCH-HCIL` | Bosch Home Comfort India Ltd | Consumer Electronics | ₹1,696.80 | 4,647.2 | 42.6% (⚖️ Neutral | ₹5.46 Cr) | **6/10 days** |
-| 28 | `SIRCA` | Sirca Paints India Ltd | building materials | ₹442.35 | 2,573.8 | 34.3% (⚖️ Neutral | ₹6.15 Cr) | **6/10 days** |
-| 29 | `KRONOX` | Kronox Lab Sciences Ltd | chemicals | ₹166.45 | 622.3 | 58.0% (🛡️ Strong Delivery (₹1.68 Cr) | ₹1.68 Cr) | **6/10 days** |
-| 30 | `3IINFOLTD` | 3i Infotech Ltd | i.t | ₹27.60 | 562.7 | 45.0% (🛡️ Strong Delivery (₹4.06 Cr) | ₹4.06 Cr) | **6/10 days** |
-| 31 | `TRAVELFOOD` | Travel Food Services Ltd | consumer discretionary | ₹1,393.00 | 18,394.3 | 45.8% (🛡️ Strong Delivery (₹5.89 Cr) | ₹5.89 Cr) | **6/10 days** |
-| 32 | `SBILIFE` | SBI Life Insurance Company Limited | Financial Services | ₹1,855.00 | 184,359.2 | 63.7% (🛡️ Strong Delivery (₹98.56 Cr) | ₹98.56 Cr) | **6/10 days** |
-| 33 | `SAMBHV` | SAMBHV | Basic Materials | ₹121.97 | 3,495.4 | 52.0% (🛡️ Strong Delivery (₹10.80 Cr) | ₹10.80 Cr) | **6/10 days** |
-| 34 | `ASHOKLEY` | Ashok Leyland Limited | auto | ₹174.83 | 102,205.1 | 54.5% (🛡️ Strong Delivery (₹137.70 Cr) | ₹137.70 Cr) | **6/10 days** |
-| 35 | `TTKHLTCARE` | Ttk Healthcare Limited | miscellaneous | ₹1,078.90 | 1,496.4 | 49.9% (🛡️ Strong Delivery (₹1.01 Cr) | ₹1.01 Cr) | **5/10 days** |
-| 36 | `MANAKSTEEL` | Manaksia Steels Limited | metals & mining | ₹84.71 | 528.7 | 64.7% (🛡️ Strong Delivery (₹0.60 Cr) | ₹0.60 Cr) | **5/10 days** |
-| 37 | `CRISIL` | Crisil Limited | financials | ₹4,480.80 | 33,898.7 | 53.3% (🛡️ Strong Delivery (₹15.42 Cr) | ₹15.42 Cr) | **5/10 days** |
-| 38 | `EMIL` | Electronics Mart India Ltd | Retail - Electronics | ₹184.75 | 6,955.1 | 9.5% (⚠️ Speculative Churn | ₹173.37 Cr) | **5/10 days** |
-| 39 | `RITES` | Rites Ltd | miscellaneous | ₹226.67 | 11,190.4 | 39.1% (⚖️ Neutral | ₹6.65 Cr) | **5/10 days** |
-| 40 | `FMGOETZE` | Federal-mogul Goetze (india) Limited. | auto | ₹483.30 | 2,732.9 | 61.3% (🛡️ Strong Delivery (₹1.34 Cr) | ₹1.34 Cr) | **5/10 days** |
-| 41 | `RAYMOND` | Raymond Limited | transportation | ₹624.30 | 4,174.2 | 44.6% (⚖️ Neutral | ₹25.98 Cr) | **5/10 days** |
-| 42 | `TANLA` | Tanla Solutions Limited | i.t | ₹616.65 | 8,382.7 | 38.8% (⚖️ Neutral | ₹28.55 Cr) | **5/10 days** |
-| 43 | `BPCL` | Bharat Petroleum Corporation Limited | Energy | ₹318.50 | 135,782.7 | 61.6% (🛡️ Strong Delivery (₹60.00 Cr) | ₹60.00 Cr) | **5/10 days** |
-| 44 | `CCAVENUE` | AvenuesAI Limited | Technology | ₹17.54 | 5,715.8 | 51.8% (🛡️ Strong Delivery (₹15.29 Cr) | ₹15.29 Cr) | **5/10 days** |
-| 45 | `JUSTDIAL` | Just Dial Limited | Communication Services | ₹687.55 | 5,910.5 | 32.7% (⚖️ Neutral | ₹4.15 Cr) | **5/10 days** |
-| 46 | `MAGADSUGAR` | Magadh Sugar & Energy Ltd | fmcg | ₹527.80 | 749.0 | 45.9% (🛡️ Strong Delivery (₹0.76 Cr) | ₹0.76 Cr) | **5/10 days** |
-| 47 | `COSMOFIRST` | Cosmo First Ltd | industrials | ₹930.30 | 2,433.7 | 49.8% (🛡️ Strong Delivery (₹16.22 Cr) | ₹16.22 Cr) | **5/10 days** |
-| 48 | `BASF` | Basf India Limited | chemicals | ₹4,036.00 | 17,451.0 | 45.0% (⚖️ Neutral | ₹7.88 Cr) | **4/10 days** |
-| 49 | `MAZDOCK` | Mazagon Dock Shipbuilders Ltd | aerospace & defence | ₹2,554.00 | 103,870.4 | 40.9% (🔥 High Accumulation (₹154.41 Cr) | ₹154.41 Cr) | **4/10 days** |
-| 50 | `APLLTD` | Alembic Pharmaceuticals Limited | healthcare | ₹838.95 | 16,341.3 | 46.5% (🛡️ Strong Delivery (₹3.24 Cr) | ₹3.24 Cr) | **4/10 days** |
-| 51 | `UFLEX` | Uflex Limited | industrials | ₹497.05 | 3,556.1 | 56.1% (🛡️ Strong Delivery (₹1.78 Cr) | ₹1.78 Cr) | **4/10 days** |
-| 52 | `APOLLOTYRE` | Apollo Tyres Limited | Consumer Cyclical | ₹445.95 | 28,023.4 | 44.1% (⚖️ Neutral | ₹13.94 Cr) | **4/10 days** |
-| 53 | `CASTROLIND` | Castrol India Limited | Energy | ₹193.43 | 18,478.8 | 74.5% (🛡️ Strong Delivery (₹93.48 Cr) | ₹93.48 Cr) | **4/10 days** |
-| 54 | `UGARSUGAR` | The Ugar Sugar Works Limited | fmcg | ₹45.65 | 523.0 | 54.6% (🛡️ Strong Delivery (₹2.28 Cr) | ₹2.28 Cr) | **4/10 days** |
-| 55 | `MPHASIS` | Mphasis Limited | i.t | ₹2,530.00 | 47,871.0 | 49.8% (🔥 High Accumulation (₹74.78 Cr) | ₹74.78 Cr) | **4/10 days** |
-| 56 | `ALKYLAMINE` | Alkyl Amines Chemicals Limited | chemicals | ₹1,947.40 | 9,801.6 | 42.5% (⚖️ Neutral | ₹5.45 Cr) | **4/10 days** |
-| 57 | `UNIVASTU` | Univastu India Limited | Industrials | ₹132.21 | 499.6 | 82.1% (🛡️ Strong Delivery (₹0.93 Cr) | ₹0.93 Cr) | **4/10 days** |
-| 58 | `KANPRPLA` | Kanpur Plastipack Ltd | industrials | ₹217.84 | 502.8 | 58.6% (🛡️ Strong Delivery (₹0.07 Cr) | ₹0.07 Cr) | **4/10 days** |
-| 59 | `MANCREDIT` | Mangal Credit and Fincorp Limited | Financial Services | ₹229.99 | 521.6 | 73.9% (🔥 High Accumulation (₹4.73 Cr) | ₹4.73 Cr) | **4/10 days** |
-| 60 | `JINDALSTEL` | Jindal Steel Limited | Basic Materials | ₹1,125.00 | 111,414.9 | 41.3% (⚖️ Neutral | ₹41.67 Cr) | **4/10 days** |
-| 61 | `TRENT` | Trent Limited | Consumer Cyclical | ₹3,025.00 | 159,969.7 | 52.9% (🛡️ Strong Delivery (₹158.22 Cr) | ₹158.22 Cr) | **4/10 days** |
-| 62 | `JYOTICNC` | Jyoti CNC Automation Limited | Industrials | ₹801.35 | 18,307.6 | 40.7% (⚖️ Neutral | ₹59.51 Cr) | **4/10 days** |
-| 63 | `INDORAMA` | Indo Rama Synthetics (India) Limited | Consumer Cyclical | ₹56.41 | 1,515.8 | 66.0% (🛡️ Strong Delivery (₹0.97 Cr) | ₹0.97 Cr) | **4/10 days** |
-| 64 | `ONWARDTEC` | Onward Technologies Limited | Technology | ₹284.75 | 627.4 | 49.7% (🛡️ Strong Delivery (₹0.29 Cr) | ₹0.29 Cr) | **4/10 days** |
-| 65 | `PFOCUS` | Prime Focus Limited | Communication Services | ₹283.05 | 21,926.4 | 52.1% (🛡️ Strong Delivery (₹4.94 Cr) | ₹4.94 Cr) | **3/10 days** |
-| 66 | `NAHARPOLY` | Nahar Poly Films Limited | Consumer Cyclical | ₹247.50 | 616.4 | 68.3% (🛡️ Strong Delivery (₹0.85 Cr) | ₹0.85 Cr) | **3/10 days** |
-| 67 | `SUNDARMFIN` | Sundaram Finance Limited | Financial Services | ₹4,568.50 | 49,018.2 | 60.1% (🛡️ Strong Delivery (₹4.90 Cr) | ₹4.90 Cr) | **3/10 days** |
-| 68 | `CLSEL` | Chaman Lal Setia Exports Ltd. | Consumer Defensive | ₹278.90 | 1,378.6 | 50.3% (🛡️ Strong Delivery (₹0.79 Cr) | ₹0.79 Cr) | **3/10 days** |
-| 69 | `POLYMED` | Poly Medicure Limited | healthcare | ₹1,863.90 | 17,965.0 | 41.1% (⚖️ Neutral | ₹60.62 Cr) | **3/10 days** |
-| 70 | `DDEVPLSTIK` | DDev Plastiks Industries Ltd | chemicals | ₹290.30 | 2,957.4 | 56.7% (🛡️ Strong Delivery (₹4.21 Cr) | ₹4.21 Cr) | **3/10 days** |
-| 71 | `FSL` | Firstsource Solutions Limited | Technology | ₹279.70 | 19,322.7 | 26.0% (⚖️ Neutral | ₹19.17 Cr) | **3/10 days** |
-| 72 | `SONATSOFTW` | Sonata Software Limited | Technology | ₹320.10 | 9,242.2 | 29.7% (⚖️ Neutral | ₹10.88 Cr) | **3/10 days** |
-| 73 | `RELAXO` | Relaxo Footwears Limited | consumer discretionary | ₹422.00 | 10,566.2 | 37.4% (⚖️ Neutral | ₹3.85 Cr) | **3/10 days** |
-| 74 | `BORANA` | BORANA | Consumer Cyclical | ₹343.35 | 874.2 | 58.2% (🛡️ Strong Delivery (₹0.79 Cr) | ₹0.79 Cr) | **3/10 days** |
-| 75 | `FOSECOIND` | Foseco India Limited | chemicals | ₹5,500.50 | 4,199.0 | 65.2% (🔥 High Accumulation (₹2.42 Cr) | ₹2.42 Cr) | **3/10 days** |
-| 76 | `MAMATA` | Mamata Machinery Ltd | industrials | ₹425.00 | 1,046.6 | 37.5% (⚖️ Neutral | ₹1.07 Cr) | **3/10 days** |
-| 77 | `WINDMACHIN` | Windsor Machines Limited | industrials | ₹302.60 | 3,088.9 | 32.9% (⚖️ Neutral | ₹3.24 Cr) | **3/10 days** |
-| 78 | `MATRIMONY` | Matrimony.com Ltd | miscellaneous | ₹530.00 | 993.0 | 88.4% (🔥 High Accumulation (₹4.72 Cr) | ₹4.72 Cr) | **3/10 days** |
-| 79 | `ORIENTELEC` | Orient Electric Ltd | consumer discretionary | ₹190.88 | 4,048.6 | 50.7% (🛡️ Strong Delivery (₹7.05 Cr) | ₹7.05 Cr) | **3/10 days** |
-| 80 | `MOLDTECH` | Mold-tek Technologies Limited | realty | ₹182.49 | 553.3 | 54.5% (🛡️ Strong Delivery (₹6.02 Cr) | ₹6.02 Cr) | **3/10 days** |
-| 81 | `RAYMONDREL` | Raymond Realty Limited | Real Estate | ₹607.05 | 4,055.0 | 42.0% (⚖️ Neutral | ₹45.96 Cr) | **3/10 days** |
-| 82 | `ENRIN` | Siemens Energy India Ltd | power & utilities | ₹3,563.80 | 127,038.9 | 29.3% (⚖️ Neutral | ₹119.69 Cr) | **3/10 days** |
+| 1 | `PERSISTENT` | Persistent Systems Limited | i.t | ₹5,474.00 | 87,330.4 | 45.8% (🛡️ Strong Delivery (₹87.17 Cr) | ₹87.17 Cr) | **10/10 days** |
+| 2 | `PFIZER` | Pfizer Limited | healthcare | ₹5,017.60 | 22,409.5 | 31.4% (⚖️ Neutral | ₹23.44 Cr) | **10/10 days** |
+| 3 | `ETERNAL` | Eternal Ltd | i.t | ₹314.05 | 306,881.2 | 52.2% (🔥 High Accumulation (₹327.82 Cr) | ₹327.82 Cr) | **10/10 days** |
+| 4 | `KILITCH` | Kilitch Drugs (india) Limited | healthcare | ₹191.21 | 669.4 | 59.3% (🛡️ Strong Delivery (₹1.59 Cr) | ₹1.59 Cr) | **10/10 days** |
+| 5 | `SMLMAH` | SML Mahindra Ltd | auto | ₹5,172.00 | 7,537.6 | 27.4% (⚖️ Neutral | ₹10.16 Cr) | **10/10 days** |
+| 6 | `VRLLOG` | Vrl Logistics Limited | transportation | ₹300.90 | 5,339.9 | 59.0% (🛡️ Strong Delivery (₹10.33 Cr) | ₹10.33 Cr) | **10/10 days** |
+| 7 | `BALKRISIND` | Balkrishna Industries Limited | auto | ₹2,496.90 | 48,308.0 | 66.5% (🔥 High Accumulation (₹26.07 Cr) | ₹26.07 Cr) | **10/10 days** |
+| 8 | `INDIGOPNTS` | Indigo Paints Ltd | building materials | ₹1,122.10 | 5,365.9 | 53.1% (🛡️ Strong Delivery (₹1.72 Cr) | ₹1.72 Cr) | **10/10 days** |
+| 9 | `COFORGE` | Coforge (Niit Tech) Ltd | IT - Software | ₹1,801.50 | 80,525.5 | 50.0% (🛡️ Strong Delivery (₹143.27 Cr) | ₹143.27 Cr) | **10/10 days** |
+| 10 | `GLAXO` | Glaxosmithkline Pharmaceuticals Limited | healthcare | ₹2,620.20 | 44,077.8 | 62.1% (🛡️ Strong Delivery (₹10.53 Cr) | ₹10.53 Cr) | **10/10 days** |
+| 11 | `APLAPOLLO` | Apl Apollo Tubes Limited | industrials | ₹1,997.10 | 55,884.3 | 65.8% (🔥 High Accumulation (₹93.98 Cr) | ₹93.98 Cr) | **9/10 days** |
+| 12 | `ANTHEM` | Anthem Biosciences Ltd | healthcare | ₹878.40 | 50,234.2 | 53.7% (🛡️ Strong Delivery (₹20.10 Cr) | ₹20.10 Cr) | **9/10 days** |
+| 13 | `KOTHARIPET` | Kothari Petrochemicals Limited | energy | ₹150.63 | 857.1 | 56.8% (🛡️ Strong Delivery (₹1.47 Cr) | ₹1.47 Cr) | **9/10 days** |
+| 14 | `63MOONS` | 63 Moons Technologies Ltd | i.t | ₹867.40 | 3,956.5 | 41.8% (⚖️ Neutral | ₹13.88 Cr) | **9/10 days** |
+| 15 | `LTFOODS` | L T Foods Ltd | fmcg | ₹426.70 | 14,560.3 | 41.0% (⚖️ Neutral | ₹8.80 Cr) | **9/10 days** |
+| 16 | `THEJO` | Thejo Engineering Ltd | industrials | ₹2,122.80 | 2,337.1 | 57.6% (🛡️ Strong Delivery (₹0.44 Cr) | ₹0.44 Cr) | **9/10 days** |
+| 17 | `TARSONS` | Tarsons Products Limited | Healthcare | ₹297.20 | 1,664.3 | 9.8% (⚠️ Speculative Churn | ₹4.96 Cr) | **8/10 days** |
+| 18 | `UEL` | Ujaas Energy Ltd | power & utilities | ₹259.47 | 3,643.4 | 100.0% (🛡️ Strong Delivery (₹0.35 Cr) | ₹0.35 Cr) | **8/10 days** |
+| 19 | `BCLIND` | BCL Industries Ltd | fmcg | ₹37.48 | 1,094.5 | 54.2% (🛡️ Strong Delivery (₹1.23 Cr) | ₹1.23 Cr) | **8/10 days** |
+| 20 | `DOLPHIN` | Dolphin Offshore Enterprises (India) Ltd | Oil Drilling & Exploration | ₹494.35 | 1,762.4 | 83.7% (🔥 High Accumulation (₹27.10 Cr) | ₹27.10 Cr) | **8/10 days** |
+| 21 | `MARUTI` | Maruti Suzuki India Limited | Consumer Cyclical | ₹13,990.00 | 436,233.5 | 64.1% (🛡️ Strong Delivery (₹315.31 Cr) | ₹315.31 Cr) | **8/10 days** |
+| 22 | `UTTAMSUGAR` | Uttam Sugar Mills Limited | fmcg | ₹253.53 | 964.4 | 47.0% (🛡️ Strong Delivery (₹0.88 Cr) | ₹0.88 Cr) | **8/10 days** |
+| 23 | `SHALPAINTS` | Shalimar Paints Limited | building materials | ₹82.90 | 702.1 | 34.3% (⚖️ Neutral | ₹7.35 Cr) | **8/10 days** |
+| 24 | `RBZJEWEL` | RBZ Jewellers Limited | Consumer Cyclical | ₹154.46 | 564.8 | 52.8% (🛡️ Strong Delivery (₹1.70 Cr) | ₹1.70 Cr) | **8/10 days** |
+| 25 | `SIRCA` | Sirca Paints India Ltd | building materials | ₹435.90 | 2,512.2 | 42.4% (🛡️ Strong Delivery (₹6.83 Cr) | ₹6.83 Cr) | **7/10 days** |
+| 26 | `CEATLTD` | Ceat Limited | auto | ₹3,723.10 | 15,169.6 | 56.3% (🛡️ Strong Delivery (₹12.70 Cr) | ₹12.70 Cr) | **7/10 days** |
+| 27 | `KRONOX` | Kronox Lab Sciences Ltd | chemicals | ₹173.93 | 620.2 | 41.0% (⚖️ Neutral | ₹5.11 Cr) | **7/10 days** |
+| 28 | `TRAVELFOOD` | Travel Food Services Ltd | consumer discretionary | ₹1,390.10 | 18,290.3 | 53.5% (🛡️ Strong Delivery (₹2.61 Cr) | ₹2.61 Cr) | **7/10 days** |
+| 29 | `BOSCH-HCIL` | Bosch Home Comfort India Ltd | Consumer Electronics | ₹1,713.80 | 4,613.8 | 39.9% (⚖️ Neutral | ₹3.11 Cr) | **7/10 days** |
+| 30 | `3IINFOLTD` | 3i Infotech Ltd | i.t | ₹27.47 | 572.4 | 70.4% (🛡️ Strong Delivery (₹1.86 Cr) | ₹1.86 Cr) | **7/10 days** |
+| 31 | `ASHOKLEY` | Ashok Leyland Limited | auto | ₹176.70 | 102,692.6 | 51.4% (🛡️ Strong Delivery (₹96.42 Cr) | ₹96.42 Cr) | **7/10 days** |
+| 32 | `CRISIL` | Crisil Limited | financials | ₹4,507.10 | 32,768.1 | 50.6% (🛡️ Strong Delivery (₹6.41 Cr) | ₹6.41 Cr) | **6/10 days** |
+| 33 | `RAYMOND` | Raymond Limited | transportation | ₹618.95 | 4,156.2 | 45.3% (🛡️ Strong Delivery (₹20.12 Cr) | ₹20.12 Cr) | **6/10 days** |
+| 34 | `MANAKSTEEL` | Manaksia Steels Limited | metals & mining | ₹82.75 | 555.1 | 52.5% (🛡️ Strong Delivery (₹2.49 Cr) | ₹2.49 Cr) | **6/10 days** |
+| 35 | `EMIL` | Electronics Mart India Ltd | Retail - Electronics | ₹193.61 | 7,108.2 | 10.1% (⚖️ Neutral | ₹61.82 Cr) | **6/10 days** |
+| 36 | `TTKHLTCARE` | Ttk Healthcare Limited | miscellaneous | ₹1,103.40 | 1,533.6 | 53.0% (🔥 High Accumulation (₹1.95 Cr) | ₹1.95 Cr) | **6/10 days** |
+| 37 | `FMGOETZE` | Federal-mogul Goetze (india) Limited. | auto | ₹487.20 | 2,711.5 | 63.6% (🛡️ Strong Delivery (₹0.89 Cr) | ₹0.89 Cr) | **6/10 days** |
+| 38 | `MAGADSUGAR` | Magadh Sugar & Energy Ltd | fmcg | ₹520.35 | 740.9 | 46.0% (🛡️ Strong Delivery (₹0.28 Cr) | ₹0.28 Cr) | **6/10 days** |
+| 39 | `DYNAMATECH` | Dynamatic Technologies Limited | Consumer Cyclical | ₹10,600.00 | 7,249.2 | 48.8% (🛡️ Strong Delivery (₹15.55 Cr) | ₹15.55 Cr) | **6/10 days** |
+| 40 | `UFLEX` | Uflex Limited | industrials | ₹497.75 | 3,589.3 | 52.9% (🛡️ Strong Delivery (₹1.91 Cr) | ₹1.91 Cr) | **5/10 days** |
+| 41 | `MAZDOCK` | Mazagon Dock Shipbuilders Ltd | aerospace & defence | ₹2,552.00 | 103,023.2 | 25.4% (⚖️ Neutral | ₹44.93 Cr) | **5/10 days** |
+| 42 | `JINDALSTEL` | Jindal Steel Ltd | metals & mining | ₹1,112.00 | 111,699.6 | 45.6% (🛡️ Strong Delivery (₹20.11 Cr) | ₹20.11 Cr) | **5/10 days** |
+| 43 | `COSMOFIRST` | Cosmo First Limited | Consumer Cyclical | ₹930.30 | 2,359.6 | 56.6% (🛡️ Strong Delivery (₹3.65 Cr) | ₹3.65 Cr) | **5/10 days** |
+| 44 | `APLLTD` | Alembic Pharmaceuticals Limited | healthcare | ₹841.65 | 16,488.7 | 63.0% (🛡️ Strong Delivery (₹7.53 Cr) | ₹7.53 Cr) | **5/10 days** |
+| 45 | `RITES` | RITES Limited | Industrials | ₹226.67 | 10,743.9 | 50.9% (🛡️ Strong Delivery (₹5.10 Cr) | ₹5.10 Cr) | **5/10 days** |
+| 46 | `APOLLOTYRE` | Apollo Tyres Limited | auto | ₹445.15 | 28,135.0 | 52.2% (🛡️ Strong Delivery (₹13.04 Cr) | ₹13.04 Cr) | **5/10 days** |
+| 47 | `BASF` | Basf India Limited | chemicals | ₹3,990.10 | 17,475.3 | 48.9% (🛡️ Strong Delivery (₹5.23 Cr) | ₹5.23 Cr) | **5/10 days** |
+| 48 | `TANLA` | Tanla Platforms Limited | Technology | ₹616.65 | 7,883.8 | 51.1% (🛡️ Strong Delivery (₹18.44 Cr) | ₹18.44 Cr) | **5/10 days** |
+| 49 | `BPCL` | Bharat Petroleum Corporation Limited | Energy | ₹317.80 | 135,440.9 | 60.5% (🛡️ Strong Delivery (₹129.05 Cr) | ₹129.05 Cr) | **5/10 days** |
+| 50 | `MANCREDIT` | Mangal Credit & Fincorp Ltd | financials | ₹243.44 | 521.6 | 44.6% (⚖️ Neutral | ₹0.45 Cr) | **5/10 days** |
+| 51 | `UNIVASTU` | Univastu India Ltd | realty | ₹145.76 | 524.6 | N/A | **5/10 days** |
+| 52 | `UGARSUGAR` | The Ugar Sugar Works Limited | fmcg | ₹44.15 | 512.0 | 51.1% (🛡️ Strong Delivery (₹0.50 Cr) | ₹0.50 Cr) | **5/10 days** |
+| 53 | `MPHASIS` | Mphasis Limited | i.t | ₹2,537.60 | 48,290.9 | 56.6% (🛡️ Strong Delivery (₹52.68 Cr) | ₹52.68 Cr) | **5/10 days** |
+| 54 | `SAMBHV` | SAMBHV | Basic Materials | ₹118.62 | 3,490.4 | 53.1% (🛡️ Strong Delivery (₹3.73 Cr) | ₹3.73 Cr) | **5/10 days** |
+| 55 | `CCAVENUE` | AvenuesAI Limited | Technology | ₹16.42 | 5,587.0 | 56.7% (🛡️ Strong Delivery (₹14.40 Cr) | ₹14.40 Cr) | **5/10 days** |
+| 56 | `WINDMACHIN` | Windsor Machines Limited | industrials | ₹305.10 | 3,078.3 | 59.5% (🛡️ Strong Delivery (₹3.70 Cr) | ₹3.70 Cr) | **4/10 days** |
+| 57 | `ENRIN` | Siemens Energy India Ltd | power & utilities | ₹3,562.10 | 126,914.2 | 45.1% (🛡️ Strong Delivery (₹71.52 Cr) | ₹71.52 Cr) | **4/10 days** |
+| 58 | `FOSECOIND` | Foseco India Limited | chemicals | ₹5,530.50 | 4,145.9 | 62.3% (🛡️ Strong Delivery (₹1.10 Cr) | ₹1.10 Cr) | **4/10 days** |
+| 59 | `MAMATA` | Mamata Machinery Ltd | industrials | ₹426.05 | 1,046.3 | 69.4% (🛡️ Strong Delivery (₹1.90 Cr) | ₹1.90 Cr) | **4/10 days** |
+| 60 | `TRENT` | Trent Limited | Consumer Cyclical | ₹3,000.00 | 159,276.5 | 45.4% (🛡️ Strong Delivery (₹93.83 Cr) | ₹93.83 Cr) | **4/10 days** |
+| 61 | `ORIENTELEC` | Orient Electric Ltd | consumer discretionary | ₹189.79 | 4,068.5 | 56.6% (🛡️ Strong Delivery (₹2.54 Cr) | ₹2.54 Cr) | **4/10 days** |
+| 62 | `MATRIMONY` | Matrimony.com Ltd | miscellaneous | ₹541.50 | 1,110.4 | 49.7% (🛡️ Strong Delivery (₹9.84 Cr) | ₹9.84 Cr) | **4/10 days** |
+| 63 | `MOLDTECH` | Mold-tek Technologies Limited | realty | ₹180.65 | 526.4 | 54.5% (🛡️ Strong Delivery (₹6.02 Cr) | ₹6.02 Cr) | **4/10 days** |
+| 64 | `CASTROLIND` | Castrol India Limited | Energy | ₹186.82 | 18,633.1 | 61.8% (🛡️ Strong Delivery (₹59.51 Cr) | ₹59.51 Cr) | **4/10 days** |
+| 65 | `JYOTICNC` | Jyoti CNC Automation Limited | Industrials | ₹805.00 | 18,622.5 | 41.0% (⚖️ Neutral | ₹25.42 Cr) | **4/10 days** |
+| 66 | `INDORAMA` | Indo Rama Synthetics (India) Limited | Consumer Cyclical | ₹58.05 | 1,518.6 | 51.3% (🛡️ Strong Delivery (₹0.71 Cr) | ₹0.71 Cr) | **4/10 days** |
+| 67 | `DDEVPLSTIK` | DDev Plastiks Industries Ltd | chemicals | ₹290.85 | 3,003.9 | 44.6% (⚖️ Neutral | ₹2.95 Cr) | **4/10 days** |
+| 68 | `ALKYLAMINE` | Alkyl Amines Chemicals Limited | Basic Materials | ₹1,947.40 | 9,665.6 | 48.7% (🛡️ Strong Delivery (₹4.48 Cr) | ₹4.48 Cr) | **4/10 days** |
+| 69 | `POLYMED` | Poly Medicure Limited | healthcare | ₹1,869.40 | 18,892.4 | 42.4% (⚖️ Neutral | ₹17.43 Cr) | **4/10 days** |
+| 70 | `JUSTDIAL` | Just Dial Limited | Communication Services | ₹694.95 | 5,846.7 | 42.7% (🛡️ Strong Delivery (₹4.71 Cr) | ₹4.71 Cr) | **4/10 days** |
+| 71 | `SHANTIGOLD` | Shanti Gold International Ltd | consumer discretionary | ₹230.20 | 1,642.1 | 47.6% (🛡️ Strong Delivery (₹16.31 Cr) | ₹16.31 Cr) | **3/10 days** |
+| 72 | `BRITANNIA` | Britannia Industries Limited | fmcg | ₹5,645.50 | 134,838.1 | 63.3% (🛡️ Strong Delivery (₹92.18 Cr) | ₹92.18 Cr) | **3/10 days** |
+| 73 | `BAFNAPH` | Bafna Pharmaceuticals Ltd | healthcare | ₹268.30 | 647.6 | N/A | **3/10 days** |
+| 74 | `ONWARDTEC` | Onward Technologies Limited | Technology | ₹286.05 | 627.1 | 59.7% (🛡️ Strong Delivery (₹0.47 Cr) | ₹0.47 Cr) | **3/10 days** |
+| 75 | `FSL` | Firstsource Solutions Limited | Technology | ₹279.60 | 18,970.3 | 41.5% (🛡️ Strong Delivery (₹21.19 Cr) | ₹21.19 Cr) | **3/10 days** |
+| 76 | `CHEMBONDCH` | Chembond Chemicals Ltd | chemicals | ₹274.82 | 704.0 | N/A | **3/10 days** |
+| 77 | `NAHARPOLY` | Nahar Poly Films Limited | Consumer Cyclical | ₹250.70 | 614.6 | 81.5% (🛡️ Strong Delivery (₹0.45 Cr) | ₹0.45 Cr) | **3/10 days** |
+| 78 | `BEML` | Beml Limited | aerospace & defence | ₹1,900.60 | 15,844.1 | 27.1% (⚖️ Neutral | ₹36.75 Cr) | **3/10 days** |
+| 79 | `CLSEL` | Chaman Lal Setia Exports Ltd. | Consumer Defensive | ₹277.25 | 1,410.5 | 49.8% (🛡️ Strong Delivery (₹0.95 Cr) | ₹0.95 Cr) | **3/10 days** |
+| 80 | `SUNDARMFIN` | Sundaram Finance Limited | Financial Services | ₹4,447.40 | 49,304.7 | 63.9% (🛡️ Strong Delivery (₹11.04 Cr) | ₹11.04 Cr) | **3/10 days** |
+| 81 | `SONATSOFTW` | Sonata Software Limited | Technology | ₹333.90 | 8,952.9 | 39.6% (⚖️ Neutral | ₹9.87 Cr) | **3/10 days** |
+| 82 | `GIPCL` | Gujarat Industries Power Company Limited | Power - Generation/Distribution | ₹174.05 | 2,555.5 | 21.1% (⚖️ Neutral | ₹29.76 Cr) | **3/10 days** |
+| 83 | `WINDLAS` | Windlas Biotech Ltd | healthcare | ₹894.70 | 1,946.2 | 38.2% (⚖️ Neutral | ₹5.38 Cr) | **3/10 days** |
+| 84 | `BORANA` | BORANA | Consumer Cyclical | ₹328.10 | 876.8 | 63.0% (🛡️ Strong Delivery (₹1.01 Cr) | ₹1.01 Cr) | **3/10 days** |
+| 85 | `TIIL` | Technocraft Industries (india) Limited | metals & mining | ₹2,878.30 | 5,915.1 | 21.1% (⚖️ Neutral | ₹11.73 Cr) | **3/10 days** |
+| 86 | `AARTIPHARM` | Aarti Pharmalabs Ltd | Pharma - API | ₹888.70 | 8,013.4 | 12.7% (⚖️ Neutral | ₹40.16 Cr) | **3/10 days** |
+| 87 | `RELAXO` | Relaxo Footwears Limited | Consumer Cyclical | ₹421.65 | 10,380.7 | 35.6% (⚖️ Neutral | ₹12.43 Cr) | **3/10 days** |
+| 88 | `PFOCUS` | Prime Focus Limited | Communication Services | ₹281.55 | 20,871.1 | 56.1% (🛡️ Strong Delivery (₹13.05 Cr) | ₹13.05 Cr) | **3/10 days** |
+| 89 | `RAYMONDREL` | Raymond Realty Limited | Real Estate | ₹609.30 | 3,866.0 | 45.9% (🛡️ Strong Delivery (₹14.41 Cr) | ₹14.41 Cr) | **3/10 days** |

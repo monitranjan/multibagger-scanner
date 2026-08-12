@@ -1,92 +1,62 @@
 [
   {
-    "symbol": "LUMAXTECH",
-    "company": "Lumax Auto Technologies Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 2076.3,
-    "return_1d": 19.45,
-    "mcap_cr": 11847.17,
+    "symbol": "SKYGOLD",
+    "company": "Sky Gold Ltd",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 833.1,
+    "return_1d": 5.45,
+    "mcap_cr": 12235.81,
     "signal": "52W Breakout",
-    "scans_count": 27
+    "scans_count": 34
   },
   {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 819.7,
-    "return_1d": 1.5,
-    "mcap_cr": 15794.21,
+    "symbol": "PRICOLLTD",
+    "company": "Pricol Ltd.",
+    "industry": "Auto Ancillaries - 2 Wheelers",
+    "close": 783.25,
+    "return_1d": 6.25,
+    "mcap_cr": 8984.49,
     "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "INDSWFTLAB",
-    "company": "Ind-swift Laboratories Limited",
-    "industry": "Pharma - API",
-    "close": 284.68,
-    "return_1d": 20.0,
-    "mcap_cr": 2063.08,
-    "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 25
   },
   {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives/Protectives",
-    "close": 276.65,
-    "return_1d": 5.31,
-    "mcap_cr": 35325.58,
+    "close": 289.87,
+    "return_1d": 4.78,
+    "mcap_cr": 37200.04,
     "signal": "52W Breakout",
-    "scans_count": 25
+    "scans_count": 24
   },
   {
-    "symbol": "DEEPINDS",
-    "company": "Deep Industries Ltd",
-    "industry": "Oil Drilling & Exploration",
-    "close": 670.05,
-    "return_1d": 3.41,
-    "mcap_cr": 4146.88,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "KRISHANA",
-    "company": "Krishana Phoschem Ltd",
-    "industry": "Fertilisers",
-    "close": 186.45,
-    "return_1d": 1.59,
-    "mcap_cr": 1134.78,
+    "symbol": "UJJIVANSFB",
+    "company": "Ujjivan Small Finance Bank Ltd",
+    "industry": "Banks - Small Finance",
+    "close": 72.38,
+    "return_1d": 3.19,
+    "mcap_cr": 13644.02,
     "signal": "52W Breakout",
     "scans_count": 22
   },
   {
-    "symbol": "E2E",
-    "company": "E2E Networks Ltd",
-    "industry": "Data Centre",
-    "close": 627.4,
-    "return_1d": 4.08,
-    "mcap_cr": 12391.45,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "LAURUSLABS",
-    "company": "Laurus Labs Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 1858.0,
-    "return_1d": 0.22,
-    "mcap_cr": 100162.27,
+    "symbol": "HAPPYFORGE",
+    "company": "Happy Forgings Ltd",
+    "industry": "Castings, Forgings & Fastners",
+    "close": 2022.7,
+    "return_1d": 6.02,
+    "mcap_cr": 18005.57,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "RRKABEL",
-    "company": "R R Kabel Ltd",
-    "industry": "Cables - Power",
-    "close": 2812.8,
-    "return_1d": 2.03,
-    "mcap_cr": 31182.06,
+    "symbol": "SENORES",
+    "company": "Senores Pharmaceuticals Ltd",
+    "industry": "Pharma - API",
+    "close": 1492.4,
+    "return_1d": 1.13,
+    "mcap_cr": 6796.13,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 20
   }
 ]
