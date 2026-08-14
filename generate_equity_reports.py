@@ -1458,6 +1458,34 @@ def fetch_stockscans_announcements_scan(symbol: str) -> list[dict]:
         print(f"⚠️ Error querying announcements scan: {e}")
     return []
 
+def fetch_ddg_search_results(query: str, limit: int = 5) -> list[dict]:
+    """Search DuckDuckGo (HTML version) and return list of dicts with 'url' and 'snippet'."""
+    import urllib.parse
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36"
+    }
+    results = []
+    url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
+    try:
+        r = requests.get(url, headers=headers, timeout=12)
+        if r.status_code == 200:
+            soup = BeautifulSoup(r.text, 'html.parser')
+            for div in soup.find_all('div', class_='result')[:limit]:
+                a_link = div.find('a', class_='result__url')
+                snippet_el = div.find('a', class_='result__snippet')
+                if a_link and snippet_el:
+                    href = a_link.get('href')
+                    snippet = snippet_el.text.strip()
+                    parsed = urllib.parse.urlparse(href)
+                    actual_url = urllib.parse.parse_qs(parsed.query).get('uddg', [None])[0]
+                    if not actual_url and href.startswith("http"):
+                        actual_url = href
+                    if actual_url:
+                        results.append({"url": actual_url, "snippet": snippet})
+    except Exception as e:
+        print(f"⚠️ Search error for query '{query}': {e}")
+    return results
+
 def get_company_web_context(company_name: str, symbol: str) -> dict:
     """Gather company overview, plants, and PDF presentation/annual report links directly without DDG fallback."""
     cleaned_name = clean_company_name(company_name)
@@ -1498,14 +1526,53 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
         full_url = f"https://www.stockscans.in/announcement/{ss_url}" if ss_url else ""
         announcements_context += f"- **Date**: {date_str}\n  **Title**: {title}\n  **Description**: {desc}\n  **Document Link**: [{title} PDF]({full_url})\n\n"
         
+    # Search Substack for investment research
+    print(f"🔍 Searching Substack for {cleaned_name}...")
+    res_substack = fetch_ddg_search_results(f"site:substack.com {cleaned_name} research", 5)
+    substack_context = ""
+    for idx, item in enumerate(res_substack):
+        substack_context += f"- **Substack Link**: [{item['url']}]({item['url']})\n  **Summary/Snippet**: {item['snippet']}\n\n"
+
     return {
         "ip_pdf": ip_pdf,
         "ar_pdf": ar_pdf,
         "concall_pdf": concall_pdf,
         "valuepickr_url": val_url,
         "valuepickr_posts": val_posts_context,
-        "announcements": announcements_context.strip()
+        "announcements": announcements_context.strip(),
+        "substack_search": res_substack,
+        "substack_context": substack_context.strip()
     }
+
+def format_quarter_label(q_str: str) -> str:
+    """Format YYYYMM quarter string into a human-readable label (e.g. '202606' -> 'Q1 FY27 (Ended June 2026)')."""
+    if not q_str or len(str(q_str)) != 6:
+        return str(q_str)
+    try:
+        q_str = str(q_str)
+        year = int(q_str[:4])
+        month = int(q_str[4:])
+        
+        # Indian Fiscal Year mapping:
+        # April-June (month 06): Q1 of next fiscal year (FY = year + 1)
+        # July-Sept (month 09): Q2 of next fiscal year (FY = year + 1)
+        # Oct-Dec (month 12): Q3 of next fiscal year (FY = year + 1)
+        # Jan-March (month 03): Q4 of current fiscal year (FY = year)
+        
+        if month == 6:
+            fq = f"Q1 FY{str(year + 1)[2:]} (Ended June {year})"
+        elif month == 9:
+            fq = f"Q2 FY{str(year + 1)[2:]} (Ended Sept {year})"
+        elif month == 12:
+            fq = f"Q3 FY{str(year + 1)[2:]} (Ended Dec {year})"
+        elif month == 3:
+            fq = f"Q4 FY{str(year)[2:]} (Ended March {year})"
+        else:
+            months_map = {3: "March", 6: "June", 9: "September", 12: "December"}
+            fq = f"{months_map.get(month, str(month))} {year}"
+        return fq
+    except Exception:
+        return str(q_str)
 
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
     """Invoke the Gemini API in three distinct stages to guarantee complete, non-truncated reports."""
@@ -1583,6 +1650,9 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
 
     valuepickr_posts = web_context.get("valuepickr_posts", "")
     announcements = web_context.get("announcements", "")
+    substack_context = web_context.get("substack_context", "")
+    latest_q = r.get("latest_quarter", "")
+    formatted_q = format_quarter_label(latest_q) if latest_q else "Not Disclosed"
 
     # Build metadata block with formatted actuals and verified sources
     metadata = f"""
@@ -1590,6 +1660,7 @@ COMPANY: {company}
 NSE TICKER: {symbol}
 SECTOR: {sector}
 REPORT DATE: {today_str}
+LATEST DATA UP TO: {formatted_q}
 CMP: Rs. {cmp:.2f}
 MARKET CAP: Rs. {mcap:.1f} Cr
 YOUR RATING: BUY
@@ -1602,6 +1673,9 @@ YOUR RATING: BUY
 
 --- VERIFIED RECENT CORPORATE ANNOUNCEMENTS ---
 {announcements or "No recent critical corporate announcements found."}
+
+--- VERIFIED SUBSTACK INVESTMENT RESEARCH ARTICLES ---
+{substack_context or "No active Substack research articles found."}
 
 --- VERIFIED INVESTOR COMMUNITY DISCUSSION FORUM ---
 - ValuePickr Discussion Forum Thread: {valuepickr_url}
@@ -1923,6 +1997,13 @@ Public %: {public_val:.2f}%
     stage3_headers = ["SECTION 8", "SECTION 9", "SECTION 10", "TECHNICAL LEVELS|SECTION 10B", "CONCALL BRIEF|APPENDIX", "DISCLAIMER"]
     part3_text = call_stage_with_fallback(3, stage3_prompt, stage3_headers, model)
     
+    substack_search = web_context.get("substack_search", [])
+    substack_refs = ""
+    for idx, item in enumerate(substack_search):
+        if "substack.com" in item["url"]:
+            title = item['snippet'][:60].replace('[','').replace(']','').replace('\n',' ').strip() + "..."
+            substack_refs += f"- **Substack Research #{idx+1}**: [{title}]({item['url']})\n"
+
     # Build reference directory section programmatically
     ref_directory = f"""
 
@@ -1938,6 +2019,9 @@ Public %: {public_val:.2f}%
   - [Latest Annual Report (PDF)]({ar_pdf})
 - **Last 4 Quarters Concall Transcripts (PDF)**:
   - [Latest Concall Transcript (PDF)]({concall_pdf})
+
+#### Substack Investment Research:
+{substack_refs or "- No recent Substack research articles found."}
 
 #### Recent Corporate Announcements:
 {announcements or "- No recent critical corporate announcements found."}
@@ -1961,11 +2045,33 @@ Public %: {public_val:.2f}%
 [^screener-peers]: Screener.in — [Peer Comparison Data for {company}](https://www.screener.in/company/{symbol}/consolidated/)
 [^screener-fcf]: Screener.in — [{company} Consolidated Cash Flow](https://www.screener.in/company/{symbol}/consolidated/)
 [^screener-debt]: Screener.in — [{company} Debt & Credit Ratings](https://www.screener.in/company/{symbol}/consolidated/)
-[^bse-shp]: BSE India — [Shareholding Pattern {company}](https://www.bseindia.com/)
+[^nse-shp]: NSE India — [Shareholding Pattern {company}](https://www.nseindia.com/companies-listing/corporate-filings-shareholding-pattern?symbol={symbol})
 """
+
+    # Append substack footnotes dynamically
+    for idx, item in enumerate(substack_search):
+        if "substack.com" in item["url"]:
+            title = item['snippet'][:60].replace('[','').replace(']','').replace('\n',' ').strip() + "..."
+            ref_directory += f"[^substack-{idx+1}]: Substack Research — [{title}]({item['url']})\n"
 
     # Combine all three parts and append reference directory
     full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text + "\n\n" + ref_directory
+    
+    # Inject latest data quarter info into the report subtitle dynamically if not already present
+    lines = full_report.splitlines()
+    has_latest_data = False
+    for line in lines[:10]:
+        if "Latest Data" in line:
+            has_latest_data = True
+            break
+            
+    if not has_latest_data:
+        full_report = re.sub(
+            r'(Report Date:\s*[^\n|]*)',
+            r'\1 | Latest Data: ' + formatted_q,
+            full_report,
+            count=1
+        )
     return full_report
 
 
