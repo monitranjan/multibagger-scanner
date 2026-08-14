@@ -1131,6 +1131,48 @@ def find_matching_existing_report(symbol: str, reports_dir: Path, today: datetim
         try:
             with open(latest_filepath, "r") as f:
                 content = f.read()
+                
+            # Check if any new/updated documents are available on StockScans or Screener
+            print(f"🔍 [find_matching_existing_report] Checking if newer documents are available for {symbol}...")
+            ss_docs = fetch_stockscans_documents(symbol, "NSE")
+            ip_pdf = ss_docs.get("ip_pdf")
+            ar_pdf = ss_docs.get("ar_pdf")
+            concall_pdf = ss_docs.get("concall_pdf")
+            if not ip_pdf or not ar_pdf or not concall_pdf:
+                ss_docs_bse = fetch_stockscans_documents(symbol, "BSE")
+                if not ip_pdf:
+                    ip_pdf = ss_docs_bse.get("ip_pdf")
+                if not ar_pdf:
+                    ar_pdf = ss_docs_bse.get("ar_pdf")
+                if not concall_pdf:
+                    concall_pdf = ss_docs_bse.get("concall_pdf")
+            if not ip_pdf or not ar_pdf or not concall_pdf:
+                screener_docs = fetch_screener_documents(symbol)
+                if not ip_pdf:
+                    ip_pdf = screener_docs.get("ip_pdf")
+                if not ar_pdf:
+                    ar_pdf = screener_docs.get("ar_pdf")
+                if not concall_pdf:
+                    concall_pdf = screener_docs.get("concall_pdf")
+            
+            new_doc_found = False
+            new_doc_url = None
+            new_doc_type = None
+            for key, url_val in [("concall_pdf", concall_pdf), ("ip_pdf", ip_pdf), ("ar_pdf", ar_pdf)]:
+                if url_val and isinstance(url_val, str) and url_val.strip():
+                    if "nseindia.com" in url_val or "concall.in" in url_val:
+                        continue
+                    basename = url_val.split("/")[-1]
+                    if basename and basename not in content:
+                        new_doc_found = True
+                        new_doc_url = url_val
+                        new_doc_type = key
+                        break
+            
+            if new_doc_found:
+                print(f"🔥 [NEW DOCUMENT DETECTED] Bypassing skip checks for {symbol}. New {new_doc_type} available: {new_doc_url}")
+                return None, ""
+
             match = re.search(r'<!-- latest_quarter:\s*(\d{6})\s*-->', content)
             if match:
                 report_quarter = match.group(1)
