@@ -1,11 +1,21 @@
 [
   {
+    "symbol": "DIVGIITTS",
+    "company": "Divgi Torqtransfer Systems Ltd",
+    "industry": "Auto Ancillaries - Transmission",
+    "close": 1301.05,
+    "return_1d": 6.67,
+    "mcap_cr": 3730.35,
+    "signal": "52W Breakout",
+    "scans_count": 27
+  },
+  {
     "symbol": "NEULANDLAB",
     "company": "Neuland Laboratories Limited",
     "industry": "Pharma - API & CRAMS",
-    "close": 23207.0,
-    "return_1d": 3.1,
-    "mcap_cr": 29451.01,
+    "close": 23330.0,
+    "return_1d": 0.53,
+    "mcap_cr": 29774.32,
     "signal": "52W Breakout",
     "scans_count": 26
   },
@@ -13,70 +23,70 @@
     "symbol": "UNIPARTS",
     "company": "Uniparts India Ltd",
     "industry": "Castings, Forgings & Fastners",
-    "close": 824.3,
-    "return_1d": 1.32,
-    "mcap_cr": 3639.44,
-    "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "PRECWIRE",
-    "company": "Precision Wires India Limited",
-    "industry": "Copper Wires",
-    "close": 468.65,
-    "return_1d": 10.98,
-    "mcap_cr": 7571.91,
-    "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecom Services",
-    "close": 227.36,
-    "return_1d": 2.64,
-    "mcap_cr": 32791.63,
+    "close": 816.0,
+    "return_1d": -1.01,
+    "mcap_cr": 3721.15,
     "signal": "52W Breakout",
     "scans_count": 25
   },
   {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives/Protectives",
-    "close": 294.86,
-    "return_1d": 1.72,
-    "mcap_cr": 37200.04,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "NETWEB",
-    "company": "Netweb Technologies India Ltd",
-    "industry": "Data Centre",
-    "close": 5181.0,
-    "return_1d": 7.1,
-    "mcap_cr": 27672.04,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "PAYTM",
-    "company": "One 97 Communications Ltd",
-    "industry": "E-Commerce - Platform - Utility",
-    "close": 1649.5,
-    "return_1d": 2.45,
-    "mcap_cr": 102050.51,
+    "symbol": "KRISHANA",
+    "company": "Krishana Phoschem Ltd",
+    "industry": "Fertilisers",
+    "close": 190.4,
+    "return_1d": 0.77,
+    "mcap_cr": 1168.17,
     "signal": "52W Breakout",
     "scans_count": 22
   },
   {
-    "symbol": "GLAND",
-    "company": "Gland Pharma Ltd",
-    "industry": "Pharma - API & CRAMS",
-    "close": 2967.6,
-    "return_1d": 2.64,
-    "mcap_cr": 48240.81,
+    "symbol": "COMSYN",
+    "company": "Commercial Syn Bags Ltd",
+    "industry": "Packaging - Polysacks",
+    "close": 288.33,
+    "return_1d": 2.01,
+    "mcap_cr": 1140.23,
     "signal": "52W Breakout",
     "scans_count": 21
+  },
+  {
+    "symbol": "KRN",
+    "company": "KRN Heat Exchanger and Refrigeration Ltd",
+    "industry": "Engineering - General",
+    "close": 1468.3,
+    "return_1d": 5.0,
+    "mcap_cr": 9153.71,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "HAPPYFORGE",
+    "company": "Happy Forgings Ltd",
+    "industry": "Castings, Forgings & Fastners",
+    "close": 2089.6,
+    "return_1d": 4.08,
+    "mcap_cr": 18947.47,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "E2E",
+    "company": "E2E Networks Ltd",
+    "industry": "Data Centre",
+    "close": 666.75,
+    "return_1d": 5.0,
+    "mcap_cr": 13053.37,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "LMW",
+    "company": "LMW Ltd",
+    "industry": "Textile machinery",
+    "close": 19100.0,
+    "return_1d": 1.88,
+    "mcap_cr": 20027.42,
+    "signal": "52W Breakout",
+    "scans_count": 19
   }
 ]
