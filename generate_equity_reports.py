@@ -1423,68 +1423,77 @@ def fetch_valuepickr_posts(topic_id: int) -> str:
     return ""
 
 def fetch_stockscans_announcements_scan(symbol: str) -> list[dict]:
-    """Query StockScans announcements scan API for latest corporate announcements."""
-    url = "https://www.stockscans.in/api/company/announcements/scan"
+    """Query the new StockScans announcements API for latest corporate announcements."""
+    url = "https://www.stockscans.in/api/company/announcements"
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36"
     }
     payload = {
-        "scan": {
-            "scanId": "797b00d9ba9ce9fbe3f95511",
-            "scanName": symbol,
-            "filters": [],
-            "industry": [],
-            "index": [],
-            "watchlistIds": [],
-            "searchFilters": [symbol],
-            "announcementType": "All",
-            "alerts": False,
-            "searchMode": "full",
-            "companyIds": [],
-            "companyFilters": []
-        },
-        "offset": 0,
-        "quarterDate": "202609"
+        "companyIds": [f"NSE:{symbol}"],
+        "offset": 0
     }
     try:
-        print(f"📊 [StockScans Scan API] Querying announcements for {symbol}...")
+        print(f"📊 [StockScans API] Querying announcements for {symbol}...")
         r = requests.post(url, json=payload, headers=headers, timeout=10)
         if r.status_code == 200:
             data = r.json()
-            return data.get("announcements", [])
+            return data.get("companyAnnouncements", [])
     except Exception as e:
-        print(f"⚠️ Error querying announcements scan: {e}")
+        print(f"⚠️ Error querying announcements: {e}")
     return []
 
+GOOGLE_SEARCH_COUNTER = 0
+
 def fetch_ddg_search_results(query: str, limit: int = 5) -> list[dict]:
-    """Search DuckDuckGo (HTML version) and return list of dicts with 'url' and 'snippet'."""
-    import urllib.parse
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36"
+    """Search for results using Tavily Search API.
+    Caps search requests at 100 to prevent exceeding limits.
+    """
+    import os
+    global GOOGLE_SEARCH_COUNTER
+    
+    api_key = os.getenv("TAVILY_API_KEY")
+    if not api_key:
+        print("⚠️ TAVILY_API_KEY not found in environment.")
+        return [{"url": "https://substack.com", "snippet": "Tavily Search credentials not configured."}]
+        
+    if GOOGLE_SEARCH_COUNTER >= 100:
+        print("⚠️ Search limit of 100 reached. Skipping query.")
+        return [{"url": "https://substack.com", "snippet": "Limit reached"}]
+        
+    print(f"🔍 [Tavily Search] Querying Tavily for: {query} (Call count: {GOOGLE_SEARCH_COUNTER + 1})")
+    GOOGLE_SEARCH_COUNTER += 1
+    
+    url = "https://api.tavily.com/search"
+    payload = {
+        "api_key": api_key,
+        "query": query,
+        "max_results": limit,
+        "search_depth": "basic"
     }
-    results = []
-    url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
+    
     try:
-        r = requests.get(url, headers=headers, timeout=12)
+        r = requests.post(url, json=payload, timeout=12)
         if r.status_code == 200:
-            soup = BeautifulSoup(r.text, 'html.parser')
-            for div in soup.find_all('div', class_='result')[:limit]:
-                a_link = div.find('a', class_='result__url')
-                snippet_el = div.find('a', class_='result__snippet')
-                if a_link and snippet_el:
-                    href = a_link.get('href')
-                    snippet = snippet_el.text.strip()
-                    parsed = urllib.parse.urlparse(href)
-                    actual_url = urllib.parse.parse_qs(parsed.query).get('uddg', [None])[0]
-                    if not actual_url and href.startswith("http"):
-                        actual_url = href
-                    if actual_url:
-                        results.append({"url": actual_url, "snippet": snippet})
+            data = r.json()
+            results = []
+            for item in data.get("results", []):
+                results.append({
+                    "url": item.get("url"),
+                    "snippet": item.get("content", "")
+                })
+            return results
+        else:
+            print(f"⚠️ Tavily API error (status {r.status_code}): {r.text}")
+            if r.status_code == 429:
+                return [{"url": "https://substack.com", "snippet": "Limit reached"}]
+            return []
     except Exception as e:
-        print(f"⚠️ Search error for query '{query}': {e}")
-    return results
+        print(f"⚠️ Tavily Search failed: {e}")
+        return []
+
+
 
 def get_company_web_context(company_name: str, symbol: str) -> dict:
     """Gather company overview, plants, and PDF presentation/annual report links directly without DDG fallback."""
@@ -1528,7 +1537,38 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
         
     # Search Substack for investment research
     print(f"🔍 Searching Substack for {cleaned_name}...")
-    res_substack = fetch_ddg_search_results(f"site:substack.com {cleaned_name} research", 5)
+    raw_substack = fetch_ddg_search_results(f"site:substack.com {cleaned_name}", 10)
+    
+    # Filter results to ensure the main brand name or symbol is present (to avoid generic/unrelated results)
+    res_substack = []
+    brand_name = cleaned_name.split()[0].lower() if cleaned_name.split() else ""
+    symbol_lower = symbol.lower() if symbol else ""
+    
+    for item in raw_substack:
+        url_lower = item.get("url", "").lower()
+        snippet_lower = item.get("snippet", "").lower()
+        
+        # Check if first word of company name or ticker symbol is in the result details
+        if (brand_name and (brand_name in url_lower or brand_name in snippet_lower)) or \
+           (symbol_lower and (symbol_lower in url_lower or symbol_lower in snippet_lower)):
+            
+            # Exclude paid/subscription-only posts
+            is_paid = any(p in snippet_lower for p in ["paid episode", "paid subscriber", "paid post", "only available to paid", "paid content"])
+            if not is_paid:
+                res_substack.append(item)
+            
+        if len(res_substack) >= 5:
+            break
+            
+    # Fallback to first 3 raw results if brand filter is too restrictive (excluding config/limit messages and paid posts)
+    if not res_substack and raw_substack:
+        res_substack = [
+            item for item in raw_substack 
+            if "not configured" not in item.get("snippet", "") 
+            and "limit reached" not in item.get("snippet", "").lower()
+            and not any(p in item.get("snippet", "").lower() for p in ["paid episode", "paid subscriber", "paid post", "only available to paid", "paid content"])
+        ][:3]
+        
     substack_context = ""
     for idx, item in enumerate(res_substack):
         substack_context += f"- **Substack Link**: [{item['url']}]({item['url']})\n  **Summary/Snippet**: {item['snippet']}\n\n"
@@ -2029,12 +2069,8 @@ Public %: {public_val:.2f}%
 #### Reference Directory:
 - **Official Screener consolidated dashboard**: https://www.screener.in/company/{symbol}/consolidated/
 - **ValuePickr Discussion Forum Thread**: {valuepickr_url}
-- **Credit Ratings filings**:
-  - CRISIL Rating Rationale ({company}): https://www.crisilratings.com/
-  - ICRA Rating Rationale ({company}): https://www.icra.in/
 - **Exchange Corporate Announcements**:
   - NSE {symbol} Corporate Announcements: https://www.nseindia.com/get-quotes/equity?symbol={symbol}#corporate-announcements
-  - BSE {symbol} Corporate Announcements: https://www.bseindia.com/
 
 #### Footnotes:
 [^vp-thread]: ValuePickr Discussion Forum Thread — [{company}]({valuepickr_url})
