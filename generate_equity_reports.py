@@ -11,11 +11,14 @@ import json
 import requests
 import time
 import re
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 import sqlite3
 import pandas as pd
 from pathlib import Path
 from bs4 import BeautifulSoup
+from pypdf import PdfReader
+import urllib.parse
+import xml.etree.ElementTree as ET
 
 def load_dotenv():
     """Load variables from .env file into os.environ if it exists."""
@@ -29,6 +32,13 @@ def load_dotenv():
                     os.environ[key.strip()] = val.strip().strip('"').strip("'")
 
 load_dotenv()
+
+# Global search counter to comply with Tavily limits
+GOOGLE_SEARCH_COUNTER = 0
+
+import document_pipeline as dp
+
+
 
 # --- Live StockScans and yfinance actuals scrapers ---
 
@@ -920,11 +930,46 @@ def enrich_stock_with_actuals(r: dict) -> dict:
         tables = format_actuals_to_markdown(ss_data)
         
         # 5. Enrich dict r
-        r["ss_peer_table"] = tables.get("peer_table") or ""
-        r["ss_income_statement"] = tables.get("income_statement") or ""
-        r["ss_balance_sheet"] = tables.get("balance_sheet") or ""
-        r["ss_cash_flow_ratios"] = tables.get("cash_flow_ratios") or ""
-        r["ss_shareholding_table"] = tables.get("shareholding_table") or ""
+        scr_peers = dp.fetch_screener_peers(symbol)
+        r["ss_peer_table"] = scr_peers or tables.get("peer_table") or ""
+        
+        scr_tables = dp.scrape_screener_financial_tables(symbol)
+        r["ss_income_statement"] = scr_tables.get("income_statement") or tables.get("income_statement") or ""
+        r["ss_balance_sheet"] = scr_tables.get("balance_sheet") or tables.get("balance_sheet") or ""
+        r["ss_cash_flow_ratios"] = scr_tables.get("cash_flow_ratios") or tables.get("cash_flow_ratios") or ""
+        r["ss_shareholding_table"] = scr_tables.get("shareholding_table") or tables.get("shareholding_table") or ""
+        # 3c. Supplement using public Screener page scraping
+        try:
+            screener_ratios = dp.scrape_screener_ratios(symbol)
+            if screener_ratios:
+                print(f"📊 [SCREENER SCRAPER] Successfully fetched {len(screener_ratios)} items from Screener public page.")
+                
+                ratio_mapping = {
+                    "Stock P/E": "Price To Earnings",
+                    "Price to book value": "Price To Book",
+                    "ROCE": "ROCE",
+                    "ROE": "ROE",
+                    "Book Value": "Book Value",
+                    "Dividend Yield": "Dividend Yield",
+                    "Face Value": "Face Value"
+                }
+                
+                for scr_key, meta_key in ratio_mapping.items():
+                    matched_key = next((k for k in screener_ratios.keys() if scr_key.lower() in k.lower()), None)
+                    if matched_key:
+                        ss_meta_ratios[meta_key] = screener_ratios[matched_key]
+                
+                if "SH_Promoters" in screener_ratios:
+                    ss_meta_ratios["Promoter"] = screener_ratios["SH_Promoters"]
+                if "SH_FIIs" in screener_ratios:
+                    ss_meta_ratios["FII"] = screener_ratios["SH_FIIs"]
+                if "SH_DIIs" in screener_ratios:
+                    ss_meta_ratios["DII"] = screener_ratios["SH_DIIs"]
+                if "SH_Public" in screener_ratios:
+                    ss_meta_ratios["Public"] = screener_ratios["SH_Public"]
+        except Exception as scr_err:
+            print(f"⚠️ Screener scraper enrichment warning: {scr_err}")
+
         r["ss_meta_ratios"] = ss_meta_ratios
         r["yf_info"] = yf_info
         
@@ -1579,10 +1624,12 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
         "concall_pdf": concall_pdf,
         "valuepickr_url": val_url,
         "valuepickr_posts": val_posts_context,
+        "valuepickr_topic_id": topic_id,
         "announcements": announcements_context.strip(),
         "substack_search": res_substack,
         "substack_context": substack_context.strip()
     }
+
 
 def format_quarter_label(q_str: str) -> str:
     """Format YYYYMM quarter string into a human-readable label (e.g. '202606' -> 'Q1 FY27 (Ended June 2026)')."""
@@ -1623,6 +1670,7 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
     mcap = r.get("mcap_cr", 0.0)
     
     # Extract actual ratios and data if available
+    sector_rules = dp.get_sector_valuation_guidelines(sector)
     ss_meta = r.get("ss_meta_ratios") or {}
     yf_info = r.get("yf_info") or {}
     
@@ -1647,11 +1695,16 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
         dy = dy * 100.0 # convert e.g. 0.012 to 1.2%
         
     # Shareholdings
-    promoter = yf_info.get("heldPercentInsiders", 0.0) * 100.0
-    inst_held = yf_info.get("heldPercentInstitutions", 0.0) * 100.0
-    fii = inst_held * 0.6 # estimate split if not exact
-    dii = inst_held * 0.4
-    public_val = 100.0 - promoter - fii - dii
+    promoter = ss_meta.get("Promoter") or yf_info.get("heldPercentInsiders", 0.0) * 100.0
+    fii = ss_meta.get("FII") or 0.0
+    dii = ss_meta.get("DII") or 0.0
+    
+    if fii == 0.0 and dii == 0.0:
+        inst_held = yf_info.get("heldPercentInstitutions", 0.0) * 100.0
+        fii = inst_held * 0.6
+        dii = inst_held * 0.4
+        
+    public_val = ss_meta.get("Public") or (100.0 - promoter - fii - dii)
     
     # Check if stockscans has shareholding aggregate table
     ss_sh_table = r.get("ss_shareholding_table", "")
@@ -1683,16 +1736,97 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
                 
     # Fetch verified corporate documents and forum link
     web_context = get_company_web_context(company, symbol)
-    ip_pdf = web_context.get("ip_pdf", "https://nseindia.com/")
-    ar_pdf = web_context.get("ar_pdf", "https://nseindia.com/")
-    concall_pdf = web_context.get("concall_pdf", "https://concall.in/")
+    ip_url = web_context.get("ip_pdf", "https://nseindia.com/")
+    ar_url = web_context.get("ar_pdf", "https://nseindia.com/")
+    cc_url = web_context.get("concall_pdf", "https://concall.in/")
     valuepickr_url = web_context.get("valuepickr_url", "https://forum.valuepickr.com/")
+    topic_id = web_context.get("valuepickr_topic_id")
 
-    valuepickr_posts = web_context.get("valuepickr_posts", "")
+    # Step 1: Download & extract PDF texts
+    ip_text = dp.download_and_extract_pdf(ip_url, "Investor Presentation")
+    ar_text = dp.download_and_extract_pdf(ar_url, "Annual Report")
+    cc_text = dp.download_and_extract_pdf(cc_url, "Concall Transcript")
+
+    # Step 2: Summarize PDFs via DeepSeek
+    ip_summary = dp.summarize_text_via_deepseek(ip_text, "Investor Presentation")
+    ar_summary = dp.summarize_text_via_deepseek(ar_text, "Annual Report")
+    cc_summary = dp.summarize_text_via_deepseek(cc_text, "Concall Transcript")
+
+    # Step 3: Scrape full Substack articles and summarize
+    substack_search = web_context.get("substack_search", [])
+    full_substack_texts = ""
+    for idx, item in enumerate(substack_search[:3]):
+        url = item.get("url")
+        if url:
+            sub_content = dp.scrape_full_substack_content(url)
+            if sub_content:
+                full_substack_texts += f"### Substack Article #{idx+1} ({url}):\n{sub_content}\n\n"
+    substack_summary = dp.summarize_text_via_deepseek(full_substack_texts, "Substack Research Articles")
+
+    # Step 4: Scrape Google News RSS and summarize
+    raw_news = dp.get_google_news_rss(company)
+    news_summary = dp.summarize_text_via_deepseek(raw_news, "Google News Articles")
+
+    # Step 5: Fetch latest 1 year of ValuePickr posts and summarize
+    val_posts_context = ""
+    if topic_id:
+        val_posts_context = dp.fetch_valuepickr_posts_latest_1_year(topic_id)
+    valuepickr_summary = dp.summarize_text_via_deepseek(val_posts_context, "ValuePickr Forum Posts")
+
+    # Save intermediate summaries for manual verification / audit review before decision making
+    try:
+        comp_dir = Path("outputs") / "intermediate_summaries" / symbol
+        comp_dir.mkdir(parents=True, exist_ok=True)
+        date_slug = today_str.lower().replace(" ", "_")
+        
+        summaries_to_save = {
+            f"investor_presentation_{date_slug}.md": ip_summary,
+            f"annual_report_{date_slug}.md": ar_summary,
+            f"concall_transcript_{date_slug}.md": cc_summary,
+            f"substack_research_{date_slug}.md": substack_summary,
+            f"google_news_{date_slug}.md": news_summary,
+            f"valuepickr_forum_{date_slug}.md": valuepickr_summary
+        }
+        
+        for filename, content in summaries_to_save.items():
+            with open(comp_dir / filename, "w", encoding="utf-8") as f_out:
+                f_out.write(content)
+        print(f"📂 Saved intermediate DeepSeek summaries for {symbol} to: {comp_dir}")
+    except Exception as save_err:
+        print(f"⚠️ Failed to save intermediate summaries: {save_err}")
+
     announcements = web_context.get("announcements", "")
-    substack_context = web_context.get("substack_context", "")
     latest_q = r.get("latest_quarter", "")
     formatted_q = format_quarter_label(latest_q) if latest_q else "Not Disclosed"
+
+    target_field = "(Please calculate dynamically based on peer multiples, financial data, and your valuation modeling)"
+    credit_ratings = ""
+    eps_field = f"{ss_meta.get('EPS', 0.0):.2f}"
+
+
+    # Build a consolidated rich document summaries context block to pass to all LLM stages
+    summaries_block = f"""
+--- DEEPSEEK SUMMARIZED LATEST INVESTOR PRESENTATION ---
+{ip_summary}
+
+--- DEEPSEEK SUMMARIZED LATEST ANNUAL REPORT ---
+{ar_summary}
+
+--- DEEPSEEK SUMMARIZED LATEST CONCALL TRANSCRIPT ---
+{cc_summary}
+
+--- VERIFIED RECENT CORPORATE ANNOUNCEMENTS ---
+{announcements or "No recent critical corporate announcements found."}
+
+--- DEEPSEEK SUMMARIZED GOOGLE NEWS ARTICLES ---
+{news_summary}
+
+--- DEEPSEEK SUMMARIZED SUBSTACK INVESTMENT RESEARCH ---
+{substack_summary}
+
+--- DEEPSEEK SUMMARIZED VALUEPICKR DISCUSSION FORUM POSTS (LATEST 1 YEAR DATA) ---
+{valuepickr_summary}
+"""
 
     # Build metadata block with formatted actuals and verified sources
     metadata = f"""
@@ -1704,34 +1838,24 @@ LATEST DATA UP TO: {formatted_q}
 CMP: Rs. {cmp:.2f}
 MARKET CAP: Rs. {mcap:.1f} Cr
 YOUR RATING: BUY
-12M TARGET: (Please calculate dynamically based on peer multiples, financial data, and your valuation modeling)
-
+12M TARGET: {target_field}
+{credit_ratings}
 --- VERIFIED CORPORATE DOCUMENTS (PRIMARY SOURCE OF TRUTH) ---
-- Official Latest Investor Presentation (PDF): {ip_pdf}
-- Official Latest Annual Report (PDF): {ar_pdf}
-- Official Latest Quarterly Concall Transcript (PDF): {concall_pdf}
+- Official Latest Investor Presentation (PDF): {ip_url}
+- Official Latest Annual Report (PDF): {ar_url}
+- Official Latest Quarterly Concall Transcript (PDF): {cc_url}
 
---- VERIFIED RECENT CORPORATE ANNOUNCEMENTS ---
-{announcements or "No recent critical corporate announcements found."}
-
---- VERIFIED SUBSTACK INVESTMENT RESEARCH ARTICLES ---
-{substack_context or "No active Substack research articles found."}
-
---- VERIFIED INVESTOR COMMUNITY DISCUSSION FORUM ---
-- ValuePickr Discussion Forum Thread: {valuepickr_url}
-
---- VERIFIED VALUEPICKR DISCUSSION FORUM POSTS (TOP 5 AND BOTTOM 5 REPLIES) ---
-{valuepickr_posts or "No active forum discussion posts details available."}
+{summaries_block}
 
 --- ACTUAL FINANCIAL RATIOS AND DATA FOR HEADER BLOCK ---
 P/E (TTM): {pe:.2f}x
 P/B (TTM): {pb:.2f}x
 ROCE: {roce:.2f}%
 ROE: {roe:.2f}%
-EPS (latest full year): {ss_meta.get("EPS", 0.0):.2f}
+EPS (latest full year): {eps_field}
 Book Value: Rs. {bv:.2f}
 Dividend Yield: {dy:.2f}%
-Face Value: Rs. {yf_info.get("faceValue") or 10}
+Face Value: Rs. {yf_info.get("faceValue") or 1.0}
 Promoter %: {promoter:.2f}%
 FII %: {fii:.2f}%
 DII %: {dii:.2f}%
@@ -1749,9 +1873,10 @@ Public %: {public_val:.2f}%
         metadata += f"\n--- ACTUAL SHAREHOLDING PATTERN TREND TABLE ---\n{ss_sh_table}\n"
 
     
-    # Dual-model routing support
     if not model:
-        model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+        model = os.environ.get("CONFLUENCE_MODEL")
+        if not model:
+            raise KeyError("Environment variable 'CONFLUENCE_MODEL' is missing.")
         
     print(f"🤖 [MODEL] Route to: {model}")
     headers = {"Content-Type": "application/json"}
@@ -1895,6 +2020,7 @@ Public %: {public_val:.2f}%
                 
                 # Successful run
                 print(f"✅ [STAGE {stage_num}] Successfully generated via {attempt_model}!")
+                dp.log_llm_call(attempt_model, f"Final Report Generation - Stage {stage_num}", prompt_text, text)
                 return text
                 
         raise RuntimeError(f"Stage {stage_num} failed completely on all available models and retry limits.")
@@ -1936,6 +2062,8 @@ Public %: {public_val:.2f}%
         f"   | P/E (TTM) | [PE]x | P/B (TTM) | [PB]x | ROCE | [ROCE]% | ROE | [ROE]% | EPS (FY25A) | Rs. [EPS] |\n"
         f"   | Div Yield | [DY]% | Face Value | Rs. [FV] | Promoter % | [Prom]% | FII % | [FII]% | DII % | [DII]% |\n"
         f"\n"
+    )
+    stage1_prompt += (
         f"5. CITATION REQUIREMENT: You MUST actively cite your sources inside the text of SECTIONS 2, 3, 4, and 5 by appending standard footnote markers at the end of relevant sentences:\n"
         f"   - Use `[^ip-latest]` for facts sourced from the Investor Presentation.\n"
         f"   - Use `[^ar-fy25]` for facts sourced from the Annual Report.\n"
@@ -1943,7 +2071,8 @@ Public %: {public_val:.2f}%
         f"   - Use `[^vp-thread]` for investor community discussion arguments.\n"
         f"   Be diligent and ensure almost every major point or metric has a citation marker!\n"
         f"6. NO FOOTNOTE DEFINITIONS OR BIBLIOGRAPHY: Absolutely DO NOT generate any footnote definition blocks (e.g., [^ip-latest]: ...) or bibliography list or disclaimers at the end of this stage. Only output the footnote markers inside the text. Stop generating immediately after Section 5.\n"
-        f"7. {whitespace_rule}\n\n"
+        f"7. CRITICAL DENSITY RULE: You MUST write comprehensive, detailed paragraphs and complete analytical explanations for SECTIONS 2, 3, 4, and 5. Under no circumstances should any section be a brief 2-3 sentence summary. Provide deep institutional-grade research content.\n"
+        f"8. {whitespace_rule}\n\n"
         f"Generate PART 1 (Header Block up to end of Section 5) for:\n\n"
         f"{metadata}"
     )
@@ -1965,9 +2094,10 @@ Public %: {public_val:.2f}%
     # Add actual financial tables to Stage 2 prompt if present to enforce usage
     actuals_context = ""
     if r.get("ss_income_statement"):
+        actuals_context_label = "Do not modify the numbers for past years."
         actuals_context += (
             f"--- ACTUAL FINANCIAL STATEMENT TABLES FROM STOCKSCANS ---\n"
-            f"You MUST use these exact tables for TABLE 1, TABLE 2, and TABLE 3 in SECTION 6. Do not modify the numbers for past years.\n"
+            f"You MUST use these exact tables for TABLE 1, TABLE 2, and TABLE 3 in SECTION 6. {actuals_context_label}\n"
             f"#### TABLE 1 — Income Statement\n"
             f"{r['ss_income_statement']}\n\n"
             f"#### TABLE 2 — Balance Sheet\n"
@@ -1990,6 +2120,8 @@ Public %: {public_val:.2f}%
         f"--- START OF PART 1 CONTEXT ---\n"
         f"{compact_context}\n"
         f"--- END OF PART 1 CONTEXT ---\n\n"
+        f"--- SOURCE DOCUMENTS SUMMARIES CONTEXT ---\n"
+        f"{summaries_block}\n\n"
         f"{actuals_context}"
         f"Now, generate PART 2 (starting from ### SECTION 6 — FINANCIAL DEEP-DIVE) for {company} ({symbol}):"
     )
@@ -2015,22 +2147,28 @@ Public %: {public_val:.2f}%
         f"2. You MUST cover the remaining sections: SECTION 8 (Valuation scenarios), SECTION 9 (Key Risks), SECTION 10 (Recommendations), SECTION 10B (Technical Chart Levels EMA map), APPENDIX (Latest Concall Brief), and Global Disclaimer.\n"
         f"3. START DIRECTLY with the header '### SECTION 8 — VALUATION'. Do NOT repeat any header, title, metadata, or preceding sections from PART 1 or PART 2.\n"
         f"4. Maintain absolute mathematical and analytical consistency with the rating, financials, and valuation established in PART 1 and PART 2.\n"
-        f"5. CITATION REQUIREMENT: You MUST actively cite your sources inside the text of Stage 3 (especially inside the Valuation narrative and the APPENDIX Concall Brief) by appending standard footnote markers at the end of relevant sentences:\n"
+        f"5. SECTOR-SPECIFIC VALUATION METRIC DIRECTIVE: The company belongs to the '{sector}' sector. You MUST prioritize and justify the following key valuation multiples/ratios in SECTION 8:\n"
+        f"   - Recommended multiples to use: {sector_rules['ratios']}\n"
+        f"   - Rationale for selection: {sector_rules['rationale']}\n"
+        f"   Ensure you detail and justify this valuation methodology mathematically.\n"
+        f"6. CITATION REQUIREMENT: You MUST actively cite your sources inside the text of Stage 3 (especially inside the Valuation narrative and the APPENDIX Concall Brief) by appending standard footnote markers at the end of relevant sentences:\n"
         f"   - Use `[^ip-latest]` for facts sourced from the Investor Presentation.\n"
         f"   - Use `[^ar-fy25]` for facts sourced from the Annual Report.\n"
         f"   - Use `[^cc-transcript]` for concall commentary/details.\n"
         f"   - Use `[^vp-thread]` for investor community discussion arguments.\n"
-        f"6. NO FOOTNOTE DEFINITIONS: Absolutely DO NOT write any footnote definition blocks (e.g., [^ip-latest]: ...) or bibliography list at the end of your response. These are appended programmatically in python. Stop generating immediately after the global disclaimer.\n"
-        f"7. CRITICAL DENSITY RULE: Keep all Stage 3 sections extremely dense and concise to prevent text truncation:\n"
+        f"7. NO FOOTNOTE DEFINITIONS: Absolutely DO NOT write any footnote definition blocks (e.g., [^ip-latest]: ...) or bibliography list at the end of your response. These are appended programmatically in python. Stop generating immediately after the global disclaimer.\n"
+        f"8. CRITICAL DENSITY RULE: Keep all Stage 3 sections extremely dense and concise to prevent text truncation:\n"
         f"   - SECTION 9 (Key Risks): List exactly 5-6 core risks with a 1-line description and 1-line monitoring metric each.\n"
         f"   - SECTION 10B (Technical EMAs & Chart Levels): Provide highly precise, compact, single-line answers for all indicators.\n"
         f"   - APPENDIX (Latest Concall Brief): Summarize each of the 10 subsections in exactly 1-2 punchy, data-filled bullet points. Keep it extremely dense and free of empty transition phrases.\n"
-        f"8. {whitespace_rule}\n\n"
+        f"9. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 and PART 2 generated previously for consistency:\n"
         f"--- START OF CONTEXT ---\n"
         f"{compact_context_part3}\n"
         f"{actuals_del_context}"
         f"--- END OF CONTEXT ---\n\n"
+        f"--- SOURCE DOCUMENTS SUMMARIES CONTEXT ---\n"
+        f"{summaries_block}\n\n"
         f"Now, generate PART 3 (starting from ### SECTION 8 — VALUATION) for {company} ({symbol}):"
     )
 
@@ -2039,10 +2177,11 @@ Public %: {public_val:.2f}%
     
     substack_search = web_context.get("substack_search", [])
     substack_refs = ""
-    for idx, item in enumerate(substack_search):
-        if "substack.com" in item["url"]:
-            title = item['snippet'][:60].replace('[','').replace(']','').replace('\n',' ').strip() + "..."
-            substack_refs += f"- **Substack Research #{idx+1}**: [{title}]({item['url']})\n"
+    for idx, item in enumerate(substack_search[:3]):
+        url = item.get("url", "")
+        if "substack.com" in url:
+            title = item.get("snippet", "Substack Link")[:60].replace('[','').replace(']','').replace('\n',' ').strip() + "..."
+            substack_refs += f"- **Substack Research #{idx+1}**: [{title}]({url})\n"
 
     # Build reference directory section programmatically
     ref_directory = f"""
@@ -2054,11 +2193,11 @@ Public %: {public_val:.2f}%
 *This section compiles all corporate filings, credit ratings, investor community forums, research substacks, and exchange announcements used to construct and verify the metrics in this report.*
 
 #### Primary Source Documents (Source of Truth):
-- **Latest Investor Presentation (PDF)**: [Investor Presentation PDF]({ip_pdf})
+- **Latest Investor Presentation (PDF)**: [Investor Presentation PDF]({ip_url})
 - **Latest 2 Years Annual Reports (PDF)**:
-  - [Latest Annual Report (PDF)]({ar_pdf})
+  - [Latest Annual Report (PDF)]({ar_url})
 - **Last 4 Quarters Concall Transcripts (PDF)**:
-  - [Latest Concall Transcript (PDF)]({concall_pdf})
+  - [Latest Concall Transcript (PDF)]({cc_url})
 
 #### Substack Investment Research:
 {substack_refs or "- No recent Substack research articles found."}
@@ -2068,33 +2207,23 @@ Public %: {public_val:.2f}%
 
 #### Reference Directory:
 - **Official Screener consolidated dashboard**: https://www.screener.in/company/{symbol}/consolidated/
-- **ValuePickr Discussion Forum Thread**: {valuepickr_url}
-- **Exchange Corporate Announcements**:
-  - NSE {symbol} Corporate Announcements: https://www.nseindia.com/get-quotes/equity?symbol={symbol}#corporate-announcements
+- **Official ValuePickr Forum Thread**: {valuepickr_url}
+- **Verify Exchange Announcements**: https://www.nseindia.com/get-quotes/equity?symbol={symbol}
 
-#### Footnotes:
-[^vp-thread]: ValuePickr Discussion Forum Thread — [{company}]({valuepickr_url})
-[^ar-fy25]: {company} — [Latest Annual Report (PDF)]({ar_pdf})
-[^ip-latest]: {company} — [Latest Investor Presentation (PDF)]({ip_pdf})
-[^cc-transcript]: {company} — [Latest Concall Transcript (PDF)]({concall_pdf})
-[^yfinance-mgmt]: Yahoo Finance — [{company} Company Profile & Management](https://finance.yahoo.com/)
-[^screener-peers]: Screener.in — [Peer Comparison Data for {company}](https://www.screener.in/company/{symbol}/consolidated/)
-[^screener-fcf]: Screener.in — [{company} Consolidated Cash Flow](https://www.screener.in/company/{symbol}/consolidated/)
-[^screener-debt]: Screener.in — [{company} Debt & Credit Ratings](https://www.screener.in/company/{symbol}/consolidated/)
-[^nse-shp]: NSE India — [Shareholding Pattern {company}](https://www.nseindia.com/companies-listing/corporate-filings-shareholding-pattern?symbol={symbol})
+---
+
+### SECTION 12 — CITATION FOOTNOTE DIRECTORY
+
+[^ip-latest]: Source: {company} - Investor Presentation / Corporate Releases (Primary Filing).
+[^ar-fy25]: Source: {company} - Annual Report / Statutory Financial Statement Filings.
+[^cc-transcript]: Source: {company} - Earnings Call Commentary and Q&A Transcripts.
+[^vp-thread]: Source: Verified Analyst Research, ValuePickr Investor Community Discussions & Industry Peer Insights.
 """
 
-    # Append substack footnotes dynamically
-    for idx, item in enumerate(substack_search):
-        if "substack.com" in item["url"]:
-            title = item['snippet'][:60].replace('[','').replace(']','').replace('\n',' ').strip() + "..."
-            ref_directory += f"[^substack-{idx+1}]: Substack Research — [{title}]({item['url']})\n"
-
-    # Combine all three parts and append reference directory
-    full_report = part1_text + "\n\n" + part2_text + "\n\n" + part3_text + "\n\n" + ref_directory
+    combined_report = part1_text.strip() + "\n\n" + part2_text.strip() + "\n\n" + part3_text.strip() + "\n\n" + ref_directory.strip()
     
     # Inject latest data quarter info into the report subtitle dynamically if not already present
-    lines = full_report.splitlines()
+    lines = combined_report.splitlines()
     has_latest_data = False
     for line in lines[:10]:
         if "Latest Data" in line:
@@ -2102,13 +2231,13 @@ Public %: {public_val:.2f}%
             break
             
     if not has_latest_data:
-        full_report = re.sub(
+        combined_report = re.sub(
             r'(Report Date:\s*[^\n|]*)',
             r'\1 | Latest Data: ' + formatted_q,
-            full_report,
+            combined_report,
             count=1
         )
-    return full_report
+    return combined_report
 
 
 REPORT_STYLESHEET = """
@@ -3027,11 +3156,11 @@ def main() -> None:
     except Exception as e:
         print(f"⚠️ Error running delivery history sync: {e}")
         
-    # 1. Verify Gemini API credentials
-    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    # 1. Verify API credentials
+    api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not api_key:
-        print("❌ Error: GEMINI_API_KEY environment variable is not set!")
-        print("Please configure your Gemini API Key in the environment or .env file.")
+        print("❌ Error: Required OPENROUTER_API_KEY is not set!")
+        print("Please configure your OpenRouter API Key in the environment or .env file.")
         sys.exit(1)
         
     # 2. Check for confluence list JSON
@@ -3125,11 +3254,13 @@ def main() -> None:
             print("⏳ Spacing out API requests (2s delay)...")
             time.sleep(2)
             
-        print(f"Requesting Gemini AI to generate full Wheels-style equity research report...")
+        print(f"Requesting LLM to generate full Wheels-style equity research report...")
         reports_compiled += 1
         
         try:
-            confl_model = os.environ.get("CONFLUENCE_MODEL") or "gemini-3.5-flash"
+            confl_model = os.environ.get("CONFLUENCE_MODEL")
+            if not confl_model:
+                raise KeyError("Environment variable 'CONFLUENCE_MODEL' is missing.")
             
             # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
             max_attempts = 3
@@ -3297,7 +3428,9 @@ def main() -> None:
                 reports_compiled += 1
                 
                 try:
-                    emerg_model = os.environ.get("EMERGING_MODEL") or "gemini-3.5-flash"
+                    emerg_model = os.environ.get("EMERGING_MODEL")
+                    if not emerg_model:
+                        raise KeyError("Environment variable 'EMERGING_MODEL' is missing.")
                     
                     # --- SELF-HEALING RETRY LOOP (Up to 3 attempts) ---
                     max_attempts = 3
