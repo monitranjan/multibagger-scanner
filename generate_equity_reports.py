@@ -3299,30 +3299,19 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
     except Exception as e:
         print(f"⚠️ [GIT WARNING] Failed to auto-sync {symbol} report: {e}")
 
-def diagnose_stockscans_cookie():
+def sanitize_stockscans_cookie():
     cookie = os.environ.get("STOCKSCANS_COOKIE", "")
-    if not cookie:
-        print("🍪 [COOKIE DIAGNOSTIC] STOCKSCANS_COOKIE is empty or not set in environment!")
-        return
-        
-    has_newlines = "\n" in cookie or "\r" in cookie
-    print("🍪 [COOKIE DIAGNOSTIC] Raw loaded STOCKSCANS_COOKIE:")
-    print(f"   - Total Length: {len(cookie)} characters")
-    print(f"   - Contains Newlines/Carriage Returns: {has_newlines}")
-    
-    # Bypass GitHub Actions automatic secret-masking filter by adding dashes and printing hex representation
-    cookie_dashed = "-".join(list(cookie))
-    cookie_hex = " ".join([f"{ord(c):02x}" for c in cookie])
-    print(f"   - Cookie (Dashed): '{cookie_dashed}'")
-    print(f"   - Cookie (Hex): '{cookie_hex}'")
+    if cookie:
+        cleaned = cookie.strip().replace("\n", "").replace("\r", "")
+        os.environ["STOCKSCANS_COOKIE"] = cleaned
 
 def main() -> None:
     print("="*80)
     print("🌟🚀 AUTOMATED MONIT DEEP EQUITY RESEARCH PIPELINE 🚀🌟")
     print("="*80)
     
-    # Run cookie diagnostic first
-    diagnose_stockscans_cookie()
+    # Sanitize loaded cookie to remove any trailing newlines or spaces
+    sanitize_stockscans_cookie()
     
     # Sync local delivery history from bulk bhavcopy first
     try:
