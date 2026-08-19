@@ -223,7 +223,8 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
         "balance_sheet": "",
         "cash_flow_ratios": "",
         "peer_table": "",
-        "shareholding_table": ""
+        "shareholding_table": "",
+        "years": []
     }
     
     # 1. Format Yearly Financial Statements
@@ -233,8 +234,18 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
         header_map = {h: i for i, h in enumerate(headers)}
         row_map = {r[header_map["Date"]]: r for r in rows if "Date" in header_map}
         
-        available_years = sorted(list(row_map.keys()))
-        years_to_show = available_years[-5:] if len(available_years) >= 5 else available_years
+        available_years = [y for y in sorted(list(row_map.keys())) if y.lower() not in ["latest", "ttm"]]
+        years_to_show = available_years[-3:] if len(available_years) >= 3 else available_years
+        
+        # Helper to format year header
+        def format_year_header(y_str):
+            if len(y_str) == 6 and y_str.isdigit():
+                year = y_str[:4]
+                return f"FY{year[2:]}A"
+            return y_str
+            
+        formatted_headers = [format_year_header(y) for y in years_to_show]
+        formatted["years"] = formatted_headers
         
         # Table 1: Income Statement
         inc_cols = [
@@ -250,7 +261,7 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
             ("EPS", "EPS")
         ]
         
-        inc_hdr = "| Particulars | " + " | ".join(years_to_show) + " |"
+        inc_hdr = "| Particulars | " + " | ".join(formatted_headers) + " |"
         inc_sep = "|:---| " + " | ".join(["---:"] * len(years_to_show)) + " |"
         inc_rows = []
         for ss_col, label in inc_cols:
@@ -282,7 +293,7 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
             ("Total Assets", "Total Assets")
         ]
         
-        bs_hdr = "| Particulars | " + " | ".join(years_to_show) + " |"
+        bs_hdr = "| Particulars | " + " | ".join(formatted_headers) + " |"
         bs_sep = "|:---| " + " | ".join(["---:"] * len(years_to_show)) + " |"
         bs_rows = []
         for ss_col, label in bs_cols:
@@ -309,7 +320,7 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
             ("Cash Conversion Cycle", "Cash Conversion Cycle")
         ]
         
-        ratio_hdr = "| Particulars | " + " | ".join(years_to_show) + " |"
+        ratio_hdr = "| Particulars | " + " | ".join(formatted_headers) + " |"
         ratio_sep = "|:---| " + " | ".join(["---:"] * len(years_to_show)) + " |"
         ratio_rows = []
         for ss_col, label in ratio_cols:
@@ -1031,6 +1042,7 @@ def enrich_stock_with_actuals(r: dict) -> dict:
         r["ss_bulk_deals"] = tables.get("bulk_deals") or ""
         r["ss_insider_trading"] = tables.get("insider_trading") or ""
         r["ss_substantial_acquisition"] = tables.get("substantial_acquisition") or ""
+        r["ss_years"] = tables.get("years") or []
         # 3c. Supplement using public Screener page scraping
         try:
             screener_ratios = dp.scrape_screener_ratios(symbol)
@@ -1077,6 +1089,7 @@ def enrich_stock_with_actuals(r: dict) -> dict:
         r["ss_bulk_deals"] = ""
         r["ss_insider_trading"] = ""
         r["ss_substantial_acquisition"] = ""
+        r["ss_years"] = []
         r["ss_delivery_table"] = ""
         r["ss_meta_ratios"] = {}
         r["yf_info"] = {}
@@ -1765,6 +1778,33 @@ def format_quarter_label(q_str: str) -> str:
 def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, today_str: str, model: str = None) -> str:
     """Invoke the Gemini API in three distinct stages to guarantee complete, non-truncated reports."""
     symbol = r["symbol"]
+    
+    # Dynamically resolve financial years based on parsed data
+    ss_years = r.get("ss_years") or ["FY24A", "FY25A", "FY26A"]
+    if len(ss_years) >= 3:
+        fy_act_1 = ss_years[0]
+        fy_act_2 = ss_years[1]
+        fy_act_3 = ss_years[2]
+    else:
+        fy_act_1, fy_act_2, fy_act_3 = "FY24A", "FY25A", "FY26A"
+        
+    try:
+        last_yr_digits = re.findall(r"\d+", fy_act_3)
+        if last_yr_digits:
+            last_yr = int(last_yr_digits[0])
+            fy_est_1 = f"FY{last_yr + 1}E"
+            fy_est_2 = f"FY{last_yr + 2}E"
+        else:
+            fy_est_1, fy_est_2 = "FY27E", "FY28E"
+    except Exception:
+        fy_est_1, fy_est_2 = "FY27E", "FY28E"
+        
+    # Replace years dynamically in the prompt template
+    prompt_template = prompt_template.replace("FY24A", fy_act_1)
+    prompt_template = prompt_template.replace("FY25A", fy_act_2)
+    prompt_template = prompt_template.replace("FY26A", fy_act_3)
+    prompt_template = prompt_template.replace("FY27E", fy_est_1)
+    prompt_template = prompt_template.replace("FY28E", fy_est_2)
     company = r["company"]
     sector = r["industry"]
     cmp = r.get("close", 0.0)

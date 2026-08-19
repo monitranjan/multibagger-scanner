@@ -489,9 +489,10 @@ def scrape_screener_financial_tables(symbol: str) -> dict:
                     return None
                 
                 # Extract headers (which are dates/years)
-                headers = [th.text.strip().replace("\n", "").replace("  ", " ") for th in table.find_all("th") if th.text.strip()]
-                if not headers:
-                    headers = [td.text.strip().replace("\n", "").replace("  ", " ") for td in table.find_all("td") if td.text.strip()]
+                # Keep empty first header to preserve column alignment with row values
+                headers = [th.text.strip().replace("\n", "").replace("  ", " ") for th in table.find_all("th")]
+                if not headers or len([h for h in headers if h]) == 0:
+                    headers = [td.text.strip().replace("\n", "").replace("  ", " ") for td in table.find_all("td")]
                 
                 # Extract row data
                 rows = {}

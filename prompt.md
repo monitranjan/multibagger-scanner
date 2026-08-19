@@ -49,15 +49,17 @@ any JVs or partnerships and strategic rationale.
 
 ### SECTION 6 — FINANCIAL DEEP-DIVE (CONSOLIDATED)
 Produce three tables using ACTUALS from Screener.in for FY24A, FY25A, FY26A
-and your ESTIMATES for FY27E, FY28E:
+and your ESTIMATES for FY27E, FY28E. 
+Projections for FY27E and FY28E MUST be mathematically sound and derived logically:
+- Revenue: Estimate using the company's historical growth or management's future guidance (state the assumed YoY growth rate % explicitly).
+- EBITDA & PAT: Calculate based on operating leverage and margin expansion/contraction assumptions.
+- EPS: Calculate as PAT / outstanding shares (ensure consistency with CMP and target valuation).
 
 TABLE 1 — Income Statement:
-Revenue, EBITDA, EBITDA Margin%, Other Income, Interest, Depreciation,
-PBT, Tax Rate%, PAT, EPS, Div Payout%
+Revenue, Revenue Growth YoY %, EBITDA, EBITDA Margin%, Other Income, Interest, Depreciation, PBT, Tax Rate%, PAT, PAT Growth YoY %, EPS, Div Payout%
 
 TABLE 2 — Balance Sheet:
-Equity Capital, Reserves, Borrowings, Other Liabilities, Total Liabilities,
-Fixed Assets, CWIP, Investments, Other Assets, Total Assets
+Equity Capital, Reserves, Borrowings, Other Liabilities, Total Liabilities, Fixed Assets, CWIP, Investments, Other Assets, Total Assets
 
 TABLE 3 — Cash Flow & Key Ratios:
 CFO, CFI, CFF, Net Cash Flow, Free Cash Flow, CFO/EBITDA%
@@ -65,6 +67,7 @@ ROCE%, ROE%, Debtor Days, Inventory Days, Days Payable,
 Cash Conversion Cycle, Net D/E, DPS
 
 After each table, add a detailed but layman-friendly paragraph of analytical commentary explaining the key reasons behind the numbers (e.g., margin drivers, working capital trends, FCF quality, debt trajectory) and what they mean for the business in simple terms.
+For TABLE 1, you MUST include a specific "PROJECTION RATIONALE & ASSUMPTIONS" sub-paragraph explaining the exact reasons, YoY growth percentages, and margin assumptions you used to forecast FY27E and FY28E (e.g., based on management guidance from the concall, capacity additions, or industrial tailwinds).
 
 ### SECTION 7 — EARNINGS QUALITY CHECKLIST
 Produce a table with 8 metrics:
