@@ -2322,7 +2322,7 @@ Public %: {public_val:.2f}%
         f"Now, generate PART 3 (starting from ### SECTION 8 — VALUATION) for {company} ({symbol}):"
     )
 
-    stage3_headers = ["SECTION 8", "SECTION 9", "SECTION 10", "TECHNICAL LEVELS|SECTION 10B", "CONCALL BRIEF|APPENDIX", "DISCLAIMER"]
+    stage3_headers = ["SECTION 8", "SECTION 9", "SECTION 10", "TECHNICAL LEVELS|SECTION 10B", "CONCALL BRIEF|APPENDIX", "DISCLAIMER|informational purposes"]
     part3_text = call_stage_with_fallback(3, stage3_prompt, stage3_headers, model)
     
     substack_search = web_context.get("substack_search", [])
