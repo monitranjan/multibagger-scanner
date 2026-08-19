@@ -3299,10 +3299,25 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
     except Exception as e:
         print(f"⚠️ [GIT WARNING] Failed to auto-sync {symbol} report: {e}")
 
+def diagnose_stockscans_cookie():
+    cookie = os.environ.get("STOCKSCANS_COOKIE", "")
+    if not cookie:
+        print("🍪 [COOKIE DIAGNOSTIC] STOCKSCANS_COOKIE is empty or not set in environment!")
+        return
+        
+    has_newlines = "\n" in cookie or "\r" in cookie
+    print("🍪 [COOKIE DIAGNOSTIC] Raw loaded STOCKSCANS_COOKIE:")
+    print(f"   - Cookie Value: '{cookie}'")
+    print(f"   - Total Length: {len(cookie)} characters")
+    print(f"   - Contains Newlines/Carriage Returns: {has_newlines}")
+
 def main() -> None:
     print("="*80)
     print("🌟🚀 AUTOMATED MONIT DEEP EQUITY RESEARCH PIPELINE 🚀🌟")
     print("="*80)
+    
+    # Run cookie diagnostic first
+    diagnose_stockscans_cookie()
     
     # Sync local delivery history from bulk bhavcopy first
     try:
