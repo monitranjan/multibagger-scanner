@@ -3310,6 +3310,14 @@ def diagnose_stockscans_cookie():
     print(f"   - Cookie Value: '{cookie}'")
     print(f"   - Total Length: {len(cookie)} characters")
     print(f"   - Contains Newlines/Carriage Returns: {has_newlines}")
+    
+    # Auto-sanitize cookie by removing newlines and trailing/leading whitespaces
+    cleaned = cookie.strip().replace("\n", "").replace("\r", "")
+    os.environ["STOCKSCANS_COOKIE"] = cleaned
+    
+    print("🍪 [COOKIE DIAGNOSTIC] Auto-sanitized STOCKSCANS_COOKIE:")
+    print(f"   - Cleaned Cookie Value: '{cleaned}'")
+    print(f"   - Cleaned Length: {len(cleaned)} characters")
 
 def main() -> None:
     print("="*80)
