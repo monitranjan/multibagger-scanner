@@ -36,13 +36,12 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         GMAIL_USER: ${{ secrets.GMAIL_USER }}
         GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
-        ALERT_EMAIL: ${{ vars.ALERT_EMAIL || secrets.ALERT_EMAIL }}
+        ALERT_EMAIL: ${{ vars.ALERT_EMAIL }}
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        CONFLUENCE_MODEL: ${{ vars.CONFLUENCE_MODEL || secrets.CONFLUENCE_MODEL }}
-        EMERGING_MODEL: ${{ vars.EMERGING_MODEL || secrets.EMERGING_MODEL }}
-        FALLBACK_MODELS: ${{ vars.FALLBACK_MODELS || secrets.FALLBACK_MODELS }}
-        SUMMARIZATION_MODEL: ${{ vars.CONFLUENCE_SUMMARIZING_MODEL || secrets.CONFLUENCE_SUMMARIZING_MODEL }}
-        TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY || secrets.TRAVILY_API_KEY }}
+        CONFLUENCE_MODEL: ${{ vars.CONFLUENCE_MODEL }}
+        FALLBACK_MODELS: ${{ vars.FALLBACK_MODELS }}
+        SUMMARIZATION_MODEL: ${{ vars.CONFLUENCE_SUMMARIZING_MODEL }}
+        TAVILY_API_KEY: ${{ secrets.TRAVILY_API_KEY }}
         REPORT_TYPE: confluence
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports

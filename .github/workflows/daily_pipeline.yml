@@ -35,13 +35,8 @@ jobs:
         GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        ALERT_EMAIL: ${{ vars.ALERT_EMAIL || secrets.ALERT_EMAIL }}
-        TWILIO_SID: ${{ secrets.TWILIO_SID }}
-        TWILIO_TOKEN: ${{ secrets.TWILIO_TOKEN }}
-        TWILIO_WHATSAPP_FROM: ${{ secrets.TWILIO_WHATSAPP_FROM }}
-        TWILIO_WHATSAPP_TO: ${{ secrets.TWILIO_WHATSAPP_TO }}
+        ALERT_EMAIL: ${{ vars.ALERT_EMAIL }}
         STOCKSCANS_COOKIE: ${{ secrets.STOCKSCANS_COOKIE }}
-        SUMMARIZATION_MODEL: ${{ vars.SUMMARIZATION_MODEL || secrets.SUMMARIZATION_MODEL }}
       run: |
         # 1. Run scanner to fetch active signals
         python -u scanner.py
