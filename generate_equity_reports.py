@@ -3208,11 +3208,16 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
         # Add the report file
         subprocess.run(["git", "add", "-f", str(report_file)], check=True)
         
+        # Add the intermediate summaries directory for the symbol if it exists
+        summary_dir = Path("outputs") / "intermediate_summaries" / symbol
+        if summary_dir.exists():
+            subprocess.run(["git", "add", "-f", str(summary_dir)], check=True)
+        
         # Check if there is anything to commit
         diff_res = subprocess.run(["git", "diff", "--quiet", "--staged"], check=False)
         if diff_res.returncode != 0:
-            # Commit the staged file
-            subprocess.run(["git", "commit", "-m", f"chore: auto-publish equity report for {symbol} [skip ci]"], check=True)
+            # Commit the staged files
+            subprocess.run(["git", "commit", "-m", f"chore: auto-publish equity report and intermediate summaries for {symbol} [skip ci]"], check=True)
             # Rebase autostash pull to ensure we integrate any concurrent remote updates safely
             pull_res = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture_output=True, text=True)
             
