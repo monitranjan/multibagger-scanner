@@ -299,8 +299,9 @@ GLOBAL STYLE RULES:
 - Write like a sell-side analyst — precise, direct, no promotional language
 - Use web search at the start to fetch live Screener.in data for the
   company and all peers before writing a single section
-- End with standard disclaimer:
-  "This report is for informational purposes only and does not constitute
+- End with standard disclaimer header and text:
+  "### DISCLAIMER
+  This report is for informational purposes only and does not constitute
   investment advice. Financial data sourced from Screener.in (fetched
   [date]). Forward estimates are analyst projections — not guarantees of
   future performance. Please conduct independent due diligence before

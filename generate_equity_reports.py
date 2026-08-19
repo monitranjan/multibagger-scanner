@@ -1103,7 +1103,7 @@ def verify_report_completeness(report_text: str) -> list[str]:
         "SECTION 10 (Recommendation)": [r"(?:Recommendation|Horizon|Entry|Stop)"],
         "SECTION 10B (Technical Chart Levels)": [r"(?:Technical|EMA|VStop|Support|Resistance)"],
         "APPENDIX (Latest Concall Brief)": [r"(?:Appendix|Concall|Brief|Boss)"],
-        "DISCLAIMER (Global style rules)": [r"Disclaimer"]
+        "DISCLAIMER (Global style rules)": [r"(?:Disclaimer|informational purposes)"]
     }
     
     missing = []
