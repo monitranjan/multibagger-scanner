@@ -42,6 +42,7 @@ jobs:
         FALLBACK_MODELS: ${{ vars.FALLBACK_MODELS }}
         SUMMARIZATION_MODEL: ${{ vars.CONFLUENCE_SUMMARIZING_MODEL }}
         TAVILY_API_KEY: ${{ secrets.TRAVILY_API_KEY }}
+        STOCKSCANS_COOKIE: ${{ secrets.STOCKSCANS_COOKIE }}
         REPORT_TYPE: confluence
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports
