@@ -1,4 +1,4 @@
-name: Confluence Match Reports Pipeline
+name: Emerging Leaders Reports Pipeline
 
 on:
   workflow_run:
@@ -37,13 +37,13 @@ jobs:
         GMAIL_USER: ${{ secrets.GMAIL_USER }}
         GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
         ALERT_EMAIL: ${{ vars.ALERT_EMAIL || secrets.ALERT_EMAIL }}
-        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        OPENROUTER_API_KEY: ${{ secrets.EMERGING_OPENROUTER_API_KEY }}
         CONFLUENCE_MODEL: ${{ vars.CONFLUENCE_MODEL || secrets.CONFLUENCE_MODEL }}
         EMERGING_MODEL: ${{ vars.EMERGING_MODEL || secrets.EMERGING_MODEL }}
         FALLBACK_MODELS: ${{ vars.FALLBACK_MODELS || secrets.FALLBACK_MODELS }}
-        SUMMARIZATION_MODEL: ${{ vars.CONFLUENCE_SUMMARIZING_MODEL || secrets.CONFLUENCE_SUMMARIZING_MODEL }}
+        SUMMARIZATION_MODEL: ${{ vars.EMERGING_SUMMARIZING_MODEL || secrets.EMERGING_SUMMARIZING_MODEL }}
         TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY || secrets.TRAVILY_API_KEY }}
-        REPORT_TYPE: confluence
+        REPORT_TYPE: emerging
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports
         python -u generate_equity_reports.py
@@ -60,4 +60,4 @@ jobs:
         [ -d "outputs/reports" ] && git add -f outputs/reports/ || echo "No reports directory found to sync"
         [ -d "outputs/intermediate_summaries" ] && git add -f outputs/intermediate_summaries/ || echo "No intermediate summaries directory found to sync"
         # Commit only if changes exist
-        git diff --staged --quiet || (git commit -m "chore: auto-publish newly compiled equity reports and intermediate summaries [skip ci]" && git pull --rebase --autostash origin main && git push)
+        git diff --staged --quiet || (git commit -m "chore: auto-publish newly compiled emerging leader reports and intermediate summaries [skip ci]" && git pull --rebase --autostash origin main && git push)

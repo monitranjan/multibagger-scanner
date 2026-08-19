@@ -3318,22 +3318,28 @@ def main() -> None:
         print("Please configure your OpenRouter API Key in the environment or .env file.")
         sys.exit(1)
         
-    # 2. Check for confluence list JSON
-    confl_json_path = Path("outputs") / "today_confluences.json"
-    if not confl_json_path.exists():
-        print(f"ℹ️ Confluences list not found at: {confl_json_path}")
-        print("Please run the main daily pipeline first (monit_ranker.py) to output confluences.")
-        sys.exit(0)
+    report_type = os.environ.get("REPORT_TYPE", "all").lower()
+    print(f"📋 Running report pipeline for REPORT_TYPE: {report_type}")
+    
+    confluence_3_rows = []
+    if report_type in ["confluence", "all"]:
+        # 2. Check for confluence list JSON
+        confl_json_path = Path("outputs") / "today_confluences.json"
+        if not confl_json_path.exists():
+            print(f"ℹ️ Confluences list not found at: {confl_json_path}")
+            if report_type == "confluence":
+                sys.exit(0)
+        else:
+            try:
+                with open(confl_json_path, "r") as f:
+                    confluence_3_rows = json.load(f)
+            except Exception as e:
+                print(f"❌ Error loading confluences list: {e}")
+                if report_type == "confluence":
+                    sys.exit(1)
         
-    try:
-        with open(confl_json_path, "r") as f:
-            confluence_3_rows = json.load(f)
-    except Exception as e:
-        print(f"❌ Error loading confluences list: {e}")
-        sys.exit(1)
-        
-    if not confluence_3_rows:
-        print("ℹ️ Today's confluence list is empty. No triple-confluence stocks detected today.")
+        if not confluence_3_rows:
+            print("ℹ️ Today's confluence list is empty. No triple-confluence stocks detected today.")
         
     # 3. Load prompt template
     prompt_path = Path("prompt.md")
@@ -3355,11 +3361,12 @@ def main() -> None:
     today_str = today.strftime("%d %b %Y")
     date_suffix = today.strftime("%Y-%m-%d")
     
-    print(f"Found {len(confluence_3_rows)} triple-confluence candidates. Processing all candidates...")
-    
     # Process all confluences to keep speed high and costs optimal
     reports_compiled = 0
     consecutive_failures = 0
+    
+    if report_type in ["confluence", "all"] and confluence_3_rows:
+        print(f"Found {len(confluence_3_rows)} triple-confluence candidates. Processing all candidates...")
     for r in confluence_3_rows:
         r = enrich_basic_metadata(r)
         symbol = r["symbol"]
@@ -3483,7 +3490,12 @@ def main() -> None:
                 print(f"⚠️  Error sending separate email for {symbol}: {mail_err}")
         except Exception as e:
             print(f"❌ [FAILED] Error generating report for {symbol}: {e}")
-                # Load and process emerging leaders (save file, commit, and send consolidated digest email)
+    if report_type not in ["emerging", "all"]:
+        print("\n" + "="*80)
+        print("🏆 Deep Equity Research Report compilation process complete!")
+        print("="*80)
+        return
+        
     emerg_json_path = Path("outputs") / "today_emerging.json"
     if emerg_json_path.exists():
         try:
