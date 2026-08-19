@@ -1311,8 +1311,13 @@ def find_matching_existing_report(symbol: str, reports_dir: Path, today: datetim
                         break
             
             if new_doc_found:
-                print(f"🔥 [NEW DOCUMENT DETECTED] Bypassing skip checks for {symbol}. New {new_doc_type} available: {new_doc_url}")
-                return None, ""
+                # Add a 7-day cooldown to prevent continuous updates as documents trick in over 2-3 days
+                report_age_days = (today - latest_date).days
+                if report_age_days < 7:
+                    print(f"⏭️ [NEW DOCUMENT BYPASSED] New {new_doc_type} detected, but the existing report is only {report_age_days} days old. Skipping regeneration to allow other documents to trickle in.")
+                else:
+                    print(f"🔥 [NEW DOCUMENT DETECTED] Bypassing skip checks for {symbol}. New {new_doc_type} available: {new_doc_url}")
+                    return None, ""
 
             match = re.search(r'<!-- latest_quarter:\s*(\d{6})\s*-->', content)
             if match:
