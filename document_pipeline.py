@@ -19,7 +19,7 @@ import xml.etree.ElementTree as ET
 def download_and_extract_pdf(url: str, doc_type: str, max_pages: int = 9999) -> str:
     """Download a PDF from a URL and extract text from its pages."""
     if not url or url.startswith("https://nseindia.com") or url.startswith("https://concall.in"):
-        print(f"⚠️ No valid URL found for {doc_type} (found: {url}). Skipping download.")
+        print(f"⚠️ No valid URL found on StockScans or Screener for {doc_type} (placeholder/empty: {url}). Skipping download.")
         return ""
         
     print(f"📥 [DOWNLOADING] Fetching {doc_type} PDF from: {url}")
