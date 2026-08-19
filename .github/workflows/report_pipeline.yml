@@ -41,6 +41,7 @@ jobs:
         CONFLUENCE_MODEL: ${{ vars.CONFLUENCE_MODEL || secrets.CONFLUENCE_MODEL }}
         EMERGING_MODEL: ${{ vars.EMERGING_MODEL || secrets.EMERGING_MODEL }}
         FALLBACK_MODELS: ${{ vars.FALLBACK_MODELS || secrets.FALLBACK_MODELS }}
+        SUMMARIZATION_MODEL: ${{ vars.SUMMARIZATION_MODEL || secrets.SUMMARIZATION_MODEL }}
         TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       run: |
         # Run decoupled report generator to fetch, evaluate, and write Wheels-style reports

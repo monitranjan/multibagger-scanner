@@ -36,6 +36,7 @@ jobs:
         CONFLUENCE_MODEL: ${{ vars.CONFLUENCE_MODEL || secrets.CONFLUENCE_MODEL || 'nvidia/nemotron-3-ultra-550b-a55b:free' }}
         EMERGING_MODEL: ${{ vars.EMERGING_MODEL || secrets.EMERGING_MODEL }}
         FALLBACK_MODELS: ${{ vars.FALLBACK_MODELS || secrets.FALLBACK_MODELS }}
+        SUMMARIZATION_MODEL: ${{ vars.SUMMARIZATION_MODEL || secrets.SUMMARIZATION_MODEL }}
       run: |
         python -u scratch/compile_cdsl.py
 
