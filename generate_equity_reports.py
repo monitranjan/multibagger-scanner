@@ -119,6 +119,31 @@ def fetch_stockscans_company_data(symbol: str) -> dict:
             print(f"ℹ️ StockScans shareholding returned 401 (Session expired/unauthorized) for {symbol}. Will fall back to yfinance.")
     except Exception as e:
         print(f"⚠️ Error fetching shareholding from StockScans for {symbol}: {e}")
+        
+    # 5b. Fetch extra details from StockScans (deals, insider trading, acquisitions)
+    bulk_deals_data = {}
+    try:
+        r = requests.get(f"https://www.stockscans.in/api/company/bulk-block-deals/{exchange}:{symbol}", headers=headers, timeout=12)
+        if r.status_code == 200:
+            bulk_deals_data = r.json()
+    except Exception as e:
+        print(f"⚠️ Error fetching bulk/block deals from StockScans for {symbol}: {e}")
+        
+    insider_trading_data = {}
+    try:
+        r = requests.get(f"https://www.stockscans.in/api/company/insider-trading/{exchange}:{symbol}", headers=headers, timeout=12)
+        if r.status_code == 200:
+            insider_trading_data = r.json()
+    except Exception as e:
+        print(f"⚠️ Error fetching insider trading from StockScans for {symbol}: {e}")
+        
+    substantial_acq_data = {}
+    try:
+        r = requests.get(f"https://www.stockscans.in/api/company/substantial-acquisition/{exchange}:{symbol}", headers=headers, timeout=12)
+        if r.status_code == 200:
+            substantial_acq_data = r.json()
+    except Exception as e:
+        print(f"⚠️ Error fetching substantial acquisitions from StockScans for {symbol}: {e}")
             
     return {
         "symbol": symbol,
@@ -128,7 +153,10 @@ def fetch_stockscans_company_data(symbol: str) -> dict:
         "fundamentals": fundamentals_data,
         "peers": peers_list,
         "card_details": card_details,
-        "shareholding": shareholding_data
+        "shareholding": shareholding_data,
+        "bulk_deals": bulk_deals_data,
+        "insider_trading": insider_trading_data,
+        "substantial_acquisition": substantial_acq_data
     }
 
 
@@ -379,6 +407,68 @@ def format_actuals_to_markdown(data: dict) -> dict[str, str]:
                     cells.append(str(val))
             md.append("| " + " | ".join(cells) + " |")
         formatted["shareholding_table"] = "\n".join(md)
+        
+    # 4. Format Bulk / Block Deals
+    bulk_deals_list = data.get("bulk_deals", {}).get("bulkBlockDeals", [])
+    if bulk_deals_list:
+        hdr = "| Date | Shareholder Name | Type | Quantity | Avg Price | Value (Cr) |\n|:---|:---|:---|---:|---:|---:|"
+        rows = []
+        for item in bulk_deals_list[:15]:
+            date = item.get("date") or "-"
+            name = item.get("shareholderName") or "-"
+            ttype = item.get("transactionType") or "-"
+            qty = item.get("shareQuantity")
+            qty_str = f"{qty:,.0f}" if isinstance(qty, (int, float)) else str(qty or "-")
+            price = item.get("averagePrice")
+            price_str = f"{price:.2f}" if isinstance(price, (int, float)) else str(price or "-")
+            val = item.get("valueOfSecurities")
+            val_str = f"{val:.2f}" if isinstance(val, (int, float)) else str(val or "-")
+            rows.append(f"| {date} | {name} | {ttype} | {qty_str} | {price_str} | {val_str} |")
+        formatted["bulk_deals"] = "\n".join([hdr] + rows)
+    else:
+        formatted["bulk_deals"] = "No recent bulk or block deals found."
+
+    # 5. Format Insider Trading
+    insider_list = data.get("insider_trading", {}).get("insiderTrading", [])
+    if insider_list:
+        hdr = "| Date | Shareholder Name | Category | Type | Quantity | Avg Price | Value (Cr) | Mode |\n|:---|:---|:---|:---|---:|---:|---:|:---|"
+        rows = []
+        for item in insider_list[:15]:
+            date = item.get("date") or "-"
+            name = item.get("shareholderName") or "-"
+            cat = item.get("shareholderCategory") or "-"
+            ttype = item.get("transactionType") or "-"
+            qty = item.get("shareQuantity")
+            qty_str = f"{qty:,.0f}" if isinstance(qty, (int, float)) else str(qty or "-")
+            price = item.get("averagePrice")
+            price_str = f"{price:.2f}" if isinstance(price, (int, float)) else str(price or "-")
+            val = item.get("valueOfSecurities")
+            val_str = f"{val:.2f}" if isinstance(val, (int, float)) else str(val or "-")
+            mode = item.get("modeOfTransaction") or "-"
+            rows.append(f"| {date} | {name} | {cat} | {ttype} | {qty_str} | {price_str} | {val_str} | {mode} |")
+        formatted["insider_trading"] = "\n".join([hdr] + rows)
+    else:
+        formatted["insider_trading"] = "No recent insider trading transactions found."
+
+    # 6. Format Substantial Acquisition
+    acq_list = data.get("substantial_acquisition", {}).get("substantialAcquisition", [])
+    if acq_list:
+        hdr = "| Date | Acquirer Name | Type | Quantity | Avg Price | Value (Cr) |\n|:---|:---|:---|---:|---:|---:|"
+        rows = []
+        for item in acq_list[:15]:
+            date = item.get("date") or "-"
+            name = item.get("shareholderName") or item.get("acquirerName") or "-"
+            ttype = item.get("transactionType") or "-"
+            qty = item.get("shareQuantity")
+            qty_str = f"{qty:,.0f}" if isinstance(qty, (int, float)) else str(qty or "-")
+            price = item.get("averagePrice")
+            price_str = f"{price:.2f}" if isinstance(price, (int, float)) else str(price or "-")
+            val = item.get("valueOfSecurities")
+            val_str = f"{val:.2f}" if isinstance(val, (int, float)) else str(val or "-")
+            rows.append(f"| {date} | {name} | {ttype} | {qty_str} | {price_str} | {val_str} |")
+        formatted["substantial_acquisition"] = "\n".join([hdr] + rows)
+    else:
+        formatted["substantial_acquisition"] = "No recent substantial acquisitions found."
         
     return formatted
 
@@ -938,6 +1028,9 @@ def enrich_stock_with_actuals(r: dict) -> dict:
         r["ss_balance_sheet"] = scr_tables.get("balance_sheet") or tables.get("balance_sheet") or ""
         r["ss_cash_flow_ratios"] = scr_tables.get("cash_flow_ratios") or tables.get("cash_flow_ratios") or ""
         r["ss_shareholding_table"] = scr_tables.get("shareholding_table") or tables.get("shareholding_table") or ""
+        r["ss_bulk_deals"] = tables.get("bulk_deals") or ""
+        r["ss_insider_trading"] = tables.get("insider_trading") or ""
+        r["ss_substantial_acquisition"] = tables.get("substantial_acquisition") or ""
         # 3c. Supplement using public Screener page scraping
         try:
             screener_ratios = dp.scrape_screener_ratios(symbol)
@@ -981,6 +1074,9 @@ def enrich_stock_with_actuals(r: dict) -> dict:
         r["ss_balance_sheet"] = ""
         r["ss_cash_flow_ratios"] = ""
         r["ss_shareholding_table"] = ""
+        r["ss_bulk_deals"] = ""
+        r["ss_insider_trading"] = ""
+        r["ss_substantial_acquisition"] = ""
         r["ss_delivery_table"] = ""
         r["ss_meta_ratios"] = {}
         r["yf_info"] = {}
@@ -1826,6 +1922,15 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
 
 --- DEEPSEEK SUMMARIZED VALUEPICKR DISCUSSION FORUM POSTS (LATEST 1 YEAR DATA) ---
 {valuepickr_summary}
+
+--- STOCKSCANS BULK & BLOCK DEALS ---
+{r.get("ss_bulk_deals") or "No recent bulk or block deals found."}
+
+--- STOCKSCANS INSIDER TRADING TRANSACTIONS ---
+{r.get("ss_insider_trading") or "No recent insider trading transactions found."}
+
+--- STOCKSCANS SUBSTANTIAL ACQUISITIONS ---
+{r.get("ss_substantial_acquisition") or "No recent substantial acquisitions found."}
 """
 
     # Build metadata block with formatted actuals and verified sources
