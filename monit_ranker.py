@@ -48,6 +48,11 @@ def load_dotenv():
 
 load_dotenv()
 
+# Sanitize loaded cookie to remove any trailing newlines or spaces
+_cookie = os.environ.get("STOCKSCANS_COOKIE", "")
+if _cookie:
+    os.environ["STOCKSCANS_COOKIE"] = _cookie.strip().replace("\n", "").replace("\r", "")
+
 
 DEFAULT_TEMPLATE = (
     Path("SOIC Ranking Sheet.xlsx")
