@@ -2263,7 +2263,7 @@ Public %: {public_val:.2f}%
         f"1. You are tasked with generating PART 2 of the equity research report for {company} ({symbol}).\n"
         f"2. You MUST cover the following sections: SECTION 6 (Financial Statements: Income Statement, Balance Sheet, and Cash Flow tables + commentary) and SECTION 7 (Earnings Quality Checklist table).\n"
         f"3. START DIRECTLY with the header '### SECTION 6 — FINANCIAL DEEP-DIVE (CONSOLIDATED)'. Do NOT repeat any header, title, metadata, or preceding sections.\n"
-        f"4. Under no circumstances should you generate SECTION 8 or beyond in this call. Stop generating immediately after Section 7.\n"
+        f"4. Under no circumstances should you generate SECTION 8 or beyond, or any disclaimer/bibliography at the end of this call. Stop generating immediately after Section 7.\n"
         f"5. Maintain absolute mathematical and analytical consistency with the rating, prices, and metrics established in PART 1.\n"
         f"6. {whitespace_rule}\n\n"
         f"Here is the context of PART 1 generated previously for consistency:\n"
@@ -2370,7 +2370,10 @@ Public %: {public_val:.2f}%
 [^vp-thread]: Source: Verified Analyst Research, ValuePickr Investor Community Discussions & Industry Peer Insights.
 """
 
-    combined_report = part1_text.strip() + "\n\n" + part2_text.strip() + "\n\n" + part3_text.strip() + "\n\n" + ref_directory.strip()
+    # Programmatically clean up any accidental duplicate disclaimer at the end of part2_text
+    part2_text_cleaned = re.sub(r"(###?\s*DISCLAIMER\b.*)", "", part2_text, flags=re.DOTALL | re.IGNORECASE).strip()
+
+    combined_report = part1_text.strip() + "\n\n" + part2_text_cleaned + "\n\n" + part3_text.strip() + "\n\n" + ref_directory.strip()
     
     # Inject latest data quarter info into the report subtitle dynamically if not already present
     lines = combined_report.splitlines()
