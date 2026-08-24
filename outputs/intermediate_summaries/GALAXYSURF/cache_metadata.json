@@ -1,0 +1,20 @@
+{
+  "annual_report": {
+    "date_key": "2026",
+    "url": "https://www.stockscans.in/document/3sra0z1v346noiinufxcm506.pdf",
+    "filename": "annual_report_2026.md",
+    "cached_at": "2026-08-24T23:37:39.203323"
+  },
+  "concall_transcript": {
+    "date_key": "202606",
+    "url": "https://www.stockscans.in/document/8c2n6odo35lf45cmjt37s7ks.pdf",
+    "filename": "concall_transcript_202606.md",
+    "cached_at": "2026-08-24T23:37:39.205413"
+  },
+  "investor_presentation": {
+    "date_key": "202606",
+    "url": "https://www.stockscans.in/document/vdp27q2vgqicx2plfzqbamu3.pdf",
+    "filename": "investor_presentation_202606.md",
+    "cached_at": "2026-08-24T23:37:39.207043"
+  }
+}
