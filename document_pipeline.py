@@ -206,6 +206,94 @@ def log_llm_call(model: str, role: str, prompt: str, output: str):
         lf.write(f"📥 RESPONSE:\n{output}\n")
         lf.write(f"{'='*80}\n\n")
 
+def get_cached_document(symbol: str, doc_type: str, date_key: str, url: str) -> str:
+    """
+    Check if a cached summary exists for a given symbol, document type, date key, and URL.
+    Returns the summary string if found and valid, otherwise None.
+    """
+    if not url or "nseindia.com" in url or "concall.in" in url:
+        return None
+        
+    comp_dir = Path("outputs") / "intermediate_summaries" / symbol
+    metadata_path = comp_dir / "cache_metadata.json"
+    
+    if not metadata_path.exists():
+        return None
+        
+    try:
+        import json
+        with open(metadata_path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+            
+        doc_key = doc_type.lower().replace(" ", "_")
+        doc_meta = meta.get(doc_key)
+        if not doc_meta:
+            return None
+            
+        # Check if date_key and URL match
+        if doc_meta.get("date_key") == date_key and doc_meta.get("url") == url:
+            filename = doc_meta.get("filename")
+            if filename:
+                file_path = comp_dir / filename
+                if file_path.exists():
+                    with open(file_path, "r", encoding="utf-8") as f_md:
+                        content = f_md.read().strip()
+                        if content and len(content) > 100:
+                            print(f"🎯 [CACHE HIT] Loaded cached {doc_type} summary for {symbol} ({date_key})")
+                            return content
+    except Exception as e:
+        print(f"⚠️ Error reading cache for {symbol} ({doc_type}): {e}")
+        
+    return None
+
+def save_document_to_cache(symbol: str, doc_type: str, date_key: str, url: str, content: str):
+    """
+    Save the document summary text to a markdown file and update the cache_metadata.json file.
+    """
+    if not content or len(content.strip()) < 100:
+        print(f"⚠️ Refusing to cache empty/short summary for {symbol} ({doc_type})")
+        return
+        
+    if not url or "nseindia.com" in url or "concall.in" in url:
+        return
+        
+    try:
+        import json
+        comp_dir = Path("outputs") / "intermediate_summaries" / symbol
+        comp_dir.mkdir(parents=True, exist_ok=True)
+        
+        doc_key = doc_type.lower().replace(" ", "_")
+        filename = f"{doc_key}_{date_key}.md"
+        
+        # Save the markdown summary content
+        file_path = comp_dir / filename
+        with open(file_path, "w", encoding="utf-8") as f_md:
+            f_md.write(content)
+            
+        # Load and update the metadata JSON
+        metadata_path = comp_dir / "cache_metadata.json"
+        meta = {}
+        if metadata_path.exists():
+            try:
+                with open(metadata_path, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
+            except Exception:
+                meta = {}
+                
+        meta[doc_key] = {
+            "date_key": date_key,
+            "url": url,
+            "filename": filename,
+            "cached_at": datetime.now().isoformat()
+        }
+        
+        with open(metadata_path, "w", encoding="utf-8") as f:
+            json.dump(meta, f, indent=2)
+            
+        print(f"💾 [CACHE SAVE] Cached {doc_type} summary for {symbol} ({date_key})")
+    except Exception as e:
+        print(f"⚠️ Error writing cache for {symbol} ({doc_type}): {e}")
+
 def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
     """Summarize the given document text using DeepSeek via OpenRouter with custom prompt templates based on doc_type."""
     if not text or not text.strip() or "No extracted text available" in text:

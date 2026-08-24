@@ -1448,10 +1448,17 @@ def fetch_stockscans_documents(symbol: str, exchange: str) -> dict:
         valid_years = [int(y) if len(y) == 4 else 2000 + int(y) for y in years]
         valid_years = [y for y in valid_years if 2018 <= y <= 2028]
         return max(valid_years) if valid_years else 0
-    ip_pdf = max(ip_links, key=get_item_date_score)[0] if ip_links else None
-    ar_pdf = max(ar_links, key=get_item_date_score)[0] if ar_links else None
-    concall_pdf = max(cc_links, key=get_item_date_score)[0] if cc_links else None
-    return {"ip_pdf": ip_pdf, "ar_pdf": ar_pdf, "concall_pdf": concall_pdf}
+    best_ip = max(ip_links, key=get_item_date_score) if ip_links else (None, None)
+    best_ar = max(ar_links, key=get_item_date_score) if ar_links else (None, None)
+    best_cc = max(cc_links, key=get_item_date_score) if cc_links else (None, None)
+    return {
+        "ip_pdf": best_ip[0],
+        "ip_date": best_ip[1],
+        "ar_pdf": best_ar[0],
+        "ar_date": best_ar[1],
+        "concall_pdf": best_cc[0],
+        "concall_date": best_cc[1]
+    }
 
 def fetch_screener_documents(symbol: str) -> dict:
     """Scrape official document PDF links directly from the Screener.in company page and return the latest ones."""
@@ -1660,17 +1667,60 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
     print(f"🔍 [SEARCH] Gathering web search context for {cleaned_name} ({symbol})...")
     ss_docs = fetch_stockscans_documents(symbol, "NSE")
     ip_pdf = ss_docs.get("ip_pdf")
+    ip_date = ss_docs.get("ip_date")
     ar_pdf = ss_docs.get("ar_pdf")
+    ar_date = ss_docs.get("ar_date")
     concall_pdf = ss_docs.get("concall_pdf")
+    concall_date = ss_docs.get("concall_date")
+    
     if not ip_pdf or not ar_pdf or not concall_pdf:
         print("🔍 Attempting to scrape missing PDFs directly from Screener...")
         screener_docs = fetch_screener_documents(symbol)
         if not ip_pdf:
             ip_pdf = screener_docs.get("ip_pdf")
+            ip_date = None
         if not ar_pdf:
             ar_pdf = screener_docs.get("ar_pdf")
+            ar_date = None
         if not concall_pdf:
             concall_pdf = screener_docs.get("concall_pdf")
+            concall_date = None
+            
+    # Resolve years or dates if missing (especially when scraped from Screener)
+    import re
+    from datetime import datetime
+    
+    def clean_doc_date(date_str, url, is_ar=False):
+        if date_str and str(date_str).strip() and not str(date_str).lower().startswith("not"):
+            clean = str(date_str).strip()
+            # If 6 digits or 4 digits, return it
+            if re.match(r'^\d{4}$|^\d{6}$', clean):
+                return clean
+            # If date string has full timestamp/year, parse it
+            year_match = re.findall(r'20\d{2}', clean)
+            if year_match:
+                return year_match[0]
+        
+        # Fallback to URL parsing
+        if url:
+            url_clean = url.split("?")[0]
+            year_match = re.findall(r'20\d{2}', url_clean)
+            if year_match:
+                return year_match[-1]
+            fy_match = re.search(r'(\d{2})-(\d{2})', url_clean)
+            if fy_match:
+                return f"20{fy_match.group(2)}"
+        
+        # Fallback to current year / approximate
+        if is_ar:
+            return str(datetime.now().year)
+        else:
+            return datetime.now().strftime("%Y%m")
+
+    ar_date = clean_doc_date(ar_date, ar_pdf, is_ar=True)
+    ip_date = clean_doc_date(ip_date, ip_pdf, is_ar=False)
+    concall_date = clean_doc_date(concall_date, concall_pdf, is_ar=False)
+
     if not ip_pdf:
         ip_pdf = "https://nseindia.com/"
     if not ar_pdf:
@@ -1734,8 +1784,11 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
 
     return {
         "ip_pdf": ip_pdf,
+        "ip_date": ip_date,
         "ar_pdf": ar_pdf,
+        "ar_date": ar_date,
         "concall_pdf": concall_pdf,
+        "concall_date": concall_date,
         "valuepickr_url": val_url,
         "valuepickr_posts": val_posts_context,
         "valuepickr_topic_id": topic_id,
@@ -1882,16 +1935,29 @@ def generate_report_via_gemini(api_key: str, r: dict, prompt_template: str, toda
     cc_url = web_context.get("concall_pdf", "https://concall.in/")
     valuepickr_url = web_context.get("valuepickr_url", "https://forum.valuepickr.com/")
     topic_id = web_context.get("valuepickr_topic_id")
+    
+    ip_date = web_context.get("ip_date")
+    ar_date = web_context.get("ar_date")
+    cc_date = web_context.get("concall_date")
 
-    # Step 1: Download & extract PDF texts
-    ip_text = dp.download_and_extract_pdf(ip_url, "Investor Presentation")
-    ar_text = dp.download_and_extract_pdf(ar_url, "Annual Report")
-    cc_text = dp.download_and_extract_pdf(cc_url, "Concall Transcript")
-
-    # Step 2: Summarize PDFs via DeepSeek
-    ip_summary = dp.summarize_text_via_deepseek(ip_text, "Investor Presentation")
-    ar_summary = dp.summarize_text_via_deepseek(ar_text, "Annual Report")
-    cc_summary = dp.summarize_text_via_deepseek(cc_text, "Concall Transcript")
+    # Cache lookup and fallback processing for documents
+    ip_summary = dp.get_cached_document(symbol, "Investor Presentation", ip_date, ip_url)
+    if not ip_summary:
+        ip_text = dp.download_and_extract_pdf(ip_url, "Investor Presentation")
+        ip_summary = dp.summarize_text_via_deepseek(ip_text, "Investor Presentation")
+        dp.save_document_to_cache(symbol, "Investor Presentation", ip_date, ip_url, ip_summary)
+        
+    ar_summary = dp.get_cached_document(symbol, "Annual Report", ar_date, ar_url)
+    if not ar_summary:
+        ar_text = dp.download_and_extract_pdf(ar_url, "Annual Report")
+        ar_summary = dp.summarize_text_via_deepseek(ar_text, "Annual Report")
+        dp.save_document_to_cache(symbol, "Annual Report", ar_date, ar_url, ar_summary)
+        
+    cc_summary = dp.get_cached_document(symbol, "Concall Transcript", cc_date, cc_url)
+    if not cc_summary:
+        cc_text = dp.download_and_extract_pdf(cc_url, "Concall Transcript")
+        cc_summary = dp.summarize_text_via_deepseek(cc_text, "Concall Transcript")
+        dp.save_document_to_cache(symbol, "Concall Transcript", cc_date, cc_url, cc_summary)
 
     # Step 3: Scrape full Substack articles and summarize
     substack_search = web_context.get("substack_search", [])
