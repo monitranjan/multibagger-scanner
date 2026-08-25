@@ -1,0 +1,6 @@
+- [Verified] Consensus View: None expressed; post is a query seeking opinions, not a stated community consensus among retail investors.
+- [Verified] Variant View: None expressed; no contradictory theses or minority opinions present in text.
+- [Verified] Events Watched: None specified; no results, capex, approvals, audits, or other catalysts mentioned by the community.
+- [Verified] Red Flags Tracked: None tracked or mentioned in the provided text.
+- [Verified] Milestones: None identified that would change sentiment.
+- [Verified] Rumours: None present to flag separately (post solely notes thread inactivity and requests shared insights).
