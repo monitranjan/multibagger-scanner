@@ -1,0 +1,46 @@
+- **CORE PRODUCT SEGMENTS & LAUNCHES** *(Restricted to text; NO fragrances/elixirs/active-ingredient cosmetics cited – pharma entity)*:
+  - *Hospital Business*: Critical Care Division, Intensive Care Division, Institution Business, Exports (P13)
+  - *Trade Business*: Pharma Division, Ortho Division, Gynecology Division (P13)
+  - *API Business*: API Legacy Business, New Product pipeline (P13)
+  - *Launches*: "Critical Care and Intensive Care teams contribute to building Hospital Business with new launches" (P13) – no specific SKU names provided
+  - *Formulation Types (Haridwar)*: Tablets (520mn/yr), Ointment (9mn tubes/yr), Ampoules (36mn/yr), Vials (12mn/yr), Pre-filled Syringes (6mn/yr) (P14)
+  - *API Types*: Synthetic APIs – Hyderabad (120 MT/yr), Vapi (191 MT/yr) (P14)
+  - *Therapeutic/Complex Focus*: Anesthesia, Critical Care, Complex Injectables (P17-18)
+
+- **QUANTITATIVE METRICS**:
+  - *Growth Trajectory (Consolidated)*:
+    - Q1 FY27 Net Revenue: ₹86.96 Cr (YoY -10.9% vs ₹97.58 Cr Q1 FY26; Q4 FY26 ₹76.53 Cr) (P7-8)
+    - Q1 FY27 PBT: ₹38.60 Cr (vs -₹14.06 Cr Q1 FY26; Q4 FY26 ₹9.06 Cr) (P8)
+    - Q1 FY27 PAT: ₹24.61 Cr (YoY +273.1% vs -₹14.22 Cr); PAT Margin 28.30% (vs -14.57% Q1 FY26; +4,287 bps) (P8)
+    - Q1 FY27 EBITDA: -₹52.42 Cr (Margin -60.28% vs -10.33% Q1 FY26) (P8)
+    - FY26 Net Revenue: ₹342.24 Cr (YoY -15.6% vs ₹405.51 Cr FY25) (P9)
+    - R&D Spend Q1 FY27: ~8% of revenue ≈ ₹7 Cr (P5, P15 chart)
+  - *Market Shares*: Hospital segment "Highly Fragmented unlike West where 3-4 players control 90% market share" (P17); explicit TML share % NOT provided
+  - *Handler Shares / Category ARR*: NOT present in provided text
+  - *Margin Contribution*:
+    - Q1 FY27 PAT ₹24.6 Cr "predominantly contributed by one off gains" (P5)
+    - Profit on Sale of Shares: ₹92.95 Cr (P8) → primary driver of PBT ₹38.6 Cr
+    - Share of P/L Associates & JV: ₹2.59 Cr (P8)
+    - Balance Sheet: Debt/Equity FY26 = 0.25; EBITDA Margin FY26 = 0.11% (P12)
+
+- **FUTURE GROWTH ADJACENCIES** *(Restricted to text; NO fragrance entry/oral beauty M&A/offline retail cited)*:
+  - *Hospital Leadership*: Target leadership in India (Corporate Hospitals, Nursing Homes) via Complex Injectables expertise (P17)
+  - *Geographic Adjacency*: Phase I (0–3 yrs): CIS, Latin America, GCC; Phase II (3–5 yrs): Regulated Markets EU, USA (P18)
+  - *API Adjacency*: APIs for in-house consumption + commercial production; "API and institution business look promising with visibility of healthy recovery in this financial year" (P5, P18)
+  - *Therapeutic Adjacency*: Vision "Leadership in Anesthesia and Critical Care" (P18)
+  - *Channel Coverage*: "increased hospitals/doctor’s coverage" (P13) – no offline channel retail additions specified
+
+- **REVENUE MIX BREAKDOWN BY BRAND/DIVISION** *(Visualised from P13, P14, P15)*:
+  - *Businesswise Revenue – Q1 FY27*:
+    - Hospital Business: **56%** (Critical Care, Intensive Care, Institution, Exports)
+    - Trade Business: **21%** (Pharma, Ortho, Gynecology)
+    - API, Co-Mkt & Others: **23%** (API Legacy, New Pipeline)
+  - *Businesswise Revenue – FY26*:
+    - Hospital: **50%** | Trade: **26%** | API/Co-Mkt/Others: **24%**
+  - *Manufacturing Capacity Mix (per annum)*:
+    - Haridwar (Formulations): 520mn Tabs | 9mn Oint Tubes | 36mn Amps | 12mn Vials | 6mn PFS
+    - Hyderabad (Synth API): 120 MT
+    - Vapi (Synth API): 191 MT
+  - *R&D Pipeline Output Mix (P15)*:
+    - API: 5–8 products/yr (rolling 3–5)
+    - Formulations: 20–24 products/yr (rolling 31)
