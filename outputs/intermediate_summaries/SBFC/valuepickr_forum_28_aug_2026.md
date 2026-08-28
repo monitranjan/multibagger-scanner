@@ -1,0 +1,6 @@
+- [Verified] Consensus View: None articulated; provided text contains only a new-member thread initiation (@amrit) presenting own thesis, with no peer responses or agreed community stance.
+- [Verified] Variant View: None articulated; @amrit queries "why bulls and bears having an intense go" but provides no counter-thesis details (excluded as price/volatility chatter).
+- [Verified] Events Watched: None cited by community (no mentions of results, capex, approvals, audits in snippet).
+- [Verified] Red Flags Tracked: None tracked; @amrit highlights low NPAs and home-collateral as positives (introductory restating, not a tracked negative).
+- [Verified] Milestones Changing Sentiment: None proposed by any user in the provided text.
+- [Rumour] No unverified rumours present in the provided text to flag separately.
