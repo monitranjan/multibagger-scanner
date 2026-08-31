@@ -1,0 +1,12 @@
+- [Verified] Consensus View: Retail community amplifies external bullish narrative on Godrej Group’s agro-chemical merger as “second step towards value creation” (Post #11) and highlights promoter stake increase (Post #14), indicating a positive structural consensus lean among individuals sharing links.
+- [Verified] Variant/Caution Signal: Sharing of Temasek arm’s Rs 204 crore exit (Post #17) reflects community tracking of institutional bearishness / contrarian caution not echoed in bullish merger thesis.
+- [Verified] Event Watched (non-filing news): Q1 FY20 results presentation/analysis and Q2 FY20 net profit rise to Rs 102.6 cr (Posts #14, #16) – monitoring quarterly performance beats/updates.
+- [Verified] Event Watched (non-filing news): Godrej Industries promoter increased stake to 58.17% via small market purchase (9,774 shares, Aug 2019) per EquityBulls share (Post #14).
+- [Verified] Event Watched (nonfiling external analysis): Godrej agro-chem merger article and Motilal Oswal report links (Posts #11, #12) – tracking consolidation strategy.
+- [Verified] Event Watched (nonfiling news): Poultry sales impact from false virus rumour (~50% slash) as quoted by Godrej Agrovet in int’l news (Post #20) – tracking demand shock in key segment.
+- [Verified] Red Flag Tracked: Large institutional exit by Temasek (Rs 204 cr sold at avg Rs 539.13, Post #17) – potential confidence red flag.
+- [Verified] Red Flag Tracked (nonfiling news): Poultry segment demand destruction due to misinformation (Post #20) – operational revenue red flag for agro-poultry business.
+- [Needs Verification] Milestone to Shift Sentiment: Successful execution/value unlock from agro-chem merger (implied by Post #11 article) would re-rate community sentiment positively.
+- [Verified] Milestone to Shift Sentiment (nonfiling observation): Government public awareness/safety notices reversing poultry slump (Post #20 notes govt notice hard to find) – key pivot for sector sentiment.
+- [Needs Verification] Milestone to Shift Sentiment: Sustained promoter accumulation beyond token 9,774 shares (Post #14) to confirm long-term support.
+- [Rumour] Flagged Separately: External unverified/false market rumour that coronavirus spreads via chickens (cited in Post #20 news share) – not forum-originated, but flagged per rule; caused verified sales impact but health claim itself is false/unverified.
