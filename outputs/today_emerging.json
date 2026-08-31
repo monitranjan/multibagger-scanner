@@ -1,426 +1,410 @@
 [
   {
-    "symbol": "SURAKSHA",
-    "company": "Suraksha Diagnostic Ltd",
-    "industry": "healthcare",
-    "close": 340.2,
-    "mcap_cr": 1771.79,
+    "symbol": "GPPL",
+    "company": "Gujarat Pipavav Port Limited",
+    "industry": "transportation",
+    "close": 167.56,
+    "mcap_cr": 8158.05,
     "persistence": 10
   },
   {
     "symbol": "TASTYBITE",
     "company": "Tasty Bite Eatables Ltd",
     "industry": "fmcg",
-    "close": 10073.0,
+    "close": 10139.0,
     "mcap_cr": 2584.73,
-    "persistence": 10
-  },
-  {
-    "symbol": "ARIES",
-    "company": "Aries Agro Limited",
-    "industry": "chemicals",
-    "close": 484.3,
-    "mcap_cr": 629.8,
     "persistence": 10
   },
   {
     "symbol": "EIMCOELECO",
     "company": "Eimco Elecon (india) Limited",
     "industry": "industrials",
-    "close": 2196.1,
+    "close": 2195.4,
     "mcap_cr": 1266.8,
     "persistence": 10
   },
   {
-    "symbol": "GALAXYSURF",
-    "company": "Galaxy Surfactants Ltd",
-    "industry": "Speciality Chemicals",
-    "close": 2285.0,
-    "mcap_cr": 8101.41,
-    "persistence": 10
-  },
-  {
-    "symbol": "DWARKESH",
-    "company": "Dwarikesh Sugar Industries Limited",
-    "industry": "fmcg",
-    "close": 51.89,
-    "mcap_cr": 961.53,
-    "persistence": 10
-  },
-  {
-    "symbol": "SYNCOMF",
-    "company": "Syncom Formulations (India) Ltd",
-    "industry": "Pharma - Others",
-    "close": 19.46,
-    "mcap_cr": 1829.24,
+    "symbol": "ARIES",
+    "company": "Aries Agro Limited",
+    "industry": "chemicals",
+    "close": 474.45,
+    "mcap_cr": 629.8,
     "persistence": 10
   },
   {
     "symbol": "DICIND",
     "company": "Dic India Limited",
     "industry": "chemicals",
-    "close": 605.6,
+    "close": 576.8,
     "mcap_cr": 555.88,
     "persistence": 10
-  },
-  {
-    "symbol": "GPPL",
-    "company": "Gujarat Pipavav Port Limited",
-    "industry": "transportation",
-    "close": 168.75,
-    "mcap_cr": 8158.05,
-    "persistence": 9
   },
   {
     "symbol": "YUKEN",
     "company": "Yuken India Ltd",
     "industry": "industrials",
-    "close": 993.4,
+    "close": 989.1,
     "mcap_cr": 1349.43,
-    "persistence": 9
+    "persistence": 10
   },
   {
     "symbol": "SMARTWORKS",
     "company": "Smartworks Coworking Spaces Ltd",
     "industry": "co-working",
-    "close": 538.75,
+    "close": 537.55,
     "mcap_cr": 6155.87,
+    "persistence": 10
+  },
+  {
+    "symbol": "BAJAJHIND",
+    "company": "Bajaj Hindusthan Sugar Limited",
+    "industry": "fmcg",
+    "close": 22.47,
+    "mcap_cr": 5180.57,
+    "persistence": 9
+  },
+  {
+    "symbol": "BANARISUG",
+    "company": "Bannari Amman Sugars Limited",
+    "industry": "fmcg",
+    "close": 3925.7,
+    "mcap_cr": 4928.98,
     "persistence": 9
   },
   {
     "symbol": "KRBL",
     "company": "Krbl Limited",
     "industry": "fmcg",
-    "close": 437.65,
+    "close": 422.25,
     "mcap_cr": 10017.37,
-    "persistence": 8
+    "persistence": 9
   },
   {
-    "symbol": "DLF",
-    "company": "Dlf Limited",
-    "industry": "realty",
-    "close": 679.8,
-    "mcap_cr": 168271.69,
-    "persistence": 8
-  },
-  {
-    "symbol": "BECTORFOOD",
-    "company": "Mrs. Bectors Food Specialities Limited",
-    "industry": "Consumer Defensive",
-    "close": 238.12,
-    "mcap_cr": 7142.1739008,
-    "persistence": 8
-  },
-  {
-    "symbol": "BAJAJHIND",
-    "company": "Bajaj Hindusthan Sugar Limited",
-    "industry": "fmcg",
-    "close": 21.67,
-    "mcap_cr": 5180.57,
-    "persistence": 8
-  },
-  {
-    "symbol": "BANARISUG",
-    "company": "Bannari Amman Sugars Limited",
-    "industry": "fmcg",
-    "close": 3930.7,
-    "mcap_cr": 4928.98,
+    "symbol": "UDS",
+    "company": "Updater Services Ltd",
+    "industry": "miscellaneous",
+    "close": 224.73,
+    "mcap_cr": 1489.58,
     "persistence": 8
   },
   {
     "symbol": "MAWANASUG",
     "company": "Mawana Sugars Limited",
     "industry": "fmcg",
-    "close": 147.94,
+    "close": 149.1,
     "mcap_cr": 578.69,
-    "persistence": 7
+    "persistence": 8
+  },
+  {
+    "symbol": "DLF",
+    "company": "Dlf Limited",
+    "industry": "realty",
+    "close": 691.05,
+    "mcap_cr": 168271.69,
+    "persistence": 8
+  },
+  {
+    "symbol": "ANURAS",
+    "company": "Anupam Rasayan India Ltd",
+    "industry": "chemicals",
+    "close": 1262.8,
+    "mcap_cr": 14349.44,
+    "persistence": 8
   },
   {
     "symbol": "20MICRONS",
     "company": "20 Microns Limited",
     "industry": "metals & mining",
-    "close": 222.0,
+    "close": 218.03,
     "mcap_cr": 783.36,
-    "persistence": 7
+    "persistence": 8
   },
   {
     "symbol": "JAYNECOIND",
     "company": "Jayaswal Neco Industries Limited",
     "industry": "metals & mining",
-    "close": 99.1,
+    "close": 98.41,
     "mcap_cr": 9622.59,
+    "persistence": 8
+  },
+  {
+    "symbol": "CDSL",
+    "company": "Central Depository Services Ltd",
+    "industry": "financials",
+    "close": 1402.5,
+    "mcap_cr": 29567.23,
     "persistence": 7
   },
   {
-    "symbol": "UDS",
-    "company": "Updater Services Ltd",
-    "industry": "miscellaneous",
-    "close": 222.48,
-    "mcap_cr": 1489.58,
+    "symbol": "BECTORFOOD",
+    "company": "Mrs. Bectors Food Specialities Limited",
+    "industry": "Consumer Defensive",
+    "close": 232.87,
+    "mcap_cr": 6959.3800704,
     "persistence": 7
   },
   {
     "symbol": "CHALET",
     "company": "Chalet Hotels Ltd",
     "industry": "services",
-    "close": 901.2,
+    "close": 903.95,
     "mcap_cr": 19735.75,
+    "persistence": 7
+  },
+  {
+    "symbol": "SHANTIGEAR",
+    "company": "Shanthi Gears Limited",
+    "industry": "industrials",
+    "close": 525.5,
+    "mcap_cr": 3971.96,
     "persistence": 6
   },
   {
-    "symbol": "JAGSNPHARM",
-    "company": "Jagsonpal Pharmaceuticals Limited",
-    "industry": "healthcare",
-    "close": 239.06,
-    "mcap_cr": 1573.86,
+    "symbol": "BALUFORGE",
+    "company": "Balu Forge Industries Ltd",
+    "industry": "industrials",
+    "close": 630.6,
+    "mcap_cr": 7645.28,
     "persistence": 6
   },
   {
-    "symbol": "ARIS",
-    "company": "Arisinfra Solutions Ltd",
-    "industry": "Trading",
-    "close": 151.31,
-    "mcap_cr": 1237.62,
-    "persistence": 6
-  },
-  {
-    "symbol": "BDL",
-    "company": "Bharat Dynamics Limited",
-    "industry": "Industrials",
-    "close": 1348.6,
-    "mcap_cr": 47873.0616832,
+    "symbol": "PRINCEPIPE",
+    "company": "Prince Pipes & Fittings Ltd",
+    "industry": "plastic products",
+    "close": 294.1,
+    "mcap_cr": 3244.41,
     "persistence": 6
   },
   {
     "symbol": "SGFIN",
     "company": "SG Finserve Limited",
     "industry": "Financial Services",
-    "close": 687.45,
-    "mcap_cr": 4510.8420608,
+    "close": 684.55,
+    "mcap_cr": 4537.8592768,
     "persistence": 6
   },
   {
     "symbol": "BLACKBUCK",
     "company": "BlackBuck Limited",
     "industry": "Technology",
-    "close": 588.2,
-    "mcap_cr": 10714.1644288,
+    "close": 588.15,
+    "mcap_cr": 10817.0878976,
     "persistence": 6
   },
   {
-    "symbol": "CDSL",
-    "company": "Central Depository Services Ltd",
-    "industry": "financials",
-    "close": 1414.7,
-    "mcap_cr": 29567.23,
+    "symbol": "VALIANTLAB",
+    "company": "Valiant Laboratories Ltd",
+    "industry": "healthcare",
+    "close": 96.34,
+    "mcap_cr": 541.22,
+    "persistence": 6
+  },
+  {
+    "symbol": "ARIS",
+    "company": "Arisinfra Solutions Limited",
+    "industry": "Industrials",
+    "close": 151.31,
+    "mcap_cr": 1163.6810752,
+    "persistence": 6
+  },
+  {
+    "symbol": "VIDHIING",
+    "company": "Vidhi Specialty Food Ingredients",
+    "industry": "chemicals",
+    "close": 354.55,
+    "mcap_cr": 1776.54,
+    "persistence": 6
+  },
+  {
+    "symbol": "BRIGADE",
+    "company": "Brigade Enterprises Limited",
+    "industry": "realty",
+    "close": 655.85,
+    "mcap_cr": 20947.78,
     "persistence": 6
   },
   {
     "symbol": "NIITLTD",
     "company": "Niit Limited",
     "industry": "i.t",
-    "close": 105.52,
+    "close": 101.44,
     "mcap_cr": 1441.97,
-    "persistence": 5
-  },
-  {
-    "symbol": "IMAGICAA",
-    "company": "Imagicaaworld Entertainment Ltd",
-    "industry": "media",
-    "close": 58.07,
-    "mcap_cr": 3285.96,
-    "persistence": 5
-  },
-  {
-    "symbol": "THEMISMED",
-    "company": "Themis Medicare Limited",
-    "industry": "healthcare",
-    "close": 125.48,
-    "mcap_cr": 1155.67,
-    "persistence": 5
-  },
-  {
-    "symbol": "DCI",
-    "company": "DC Infotech & Communication Ltd",
-    "industry": "i.t",
-    "close": 410.05,
-    "mcap_cr": 672.48,
-    "persistence": 5
-  },
-  {
-    "symbol": "VIDHIING",
-    "company": "Vidhi Specialty Food Ingredients",
-    "industry": "chemicals",
-    "close": 355.7,
-    "mcap_cr": 1776.54,
-    "persistence": 5
-  },
-  {
-    "symbol": "VALIANTLAB",
-    "company": "Valiant Laboratories Ltd",
-    "industry": "healthcare",
-    "close": 99.65,
-    "mcap_cr": 541.22,
-    "persistence": 5
-  },
-  {
-    "symbol": "SHANTIGEAR",
-    "company": "Shanthi Gears Limited",
-    "industry": "industrials",
-    "close": 517.75,
-    "mcap_cr": 3971.96,
-    "persistence": 5
-  },
-  {
-    "symbol": "BALUFORGE",
-    "company": "Balu Forge Industries Ltd",
-    "industry": "industrials",
-    "close": 638.8,
-    "mcap_cr": 7645.28,
-    "persistence": 5
-  },
-  {
-    "symbol": "BRIGADE",
-    "company": "Brigade Enterprises Limited",
-    "industry": "realty",
-    "close": 642.25,
-    "mcap_cr": 20947.78,
-    "persistence": 5
+    "persistence": 6
   },
   {
     "symbol": "ALEMBICLTD",
     "company": "Alembic Limited",
     "industry": "realty",
-    "close": 100.04,
+    "close": 98.74,
     "mcap_cr": 2568.85,
-    "persistence": 5
+    "persistence": 6
   },
   {
-    "symbol": "PRINCEPIPE",
-    "company": "Prince Pipes & Fittings Ltd",
-    "industry": "plastic products",
-    "close": 293.45,
-    "mcap_cr": 3244.41,
-    "persistence": 5
+    "symbol": "IMAGICAA",
+    "company": "Imagicaaworld Entertainment Ltd",
+    "industry": "media",
+    "close": 56.29,
+    "mcap_cr": 3285.96,
+    "persistence": 6
+  },
+  {
+    "symbol": "THEMISMED",
+    "company": "Themis Medicare Limited",
+    "industry": "healthcare",
+    "close": 124.76,
+    "mcap_cr": 1155.67,
+    "persistence": 6
   },
   {
     "symbol": "MOLDTKPAC",
-    "company": "Mold-Tek Packaging Limited",
-    "industry": "Consumer Cyclical",
-    "close": 702.2,
-    "mcap_cr": 2296.7826432,
-    "persistence": 4
+    "company": "Mold-tek Packaging Limited",
+    "industry": "industrials",
+    "close": 709.25,
+    "mcap_cr": 2296.78,
+    "persistence": 5
   },
   {
     "symbol": "BAJEL",
     "company": "Bajel Projects Ltd",
     "industry": "realty",
-    "close": 192.84,
+    "close": 194.12,
     "mcap_cr": 2231.1,
-    "persistence": 4
+    "persistence": 5
   },
   {
     "symbol": "LOTUSDEV",
     "company": "Sri Lotus Developers & Realty Ltd",
     "industry": "realty",
-    "close": 186.61,
+    "close": 182.86,
     "mcap_cr": 9120.07,
-    "persistence": 4
+    "persistence": 5
   },
   {
-    "symbol": "EXCELINDUS",
-    "company": "Excel Industries Limited",
-    "industry": "Basic Materials",
-    "close": 1041.6,
-    "mcap_cr": 1295.8497792,
-    "persistence": 3
+    "symbol": "DCI",
+    "company": "DC Infotech and Communication Limited",
+    "industry": "Technology",
+    "close": 410.05,
+    "mcap_cr": 611.0640128,
+    "persistence": 5
+  },
+  {
+    "symbol": "LGBBROSLTD",
+    "company": "Lg Balakrishnan & Bros Limited",
+    "industry": "auto",
+    "close": 1692.4,
+    "mcap_cr": 5478.16,
+    "persistence": 4
   },
   {
     "symbol": "ALBERTDAVD",
     "company": "Albert David Limited",
     "industry": "healthcare",
-    "close": 898.6,
+    "close": 897.9,
     "mcap_cr": 512.85,
+    "persistence": 4
+  },
+  {
+    "symbol": "DIXON",
+    "company": "Dixon Technologies Ltd",
+    "industry": "consumer discretionary",
+    "close": 14850.0,
+    "mcap_cr": 89490.87,
+    "persistence": 4
+  },
+  {
+    "symbol": "CYIENT",
+    "company": "Cyient Limited",
+    "industry": "i.t",
+    "close": 1174.8,
+    "mcap_cr": 11599.63,
+    "persistence": 4
+  },
+  {
+    "symbol": "SBFC",
+    "company": "SBFC Finance Ltd",
+    "industry": "financials",
+    "close": 98.82,
+    "mcap_cr": 10934.65,
+    "persistence": 4
+  },
+  {
+    "symbol": "MOTISONS",
+    "company": "Motisons Jewellers Limited",
+    "industry": "Consumer Cyclical",
+    "close": 16.64,
+    "mcap_cr": 1847.3105408,
+    "persistence": 3
+  },
+  {
+    "symbol": "BAJAJHLDNG",
+    "company": "Bajaj Holdings & Investment Limited",
+    "industry": "financials",
+    "close": 11644.0,
+    "mcap_cr": 126206.84,
+    "persistence": 3
+  },
+  {
+    "symbol": "GODREJAGRO",
+    "company": "Godrej Agrovet Ltd",
+    "industry": "fmcg",
+    "close": 615.3,
+    "mcap_cr": 11720.49,
     "persistence": 3
   },
   {
     "symbol": "ORIENTCER",
-    "company": "Orient Ceratech Ltd",
-    "industry": "building materials",
+    "company": "Orient Ceratech Limited",
+    "industry": "Basic Materials",
     "close": 46.6,
-    "mcap_cr": 557.52,
+    "mcap_cr": 536.8210944,
     "persistence": 3
   },
   {
-    "symbol": "DIXON",
-    "company": "Dixon Technologies (India) Limited",
-    "industry": "Technology",
-    "close": 14711.0,
-    "mcap_cr": 89074.7748352,
+    "symbol": "AMBER",
+    "company": "Amber Enterprises India Ltd",
+    "industry": "consumer discretionary",
+    "close": 7620.0,
+    "mcap_cr": 27068.01,
     "persistence": 3
   },
   {
-    "symbol": "KFINTECH",
-    "company": "KFin Technologies Limited",
-    "industry": "Technology",
-    "close": 957.0,
-    "mcap_cr": 16421.9830272,
+    "symbol": "WONDERLA",
+    "company": "Wonderla Holidays Limited",
+    "industry": "media",
+    "close": 537.25,
+    "mcap_cr": 3407.9,
+    "persistence": 3
+  },
+  {
+    "symbol": "EXCELINDUS",
+    "company": "Excel Industries Limited",
+    "industry": "Basic Materials",
+    "close": 1030.85,
+    "mcap_cr": 1315.0829568,
+    "persistence": 3
+  },
+  {
+    "symbol": "SUTLEJTEX",
+    "company": "Sutlej Textiles And Industries Limited",
+    "industry": "textiles",
+    "close": 40.07,
+    "mcap_cr": 643.85,
+    "persistence": 3
+  },
+  {
+    "symbol": "ANUHPHR",
+    "company": "Anuh Pharma Ltd",
+    "industry": "healthcare",
+    "close": 82.04,
+    "mcap_cr": 837.57,
     "persistence": 3
   },
   {
     "symbol": "KCP",
     "company": "The KCP Limited",
     "industry": "Basic Materials",
-    "close": 169.51,
-    "mcap_cr": 2174.7709952,
-    "persistence": 3
-  },
-  {
-    "symbol": "LGBBROSLTD",
-    "company": "Lg Balakrishnan & Bros Limited",
-    "industry": "auto",
-    "close": 1717.7,
-    "mcap_cr": 5478.16,
-    "persistence": 3
-  },
-  {
-    "symbol": "AARTISURF",
-    "company": "Aarti Surfactants Limited",
-    "industry": "Basic Materials",
-    "close": 539.9,
-    "mcap_cr": 458.69952,
-    "persistence": 3
-  },
-  {
-    "symbol": "BBTCL",
-    "company": "B&B Triplewall Containers Limited",
-    "industry": "Consumer Cyclical",
-    "close": 237.01,
-    "mcap_cr": 483.22432,
-    "persistence": 3
-  },
-  {
-    "symbol": "MOTISONS",
-    "company": "Motisons Jewellers Ltd",
-    "industry": "consumer discretionary",
-    "close": 16.64,
-    "mcap_cr": 1892.81,
-    "persistence": 3
-  },
-  {
-    "symbol": "CYIENT",
-    "company": "Cyient Limited",
-    "industry": "i.t",
-    "close": 1107.45,
-    "mcap_cr": 11599.63,
-    "persistence": 3
-  },
-  {
-    "symbol": "SBFC",
-    "company": "SBFC Finance Ltd",
-    "industry": "financials",
-    "close": 98.75,
-    "mcap_cr": 10934.65,
+    "close": 168.69,
+    "mcap_cr": 2151.8231552,
     "persistence": 3
   }
 ]
