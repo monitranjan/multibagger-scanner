@@ -40,22 +40,22 @@
     "scans_count": 23
   },
   {
-    "symbol": "OFSS",
-    "company": "Oracle Financial Services Software Limited",
-    "industry": "IT Product Companies",
-    "close": 12540.0,
-    "return_1d": 2.87,
-    "mcap_cr": 106140.94,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
     "symbol": "UNIPARTS",
     "company": "Uniparts India Ltd",
     "industry": "Castings, Forgings & Fastners",
     "close": 893.45,
     "return_1d": 2.32,
     "mcap_cr": 3941.67,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "OFSS",
+    "company": "Oracle Financial Services Software Limited",
+    "industry": "IT Product Companies",
+    "close": 12540.0,
+    "return_1d": 2.87,
+    "mcap_cr": 106140.94,
     "signal": "52W Breakout",
     "scans_count": 22
   },
@@ -70,14 +70,14 @@
     "scans_count": 21
   },
   {
-    "symbol": "BHEL",
-    "company": "Bharat Heavy Electricals Limited",
-    "industry": "Capital Goods - Engineering Heavy",
-    "close": 442.65,
-    "return_1d": 2.74,
-    "mcap_cr": 150024.7,
+    "symbol": "WELSPUNLIV",
+    "company": "Welspun Living Ltd",
+    "industry": "Textiles - Home Textile",
+    "close": 196.21,
+    "return_1d": 3.02,
+    "mcap_cr": 17993.76,
     "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 20
   },
   {
     "symbol": "ATHERENERG",

@@ -15,11 +15,11 @@ Total triple-confluence candidates: **9**
 | `BODALCHEM` | Bodal Chemicals Limited | Dyes & Pigments | ₹118.89 | 19.99% | 1,247.8 | 44.1% (⚖️ Neutral | ₹36.89 Cr) | **52W Breakout** | **26** | 📝 **Sent on 25-Aug-2026** |
 | `PVP` | Pvp Ventures Limited | Realty - Construction & Contracting | ₹68.48 | 5.0% | 1,698.3 | 38.2% (⚖️ Neutral | ₹16.58 Cr) | **52W Breakout** | **24** | 📝 **Sent on 21-Aug-2026** |
 | `SHILPAMED` | Shilpa Medicare Limited | Pharma - API & CRAMS | ₹949.30 | 5.03% | 17,676.7 | 38.2% (⚖️ Neutral | ₹93.30 Cr) | **52W Breakout** | **23** | 📝 **Sent on 24-Aug-2026** |
-| `OFSS` | Oracle Financial Services Software Limited | IT Product Companies | ₹12,540.00 | 2.87% | 106,140.9 | 58.3% (🔥 High Accumulation (₹356.15 Cr) | ₹356.15 Cr) | **52W Breakout** | **22** | 📝 **Sent on 17-Jul-2026** |
-| `UNIPARTS` | Uniparts India Ltd | Castings, Forgings & Fastners | ₹893.45 | 2.32% | 3,941.7 | 43.5% (⚖️ Neutral | ₹17.22 Cr) | **52W Breakout** | **22** | 📝 **Sent on 12-Jun-2026** |
-| `NYKAA` | FSN E-Commerce Ventures Ltd | New age - Platform - E-Retail | ₹349.55 | 4.14% | 96,124.3 | 65.4% (🛡️ Strong Delivery (₹181.30 Cr) | ₹181.30 Cr) | **52W Breakout** | **21** | 📝 **Sent on 19-Jun-2026** |
-| `BHEL` | Bharat Heavy Electricals Limited | Capital Goods - Engineering Heavy | ₹442.65 | 2.74% | 150,024.7 | 52.9% (🔥 High Accumulation (₹216.72 Cr) | ₹216.72 Cr) | **52W Breakout** | **21** | _Pending separate pipeline run_ |
-| `ATHERENERG` | Ather Energy Ltd | Auto - 2 & 3 Wheelers | ₹1,717.70 | 6.27% | 63,702.5 | 35.0% (⚖️ Neutral | ₹1187.76 Cr) | **52W Breakout** | **20** | 📝 **Sent on 05-Jun-2026** |
+| `UNIPARTS` | Uniparts India Ltd | Castings, Forgings & Fastners | ₹893.45 | 2.32% | 3,941.7 | 43.5% (⚖️ Neutral | ₹17.22 Cr) | **52W Breakout** | **22** | 📝 **Sent on 31-Aug-2026** |
+| `OFSS` | Oracle Financial Services Software Limited | IT Product Companies | ₹12,540.00 | 2.87% | 106,140.9 | 58.3% (🔥 High Accumulation (₹356.15 Cr) | ₹356.15 Cr) | **52W Breakout** | **22** | 📝 **Sent on 31-Aug-2026** |
+| `NYKAA` | FSN E-Commerce Ventures Ltd | New age - Platform - E-Retail | ₹349.55 | 4.14% | 96,124.3 | 65.4% (🛡️ Strong Delivery (₹181.30 Cr) | ₹181.30 Cr) | **52W Breakout** | **21** | 📝 **Sent on 31-Aug-2026** |
+| `WELSPUNLIV` | Welspun Living Ltd | Textiles - Home Textile | ₹196.21 | 3.02% | 17,993.8 | 34.3% (🛡️ Strong Delivery (₹26.03 Cr) | ₹26.03 Cr) | **52W Breakout** | **20** | _Pending separate pipeline run_ |
+| `ATHERENERG` | Ather Energy Ltd | Auto - 2 & 3 Wheelers | ₹1,717.70 | 6.27% | 63,702.5 | 35.0% (⚖️ Neutral | ₹1187.76 Cr) | **52W Breakout** | **20** | 📝 **Sent on 31-Aug-2026** |
 
 ---
 
