@@ -1,92 +1,102 @@
 [
   {
+    "symbol": "TBZ",
+    "company": "Tribhovandas Bhimji Zaveri Limited",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 366.8,
+    "return_1d": 19.99,
+    "mcap_cr": 2039.96,
+    "signal": "52W Breakout",
+    "scans_count": 28
+  },
+  {
     "symbol": "MODISONLTD",
     "company": "Modison Ltd",
     "industry": "Capital Goods - Electric General",
-    "close": 454.05,
-    "return_1d": 9.99,
-    "mcap_cr": 1339.54,
+    "close": 499.45,
+    "return_1d": 10.0,
+    "mcap_cr": 1473.39,
     "signal": "52W Breakout",
     "scans_count": 27
   },
   {
-    "symbol": "BODALCHEM",
-    "company": "Bodal Chemicals Limited",
-    "industry": "Dyes & Pigments",
-    "close": 118.89,
-    "return_1d": 19.99,
-    "mcap_cr": 1247.85,
-    "signal": "52W Breakout",
-    "scans_count": 26
-  },
-  {
-    "symbol": "PVP",
-    "company": "Pvp Ventures Limited",
-    "industry": "Realty - Construction & Contracting",
-    "close": 68.48,
-    "return_1d": 5.0,
-    "mcap_cr": 1698.35,
+    "symbol": "THELEELA",
+    "company": "Leela Palaces Hotels & Resorts Ltd",
+    "industry": "Hotels",
+    "close": 575.35,
+    "return_1d": 0.87,
+    "mcap_cr": 19048.96,
     "signal": "52W Breakout",
     "scans_count": 24
-  },
-  {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 949.3,
-    "return_1d": 5.03,
-    "mcap_cr": 17676.68,
-    "signal": "52W Breakout",
-    "scans_count": 23
   },
   {
     "symbol": "UNIPARTS",
     "company": "Uniparts India Ltd",
     "industry": "Castings, Forgings & Fastners",
-    "close": 893.45,
-    "return_1d": 2.32,
-    "mcap_cr": 3941.67,
+    "close": 901.15,
+    "return_1d": 0.86,
+    "mcap_cr": 4033.31,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "PTCIL",
+    "company": "PTC Industries Ltd",
+    "industry": "Castings - Steel/Alloy",
+    "close": 22755.0,
+    "return_1d": 2.9,
+    "mcap_cr": 33154.52,
     "signal": "52W Breakout",
     "scans_count": 22
   },
   {
-    "symbol": "OFSS",
-    "company": "Oracle Financial Services Software Limited",
-    "industry": "IT Product Companies",
-    "close": 12540.0,
-    "return_1d": 2.87,
-    "mcap_cr": 106140.94,
+    "symbol": "MENONBE",
+    "company": "Menon Bearings Limited",
+    "industry": "Auto Ancillaries - Bearings",
+    "close": 301.4,
+    "return_1d": 5.01,
+    "mcap_cr": 1608.4,
     "signal": "52W Breakout",
     "scans_count": 22
-  },
-  {
-    "symbol": "NYKAA",
-    "company": "FSN E-Commerce Ventures Ltd",
-    "industry": "New age - Platform - E-Retail",
-    "close": 349.55,
-    "return_1d": 4.14,
-    "mcap_cr": 96124.26,
-    "signal": "52W Breakout",
-    "scans_count": 21
   },
   {
     "symbol": "WELSPUNLIV",
     "company": "Welspun Living Ltd",
     "industry": "Textiles - Home Textile",
-    "close": 196.21,
-    "return_1d": 3.02,
-    "mcap_cr": 17993.76,
+    "close": 198.41,
+    "return_1d": 1.12,
+    "mcap_cr": 18536.99,
     "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 21
+  },
+  {
+    "symbol": "MARINE",
+    "company": "Marine Electricals (India) Ltd",
+    "industry": "Shipping - Proxy",
+    "close": 432.6,
+    "return_1d": 7.92,
+    "mcap_cr": 5609.67,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "WELCORP",
+    "company": "Welspun Corp Limited",
+    "industry": "DI Pipes/Saw Pipes",
+    "close": 2553.6,
+    "return_1d": 6.8,
+    "mcap_cr": 63072.34,
+    "signal": "52W Breakout",
+    "scans_count": 21
   },
   {
     "symbol": "ATHERENERG",
     "company": "Ather Energy Ltd",
     "industry": "Auto - 2 & 3 Wheelers",
-    "close": 1717.7,
-    "return_1d": 6.27,
-    "mcap_cr": 63702.47,
+    "close": 1725.6,
+    "return_1d": 0.46,
+    "mcap_cr": 67698.9,
     "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 19
   }
 ]
