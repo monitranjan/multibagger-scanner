@@ -1,0 +1,8 @@
+- **Consensus vs Variant View**:
+  - Verified: Sole active retail poster (@saurabhsharmaa2020) expresses bullish confidence ("Invested", praises financials); no variant or contrarian views present as other user posts are empty.
+- **Events the community is watching (results, capex, approvals, audits)**:
+  - Verified: Audited standalone & consolidated financial results for Q4/FY ended March 31, 2026 and dividend declaration (Rs 1.64/share) were shared by a member (audit/results event released and discussed).
+- **Red flags being tracked**:
+  - Verified: No red flags or risk concerns explicitly tracked or mentioned in the provided excerpts.
+- **Milestones that would change sentiment**:
+  - Verified: No forward-looking milestones, catalysts, or sentiment-trigger thresholds outlined in the provided excerpts.
