@@ -40,16 +40,6 @@
     "scans_count": 24
   },
   {
-    "symbol": "CRAFTSMAN",
-    "company": "Craftsman Automation Ltd",
-    "industry": "Auto & Auto Ancl - CV",
-    "close": 11398.0,
-    "return_1d": 1.59,
-    "mcap_cr": 29345.27,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
     "symbol": "SAKAR",
     "company": "Sakar Healthcare Ltd",
     "industry": "Hospitals",
@@ -60,14 +50,14 @@
     "scans_count": 23
   },
   {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 964.15,
-    "return_1d": 0.84,
-    "mcap_cr": 18700.56,
+    "symbol": "CRAFTSMAN",
+    "company": "Craftsman Automation Ltd",
+    "industry": "Auto & Auto Ancl - CV",
+    "close": 11398.0,
+    "return_1d": 1.59,
+    "mcap_cr": 29345.27,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 23
   },
   {
     "symbol": "MENONBE",
@@ -76,6 +66,16 @@
     "close": 321.4,
     "return_1d": 4.16,
     "mcap_cr": 1729.11,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "SHILPAMED",
+    "company": "Shilpa Medicare Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 964.15,
+    "return_1d": 0.84,
+    "mcap_cr": 18700.56,
     "signal": "52W Breakout",
     "scans_count": 22
   },

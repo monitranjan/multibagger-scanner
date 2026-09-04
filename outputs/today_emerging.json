@@ -1,26 +1,18 @@
 [
   {
+    "symbol": "THEMISMED",
+    "company": "Themis Medicare Limited",
+    "industry": "healthcare",
+    "close": 120.42,
+    "mcap_cr": 1150.05,
+    "persistence": 10
+  },
+  {
     "symbol": "CHALET",
     "company": "Chalet Hotels Ltd",
     "industry": "services",
     "close": 896.75,
     "mcap_cr": 19506.9,
-    "persistence": 10
-  },
-  {
-    "symbol": "BALUFORGE",
-    "company": "Balu Forge Industries Ltd",
-    "industry": "industrials",
-    "close": 574.1,
-    "mcap_cr": 6826.06,
-    "persistence": 10
-  },
-  {
-    "symbol": "SHANTIGEAR",
-    "company": "Shanthi Gears Limited",
-    "industry": "Auto Ancillaries - Gears",
-    "close": 621.75,
-    "mcap_cr": 4471.0,
     "persistence": 10
   },
   {
@@ -64,11 +56,19 @@
     "persistence": 10
   },
   {
-    "symbol": "THEMISMED",
-    "company": "Themis Medicare Limited",
-    "industry": "healthcare",
-    "close": 120.42,
-    "mcap_cr": 1150.05,
+    "symbol": "SHANTIGEAR",
+    "company": "Shanthi Gears Limited",
+    "industry": "Auto Ancillaries - Gears",
+    "close": 621.75,
+    "mcap_cr": 4471.0,
+    "persistence": 10
+  },
+  {
+    "symbol": "BALUFORGE",
+    "company": "Balu Forge Industries Ltd",
+    "industry": "industrials",
+    "close": 574.1,
+    "mcap_cr": 6826.06,
     "persistence": 10
   },
   {
@@ -104,6 +104,14 @@
     "persistence": 9
   },
   {
+    "symbol": "LGBBROSLTD",
+    "company": "Lg Balakrishnan & Bros Limited",
+    "industry": "auto",
+    "close": 1702.8,
+    "mcap_cr": 5473.38,
+    "persistence": 8
+  },
+  {
     "symbol": "SBFC",
     "company": "SBFC Finance Ltd",
     "industry": "financials",
@@ -120,14 +128,6 @@
     "persistence": 8
   },
   {
-    "symbol": "LGBBROSLTD",
-    "company": "Lg Balakrishnan & Bros Limited",
-    "industry": "auto",
-    "close": 1702.8,
-    "mcap_cr": 5473.38,
-    "persistence": 8
-  },
-  {
     "symbol": "JAYNECOIND",
     "company": "Jayaswal Neco Industries Limited",
     "industry": "Basic Materials",
@@ -136,11 +136,11 @@
     "persistence": 8
   },
   {
-    "symbol": "LOTUSDEV",
-    "company": "Sri Lotus Developers & Realty Ltd",
-    "industry": "realty",
-    "close": 193.25,
-    "mcap_cr": 9023.79,
+    "symbol": "GODREJAGRO",
+    "company": "Godrej Agrovet Ltd",
+    "industry": "fmcg",
+    "close": 644.85,
+    "mcap_cr": 12675.56,
     "persistence": 7
   },
   {
@@ -152,19 +152,11 @@
     "persistence": 7
   },
   {
-    "symbol": "NIITLTD",
-    "company": "NIIT Limited",
-    "industry": "Consumer Defensive",
-    "close": 97.57,
-    "mcap_cr": 1355.6900864,
-    "persistence": 7
-  },
-  {
-    "symbol": "GODREJAGRO",
-    "company": "Godrej Agrovet Ltd",
-    "industry": "fmcg",
-    "close": 644.85,
-    "mcap_cr": 12675.56,
+    "symbol": "LOTUSDEV",
+    "company": "Sri Lotus Developers & Realty Ltd",
+    "industry": "realty",
+    "close": 193.25,
+    "mcap_cr": 9023.79,
     "persistence": 7
   },
   {
@@ -173,6 +165,14 @@
     "industry": "Basic Materials",
     "close": 1240.2,
     "mcap_cr": 14102.5787904,
+    "persistence": 7
+  },
+  {
+    "symbol": "NIITLTD",
+    "company": "NIIT Limited",
+    "industry": "Consumer Defensive",
+    "close": 97.57,
+    "mcap_cr": 1355.6900864,
     "persistence": 7
   },
   {
@@ -192,11 +192,11 @@
     "persistence": 6
   },
   {
-    "symbol": "ASIANHOTNR",
-    "company": "Asian Hotels (north) Limited",
-    "industry": "services",
-    "close": 384.75,
-    "mcap_cr": 1636.48,
+    "symbol": "ANUHPHR",
+    "company": "Anuh Pharma Ltd",
+    "industry": "healthcare",
+    "close": 81.1,
+    "mcap_cr": 798.58,
     "persistence": 5
   },
   {
@@ -208,27 +208,11 @@
     "persistence": 5
   },
   {
-    "symbol": "SUTLEJTEX",
-    "company": "Sutlej Textiles And Industries Limited",
-    "industry": "textiles",
-    "close": 40.89,
-    "mcap_cr": 638.28,
-    "persistence": 5
-  },
-  {
-    "symbol": "ANUHPHR",
-    "company": "Anuh Pharma Ltd",
-    "industry": "healthcare",
-    "close": 81.1,
-    "mcap_cr": 798.58,
-    "persistence": 5
-  },
-  {
-    "symbol": "ARIS",
-    "company": "Arisinfra Solutions Limited",
-    "industry": "Industrials",
-    "close": 129.43,
-    "mcap_cr": 1051.5417088,
+    "symbol": "ASIANHOTNR",
+    "company": "Asian Hotels (north) Limited",
+    "industry": "services",
+    "close": 384.75,
+    "mcap_cr": 1636.48,
     "persistence": 5
   },
   {
@@ -240,19 +224,35 @@
     "persistence": 5
   },
   {
+    "symbol": "ARIS",
+    "company": "Arisinfra Solutions Limited",
+    "industry": "Industrials",
+    "close": 129.43,
+    "mcap_cr": 1051.5417088,
+    "persistence": 5
+  },
+  {
+    "symbol": "SUTLEJTEX",
+    "company": "Sutlej Textiles And Industries Limited",
+    "industry": "textiles",
+    "close": 40.89,
+    "mcap_cr": 638.28,
+    "persistence": 5
+  },
+  {
+    "symbol": "DCI",
+    "company": "DC Infotech and Communication Limited",
+    "industry": "Technology",
+    "close": 357.65,
+    "mcap_cr": 574.9019648,
+    "persistence": 4
+  },
+  {
     "symbol": "BAJEL",
     "company": "Bajel Projects Limited",
     "industry": "Utilities",
     "close": 185.69,
     "mcap_cr": 2126.7410944,
-    "persistence": 4
-  },
-  {
-    "symbol": "ELECTCAST",
-    "company": "Electrosteel Castings Limited",
-    "industry": "industrials",
-    "close": 83.71,
-    "mcap_cr": 5183.48,
     "persistence": 4
   },
   {
@@ -272,12 +272,36 @@
     "persistence": 4
   },
   {
-    "symbol": "DCI",
-    "company": "DC Infotech and Communication Limited",
-    "industry": "Technology",
-    "close": 357.65,
-    "mcap_cr": 574.9019648,
+    "symbol": "ELECTCAST",
+    "company": "Electrosteel Castings Limited",
+    "industry": "industrials",
+    "close": 83.71,
+    "mcap_cr": 5183.48,
     "persistence": 4
+  },
+  {
+    "symbol": "MAZDA",
+    "company": "Mazda Limited",
+    "industry": "industrials",
+    "close": 270.0,
+    "mcap_cr": 546.38,
+    "persistence": 3
+  },
+  {
+    "symbol": "BAJAJHLDNG",
+    "company": "Bajaj Holdings & Investment Limited",
+    "industry": "Financial Services",
+    "close": 11165.0,
+    "mcap_cr": 124225.8210816,
+    "persistence": 3
+  },
+  {
+    "symbol": "KCP",
+    "company": "The KCP Limited",
+    "industry": "Basic Materials",
+    "close": 168.17,
+    "mcap_cr": 2093.4217728,
+    "persistence": 3
   },
   {
     "symbol": "AGI",
@@ -293,30 +317,6 @@
     "industry": "Consumer Cyclical",
     "close": 7410.0,
     "mcap_cr": 26359.1297024,
-    "persistence": 3
-  },
-  {
-    "symbol": "MAZDA",
-    "company": "Mazda Limited",
-    "industry": "industrials",
-    "close": 270.0,
-    "mcap_cr": 546.38,
-    "persistence": 3
-  },
-  {
-    "symbol": "KCP",
-    "company": "The KCP Limited",
-    "industry": "Basic Materials",
-    "close": 168.17,
-    "mcap_cr": 2093.4217728,
-    "persistence": 3
-  },
-  {
-    "symbol": "BAJAJHLDNG",
-    "company": "Bajaj Holdings & Investment Limited",
-    "industry": "Financial Services",
-    "close": 11165.0,
-    "mcap_cr": 124225.8210816,
     "persistence": 3
   }
 ]
