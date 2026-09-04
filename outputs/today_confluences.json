@@ -1,41 +1,31 @@
 [
   {
-    "symbol": "CGCL",
-    "company": "Capri Global Capital Limited",
-    "industry": "Finance & Investments - Gold Loan",
-    "close": 271.7,
-    "return_1d": 5.88,
-    "mcap_cr": 24688.87,
-    "signal": "52W Breakout",
-    "scans_count": 34
-  },
-  {
-    "symbol": "ENTERO",
-    "company": "Entero Healthcare Solutions Ltd",
-    "industry": "Pharmacy Distribution",
-    "close": 1848.0,
-    "return_1d": 2.82,
-    "mcap_cr": 7822.84,
-    "signal": "52W Breakout",
-    "scans_count": 29
-  },
-  {
     "symbol": "BIRLACABLE",
     "company": "Birla Cable Limited",
     "industry": "Cables - Telecom",
-    "close": 358.65,
+    "close": 376.55,
     "return_1d": 4.99,
-    "mcap_cr": 1024.8,
+    "mcap_cr": 1075.95,
     "signal": "52W Breakout",
     "scans_count": 29
+  },
+  {
+    "symbol": "TBZ",
+    "company": "Tribhovandas Bhimji Zaveri Limited",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 480.85,
+    "return_1d": 10.0,
+    "mcap_cr": 2917.13,
+    "signal": "52W Breakout",
+    "scans_count": 28
   },
   {
     "symbol": "BHAGERIA",
     "company": "Bhageria Industries Limited",
     "industry": "Dyes & Pigments",
-    "close": 290.15,
-    "return_1d": 4.99,
-    "mcap_cr": 1206.11,
+    "close": 304.65,
+    "return_1d": 5.0,
+    "mcap_cr": 1266.34,
     "signal": "52W Breakout",
     "scans_count": 27
   },
@@ -43,39 +33,39 @@
     "symbol": "PTCIL",
     "company": "PTC Industries Ltd",
     "industry": "Castings - Steel/Alloy",
-    "close": 23820.0,
-    "return_1d": 4.86,
-    "mcap_cr": 34055.58,
-    "signal": "52W Breakout",
-    "scans_count": 25
-  },
-  {
-    "symbol": "KMEW",
-    "company": "Knowledge Marine & Engineering Works Ltd",
-    "industry": "Shipping",
-    "close": 3150.4,
-    "return_1d": 6.74,
-    "mcap_cr": 7214.92,
+    "close": 23830.0,
+    "return_1d": 0.04,
+    "mcap_cr": 35712.25,
     "signal": "52W Breakout",
     "scans_count": 24
   },
   {
-    "symbol": "MANINDS",
-    "company": "Man Industries (india) Limited",
-    "industry": "Steel - Tubes/Pipes",
-    "close": 793.4,
-    "return_1d": 6.52,
-    "mcap_cr": 5587.09,
+    "symbol": "CRAFTSMAN",
+    "company": "Craftsman Automation Ltd",
+    "industry": "Auto & Auto Ancl - CV",
+    "close": 11398.0,
+    "return_1d": 1.59,
+    "mcap_cr": 29345.27,
     "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 23
   },
   {
-    "symbol": "RPEL",
-    "company": "Raghav Productivity Enhancers Ltd",
-    "industry": "Steel Products",
-    "close": 1885.2,
-    "return_1d": 6.23,
-    "mcap_cr": 8149.31,
+    "symbol": "SAKAR",
+    "company": "Sakar Healthcare Ltd",
+    "industry": "Hospitals",
+    "close": 1013.9,
+    "return_1d": 0.69,
+    "mcap_cr": 2240.45,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "SHILPAMED",
+    "company": "Shilpa Medicare Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 964.15,
+    "return_1d": 0.84,
+    "mcap_cr": 18700.56,
     "signal": "52W Breakout",
     "scans_count": 22
   },
@@ -83,40 +73,50 @@
     "symbol": "MENONBE",
     "company": "Menon Bearings Limited",
     "industry": "Auto Ancillaries - Bearings",
-    "close": 308.55,
-    "return_1d": 4.98,
-    "mcap_cr": 1647.02,
+    "close": 321.4,
+    "return_1d": 4.16,
+    "mcap_cr": 1729.11,
     "signal": "52W Breakout",
     "scans_count": 22
-  },
-  {
-    "symbol": "TFCILTD",
-    "company": "Tourism Finance Corporation Of India Limited",
-    "industry": "Finance - PSU Lending",
-    "close": 146.71,
-    "return_1d": 0.39,
-    "mcap_cr": 6765.95,
-    "signal": "52W Breakout",
-    "scans_count": 21
   },
   {
     "symbol": "DEEPINDS",
     "company": "Deep Industries Ltd",
     "industry": "Oil Drilling & Exploration",
-    "close": 744.85,
-    "return_1d": 7.38,
-    "mcap_cr": 4439.36,
+    "close": 786.45,
+    "return_1d": 5.59,
+    "mcap_cr": 4767.04,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 21
   },
   {
-    "symbol": "NAVINFLUOR",
-    "company": "Navin Fluorine International Limited",
-    "industry": "Chemicals - Flourine",
-    "close": 8697.0,
-    "return_1d": 1.81,
-    "mcap_cr": 43815.47,
+    "symbol": "BALAMINES",
+    "company": "Balaji Amines Limited",
+    "industry": "Speciality Chemicals",
+    "close": 2525.2,
+    "return_1d": 4.44,
+    "mcap_cr": 7833.91,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 21
+  },
+  {
+    "symbol": "DOLPHIN",
+    "company": "Dolphin Offshore Enterprises (India) Ltd",
+    "industry": "Oil Drilling & Exploration",
+    "close": 674.0,
+    "return_1d": 8.78,
+    "mcap_cr": 2478.68,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "WELSPUNLIV",
+    "company": "Welspun Living Ltd",
+    "industry": "Textiles - Home Textile",
+    "close": 208.51,
+    "return_1d": 3.94,
+    "mcap_cr": 18952.68,
+    "signal": "52W Breakout",
+    "scans_count": 20
   }
 ]
