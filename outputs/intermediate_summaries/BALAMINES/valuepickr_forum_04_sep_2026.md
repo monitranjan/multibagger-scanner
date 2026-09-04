@@ -1,0 +1,30 @@
+Post #11 by @ayushmit:
+Balaji Amines - Visit Note It was an excellent opportunity to visit the company and interact with their director - Mr Ram Reddy. We visited their registered office, Unit 1 &amp; newly build Unit 3. Key Takeaways: Co is in a leadership position in its key products â Methylamines, Ethylamines and their derivatives. The products find application majorly in Pharma, Agro Chemical and other chemical industry. Over the last 4-5 years through in-house R&amp;D, the company has been able to develop products like NMP, Morpholine, PVP 30 &amp; GBL. Among these, NMP and PVP are of high potential and margins. The other 2 products are more for backward integration (i.e… in-house consumption) The co has an capacity of about 6000 MT of NMP and is in the process of more than tripling the capacity to 22000 MT. The enchased capacity should be available for operation by year end and utilization will be scaled up according to the demand. PVP is a high margin Pharma grade product with technology guarded by likes of BASF etc. The initial response is positive but to get the volumes and pricing, the company needs to get regulatory approvals like WHO GMP, European GP, USFDA etc…and the same may take time. As and when it happens, it may lead to re-rating. Co also has plans to triple their capacity of their main products â Methyl &amp; Ethyl amines from 50 TPD to 150 TPD. This may take 1-2 year. Coâs Unit 1 spread over approx 24 acres is already packed with operational plant. The new unit â 3 has been bu... (truncated)
+
+Post #12 by @Vedant:
+Balaji Amines - Visit Note It was an excellent opportunity to visit the company and interact with their director - Mr Ram Reddy. We visited their registered office, Unit 1 &amp; newly build Unit 3. Key Takeaways: Co is in a leadership position in its key products Methylamines, Ethylamines and their derivatives. The products find application majorly in Pharma, Agro Chemical and other chemical industry. Over the last 4-5 years through in-house R&amp;D, the company has been able to develop products like NMP, Morpholine, PVP 30 &amp; GBL. Among these, NMP and PVP are of high potential and margins. The other 2 products are more for backward integration (i.e… in-house consumption) The co has an capacity of about 6000 MT of NMP and is in the process of more than tripling the capacity to 22000 MT. The enchased capacity should be available for operation by year end and utilization will be scaled up according to the demand. PVP is a high margin Pharma grade product with technology guarded by likes of BASF etc. The initial response is positive but to get the volumes and pricing, the company needs to get regulatory approvals like WHO GMP, European GP, USFDA etc…and the same may take time. As and when it happens, it may lead to re-rating. Co also has plans to triple their capacity of their main products Methyl &amp; Ethyl amines from 50 TPD to 150 TPD. This may take 1-2 year. Unit 1 spread over approx 24 acres is already packed with operational plant. The new unit 3 has been build on a ap... (truncated)
+
+Post #13 by @ayushmit:
+Hi Vinod, Yes, I feel there is still lot of value butyou need to build your own conviction levels and understanding while buying a stock. Value differs from person to person Regards, Ayush
+
+Post #14 by @Ravenrage:
+HDFC Sec now has a buy rating on the stock !!
+
+Post #15 by @tcx:
+here’s the link to the HDFC Securities report on Balaji Amines . Report is pretty detailed and useful.
+
+Post #16 by @Donald:
+Balaji Amines stock story updated. This is a good stock story - with good visibility into growth and margin expansion. Inputs collated mostly from the HDFC report and other published information. Ayush, Gaurav, Nagabrahma -please have a look first, there might be something additional that we can bring-in from your plant visit and interaction with Management?? The only thing I am not comfortable is the high leverage levels. Current debt ~100 Cr (d/e 1.26) will shoot up over 2 with planned capex of 100 Cr for NMP/GBL 15000 TPA and Methylamine 30000 TPA expansion being undertaken. This is aggressive expansion and carries with it the attendant execution and high interest/depreciation risks. Should anything go wrong with the demand forecast (e,g. RCF plant in Mumbai not closing), this will start adding to unutilised capacity and depressed return ratios -just like the PVP-30 is now causing. A combination of these may hurt the company?? What are your considered views -from the interaction with Management??
+
+Post #17 by @Donald:
+With the recent correction, Balaji Amines is back to the pre-split levels of 220 (1:5 CMP 44). Given its niche dominance, strong growth, good growth visibility on expanded capex and product success, looks a good buy at these levels again. Post the split, the stock has corrected along with the market and more. Possibly cos it had run up too fast in the preceding weeks. Any newsflow? otherwise, good to go.
+
+Post #18 by @basumallick:
+News flow is not bad. Company is doing well, so it may be a good time to add…thats what I am doing…
+
+Post #19 by @hitesh2710:
+After a sharp run up to around 57 plus levels, the stock along with the market correction has corrected and posted a low of 36 recently. Since many trading sessions the stock is consolidating above its 200 day exponential moving average which is at around 38-39. Both technically and fundamentally seems to be a good level to buy.
+
+Post #20 by @satsat:
+Even though this one has been aconsistentperformer in terms of financials I am not sure if this company can be called as aspecialtychemicals company and why do they publicise that methylamine andethyl-amineare some sought of complex products when thesemoleculeshave been around for decades it is a small company which could be just wiped out because some Chinese chemicalsgiantsdecides toramp upit amines capacity which Balaji produces and remember Chinese have cheap debt, cheaper capital and free infrastructure they don’t care about the ROE they want scale I would be wary of 1-2 product companies
+... (truncated raw text fallback)
