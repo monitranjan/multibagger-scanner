@@ -23,7 +23,7 @@ fi
 
 # Step 0: Pull the latest changes from GitHub to prevent merge conflicts
 echo -e "\n${YELLOW}🔄 Step 0: Pulling latest changes from GitHub...${NC}"
-git pull --rebase --autostash origin main
+git pull --rebase -X theirs origin main
 
 # Export environment variable to disable duplicate email/telegram alerts on local automated runs
 export SKIP_NOTIFICATIONS=true
@@ -54,10 +54,26 @@ LATEST_EXCEL=$(ls -t outputs/monit_chartink_ranking_*.xlsx 2>/dev/null | head -n
 # Step 3: Automatically commit and push local changes (delivery data cache and workbook) to GitHub
 echo -e "\n${YELLOW}🔄 Step 3/3: Committing and pushing delivery cache & workbook to GitHub...${NC}"
 git add logs/backtest.db outputs/
-git commit -m "chore: local auto-sync delivery cache and ranking workbook [skip ci]"
-git pull --rebase --autostash origin main
-git push origin main
-echo -e "${GREEN}✅ Step 3 complete! Local changes successfully synced to GitHub.${NC}"
+if ! git diff --quiet || ! git diff --staged --quiet; then
+  git commit -m "chore: local auto-sync delivery cache and ranking workbook [skip ci]" || true
+  for i in {1..5}; do
+    if git pull --rebase -X theirs origin main && git push origin main; then
+      echo -e "${GREEN}✅ Step 3 complete! Local changes successfully synced to GitHub.${NC}"
+      break
+    fi
+    echo -e "${YELLOW}⚠️ Push retry $i/5 failed, retrying in 3s...${NC}"
+    if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+      for ufile in $(git diff --name-only --diff-filter=U 2>/dev/null); do
+        git checkout --theirs "$ufile" 2>/dev/null || true
+        git add "$ufile" 2>/dev/null || true
+      done
+      git -c core.editor=true rebase --continue 2>/dev/null || git rebase --abort 2>/dev/null || true
+    fi
+    sleep 3
+  done
+else
+  echo -e "${GREEN}ℹ️ No local changes to commit.${NC}"
+fi
 
 echo -e "\n${GREEN}=====================================================================${NC}"
 echo -e "${GREEN}🏆 SUCCESS! Daily pipeline finished execution flawlessly. 🏆${NC}"

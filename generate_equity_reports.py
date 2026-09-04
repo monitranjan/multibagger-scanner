@@ -2138,19 +2138,37 @@ Public %: {public_val:.2f}%
 
     def call_stage_with_fallback(stage_num: int, prompt_text: str, expected_headers: list[str], primary_model: str) -> str:
         primary_model = primary_model.strip() if primary_model else ""
-        # We try primary_model first.
-        models_to_try = [primary_model]
-        # Read fallback models from environment secret (comma-separated)
-        fallback_env = os.environ.get("FALLBACK_MODELS")
-        if fallback_env:
-            for m in fallback_env.split(","):
-                m_clean = m.strip()
-                if m_clean and m_clean not in models_to_try:
-                    models_to_try.append(m_clean)
+        
+        # Build full candidate pool ensuring all 3 free models are present
+        all_models = dp.get_model_pool(primary_model)
+        
+        # 3-way stage rotation:
+        # Stage 1: GLM-5.2 (deep thesis reasoning)
+        # Stage 2: NVIDIA Nemotron (large 550B model for dense financial tables)
+        # Stage 3: MiniMax M3 (valuation multiples & risk matrices)
+        stage_preferred = {
+            1: "z-ai/glm-5.2:free",
+            2: "nvidia/nemotron-3-ultra-550b-a55b:free",
+            3: "minimax/minimax-m3:free"
+        }
+        target_pref = stage_preferred.get(stage_num, primary_model)
+        
+        # Re-order all_models starting with target_pref if present
+        if target_pref in all_models:
+            pref_idx = all_models.index(target_pref)
+            rotated_models = all_models[pref_idx:] + all_models[:pref_idx]
+        else:
+            stage_offset = (stage_num - 1) % len(all_models)
+            rotated_models = all_models[stage_offset:] + all_models[:stage_offset]
+            
+        # Put models currently in cooldown to the end of candidate list
+        ready_models = [m for m in rotated_models if not dp.is_model_cooling_down(m)]
+        cooling_models = [m for m in rotated_models if m not in ready_models]
+        models_to_try = ready_models + cooling_models
             
         for model_idx, attempt_model in enumerate(models_to_try):
-            # 3 retries for primary model (model_idx == 0), 1 retry for fallback models
-            max_model_attempts = 3 if model_idx == 0 else 1
+            # 2 retries per model to absorb transient glitches
+            max_model_attempts = 2
             
             for model_attempt in range(1, max_model_attempts + 1):
                 print(f"🤖 [STAGE {stage_num}] Requesting model {attempt_model} (Attempt {model_attempt}/{max_model_attempts})...")
@@ -2191,8 +2209,29 @@ Public %: {public_val:.2f}%
                                             }
                                         }]
                                     }
+                        elif r_post.status_code == 429:
+                            error_snippet = r_post.text[:200]
+                            print(f"⚠️ [STAGE {stage_num}] OpenRouter HTTP 429 Rate Limited on {attempt_model}: {error_snippet}")
+                            dp.mark_model_cooldown(attempt_model, 45)
+                            sleep_time = 6 * model_attempt
+                            print(f"⏳ Cooling down {attempt_model} for 45s (sleeping {sleep_time}s before next attempt/fallback)...")
+                            time.sleep(sleep_time)
+                        elif r_post.status_code in (502, 503, 504):
+                            error_snippet = r_post.text[:200]
+                            print(f"⚠️ [STAGE {stage_num}] OpenRouter HTTP {r_post.status_code} Provider/Gateway issue on {attempt_model}: {error_snippet}")
+                            dp.mark_model_cooldown(attempt_model, 30)
+                            time.sleep(3)
+                        elif r_post.status_code == 400:
+                            error_snippet = r_post.text[:200]
+                            print(f"⚠️ [STAGE {stage_num}] OpenRouter HTTP 400 Bad Request on {attempt_model}: {error_snippet}")
+                            break  # Skip to next fallback model immediately
+                        else:
+                            error_snippet = r_post.text[:200]
+                            print(f"⚠️ [STAGE {stage_num}] OpenRouter HTTP {r_post.status_code} on {attempt_model}: {error_snippet}")
+                            time.sleep(2)
                     except Exception as exc:
                         print(f"⚠️ [STAGE {stage_num}] Exception calling OpenRouter {attempt_model}: {exc}")
+                        time.sleep(2)
                 else:
                     # Standard Gemini API path
                     gen_config = {"temperature": 0.7, "maxOutputTokens": 8192}
@@ -2212,7 +2251,9 @@ Public %: {public_val:.2f}%
                         print(f"⚠️ [STAGE {stage_num}] Exception calling {attempt_model}: {exc}")
                         
                 if not res_json or "candidates" not in res_json:
-                    print(f"⚠️ [STAGE {stage_num}] Failed API call for {attempt_model}. Trying next attempt...")
+                    print(f"⚠️ [STAGE {stage_num}] Attempt {model_attempt} failed for {attempt_model}.")
+                    if model_attempt == max_model_attempts:
+                        print(f"🔄 [STAGE {stage_num}] Switching from {attempt_model} to next model in fallback pool...")
                     continue
                     
                 candidate = res_json["candidates"][0]
@@ -3312,6 +3353,7 @@ def send_emerging_digest_email(compiled_reports):
 def git_commit_and_push(symbol: str, report_file: Path) -> None:
     """Commit and push a newly generated report immediately to prevent losing progress if the pipeline is cancelled or fails later."""
     import subprocess
+    import time
     from pathlib import Path
     try:
         print(f"📦 [GIT] Syncing {symbol} report to remote repository...")
@@ -3332,40 +3374,45 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
         if diff_res.returncode != 0:
             # Commit the staged files
             subprocess.run(["git", "commit", "-m", f"chore: auto-publish equity report and intermediate summaries for {symbol} [skip ci]"], check=True)
-            # Rebase autostash pull to ensure we integrate any concurrent remote updates safely
-            pull_res = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture_output=True, text=True)
             
-            # If the pull conflicted (usually on binary sqlite logs/backtest.db file)
-            if pull_res.returncode != 0:
-                print(f"⚠️ [GIT] Pull rebase conflicted. Resolving database cache conflict...")
+            # Rebase and push retry loop (up to 5 attempts to handle concurrent remote pushes)
+            push_success = False
+            for attempt in range(1, 6):
+                # Pull with rebase using -X theirs so newly generated outputs override remote conflicts
+                pull_res = subprocess.run(["git", "pull", "--rebase", "-X", "theirs", "origin", "main"], capture_output=True, text=True)
                 
-                # Check if rebase is in progress
+                # Check if rebase needs manual conflict finalization
                 rebase_in_progress = (
                     Path(".git/rebase-merge").exists() or 
                     Path(".git/rebase-apply").exists()
                 )
-                
                 if rebase_in_progress:
-                    # Resolve rebase conflict
-                    subprocess.run(["git", "checkout", "--ours", "logs/backtest.db"], check=False)
-                    subprocess.run(["git", "add", "logs/backtest.db"], check=False)
-                    # Continue rebase
+                    unmerged = subprocess.run(["git", "diff", "--name-only", "--diff-filter=U"], capture_output=True, text=True).stdout.strip().splitlines()
+                    if unmerged:
+                        for ufile in unmerged:
+                            subprocess.run(["git", "checkout", "--theirs", ufile], check=False)
+                            subprocess.run(["git", "add", ufile], check=False)
                     rebase_res = subprocess.run(["git", "-c", "core.editor=true", "rebase", "--continue"], capture_output=True, text=True)
                     if rebase_res.returncode != 0:
-                        print(f"❌ [GIT] Rebase continue failed: {rebase_res.stderr}. Aborting rebase.")
                         subprocess.run(["git", "rebase", "--abort"], check=False)
-                        raise RuntimeError(f"Git rebase failed: {rebase_res.stderr}")
+                
+                # Push to remote branch
+                push_res = subprocess.run(["git", "push", "origin", "main"], capture_output=True, text=True)
+                if push_res.returncode == 0:
+                    push_success = True
+                    print(f"🚀 [GIT] Successfully synced {symbol} report to GitHub!")
+                    break
                 else:
-                    # Resolve autostash apply conflict (no rebase in progress)
-                    subprocess.run(["git", "checkout", "--ours", "logs/backtest.db"], check=False)
-                    subprocess.run(["git", "reset", "logs/backtest.db"], check=False)
+                    print(f"⚠️ [GIT] Push attempt {attempt}/5 failed ({push_res.stderr.strip()}). Retrying in {attempt * 3}s...")
+                    subprocess.run(["git", "rebase", "--abort"], check=False)
+                    time.sleep(attempt * 3)
             
-            # Push to the remote branch
-            subprocess.run(["git", "push", "origin", "main"], check=True)
-            print(f"🚀 [GIT] Successfully synced {symbol} report to GitHub!")
+            if not push_success:
+                print(f"⚠️ [GIT WARNING] All 5 sync attempts failed for {symbol}. Pipeline will continue and retry sync at completion.")
         else:
             print(f"ℹ️ [GIT] No changes detected for {symbol} report (already synced).")
     except Exception as e:
+        subprocess.run(["git", "rebase", "--abort"], check=False)
         print(f"⚠️ [GIT WARNING] Failed to auto-sync {symbol} report: {e}")
 
 def sanitize_stockscans_cookie():
@@ -3452,6 +3499,12 @@ def main() -> None:
         
         print(f"\n🔍 Checking report status for `{symbol}` ({company})...")
         
+        # In parallel workflow runs, pull any newly published reports from GitHub
+        try:
+            subprocess.run(["git", "pull", "--rebase", "-X", "theirs", "origin", "main"], capture_output=True, text=True, check=False)
+        except Exception:
+            pass
+
         exists, quarter_info = check_existing_quarter_report(symbol, reports_dir, today)
         if exists:
             print(f"⏭️  [SKIPPED] A report for {symbol} has already been compiled in the current calendar quarter: {quarter_info}.")
@@ -3627,6 +3680,12 @@ def main() -> None:
                 
                 print(f"\n🔍 Checking report status for Emerging Leader: `{symbol}` ({company})...")
                 
+                # In parallel workflow runs, pull any newly published reports from GitHub
+                try:
+                    subprocess.run(["git", "pull", "--rebase", "-X", "theirs", "origin", "main"], capture_output=True, text=True, check=False)
+                except Exception:
+                    pass
+
                 exists, quarter_info = check_existing_quarter_report(symbol, reports_dir, today)
                 if exists:
                     print(f"⏭️  [SKIPPED GENERATION] A report for emerging leader {symbol} exists in current quarter: {quarter_info}.")

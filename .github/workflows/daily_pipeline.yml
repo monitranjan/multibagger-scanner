@@ -9,6 +9,9 @@ on:
 jobs:
   run-pipeline:
     runs-on: ubuntu-latest
+    concurrency:
+      group: daily-pipeline
+      cancel-in-progress: false
     permissions:
       contents: write
 
@@ -54,4 +57,22 @@ jobs:
         # Force add database file and newly generated reports/markdowns
         git add -f logs/backtest.db outputs/
         # Commit only if changes exist
-        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync database and confluence reports [skip ci]" && git pull --rebase --autostash origin main && git push)
+        if ! git diff --quiet || ! git diff --staged --quiet; then
+          git commit -m "chore: auto-sync database and confluence reports [skip ci]" || true
+          for i in {1..5}; do
+            echo "Attempt $i to sync and push..."
+            if git pull --rebase -X theirs origin main && git push origin main; then
+              echo "Successfully synced and pushed database and reports!"
+              break
+            fi
+            echo "Attempt $i failed. Resolving any conflict residuals and retrying in 5s..."
+            if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+              for ufile in $(git diff --name-only --diff-filter=U 2>/dev/null); do
+                git checkout --theirs "$ufile" 2>/dev/null || true
+                git add "$ufile" 2>/dev/null || true
+              done
+              git -c core.editor=true rebase --continue 2>/dev/null || git rebase --abort 2>/dev/null || true
+            fi
+            sleep 5
+          done
+        fi

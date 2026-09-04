@@ -294,32 +294,51 @@ def save_document_to_cache(symbol: str, doc_type: str, date_key: str, url: str, 
     except Exception as e:
         print(f"⚠️ Error writing cache for {symbol} ({doc_type}): {e}")
 
-def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
-    """Summarize the given document text using DeepSeek via OpenRouter with custom prompt templates based on doc_type."""
-    if not text or not text.strip() or "No extracted text available" in text:
-        return f"No content available to summarize for {doc_type}."
-        
-    api_key = os.environ.get("OPENROUTER_API_KEY")
-    if not api_key:
-        raise KeyError("Required environment variable 'OPENROUTER_API_KEY' is missing.")
-        
-    url = "https://openrouter.ai/api/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://github.com/monitranjan/multibagger-scanner",
-        "X-Title": "Multibagger Scanner"
-    }
-    
-    model = os.environ.get("SUMMARIZATION_MODEL")
-    if not model:
-        raise KeyError("Required environment variable 'SUMMARIZATION_MODEL' is missing.")
-    print(f"🤖 [SUMMARIZATION] Summarizing {doc_type} using model: {model} (input length: {len(text)} chars)...")
+# Default free models pool for 3-way rotation
+DEFAULT_FREE_MODELS = [
+    "minimax/minimax-m3:free",
+    "z-ai/glm-5.2:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free"
+]
 
+# Track rate-limit cooldown timestamps: {model_name: timestamp_when_ready}
+_MODEL_COOLDOWNS = {}
 
+def mark_model_cooldown(model: str, cooldown_seconds: int = 45):
+    """Mark a model as temporarily cooling down due to rate limit (429) or busy error (503)."""
+    _MODEL_COOLDOWNS[model] = time.time() + cooldown_seconds
+
+def is_model_cooling_down(model: str) -> bool:
+    """Check if a model is currently cooling down."""
+    ready_time = _MODEL_COOLDOWNS.get(model, 0)
+    return time.time() < ready_time
+
+def get_model_pool(primary_model: str = None) -> list[str]:
+    """
+    Return an ordered, deduplicated list of models ensuring all 3 free models are present:
+    [primary] + [FALLBACK_MODELS] + [DEFAULT_FREE_MODELS]
+    """
+    models = []
+    if primary_model and primary_model.strip():
+        models.append(primary_model.strip())
     
+    fallback_env = os.environ.get("FALLBACK_MODELS", "")
+    if fallback_env:
+        for m in fallback_env.split(","):
+            m_clean = m.strip()
+            if m_clean and m_clean not in models:
+                models.append(m_clean)
+                
+    for default_m in DEFAULT_FREE_MODELS:
+        if default_m not in models:
+            models.append(default_m)
+            
+    return models
+
+def _build_summarization_prompt(text: str, doc_type: str) -> str:
+    """Build task-specific summarization prompt."""
     if doc_type == "Investor Presentation":
-        prompt = (
+        return (
             "You are an expert sell-side equity research analyst. Your task is to extract all critical slides and content from this Investor Presentation transcript.\n\n"
             "FIELDS TO EXTRACT EXCLUSIVELY:\n"
             "- Core Product Segments & Launches (new fragrances, elixirs, active-ingredient cosmetics)\n"
@@ -332,7 +351,7 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
             f"Text to analyze:\n{text}"
         )
     elif doc_type == "Annual Report":
-        prompt = (
+        return (
             "You are a world class equity analyst specialising in annual report forensics and business quality assessment.\n\n"
             "Analyze this Annual Report and extract the following — be concise, insight-dense, no fluff:\n\n"
             "MANAGEMENT LETTERS:\n"
@@ -370,9 +389,8 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
             "- Limit analysis strictly to the facts present in the text. Do not invent details.\n\n"
             f"Text to analyze:\n{text}"
         )
-
     elif doc_type == "Concall Transcript":
-        prompt = (
+        return (
             "You are a financial research assistant analyzing a company's earnings conference call transcript.\n\n"
             "EXTRACT EXCLUSIVELY:\n"
             "- Management Commentary: Key statements from CEO, CFO, and leadership\n"
@@ -385,7 +403,7 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
             f"Text to analyze:\n{text}"
         )
     elif doc_type == "Substack Research Articles":
-        prompt = (
+        return (
             "You are a buy-side investment analyst. Synthesize these third-party research articles into a clear, critical thesis summary.\n\n"
             "EXTRACT EXCLUSIVELY:\n"
             "- Core investment thesis: Bull vs Bear arguments\n"
@@ -398,7 +416,7 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
             f"Text to analyze:\n{text}"
         )
     elif doc_type == "ValuePickr Forum Posts":
-        prompt = (
+        return (
             "You are analyzing community discussions from an active investor forum (ValuePickr).\n\n"
             "EXTRACT EXCLUSIVELY:\n"
             "- Consensus vs Variant View among retail/individual investors\n"
@@ -414,32 +432,104 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
             f"Text to analyze:\n{text}"
         )
     else:
-        prompt = (
+        return (
             f"You are an expert equity research analyst. Summarize the following {doc_type} text. "
             f"Extract all critical data points, revenue/profit guidance, capital expenditure (CAPEX) plans, product segments, key risks, promoter/management commentary, and financial performance details. "
             f"Ensure the summary is extremely dense, data-driven, structured, and free of fluff. Keep the summary under 2000 words.\n\n"
             f"Text to summarize:\n{text}"
         )
+
+def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
+    """
+    Summarize document text with automatic 3-way load balancing across free models
+    (minimax/minimax-m3:free, z-ai/glm-5.2:free, nvidia/nemotron-3-ultra-550b-a55b:free)
+    and graceful failover on HTTP 429/503/400.
+    """
+    if not text or not text.strip() or "No extracted text available" in text:
+        return f"No content available to summarize for {doc_type}."
         
-    payload = {
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.2,
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        raise KeyError("Required environment variable 'OPENROUTER_API_KEY' is missing.")
+        
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/monitranjan/multibagger-scanner",
+        "X-Title": "Multibagger Scanner"
     }
     
-    try:
-        response = requests.post(url, json=payload, headers=headers, timeout=120)
-        if response.status_code == 200:
-            res_json = response.json()
-            summary = res_json.get("choices", [{}])[0].get("message", {}).get("content", "").strip()
-            if summary:
-                print(f"✅ Successfully summarized {doc_type} (summary length: {len(summary)} chars).")
-                log_llm_call(model, f"DeepSeek Summarization - {doc_type}", prompt, summary)
-                return summary
-        print(f"⚠️ DeepSeek API returned status {response.status_code} for {doc_type}. Using raw/truncated text fallback.")
-    except Exception as e:
-        print(f"⚠️ Exception during DeepSeek summarization of {doc_type}: {e}")
-        
+    # 3-way load balancing distribution across document types
+    preferred_by_type = {
+        "Annual Report": "minimax/minimax-m3:free",               # 1M context handles massive PDFs
+        "Concall Transcript": "z-ai/glm-5.2:free",                 # Excellent reasoning for Q&A
+        "Investor Presentation": "nvidia/nemotron-3-ultra-550b-a55b:free", # High capacity for presentation data
+        "Substack Research Articles": "minimax/minimax-m3:free",   # Long context for multi-article articles
+        "Google News Articles": "z-ai/glm-5.2:free",               # Fast synthesis for news items
+        "ValuePickr Forum Posts": "nvidia/nemotron-3-ultra-550b-a55b:free", # Forum sentiment analysis
+    }
+    
+    primary_env = os.environ.get("SUMMARIZATION_MODEL", "").strip()
+    preferred_model = preferred_by_type.get(doc_type, primary_env or "minimax/minimax-m3:free")
+    
+    all_models = get_model_pool(preferred_model)
+    # Order candidates: ready models first (starting with preferred), then cooling-down models as last resort
+    ready_models = [m for m in all_models if not is_model_cooling_down(m)]
+    cooling_models = [m for m in all_models if m not in ready_models]
+    candidate_models = ready_models + cooling_models
+
+    for model_idx, model in enumerate(candidate_models):
+        for attempt in range(1, 3):
+            # Guard against HTTP 400 Context Overflow: truncate for models without 1M context
+            current_text = text
+            if "minimax" not in model.lower() and len(current_text) > 250000:
+                current_text = current_text[:250000] + "\n... (truncated to fit model context window)"
+                
+            prompt = _build_summarization_prompt(current_text, doc_type)
+            payload = {
+                "model": model,
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.2,
+            }
+            
+            print(f"🤖 [SUMMARIZATION] Requesting {model} for {doc_type} (Attempt {attempt}/2, len: {len(current_text)} chars)...")
+            try:
+                response = requests.post(url, json=payload, headers=headers, timeout=120)
+                if response.status_code == 200:
+                    res_json = response.json()
+                    choices = res_json.get("choices", [])
+                    if choices:
+                        summary = choices[0].get("message", {}).get("content", "").strip()
+                        if summary:
+                            print(f"✅ Successfully summarized {doc_type} via {model} (length: {len(summary)} chars).")
+                            log_llm_call(model, f"Document Summarization - {doc_type}", prompt, summary)
+                            return summary
+                elif response.status_code == 429:
+                    error_msg = response.text[:200]
+                    print(f"⚠️ [HTTP 429] Rate limited on {model} for {doc_type}: {error_msg}")
+                    mark_model_cooldown(model, 45)
+                    sleep_s = 5 * attempt
+                    print(f"⏳ Cooling down {model} for 45s (sleeping {sleep_s}s before next attempt/fallback)...")
+                    time.sleep(sleep_s)
+                elif response.status_code in (502, 503, 504):
+                    error_msg = response.text[:200]
+                    print(f"⚠️ [HTTP {response.status_code}] Provider capacity issue for {model}: {error_msg}")
+                    mark_model_cooldown(model, 30)
+                    time.sleep(3)
+                elif response.status_code == 400:
+                    error_msg = response.text[:200]
+                    print(f"⚠️ [HTTP 400] Bad Request / Context overflow on {model}: {error_msg}")
+                    break  # Switch to next model immediately
+                else:
+                    error_msg = response.text[:200]
+                    print(f"⚠️ [HTTP {response.status_code}] OpenRouter returned error for {model}: {error_msg}")
+                    time.sleep(2)
+            except Exception as e:
+                print(f"⚠️ Exception during summarization of {doc_type} with {model}: {e}")
+                time.sleep(2)
+
+    print(f"⚠️ All models failed for {doc_type}. Using raw/truncated text fallback.")
     return text[:8000] + "\n... (truncated raw text fallback)"
 
 
