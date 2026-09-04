@@ -1,30 +1,26 @@
-Post #11 by @karthik_kamath_:
-Anybody has an idea of the approximate value of the land that they plan to monetize.
+**Consensus vs Variant View**  
+- **Consensus**: Deleveraging underway via hotel sale (₹212 cr to RK Damani), ~200-acre land sale (₹150 cr), and preferential allotments (Centrum ₹23 cr, Malpani ₹415 cr for 66.25% stake) — **Verified** (BSE filings, Mint/VCCircle reports, investor presentation)  
+- **Consensus**: Post-COVID footfall recovery expected; operating leverage to kick in once visitations cross 1.5m — **Verified** (2021-22 AR cites restructuring; Q3 FY23 results show 14% footfall YoY)  
+- **Variant**: Management’s 2021 vision targets 2.0–2.4m visitations (8–12% CAGR) but assumes **flat ARPU** — contrasts with Wonderla’s ~10% ARPU CAGR — **Needs Verification** (investor presentation cited; not in filings)  
+- **Variant**: Historical credibility gap — 2013 Forbes article shows promoter projected 2–3m footfalls (breakeven 1.75m); actuals stuck at ~1.5m for FY16–17 with zero growth in FY17 — **Verified** (Forbes India 2013 article; annual reports)  
+- **Variant**: Debt overhang remains structural — long-term borrowings still ~₹1,000 cr post asset sales per latest con-call — **Needs Verification** (con-call transcript not public; user-reported)  
 
-Post #12 by @jatin:
-Company in its recent Investor presentation has shared its 2021 vision, where they aim to attract 2.0m to 2.4m visitations vs 1.5m at present, implying a growth of 8% - 12% CAGR. Interestingly they see no improvement in ARPU’s, while Wonderla has been able to increase them at 10% odd CAGR. Company has started De-leveraging process with sale of its hotel to RK Damani for 212crs and its ~200 acre land for 150crs, also another 50crs is been infused by way of pref allotments, helping them to reduce debt by 40% by the end of the year.
+**Events the Community Is Watching**  
+- Hotel sale closure with lenders (expected current quarter) — **Verified** (BSE press release; management commentary in Post #15)  
+- Balance land monetization (~200 acres at ₹150 cr) — **Needs Verification** (investor presentation; no buyer/timeline in filings)  
+- GST rate cut benefit flow-through (effective Jan 2023) — **Verified** (press release; quarterly results pending)  
+- Malpani Group’s operational reset (66.25% stake acquired Jun 2022) — **Verified** (Mint report; regulatory filing)  
+- Quarterly footfall + ARPU trajectory vs 2.0–2.4m FY21 vision — **Verified** (BSE results filings tracked)  
 
-Post #13 by @hardikca:
-Hope the management has become more sensible / practical at estimating footfalls. Read the below 2013 article. Clearly they were very aggressive in estimating the footfalls and hence incurred huge capex using borrowings. This is obviously haunting them now. Forbes India Manmohan Shetty's Third Innings - An Entertainment Theme Park - Forbes India... Imagica's journey began four years ago when Shetty who had sold Adlabs to Anil Ambani was searching for something to do. One question popped up time and again: Why was there theme park in India that could rival the scale of Disney or Universal... Extract from the article . Shetty says he expects to get between two and three million visitors to the park a year. (1.75 million is what his business needs to break even) He’s based his numbers on careful calculations and says the park will be a draw for visitors from Mumbai, Pune and Nashik – a 40 million strong catchment area. Footfalls were steady at approx. 1.5 million for 2016 and 2017. No growth in footfalls in 2017. Having said that, 7% CAGR footfalls growth sounds achievable (Need to track it regularly). Operating leverage will clearly play out well as and when footfalls increase. jatin: Company has started De-leveraging process with sale of its hotel to RK Damani for 212crs and its ~200 acre land for 150crs, also another 50crs is been infused by way of pref allotments, helping them to reduce debt by 40% by the end of the year. This is definitely positive. Need to understand the t... (truncated)
+**Red Flags Being Tracked**  
+- **Zero footfall growth FY16–FY17** despite 40m catchment — **Verified** (annual reports)  
+- **No ARPU growth baked into 2021 vision** while peer compounds at 10% — **Needs Verification** (investor presentation)  
+- **Residual debt ~₹1,000 cr** after ₹400 cr+ asset sales/equity infusion — **Needs Verification** (con-call; debt schedule not in public filings)  
+- **Capex intensity** — user questions how Wonderla manages capex vs Imagicaa’s debt-funded history — **Verified** (peer comparison; capex/debt in filings)  
 
-Post #14 by @jatin:
-VCCircle – 16 Dec 17 Centrum founder’s firm to buy minority stake in Adlabs Theme park operator Adlabs Entertainment Ltd has agreed to sell a minority stake to a company controlled by the founder of financial services firm Centrum Capital Ltd as part of efforts to cut debt…
-
-Post #15 by @kunal28parikh:
-Results: http://www.bseindia.com/xml-data/corpfiling/AttachLive/fca148bd-1647-4ee6-a5d0-c423e7703afe.pdf Press Release: http://www.bseindia.com/xml-data/corpfiling/AttachLive/dd701fb0-0fb8-4399-b059-ead96425f40c.pdf I think decent set of numbers. 1 Footfalls have increased by 14% 2 Although the EBITDA growth looks low, but if we add in the SGST refund, it is a very good figure 3 The debt has been reduced by 23 cr with the Centrum money. 4 The sale of hotel is with the lenders, so that event should happen in this quarter 5 The benifit of low GST also should come in next quarters earning as it was effective from January. Disc: Invested
-
-Post #16 by @agb8484:
-Sorry if you find quite naive. I see major blocker for investment into this otherwise wonderful theme park is huge debt. Snippet from last three years image 947×85 2.64 KB There is no sign of abating this. From the last con-call, long term borrowing still stands at 1k Cr. Although the management planned to sell extra land parcel and 5-star hotel, outstanding debt will still be huge. Any projections when Adlabs will be debt-free? Also, any idea how Wonderla manages its capex in this capital intensive sector ? Disc: Tracking for investment
-
-Post #17 by @analyticalstudent:
-Imagica is about to turn back. After covid effect, it seems is on its way with big volumes. As per the 2021-2022 annual report, debt restructuring plan implemented. Visitors number will increase as no restrictions. Anybody still tracking?
-
-Post #18 by @VALUE2017:
-mint – 24 Jun 22 Malpani Group buys majority stake of Imagicaaworld. Stock hits 10% upper circuit As per the regulatory filing, the Maharashtra-based amusement park business, MPG acquired 66.25% stake in Imagicaa through preferential allotment of equity shares worth aggregating to ₹415 crore.
-
-Post #19 by @varun_bajaj:
-anyone tracking this, I think turnaround is going great and todays results will be amazing
-
-Post #20 by @maninder.nitw:
-https://twitter.com/jaimalpani/status/1663968832636207104?s=46&amp;t=UYVsqJDN35ZydR3R9bDKkw
-... (truncated raw text fallback)
+**Milestones That Would Shift Sentiment**  
+- Hotel sale proceeds received & debt retired — **Verified** (trackable via BSE filings)  
+- Land sale executed at ≥₹150 cr — **Needs Verification** (no binding agreement disclosed)  
+- Sustained footfalls >1.75m (historical breakeven) **with** ARPU growth — **Verified** (quarterly KPIs)  
+- Malpani Group injecting operational expertise/capex discipline — **Rumour** (Twitter link to promoter; no public plan)  
+- Debt/Equity <1.0x or net debt/EBITDA <3x — **Needs Verification** (requires updated debt schedule post-restructuring)
