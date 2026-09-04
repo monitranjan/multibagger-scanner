@@ -1,0 +1,35 @@
+### News Article #1: Craftsman Automation Share Price today after 52-week peak - Univest
+Date: Fri, 04 Sep 2026 06:21:00 GMT
+Link: https://news.google.com/rss/articles/CBMikwFBVV95cUxQWHo3SUZZS3RzbzJZZ1B0dkptMl9VNGpjeEtTZVRaek82Q3BVRUdkU09jYVhTdmVzd1RRLVFHV2NlVXJfOGZlVnpybF9DZGI5X3B4b3ZIeDJCTHRYaG9aTEJZMXJCUDk2MnZqakx0TDh5VmlwT2ZqTGtzX2d4djY2T0tqU2taVGYxdmN3WTI3c0dtUjg?oc=5
+Content:
+Google News
+
+
+### News Article #2: Craftsman Automation Ltd. Peer Comparison – Compare with Others - Value Research
+Date: Fri, 28 Aug 2026 07:00:00 GMT
+Link: https://news.google.com/rss/articles/CBMilgFBVV95cUxPN1ZuTW15Q0dVbjdlRkloXzZCN3lQSE41cXM1QkNqV1ZvbnR2anFRREJDYzIwUTlka2NnaWFkZHdkRExPLXJBS2dkcHVVNjhuaXlweXE4dTZFQ3JqV1lmNklzNUd4UFFBdlZYQjZxZlhEbGdDM0hCdFRwREExSW4zelVTOHZfUFVhcjRqU3k4MHRKUGg5S2c?oc=5
+Content:
+Google News
+
+
+### News Article #3: Craftsman Automation Share Price Rise: Price and Valuation - Univest
+Date: Tue, 01 Sep 2026 07:23:00 GMT
+Link: https://news.google.com/rss/articles/CBMiiAFBVV95cUxQQW5yQ3Mzbno5TUZuWkpVOXhPSDA3QldSM2Q1a2J0QmV1TmlUNk9uTmlXYTg3azdlSi1QbzNPY1FZMGExUjVUa2ljeHJ3TWlQc2tLcG1yOFNYUzVIYURQUkJPbnIxenJldlM2UmxDeE1ScktGU1ExcHhJZkk5WUFqSGpJZFd6U05B?oc=5
+Content:
+Google News
+
+
+### News Article #4: Craftsman Automation promoter sells 2.01% stake for ₹486 crore in block deal - CNBC TV18
+Date: Tue, 23 Jun 2026 07:00:00 GMT
+Link: https://news.google.com/rss/articles/CBMi1AFBVV95cUxQU0tnS1BWbEFnaE5UWkluWWU2UDdWckJlZG9hLUlqVExjN29IcktqMUZDams0M2V4NEd2dlB0eFo0eFQ2SUZ3SUFVaTQ3ZWIyM2ZKeThCRWVsMk9Zb01FelRMWXBPTEh3Y3NaTHhEM0h1WmU3M2l4dDVHb2oxM2lxbk1aME42akhKU2o5NDItd2t1VTN4WnY0SGNQN21nQk5vMkRxM05ZMlROcTd5eHV4M3NISWlJVTdRTVpEQ0JPOC1qc1VkZnBRaU9qM1poUUFENW5aOdIB2gFBVV95cUxPbnNBRFVGdzdDSEtqbW9hTE5XRUJqSlZNaUxXdUs3bmdRbnh2U09QaXBWS3lkeUZoT1kxMjRZMDhIWGQySVZ0U1BjUWFfLUpVcHdTdjFkWUV5YjV0N2RWMk1yaFAzWnNQbk9hRTJTU0ZuU2NDVi1jeXZ1bUdmRDJsckNpWUMzYkJSMTBzUnBueWxhLVZTSElaWEllQm5qT2lmQjNzbXo1UXdDaFZEdXJzT0htQTNmdk13WlBlLVdUSEg1alVIMXROc1REM0Rpa1BJVWZQbENOX3BnZw?oc=5
+Content:
+Google News
+
+
+### News Article #5: Volumes soar at Craftsman Automation Ltd counter - Business Standard
+Date: Thu, 07 May 2026 07:00:00 GMT
+Link: https://news.google.com/rss/articles/CBMiygFBVV95cUxNZ09ncWVubGRFYTF2T0JiY3VNNS0yLUtDaEZJSVVyRlZJWEg4U1lzaEd4NTNQajkxNDdRdXExbExENHZ2cUZVeVQwelBfUEl2cnZFRzY3di13QlFjTWxsWmdqT1JzcElzSUR3aWRUT2RtclRWdDItb0lXUEtYVUdmV1ZqUjdoS1ZJcjdfUXBJZmRDSV9lWHF5NXlYVWI3Z2ZpVWVOVXlOV3pjRlBzc0FSeGg5M3VIOUhWcS01LUduNGJjNy1ManBUVTdR0gHPAUFVX3lxTE9hRld2NWNNRVJWZjlJTXpNSTlncFBFT3JQc3NaNDJOMC1jdnB5R2Y5TWxLWlZCOUxTQ09sSnVCU3o4am9PekdidVRHZUJKRU1CdnpYcGY3Q19OYUh4OUlWRVV2T0JvS2FURmNETTZMbVd0dmRNcFM3enA0YWREdmVCTFAxYm9mZUlmemIxZVIyMVUzYkVIZ3NObWZfWjY3VnhFNGpkS2l6TzVmdGNPblc4NDd6ZmkwNEVwRkhHeWVRbEh2Wi0tVkRsVWRqQ3N1UQ?oc=5
+Content:
+Google News
+
+... (truncated raw text fallback)
