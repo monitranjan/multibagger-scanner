@@ -1,0 +1,20 @@
+- **Company Overview**: Arfin India Limited – Aluminium & Ferro Alloys leader; Promoters: Mahendra Rikhavchand Shah & Jatin Mahendra Shah; Key customers: Tata Steel, JSW, JSPL, AMNS (Steel), Auto & Power sectors (Domestic + International); Member: AAI, BIR, MRAI  
+- **Key Financials (TTM vs FY23)**: Revenue: ₹550.24 Cr (TTM) vs ₹544.11 Cr (FY23); EBITDA: ₹28.75 Cr (TTM) vs ₹26.44 Cr (FY23); PAT: ₹8.63 Cr (TTM) vs ₹10.32 Cr (FY23); Installed Capacity: 71,000 MTPA; Promoter Holding: 74.11%; Market Cap: ₹936 Cr  
+- **Product Segments & Capacities (MTPA)**:  
+  - Aluminium Deox: 20,000  
+  - Aluminium Alloy Ingots: 18,000  
+  - Cored Wire: 12,000  
+  - Conductor & Cables: 3,500  
+  - Master & Ferro Alloys: 2,500  
+  - Aluminium Wire Rods: 15,000  
+  - **Total**: 71,000 MTPA  
+- **Capacity Expansion Roadmap (FY24P–FY33P)**: Brownfield expansion >60% capacity increase over 10 years; Estimated capex: ₹500 Mn  
+- **Growth Drivers**:  
+  - Capacity expansion (brownfield, >60% over 10 yrs, ₹500 Mn capex)  
+  - High-margin product focus & premiumisation via forward integration, new product launches, portfolio optimisation, higher utilisation  
+  - Strategic alliances with domestic/international players for geographic & product portfolio expansion  
+  - Renewable energy captive project to reduce carbon footprint & energy cost  
+- **Strategic Investment – JFE Shoji India Pvt Ltd (JFE Holdings group)**:  
+  - Investment: ₹52.5 Cr for ~5.81% stake (fully diluted)  
+  - Use of proceeds: Capex for capacity expansion, long-term working capital, other growth avenues  
+  - Strategic Partnership: JFE Shoji to expand sales of Arfin’s recycled aluminium deox products in India & surrounding regions
