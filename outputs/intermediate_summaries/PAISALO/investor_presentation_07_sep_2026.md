@@ -1,0 +1,65 @@
+- **Core Product Segments & Launches**  
+  - **Micro Enterprise Loans**: 3-Wheeler, SCV, 2-Wheeler, Alternative Fuel (EV), Solar, Medical Equipment, Agri Equipment, Industrial Equipment  
+  - **MSME/SME Loans**: Micro LAP, Micro Enterprise, Working Capital, Business Expansion  
+  - **Key OEM/Institutional Partnerships**: Hero, Bajaj, Escorts, Eicher, Mahindra, Adani, Phillips, Kirloskar (asset-light dealer/OEM tie-ups)  
+  - **Business Correspondent (BC) Services** (partnered with SBI, BOI, IOB): Cash withdrawal/deposit, balance enquiry, fund transfer, account opening, micro credit, social security schemes (APY, PMJJBY, PMSBY), debit cards, passbook  
+  - **Co-Lending Products** (80:20 risk-sharing with 5 bank partners: SBI, PNB, BoB, UCO, Karnataka Bank): 20% on-book, 80% partner-funded; blended customer pricing; pari-passu credit cost sharing; no FLDG  
+  - **New Category Launches (Q1FY27)**: EV financing (1,736 units in Q1FY27), Solar equipment, Agri/Industrial/Alternative-fuel equipment financing  
+
+- **Quantitative Metrics: Growth Trajectory, Market Shares, Handler Shares, Category ARR, Margin Contribution**  
+  - **AUM**: ₹67,074 Mn (Q1FY27) | +28% YoY | 3-yr CAGR ~21% (FY21–FY26) | 3-yr Vision: ~2x AUM/Income/PAT (CAGR 25–30%)  
+  - **Disbursements**: ₹17,309 Mn (Q1FY27) | +128% YoY | Highest ever quarterly  
+  - **Total Income**: ₹2,603 Mn (Q1FY27) | +19% YoY  
+  - **Net Interest Income**: ₹1,447 Mn (Q1FY27) | +16% YoY  
+  - **PAT**: ₹613 Mn (Q1FY27) | +30% YoY  
+  - **NIM**: 6.6% (Q1FY27) | FY26: 6.8%  
+  - **Yield**: 16.7% | **Cost of Borrowing**: 10.1% | **Spread**: 6.6%  
+  - **ROA**: 3.6% | **ROE**: 13.4%  
+  - **GNPA**: 0.70% | **NNPA**: 0.49% | Improved ~14 bps / ~19 bps YoY  
+  - **Credit Cost**: 0.9% of assets (Q1FY27)  
+  - **Collection Efficiency**: 97.5% (Q1FY27) | 91% digital collections  
+  - **Capital Adequacy**: 33.1% (Tier I: 26.8%, Tier II: 6.3%) | Regulatory min 15%  
+  - **Debt/Equity**: 2.61x | **Net Worth**: ₹18,298 Mn  
+  - **Liquidity Coverage**: 2.3x | **ALM**: Positive gap across all buckets (<6M: ₹17,025M assets vs ₹8,550M liab; <1Y: ₹13,361M vs ₹6,223M; <3Y: ₹26,521M vs ₹21,781M)  
+  - **Customer Franchise**: 18 Mn+ | +1.8 Mn new in Q1FY27 | 87% women borrowers  
+  - **Average Ticket Size**: ₹5.26 Lakhs | **Secured Portfolio**: 93%  
+  - **Touchpoints**: 5,995 (Branches: 424, Distribution Points: 3,997, BCs: 1,574) across 23 states, 10,389 pin codes  
+  - **Employees**: 3,018 (-2% YoY) | **BC Channel**: 1.8 Mn customers served, ₹12,138 Mn transactions (Q1FY27)  
+  - **AI/Tech Scale**: 180k applications/quarter, 200k GenAI outbound calls/day, 500k voice data conversions, 18 live AI bots, 300k quality checks/month, 80% new code AI-written  
+  - **Promoter Stake**: 46.72% (+4.97% in Q1FY27 via open market purchases)  
+  - **Credit Rating**: AA/Stable/A1+ (dual) | **NCD Shelf**: ₹900 Cr (Tranche I ₹300 Cr opened Aug 2026) | **ECB**: Maiden USD 15 Mn | **FCCB**: USD 50 Mn (FY25)  
+
+- **Future Growth Adjacencies: Fragrance Entry, Oral Beauty/Nutrition M&A, Offline Channel Additions**  
+  - **Geographic Expansion**: Added 696 touchpoints in Q1FY27; entered 1 new state (total 23); deepening in high-potential states (Delhi 27.1%, Maharashtra 19.4%, UP 14.9%, Haryana 13.0%, Rajasthan 12.6% of portfolio)  
+  - **Product Broadening**: EV financing (1,736 units Q1FY27), Solar, Agri/Industrial/Alternative-fuel equipment; targeting new MSME clusters (Food & Hospitality, Street Vendors, Agri, Textiles, Health/Education)  
+  - **Liability Diversification**: Public NCD issuance (₹900 Cr shelf), ECB (USD 15 Mn), FCCB (USD 50 Mn), Commercial Paper; reducing bank dependence (73% banks/FIs → target lower)  
+  - **Co-Lending Scale**: 5 partners; 80:20 model improves ROA/ROE, reduces capital intensity, enhances ALM  
+  - **BC Channel Deepening**: 1,574 CSPs (SBI, BOI, IOB); 20,713 small savings accounts opened Q1FY27; 23,837 cross-sell accounts (APY/PMJJBY/PMSBY); 1.8 Mn customers served  
+  - **AI-Led Operating Leverage**: Headcount -2% YoY despite AUM +28%; 180k apps/quarter (vs 160k Q4FY26); 60k facial recognitions/month (vs 50k); 300k OCR scans/month (vs 234k); 20 AI marketing campaigns (vs 11); 200k outbound calls (vs 150k); 15 voice bots (vs 5)  
+  - **ESG Adjacencies**: 87% women borrowers; 2,211 small businesses supported Q1FY27; 1,736 EVs financed; 20,713 bank accounts opened; ESG Steering Committee with Board oversight  
+
+- **Revenue Mix by Brand/Division (AUM & Disbursement Breakdown)**  
+  - **AUM by Business Mix (Q1FY27)**:  
+    - Micro Enterprise: ₹17,693 Mn (26.4%)  
+    - MSME/SME: ₹43,316 Mn (64.6%)  
+    - *Implied Other/Unallocated: ~₹6,065 Mn (9.0%)*  
+  - **AUM by Segment (Q1FY27 % of Total)**:  
+    - Food & Hospitality: 23%  
+    - Street Vendors: 16%  
+    - Agri & Allied Agri: 15%  
+    - Other MSME/SMEs: 11%  
+    - Technology: 10%  
+    - Heavy Industries: 6%  
+    - Vehicle: 6%  
+    - Textiles: 6%  
+    - Health & Education: 4%  
+    - Other Micro Enterprise: 3%  
+  - **Disbursement by Business Mix (FY26)**:  
+    - Micro Enterprise: ₹12,147 Mn (28.5%)  
+    - MSME/SME: ₹30,473 Mn (71.5%)  
+  - **Income Composition (Q1FY27)**:  
+    - Interest Income: ₹2,506 Mn (96.3% of Total Income)  
+    - Non-Interest Income: ₹97 Mn (3.7%)  
+  - **Geographic Revenue Proxy (Portfolio % by State)**:  
+    - Delhi: 27.1% | Maharashtra: 19.4% | Uttar Pradesh: 14.9% | Haryana: 13.0% | Rajasthan: 12.6% | Others: 13.0%  
+  - **BC Channel Revenue Contribution**: Fee income from partner banks (mutually agreed terms); 1.8 Mn customers, ₹12,138 Mn transactions, 20,713 savings accounts, 23,837 cross-sell accounts in Q1FY27
