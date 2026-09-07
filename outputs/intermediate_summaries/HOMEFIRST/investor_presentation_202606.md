@@ -1,0 +1,52 @@
+- **Core Product Segments & Launches**  
+  - **Housing Loans**: 83% of AUM (₹1,69,379 Mn), avg ticket size ₹12.1 L (excl. co-lending), 56.1% LTV at origination, 48.5% effective LTV on book  
+  - **Shop Loans**: 1% of AUM  
+  - **Loan Against Property (LAP)**: 16% of AUM  
+  - **Co-Lending & Direct Assignment**: ₹3,313 Mn transactions in Q1FY27; partners: Central Bank, Axis, Union Bank, Indian Bank, Yes Bank, Bajaj Housing, Shinhan, ICICI, Tata Capital, Aditya Birla Housing, Punjab & Sind Bank, South Indian Bank, Bank of Baroda, HDFC, SBI  
+  - **Green Homes Initiative**: 550 certified homes cumulative (100 added in Q1FY27); financed via IFC ₹280 Cr (7-yr debt) and DFC $75 Mn for women low-income borrowers  
+  - **PMAY 2.0**: 698 beneficiaries in Q1FY27; cumulative 38,507 customers assisted, ₹966.4 Cr subsidy credit (~26% loan reduction)  
+  - **Digital Launches**: In-house AI Conversational Platform (7 Indian languages, omni-channel), Treasury Management System (centralized ALM, cash-flow forecasting), Document Management System (AWS-backed, 90% digital agreements, 46% e-stamping, 82% e-NACH)  
+  - **Distribution Expansion**: 175 physical branches (+4 in Q1), 61 proposed, 137 digital branches → 373 touchpoints across 145 districts, 13 states/UTs  
+
+- **Quantitative Metrics**  
+  - **AUM Growth**: ₹1,69,379 Mn (+25.7% y-o-y, +6.7% q-o-q); 5-yr CAGR 38.5% (FY17–FY26)  
+  - **Disbursement Growth**: ₹16,284 Mn (+31.0% y-o-y, +3.6% q-o-q); 5-yr CAGR 31% (FY22–FY26)  
+  - **PAT Growth**: ₹1,599 Mn (+34.5% y-o-y, +7.0% q-o-q); 5-yr CAGR 62.9% (FY17–FY26)  
+  - **Net Total Income**: ₹3,321 Mn (+29.9% y-o-y, +7.1% q-o-q)  
+  - **Spreads (ex co-lending)**: 5.3% (stable q-o-q, +20 bps y-o-y); Origination yield 13.0%, Marginal COB 7.6%  
+  - **NIM**: 6.0% (Q1FY27) vs 5.9% (Q4FY26)  
+  - **Asset Quality**: Gross Stage 3 1.8% (0 bps q-o-q, -30 bps y-o-y); Net Stage 3 1.4%; DPD 30+ 3.2% (0 bps q-o-q, -40 bps y-o-y); DPD 1+ 4.7%  
+  - **Collection Efficiency**: 98.4% (Jun’26); Unique paying customers 97.3%  
+  - **Credit Cost**: 40 bps (Q1FY27), 0.4% of avg assets  
+  - **Profitability**: ROA 4.2% (+50 bps y-o-y, +10 bps q-o-q); ROE 14.5% (+10 bps q-o-q, -50 bps y-o-y)  
+  - **Operating Leverage**: Opex/Assets 3.2% (+10 bps q-o-q, 0 bps y-o-y); Cost/Income 32.7% (+70 bps q-o-q, -150 bps y-o-y)  
+  - **Capital & Liquidity**: CRAR 42.6% (Tier I 42.2%); Leverage 3.5x; Liquidity buffer ₹22,724 Mn (₹11,434 Mn cash, ₹3,540 Mn NHB unavailed, ₹7,750 Mn bank lines); ₹5,814 Mn raised in Q1FY27  
+  - **Funding Profile**: 32 lenders; Borrowing mix: Pvt banks 35%, PSU banks 22%, NHB 17%, NCD 14%, ECB 5%, DA 4%, Co-lending 2%, NBFC 1%; Zero CP exposure; AA rating (ICRA/CARE/India Ratings)  
+  - **Customer Franchise**: 1,45,117 customers; 68% salaried, 32% self-employed; 12% AUM new-to-credit (17% customers); Avg bureau score 749; 85% loans approved within 48 hrs; NPS 79  
+  - **Digital Adoption**: 96% active customers on app; 78% unique monthly logins; 98% non-cash collections; 43% service requests via app; 4.3 Google Play rating  
+  - **Geographic Concentration (Jun’26)**: Gujarat 28.6%, Maharashtra 15.2%, Tamil Nadu 10.4%, MP 10.7%, Telangana 7.9%, Rajasthan 6.7%, UP/Uttarakhand 6.2%, Karnataka 5.9%, AP 5.4%, Chhattisgarh 2.1%, Haryana/NCR 0.9%  
+
+- **Future Growth Adjacencies**  
+  - **Branch Network**: Target 61 new physical branches + 137 digital branches to deepen penetration in 0–4%, 4–7%, 7–15% GDP-contribution state buckets  
+  - **Green & Social Finance**: Scale Green Homes certification; leverage DFC ($75 Mn women-focused) and IFC (₹280 Cr green housing) credit lines  
+  - **Co-Lending & Assignment**: Expand partner base (currently 12 co-lending, 8 DA partners); Q1FY27 DA ₹1,936 Mn, Co-lending ₹1,377 Mn  
+  - **Technology & AI**: Deploy GenAI across customer lifecycle (lead qualification, servicing, collections); enhance AutoML pipelines for risk/ops models  
+  - **PMAY 2.0 & Affordable Housing**: Accelerate beneficiary onboarding under renewed policy; target EWS/LIG (58% of AUM) and women borrowers (~90% loans have woman co-borrower, 13% primary)  
+  - **ESG Integration**: Formalize 12 focus areas; target improved Sustainalytics (13.6) and S&P Global (46) scores; publish BRSR annually  
+  - **Funding Diversification**: Increase ECB/NCD share; maintain zero CP; optimize COB via PLR management (last cut 10 bps Jan’26)  
+
+- **Revenue Mix Breakdown (Q1FY27, ₹ Mn)**  
+  - **Interest Income on Term Loans**: 4,392.5 (81.4% of Total Income)  
+  - **Net Gain on Direct Assignment**: 364.8 (6.8%)  
+  - **Income Other Than Interest on Term Loans**: 641.1 (11.9%) → includes interest on deposits, fees/commission, other operating income  
+  - **Total Income**: 5,398.4  
+  - **Interest Expense**: 2,077.1  
+  - **Net Interest Income**: 2,315.4 (42.9% of Total Income)  
+  - **Net Total Income**: 3,321.3 (61.5% of Total Income)  
+  - **Operating Expenses**: 1,086.0 (32.7% of Net Total Income)  
+  - **PPOP**: 2,235.3  
+  - **Credit Cost**: 159.0  
+  - **PBT**: 2,076.3  
+  - **Tax**: 477.8  
+  - **PAT**: 1,598.5 (29.6% of Net Total Income)  
+  - **FY26 Full Year**: Interest Income 15,734.3 (81.8%), DA Gain 1,121.6 (5.8%), Other Income 2,371.3 (12.3%); Total Income 19,227.2; PAT 5,403.8 (28.1% of Total Income)
