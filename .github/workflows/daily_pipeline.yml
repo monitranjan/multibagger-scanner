@@ -59,6 +59,8 @@ jobs:
         # Commit only if changes exist
         if ! git diff --quiet || ! git diff --staged --quiet; then
           git commit -m "chore: auto-sync database and confluence reports [skip ci]" || true
+          # Discard any unstaged modifications in tracked files so rebase is never blocked
+          git checkout -- . 2>/dev/null || true
           for i in {1..5}; do
             echo "Attempt $i to sync and push..."
             if git pull --rebase -X theirs origin main && git push origin main; then

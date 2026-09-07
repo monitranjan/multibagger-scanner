@@ -3377,6 +3377,8 @@ def git_commit_and_push(symbol: str, report_file: Path) -> None:
             
             # Rebase and push retry loop (up to 5 attempts to handle concurrent remote pushes)
             push_success = False
+            # Discard any unstaged modifications in tracked files so rebase is never blocked
+            subprocess.run(["git", "checkout", "--", "."], check=False)
             for attempt in range(1, 6):
                 # Pull with rebase using -X theirs so newly generated outputs override remote conflicts
                 pull_res = subprocess.run(["git", "pull", "--rebase", "-X", "theirs", "origin", "main"], capture_output=True, text=True)

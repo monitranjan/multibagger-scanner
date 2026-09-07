@@ -36,6 +36,7 @@ outputs/
 *.xlsx
 *.csv
 scan_match_report.md
+scan_matched_data.json
 # But DO NOT ignore your master ranking template!
 !SOIC Ranking Sheet.xlsx
 
