@@ -316,12 +316,16 @@ def is_model_cooling_down(model: str) -> bool:
 
 def get_model_pool(primary_model: str = None) -> list[str]:
     """
-    Return an ordered, deduplicated list of models ensuring all 3 free models are present:
-    [primary] + [FALLBACK_MODELS] + [DEFAULT_FREE_MODELS]
+    Return an ordered, deduplicated list of models ensuring all free models are present:
+    [primary models] + [FALLBACK_MODELS] + [DEFAULT_FREE_MODELS]
+    Supports comma-separated strings in primary_model as well.
     """
     models = []
     if primary_model and primary_model.strip():
-        models.append(primary_model.strip())
+        for pm in primary_model.split(","):
+            pm_clean = pm.strip()
+            if pm_clean and pm_clean not in models:
+                models.append(pm_clean)
     
     fallback_env = os.environ.get("FALLBACK_MODELS", "")
     if fallback_env:
@@ -463,10 +467,10 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
     
     # Load balancing distribution across document types using active free models
     preferred_by_type = {
-        "Annual Report": "nvidia/nemotron-3.5-lightning:free",              # 1M context handles massive PDFs
+        "Annual Report": "minimax/minimax-m3:free",                         # Best quality & 1M context handles massive PDFs
         "Concall Transcript": "minimax/minimax-m2.7:free",                  # Advanced agentic reasoning for Q&A
-        "Investor Presentation": "nvidia/nemotron-3-ultra-550b-a55b:free",  # 550B dense analysis
-        "Substack Research Articles": "minimax/minimax-m3:free",          # Deep analytical synthesis
+        "Investor Presentation": "nvidia/nemotron-3.5-lightning:free",      # High-speed MoE & 1M context
+        "Substack Research Articles": "minimax/minimax-m3:free",            # Deep analytical synthesis
         "Google News Articles": "nvidia/nemotron-3.5-lightning:free",        # Fast synthesis for news items
         "ValuePickr Forum Posts": "nvidia/nemotron-3-ultra-550b-a55b:free", # Forum sentiment analysis
     }
