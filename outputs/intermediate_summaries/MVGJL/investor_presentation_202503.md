@@ -1,0 +1,32 @@
+- **Core Product Segments & Launches**  
+  - **Product Categories**: Daily Wear; 22 KT Gold (workmanship-based); Semi-precious Gold Jewellery; Precious Gold Jewellery; Antique Jewellery; Casting Jewellery; 22 KT Silver; 18 KT Gold & Diamond; 14 KT Gold & Diamond; 22 KT Diamond.  
+  - **Brand Launches**: ‘Visesha’ premium sub-brand launched FY17 (2016-17) for elevated experience; e-commerce platform launched FY17, now expanding to US, Canada, UK with showroom-like virtual experience.  
+  - **Design Strategy**: Cosmopolitan designs for flagship showrooms (e.g., V Square, 29,946 sq ft ISO-certified); localized designs for rural/tier 3 markets; continuous portfolio refresh via new vendor partnerships for traditional & contemporary mix.  
+
+- **Quantitative Metrics**  
+  - **Revenue Trajectory**: FY25 ₹23,840 Mn (5-yr CAGR 13.56%); FY24 ₹21,497 Mn; FY23 ₹20,273 Mn; FY22 ₹16,939 Mn; FY21 ₹14,336 Mn.  
+  - **Quarterly Dynamics**: Q4FY25 ₹7,051 Mn vs Q3FY25 ₹4,976 Mn (+42% QoQ); vs Q4FY24 ₹5,465 Mn (+29% YoY).  
+  - **EBITDA**: FY25 ₹1,645 Mn (5-yr CAGR 19.46%); margin 6.9% (FY24 7.0%, FY23 7.1%). Q4FY25 ₹456 Mn (+22% QoQ, +24% YoY); margin 6.47%.  
+  - **PAT**: FY25 ₹1,004 Mn (5-yr CAGR 48.40%); margin 4.2% (FY24 3.8%). Q4FY25 ₹267 Mn (+6% QoQ, +30% YoY); margin 3.79%.  
+  - **Returns**: ROE 15.03% (FY24 16.82%); ROCE 16.04% (FY24 15.31%).  
+  - **Leverage**: Net Debt/Equity 0.48x (FY24 0.59x, FY23 1.30x). Net Worth ₹7,188 Mn (FY24 ₹6,178 Mn).  
+  - **Operational KPIs**: 21 showrooms (20 owned + 1 franchisee) across 19 towns; 114,827 sq ft; 1,100+ employees.  
+  - **Same-Store Sales Growth (SSSG)**: 6.65% (FY25).  
+  - **Average Bill Value**: ₹95,492 (FY25) vs ₹88,509 (FY24).  
+  - **Old Gold Exchange**: 13.17% of sales (FY25).  
+  - **Inventory**: ₹13,172 Mn (FY25); 184 inventory days (FY24 171); Cash Conversion Cycle 169 days (FY24 164).  
+  - **Avg Revenue/Store**: ₹1,135 Mn (FY25) vs ₹1,433 Mn (FY24).  
+  - **Gold Volumes**: FY25 2,926 kg (FY24 3,261 kg); Q4FY25 789 kg (Q4FY24 794 kg).  
+  - **Cash Flow**: Operating CF -₹667 Mn (FY25) vs +₹595 Mn (FY24); Investing CF +₹1,272 Mn (FY25) vs -₹1,258 Mn (FY24); Financing CF -₹761 Mn (FY25) vs +₹938 Mn (FY24).  
+
+- **Future Growth Adjacencies**  
+  - **Geographical Deepening**: Penetrate micro-markets in rural & tier 3 cities of Andhra Pradesh & Telangana; leverage higher rural gold ownership driven by weddings/post-harvest seasons.  
+  - **Channel Expansion**: Accelerate owned showroom rollout (GTM campaigns 60-75 days pre-launch); franchisee model selective (1 currently).  
+  - **Digital/E-commerce**: Scale proprietary platform to US, Canada, UK; replicate showroom experience online for seamless selection/delivery.  
+  - **Product Portfolio**: Introduce unique designs via new vendor/supplier partnerships; bifurcate assortment – cosmopolitan for flagships, local for rural; premium ‘Visesha’ sub-brand as differentiator.  
+  - **Operational Efficiency**: Dynamic inventory replenishment to maintain fresh selection; strengthen supply chain (direct bullion sourcing, job-work optimization, QC/barcoding).  
+  - **Brand/Community**: CSR initiatives to deepen local connect; loyalty programs via exhibitions/promotions.  
+  - **No M&A, fragrance, oral beauty, or nutrition adjacencies disclosed.**  
+
+- **Revenue Mix by Brand/Division**  
+  - **Not disclosed in presentation**. No breakdown by brand (e.g., ‘Visesha’ vs core), product category (gold vs diamond vs silver), channel (offline vs online), or geography (AP vs Telangana). Only aggregate revenue figures provided.

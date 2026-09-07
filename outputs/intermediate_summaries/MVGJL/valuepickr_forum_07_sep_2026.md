@@ -1,0 +1,8 @@
+- **Consensus View**: Expansion beyond Andhra Pradesh/Telangana is the primary rerating catalyst — *Verified* (explicitly stated in Post #1; geographic concentration risk acknowledged by community)  
+- **Variant View**: Current P/E of 16.6x (vs. industry 42.5x) implies structural undervaluation; fair value ~₹435 at 25x P/E — *Needs Verification* (assumes margin sustainability and successful expansion; not in filings)  
+- **Market Share Claims**: ~5% organized market share in AP, ~14% in Telangana — *Needs Verification* (granular regional market share data not disclosed in public filings; source unspecified)  
+- **Operating Metric**: 7% operating profit margin cited as “good” — *Verified* (traceable to financial statements; community benchmark vs. peers not in filings)  
+- **Event Watch**: No specific upcoming events (results, capex, approvals) mentioned in available posts — *Verified* (absent from discussion)  
+- **Red Flag**: Heavy geographic concentration (18 stores in only 2 states) — *Verified* (store count/locations verifiable; concentration risk flagged implicitly)  
+- **Milestone for Sentiment Shift**: Announcement of store openings outside AP/Telangana — *Verified* (directly tied to consensus rerating thesis)  
+- **Unverified Rumour**: None identified in provided text — *Rumour* (no unverified claims flagged; Post #2 incomplete)
