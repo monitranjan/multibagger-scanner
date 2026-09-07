@@ -19,6 +19,12 @@ from bs4 import BeautifulSoup
 from pypdf import PdfReader
 import urllib.parse
 import xml.etree.ElementTree as ET
+import logging
+import warnings
+
+# Suppress pypdf font parsing warnings to prevent log clutter
+logging.getLogger("pypdf").setLevel(logging.ERROR)
+warnings.filterwarnings("ignore", module="pypdf")
 
 def load_dotenv():
     """Load variables from .env file into os.environ if it exists."""

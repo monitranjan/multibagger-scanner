@@ -15,6 +15,12 @@ from bs4 import BeautifulSoup
 from pypdf import PdfReader
 import urllib.parse
 import xml.etree.ElementTree as ET
+import logging
+import warnings
+
+# Suppress pypdf font parsing warnings to prevent log clutter
+logging.getLogger("pypdf").setLevel(logging.ERROR)
+warnings.filterwarnings("ignore", module="pypdf")
 
 def download_and_extract_pdf(url: str, doc_type: str, max_pages: int = 9999) -> str:
     """Download a PDF from a URL and extract text from its pages."""
