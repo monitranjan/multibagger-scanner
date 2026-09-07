@@ -1,122 +1,112 @@
 [
   {
-    "symbol": "BIRLACABLE",
-    "company": "Birla Cable Limited",
-    "industry": "Cables - Telecom",
-    "close": 376.55,
-    "return_1d": 4.99,
-    "mcap_cr": 1075.95,
+    "symbol": "ENTERO",
+    "company": "Entero Healthcare Solutions Ltd",
+    "industry": "Pharmacy Distribution",
+    "close": 1898.4,
+    "return_1d": 3.87,
+    "mcap_cr": 7954.28,
     "signal": "52W Breakout",
     "scans_count": 29
-  },
-  {
-    "symbol": "TBZ",
-    "company": "Tribhovandas Bhimji Zaveri Limited",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 480.85,
-    "return_1d": 10.0,
-    "mcap_cr": 2917.13,
-    "signal": "52W Breakout",
-    "scans_count": 28
   },
   {
     "symbol": "BHAGERIA",
     "company": "Bhageria Industries Limited",
     "industry": "Dyes & Pigments",
-    "close": 304.65,
-    "return_1d": 5.0,
-    "mcap_cr": 1266.34,
+    "close": 319.85,
+    "return_1d": 4.99,
+    "mcap_cr": 1329.62,
     "signal": "52W Breakout",
-    "scans_count": 27
+    "scans_count": 28
   },
   {
-    "symbol": "PTCIL",
-    "company": "PTC Industries Ltd",
-    "industry": "Castings - Steel/Alloy",
-    "close": 23830.0,
-    "return_1d": 0.04,
-    "mcap_cr": 35712.25,
+    "symbol": "TBZ",
+    "company": "Tribhovandas Bhimji Zaveri Limited",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 528.9,
+    "return_1d": 9.99,
+    "mcap_cr": 3208.74,
     "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 28
+  },
+  {
+    "symbol": "AEROENTER",
+    "company": "Aeroflex Enterprises Ltd",
+    "industry": "Miscellaneous",
+    "close": 154.73,
+    "return_1d": 9.11,
+    "mcap_cr": 1604.78,
+    "signal": "52W Breakout",
+    "scans_count": 25
   },
   {
     "symbol": "SAKAR",
     "company": "Sakar Healthcare Ltd",
     "industry": "Hospitals",
-    "close": 1013.9,
-    "return_1d": 0.69,
-    "mcap_cr": 2240.45,
+    "close": 1109.2,
+    "return_1d": 9.4,
+    "mcap_cr": 2255.92,
     "signal": "52W Breakout",
-    "scans_count": 23
+    "scans_count": 25
   },
   {
-    "symbol": "CRAFTSMAN",
-    "company": "Craftsman Automation Ltd",
-    "industry": "Auto & Auto Ancl - CV",
-    "close": 11398.0,
-    "return_1d": 1.59,
-    "mcap_cr": 29345.27,
+    "symbol": "MANINDS",
+    "company": "Man Industries (india) Limited",
+    "industry": "Steel - Tubes/Pipes",
+    "close": 819.4,
+    "return_1d": 3.91,
+    "mcap_cr": 5914.88,
     "signal": "52W Breakout",
-    "scans_count": 23
+    "scans_count": 24
   },
   {
-    "symbol": "MENONBE",
-    "company": "Menon Bearings Limited",
-    "industry": "Auto Ancillaries - Bearings",
-    "close": 321.4,
-    "return_1d": 4.16,
-    "mcap_cr": 1729.11,
+    "symbol": "STLTECH",
+    "company": "Sterlite Technologies Limited",
+    "industry": "Cables - Telecom",
+    "close": 786.3,
+    "return_1d": 4.99,
+    "mcap_cr": 38485.68,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 24
   },
   {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 964.15,
-    "return_1d": 0.84,
-    "mcap_cr": 18700.56,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "DEEPINDS",
-    "company": "Deep Industries Ltd",
-    "industry": "Oil Drilling & Exploration",
-    "close": 786.45,
-    "return_1d": 5.59,
-    "mcap_cr": 4767.04,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "BALAMINES",
-    "company": "Balaji Amines Limited",
+    "symbol": "FCL",
+    "company": "Fineotex Chemical Limited",
     "industry": "Speciality Chemicals",
-    "close": 2525.2,
-    "return_1d": 4.44,
-    "mcap_cr": 7833.91,
+    "close": 56.66,
+    "return_1d": 10.0,
+    "mcap_cr": 5998.34,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "KABRAEXTRU",
+    "company": "Kabra Extrusion Technik Limited",
+    "industry": "Capital Goods - Engineering Heavy",
+    "close": 634.5,
+    "return_1d": 9.56,
+    "mcap_cr": 2025.45,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "SYRMA",
+    "company": "Syrma SGS Technology Ltd",
+    "industry": "Consumer Electronics - EMS",
+    "close": 1634.8,
+    "return_1d": 12.18,
+    "mcap_cr": 28101.19,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "DOLPHIN",
-    "company": "Dolphin Offshore Enterprises (India) Ltd",
-    "industry": "Oil Drilling & Exploration",
-    "close": 674.0,
-    "return_1d": 8.78,
-    "mcap_cr": 2478.68,
+    "symbol": "PAISALO",
+    "company": "Paisalo Digital Ltd",
+    "industry": "Finance - Capital Markets - Brokers",
+    "close": 79.41,
+    "return_1d": 7.17,
+    "mcap_cr": 6739.56,
     "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "WELSPUNLIV",
-    "company": "Welspun Living Ltd",
-    "industry": "Textiles - Home Textile",
-    "close": 208.51,
-    "return_1d": 3.94,
-    "mcap_cr": 18952.68,
-    "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 19
   }
 ]
