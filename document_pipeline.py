@@ -294,10 +294,11 @@ def save_document_to_cache(symbol: str, doc_type: str, date_key: str, url: str, 
     except Exception as e:
         print(f"⚠️ Error writing cache for {symbol} ({doc_type}): {e}")
 
-# Default free models pool for 3-way rotation
+# Default free models pool for rotation
 DEFAULT_FREE_MODELS = [
     "minimax/minimax-m3:free",
-    "z-ai/glm-5.2:free",
+    "minimax/minimax-m2.7:free",
+    "nvidia/nemotron-3.5-lightning:free",
     "nvidia/nemotron-3-ultra-550b-a55b:free"
 ]
 
@@ -460,13 +461,13 @@ def summarize_text_via_deepseek(text: str, doc_type: str) -> str:
         "X-Title": "Multibagger Scanner"
     }
     
-    # 3-way load balancing distribution across document types
+    # Load balancing distribution across document types using active free models
     preferred_by_type = {
-        "Annual Report": "minimax/minimax-m3:free",               # 1M context handles massive PDFs
-        "Concall Transcript": "z-ai/glm-5.2:free",                 # Excellent reasoning for Q&A
-        "Investor Presentation": "nvidia/nemotron-3-ultra-550b-a55b:free", # High capacity for presentation data
-        "Substack Research Articles": "minimax/minimax-m3:free",   # Long context for multi-article articles
-        "Google News Articles": "z-ai/glm-5.2:free",               # Fast synthesis for news items
+        "Annual Report": "nvidia/nemotron-3.5-lightning:free",              # 1M context handles massive PDFs
+        "Concall Transcript": "minimax/minimax-m2.7:free",                  # Advanced agentic reasoning for Q&A
+        "Investor Presentation": "nvidia/nemotron-3-ultra-550b-a55b:free",  # 550B dense analysis
+        "Substack Research Articles": "minimax/minimax-m3:free",          # Deep analytical synthesis
+        "Google News Articles": "nvidia/nemotron-3.5-lightning:free",        # Fast synthesis for news items
         "ValuePickr Forum Posts": "nvidia/nemotron-3-ultra-550b-a55b:free", # Forum sentiment analysis
     }
     

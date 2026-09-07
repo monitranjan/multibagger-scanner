@@ -2142,12 +2142,12 @@ Public %: {public_val:.2f}%
         # Build full candidate pool ensuring all 3 free models are present
         all_models = dp.get_model_pool(primary_model)
         
-        # 3-way stage rotation:
-        # Stage 1: GLM-5.2 (deep thesis reasoning)
-        # Stage 2: NVIDIA Nemotron (large 550B model for dense financial tables)
-        # Stage 3: MiniMax M3 (valuation multiples & risk matrices)
+        # Stage rotation across active free models:
+        # Stage 1: MiniMax M2.7 (advanced agentic thesis reasoning)
+        # Stage 2: NVIDIA Nemotron 3.5 Lightning (high-speed 1M context for tables)
+        # Stage 3: NVIDIA Nemotron 3 Ultra (550B dense model for valuation & risk)
         stage_preferred = {
-            1: "z-ai/glm-5.2:free",
+            1: "nvidia/nemotron-3.5-lightning:free",
             2: "nvidia/nemotron-3-ultra-550b-a55b:free",
             3: "minimax/minimax-m3:free"
         }
