@@ -1,0 +1,82 @@
+- **Core Product Segments & Launches**  
+  - **Jewellery Categories (by Occasion & Karatage)**:  
+    - *Wedding Jewellery*: 22KT predominantly; 30–250g; ASP ₹0.1–0.2M+; Gross Margin 5–15%; Low repeat; Revenue Pool ₹3,360B (USD 40B, 2024); 6–9% CAGR to 2029.  
+    - *Daily-wear Jewellery*: 18KT/14KT; 5–30g; ASP ₹25K–35K; Gross Margin 25–35%; High repeat; Revenue Pool ₹2,282B (USD 27B, 2024); 15–18% CAGR to 2029.  
+    - *Non-wedding Occasion-wear Jewellery*: Higher studded component; varied materials (silver, platinum); ASP ₹35K–50K; Gross Margin 30–40%; Medium repeat; Revenue Pool ₹697B (USD 8B, 2024); 18–21% CAGR to 2029.  
+  - **New Segment Launches (Industry-First)**: Dedicated **Men’s** (curated lifestyle accessories: chains, bracelets) & **Kids’** (timeless pieces for milestones/daily wear) stores — bespoke retail environment for distinct customer journey.  
+  - **Entry-Level Portfolio Expansion**: Reimagined accessibility at consumer-preferred karatage via:  
+    - *Advanced Manufacturing*: Precision cutting, proprietary embedding to maximize design value.  
+    - *Material Science*: Alternative alloys/materials engineered for high quality with reduced gold ratios.  
+    - *Vertical Integration*: Leveraged to offer selection across ticket sizes; entry-level portfolio stayed relevant through duty hikes & price volatility (redesign benefits flowing through FY27).  
+  - **Design & Merchandising**: 10,000+ unique designs (Jun’26); algorithm-driven, data-led approach; dedicated prototype facility for quick turnaround & personalization; complete designer autonomy (not merchandiser-led).  
+  - **Studded Jewellery Push**: Data-driven insights led to introduction of studded designs → higher gross margins.  
+
+- **Quantitative Metrics (Growth, Market Share, Margins, Unit Economics)**  
+  - **Revenue Trajectory**:  
+    - FY25: ₹17,700M → FY26: ₹24,412M (**+37.9% YoY**); Q1 FY27: ₹7,332M (**+48.8% YoY, +6.6% QoQ**).  
+    - **Revenue CAGR (FY24–26): 38.9%**.  
+  - **Profitability**:  
+    - *Reported EBITDA*: FY25: ₹759M (4.3%) → FY26: ₹3,945M (16.2%); Q1 FY27: ₹1,102M (**+94.8% YoY, margin 15.0%, +354bps YoY**).  
+    - *Pre-IND AS EBITDA (excl. inventory gain)*: FY25: ₹172M (1.0%) → FY26: ₹1,806M (7.4%); Q1 FY27: ₹548M (**+134.6% YoY, margin 7.5%, +273bps YoY**).  
+    - *Adjusted PAT*: Q1 FY27: ₹138M (1.9% margin).  
+    - *Gross Margin*: Q1 FY27: **40.7%** (-39bps YoY, -263bps QoQ); FY26: 42.6% (+470bps YoY).  
+    - *Contribution Margin*: Q1 FY27: **36.1%** (-41bps YoY, -309bps QoQ); FY26: 38.3% (+800bps YoY).  
+    - *Adjusted EBITDA*: Q1 FY27: ₹1,293M (**+55.9% YoY**).  
+  - **Market Position**:  
+    - **#2 Digital-first omni-channel jewellery brand in India (FY24)**.  
+    - **28–32% market share among omni-channel jewellery players (FY25)**.  
+    - **Top 3** by Instagram followers (May’25); **Top 4** by least marketing spend % (FY24).  
+  - **Operational KPIs (Q1 FY27)**:  
+    - **SSSG: 39.0% YoY**.  
+    - **Repeat Revenue Ratio: 59.7%** (+900bps YoY, +377bps QoQ).  
+    - **AOV: ₹78,081** (+20.7% YoY, +4.3% QoQ).  
+    - **Lifetime Customers: 984,766** (+20.7% YoY).  
+    - **Advertising & Promotional Spend: 6.9% of revenue** (Q1 FY27).  
+    - **50%+ repeat revenue driven purely by designs & trust (no celebrity pull)**.  
+  - **Store Network**:  
+    - **352 stores** (+12 QoQ, +60 YoY) across **139 cities** (+9 YoY), **28 States/UTs**, **12,660+ PIN codes**.  
+    - **Total Area: 852K sq ft** (+40.7% YoY, +4.4% QoQ).  
+    - **Store Density: 2.5 stores/city**; **~50% stores in Tier 2/3 cities**.  
+    - **160 new stores added (FY25→FY26)**; new-format larger stores strengthening brand presence.  
+  - **Manufacturing & Tech**:  
+    - **95%+ jewellery produced in-house (#1 amongst peers)**.  
+    - **#1 design-to-store turnaround time (FY24)**.  
+    - **In-house integrated tech stack** (PMS, CRM, OMS) — one of few peers.  
+    - **Digital Milestone: 1M+ Instagram followers**.  
+  - **ESOP Normalization**:  
+    - Charge schedule: FY26: ₹927M → FY27E: ₹575M → FY28E: ₹289M → FY29E: ₹129M → FY30E: ₹48M (**~95% drop by FY30**).  
+    - Allocated pool: ~9.1M shares; Unallocated: ~2.6M shares (~1.7% equity) — covers future talent needs.  
+    - Founder (Promoter) not eligible for ESOPs; stable management, no leadership gaps.  
+  - **Inventory Gains**: Q1 FY27: ₹248M; Cumulative reserve: ₹1,749M (Q1 FY27).  
+
+- **Future Growth Adjacencies**  
+  - **Offline Channel Expansion**:  
+    - *New City Penetration*: Scaling beyond Tier I/II using digital demand data (web/app traffic) to site stores → capital-efficient model.  
+    - *Store Densification*: Multi-store in high-intent PIN codes (e.g., Lucknow: 31.3% revenue CAGR FY22–26) → proximity reduces friction, improves conversion velocity, increases LTV without cannibalization.  
+    - *New-Format Larger Stores*: Enhanced discovery/experience; high-visibility locations; standardized look/feel; real-time inventory integration across PIN codes.  
+  - **Category Adjacencies**:  
+    - **Men’s & Kids’ Jewellery** — industry-first dedicated stores capturing underserved segments.  
+    - **Entry-Level Price Points** at preferred karatage via manufacturing/material innovation.  
+    - **Studded Jewellery** expansion (data-led) for margin uplift.  
+  - **Omnichannel Deepening**:  
+    - *Lifetime Exchange & Buyback* on all products.  
+    - *10+1 Monthly Instalment Plan*.  
+    - *Industry-leading Old Gold Exchange offers*.  
+    - *Video Calling* for personalized shopping.  
+    - *3D Rendering, 360° Video, Size Visualization, Virtual Trials* — seamless online-offline experience.  
+  - **Tech & Data**: Algorithm-driven merchandizing/marketing; unified customer view for cross-channel shopping; automated inventory management; demand forecasting.  
+  - **No M&A, Fragrance, Oral Beauty/Nutrition mentions in provided text** — pure-play jewellery focus.  
+
+- **Revenue Mix Breakdown (Derived from Presentation Data)**  
+  - **No explicit brand/division revenue split disclosed** — single brand **“BlueStone”** across all channels.  
+  - **Implied Mix via Category Occasion Pools (Market Size, not BlueStone revenue)**:  
+    - Wedding: ~53% of ₹6,339B total addressable market (₹3,360B).  
+    - Daily-wear: ~36% (₹2,282B).  
+    - Non-wedding Occasion: ~11% (₹697B).  
+  - **BlueStone’s Strategic Weighting**:  
+    - *Shift from wedding to non-wedding/daily-wear* — targeting 25–45 yr women/men/couples valuing design over metal weight, discovering via social/digital.  
+    - *Higher studded mix & alternative materials* in non-wedding/daily-wear → supports **30–40% gross margins** vs 5–15% in wedding.  
+    - *Omnichannel revenue recognition*: On secondary sales basis (even for franchise stores).  
+  - **Channel Mix**: Omnichannel (online discovery + offline conversion) — **online drives discovery, stores complete physical experience**; stores added where digital demand proven.  
+  - **Geographic Mix**: Pan-India (Tier I/II/III); ~50% stores in Tier 2/3; 12,660+ PIN codes serviced.  
+  - **Customer Cohort**: 59.7% repeat ratio; 984K+ lifetime customers; AOV ₹78K.

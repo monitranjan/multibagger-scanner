@@ -1,0 +1,6 @@
+- **Variant View: Operating leverage materializing faster than initially projected** — Verified (based on Q1 EBITDA margin of 14% and SSG 39% cited from results; not explicitly stated in filings as "faster than projected")
+- **Event Watch: Store expansion pace vs FY30 target** — Verified (community tracking 12 new stores in quarter, total 352; notes need to double run-rate to hit FY30 target)
+- **Red Flag: Reported PAT obfuscated by ESOP charges & non-cash adjustments** — Verified (Cash PAT ₹57 Cr vs reported PAT; gap highlighted as recurring distortion)
+- **Milestone: Sustained SSG >30% + store addition rate >25/quarter** — Needs Verification (implied threshold for sentiment shift; not quantified in filings)
+- **Variant View: Younger store cohorts (<3 yrs) margin inflection ahead** — Needs Verification (community assumption on cohort maturation driving margin expansion; not disclosed in filings)
+- **Rumour: FY30 store target implicitly requires 2x current run-rate** — Rumour (target not confirmed in filings; community-derived extrapolation)
