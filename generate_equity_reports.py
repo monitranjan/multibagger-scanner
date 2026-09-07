@@ -1498,47 +1498,72 @@ def fetch_screener_documents(symbol: str) -> dict:
     }
 
 def clean_company_name(name: str) -> str:
-    """Remove common corporate suffixes from company name to improve search precision."""
-    cleaned = re.sub(r'\b(limited|ltd|corporation|corp|co|company|ltd\.)\b', '', name, flags=re.IGNORECASE)
+    """Remove common corporate suffixes and parentheticals from company name to improve search precision."""
+    cleaned = re.sub(r'\(.*?\)', '', name)
+    cleaned = re.sub(r'\b(limited|ltd|corporation|corp|co|company|ltd\.)\b', '', cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r'\s+', ' ', cleaned).strip()
     return cleaned
 
-def fetch_valuepickr_thread(company_name: str) -> tuple:
-    """Search ValuePickr forum API directly and return the matched topic thread URL and topic ID."""
+def fetch_valuepickr_thread(company_name: str, symbol: str = "") -> tuple:
+    """Search ValuePickr forum API directly with intelligent fallback terms and return the matched topic thread URL and topic ID."""
     cleaned = clean_company_name(company_name)
-    term = cleaned.replace(" ", "%20")
-    url = f"https://forum.valuepickr.com/search/query?term={term}"
+    candidates = []
+    
+    # Candidate 1: Stripped core name without generic sector/business words (e.g. "Syrma SGS Technology" -> "Syrma SGS")
+    stripped = re.sub(
+        r'\b(technology|technologies|industries|industry|enterprises|enterprise|solutions|solution|systems|system|india|international|holdings|holding|services|service|products|product|healthcare|pharmaceuticals|pharma)\b',
+        '', cleaned, flags=re.IGNORECASE
+    )
+    stripped = re.sub(r'\s+', ' ', stripped).strip()
+    if stripped and stripped.lower() != cleaned.lower() and len(stripped) >= 3:
+        candidates.append(stripped)
+        
+    # Candidate 2: Full cleaned name (e.g. "Syrma SGS Technology")
+    if cleaned and cleaned not in candidates:
+        candidates.append(cleaned)
+        
+    # Candidate 3: First distinctive words if multi-word (e.g. "Syrma")
+    words = [w for w in (stripped or cleaned).split() if len(w) >= 3]
+    if len(words) > 1 and words[0] not in candidates:
+        candidates.append(words[0])
+        
+    # Candidate 4: Symbol (e.g. "SYRMA")
+    if symbol and len(symbol) >= 4 and symbol not in candidates:
+        candidates.append(symbol)
+
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/115.0.0.0 Safari/537.36",
         "Accept": "application/json"
     }
-    try:
-        print(f"🔍 [ValuePickr API] Querying thread search for: {cleaned}")
-        r = requests.get(url, headers=headers, timeout=12)
-        if r.status_code == 200:
-            data = r.json()
-            topics = data.get("topics", [])
-            if topics:
-                # Filter to verify the topic title contains any term of our query
-                query_terms = [t.lower() for t in cleaned.split() if len(t) >= 3]
-                best_topic = None
-                for t in topics:
-                    t_title = t.get("title", "").lower()
-                    t_slug = t.get("slug", "").lower()
-                    # Check if query terms are matching the topic metadata
-                    if not query_terms or any(term in t_title or term in t_slug for term in query_terms):
-                        best_topic = t
-                        break
-                if best_topic:
-                    slug = best_topic.get("slug")
-                    topic_id = best_topic.get("id")
-                    if slug and topic_id:
-                        full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
-                        print(f"🎯 ValuePickr thread matched: {full_thread_url}")
-                        return full_thread_url, topic_id
-                print(f"⚠️ ValuePickr topic check: No matching topic titles found for query terms {query_terms}")
-    except Exception as e:
-        print(f"⚠️ ValuePickr API search error: {e}")
+
+    for term in candidates:
+        url = f"https://forum.valuepickr.com/search/query?term={term.replace(' ', '%20')}"
+        try:
+            print(f"🔍 [ValuePickr API] Querying thread search for: {term}")
+            r = requests.get(url, headers=headers, timeout=12)
+            if r.status_code == 200:
+                data = r.json()
+                topics = data.get("topics", [])
+                if topics:
+                    query_terms = [t.lower() for t in term.split() if len(t) >= 3]
+                    best_topic = None
+                    for t in topics:
+                        t_title = t.get("title", "").lower()
+                        t_slug = t.get("slug", "").lower()
+                        if any(qt in t_title or qt in t_slug for qt in query_terms):
+                            best_topic = t
+                            break
+                    if best_topic:
+                        slug = best_topic.get("slug")
+                        topic_id = best_topic.get("id")
+                        if slug and topic_id:
+                            full_thread_url = f"https://forum.valuepickr.com/t/{slug}/{topic_id}"
+                            print(f"🎯 ValuePickr thread matched: {full_thread_url}")
+                            return full_thread_url, topic_id
+                    print(f"⚠️ ValuePickr topic check: No matching topic titles found for query terms {query_terms}")
+        except Exception as e:
+            print(f"⚠️ ValuePickr API search error on '{term}': {e}")
+            
     return "https://forum.valuepickr.com/", None
 
 def fetch_valuepickr_posts(topic_id: int) -> str:
@@ -1728,7 +1753,7 @@ def get_company_web_context(company_name: str, symbol: str) -> dict:
     if not concall_pdf:
         concall_pdf = "https://concall.in/"
         
-    val_url, topic_id = fetch_valuepickr_thread(cleaned_name)
+    val_url, topic_id = fetch_valuepickr_thread(cleaned_name, symbol)
     val_posts_context = ""
     if topic_id:
         val_posts_context = fetch_valuepickr_posts(topic_id)
@@ -2143,11 +2168,11 @@ Public %: {public_val:.2f}%
         all_models = dp.get_model_pool(primary_model)
         
         # Stage rotation across active free models:
-        # Stage 1: MiniMax M2.7 (advanced agentic thesis reasoning)
+        # Stage 1: MiniMax M3 (institutional equity thesis reasoning & core metrics)
         # Stage 2: NVIDIA Nemotron 3.5 Lightning (high-speed 1M context for tables)
         # Stage 3: NVIDIA Nemotron 3 Ultra (550B dense model for valuation & risk)
         stage_preferred = {
-            1: "nvidia/nemotron-3.5-lightning:free",
+            1: "minimax/minimax-m2.7:free",
             2: "nvidia/nemotron-3-ultra-550b-a55b:free",
             3: "minimax/minimax-m3:free"
         }
