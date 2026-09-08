@@ -1,0 +1,20 @@
+{
+  "investor_presentation": {
+    "date_key": "202412",
+    "url": "https://www.stockscans.in/document/9ibu13qp832xl9hux961acz6.pdf",
+    "filename": "investor_presentation_202412.md",
+    "cached_at": "2026-09-08T17:20:55.888553"
+  },
+  "annual_report": {
+    "date_key": "2026",
+    "url": "https://www.stockscans.in/document/95y41ulk9em9sth5nd0o279v.pdf",
+    "filename": "annual_report_2026.md",
+    "cached_at": "2026-09-08T17:21:53.647899"
+  },
+  "concall_transcript": {
+    "date_key": "2025",
+    "url": "https://wendtindia.com/wp-content/uploads/2025/11/AGM-Transcript.pdf",
+    "filename": "concall_transcript_2025.md",
+    "cached_at": "2026-09-08T17:29:39.129451"
+  }
+}
