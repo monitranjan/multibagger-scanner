@@ -1,0 +1,13 @@
+- **Consensus View**: Community aligns on aggressive capacity expansion narrative — 700 MW current → 800 MW addition by Sep-2024 → 4.5 GW by FY26 → 5 GW cell/15 GW module by 2030 (INR 8,000 cr capex). *Label: Needs Verification* (sourced from pv magazine/Saur Energy articles, not filings)  
+- **Variant View**: @sivaram flags Adani Enterprises’ integrated SPV play (ingot-to-panel) per Adani AR as structural market-share threat — sole dissenting fundamental view. *Label: Verified* (Adani AR public)  
+- **Event Watch**: 1.2 GW module fab operationalization — originally targeted Jan-2023 (post #11), but ground-breaking was Oct-2020 with no updates since; community expects ≤1.5 yr build cycle. *Label: Needs Verification* (delay tracked via forum, not disclosed)  
+- **Event Watch**: 800 MW module line acquisition from Wuxi/GMEE Solar (pv magazine Sep-2024) — key near-term execution milestone. *Label: Needs Verification*  
+- **Event Watch**: Europe market entry post MCS 005/BSI Kitemark certification (first Indian module maker) — cited Saur Energy Sep-2024. *Label: Needs Verification*  
+- **Event Watch**: Promoter shareholding decline in latest quarter — cause unknown; community seeks clarity. *Label: Needs Verification* (not in filings yet)  
+- **Red Flag**: 1.2 GW project timeline opacity — 3+ years since ground-breaking vs. 1.5 yr norm; no operational updates. *Label: Needs Verification* (community-tracked delay)  
+- **Red Flag**: Promoter selling amid expansion capex — signal misalignment if sustained. *Label: Needs Verification*  
+- **Red Flag**: Import curbs benefit narrative vs. Adani’s vertical integration — domestic policy tailwind may not offset scale disadvantage. *Label: Verified* (policy public, Adani AR public)  
+- **Sentiment Milestone**: 800 MW line commissioned by Sep-2024 — would validate expansion credibility. *Label: Needs Verification*  
+- **Sentiment Milestone**: Europe order book/revenue post-MCS certification — proves export execution. *Label: Needs Verification*  
+- **Sentiment Milestone**: Promoter holding stabilisation or buyback — would counter selling overhang. *Label: Needs Verification*  
+- **Rumour**: 3.7 GW module capacity operational in 2023 (post #11) — contradicts 700 MW current capacity; likely outdated/erroneous target. *Label: Rumour*
