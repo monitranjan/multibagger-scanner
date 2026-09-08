@@ -1,0 +1,13 @@
+- **Needs Verification**: Management trustworthiness assessment: recent open‑market purchases @370 levels, regular monthly sales disclosures to BSE, and Tatas/Sumitomo on board viewed positively; however, historical 2012 self‑allotment at ₹300 when market was ₹200 remains a tracked governance red flag.  
+- **Needs Verification**: Promoter open‑market buying as confidence signal: 1.2 Lakh shares bought last month per BSE; Tera Software example cited (promoter buy → 320cr AP govt order → eventual decline to ₹100), outcome not verified as a repeatable pattern.  
+- **Needs Verification**: Valuation gap with peers: SSWL's higher margins vs Wheels India suggest compression potential, but sustainability depends on tractor segment recovery and monsoon outlook—prediction not directly from filings.  
+- **Needs Verification**: Egypt order win as new geographical entry: claimed repetitive, second order within a week boosts sentiment on management dependability; order details verifiable from BSE, repetitiveness is community interpretation.  
+- **Needs Verification**: Export aftermarket growth (32% & 44% last 2 months) cited as offsetting local tractor de‑growth; community watches sustainability beyond the two‑month window.  
+- **Needs Verification**: Community‑tracked gaps not apparent in filings: (a) auto segment exposure (Car/Two‑wheeler/LCV/HCV) for SSWL steel strips, (b) competitor landscape, (c) raw material price pass‑through mechanism, (d) after‑market sector entry status in India (only Korea/foreign orders so far).  
+- **Needs Verification**: Order scale perspective: ~50cr annualized new orders vs ₹1,100cr topline; community debates whether this moves the needle or is symbolic.  
+- **Needs Verification**: Monsoon‑dependent growth risk: negative tractor rim sales trend per BSE November data; outlook uncertain for next year pending monsoon performance.  
+- **Verified**: Promoter bought 1.2 Lakh shares from open market in the last month (BSE disclosure).  
+- **Verified**: First interim dividend declared (corporate action).  
+- **Verified**: Company's Risk Framework policy referenced against AR15 standards (governance doc).  
+- **Verified**: Jamshedpur plant expansion noted on company website.  
+- **Verified**: Large order received and disclosed via BSE live filing.
