@@ -1,0 +1,9 @@
+**Core Product Segments & Launches**  
+- WIL operates across four primary divisions: (1) Automotive wheels division – cars, trucks, and tractors; (2) Construction equipment division – wheels, fabrications, and hydraulic cylinders; (3) Energy products division – wind turbine sector components; (4) Air suspension & lift axle division  
+- Subsidiary WIL Car Wheels Ltd (WCWL) focused on steel wheels for light passenger vehicles  
+- Joint venture with TOPY Japan for PV/LP wheels manufacturing  
+- Export revenue: $141 Mn in FY26, constituting 26.19% of standalone sales (1,341.94 / 5,124.40 INR Cr); Q4 FY26 export at 27.19% (400.14 / 1,471.49)  
+- Product portfolio: Steel & aluminium wheels (passenger car, UV, CV, TR, LP, EM, tractor, off-road); forged aluminium wheels; cast aluminium wheels; air suspension systems; lift axles; hydraulic cylinders; wind turbine components (machined base frames, WTC); fabricated dump truck bodies; earthmover wheels  
+- Manufacturing footprint: 10 plants across Padi, Rampur, Pune, Sriperumbudur, Namachivayapuram, Thervoy Kandigai, Irungattukottai, Pukkathurai; total workforce ~8,400  
+- Accreditations: Ecovadis Silver (Top 15% global), Climate C, Water B- global rating, CII Energy Efficiency Summit 2025 awards, CII Greenco Rating, Cybersecurity award from MSIL, Partnership & Quality Award from Escorts Kubota, Best Supplier at TAFE, Best Collaboration at VECV, EEPC Quality Award, ACMA Excellence Award in Digitalization/Manufacturing/ESG, Caterpillar Supplier Excellence 2025, Komatsu Best Performance in Quality for Dump Truck 2025, John Deere Supplier of the year 2025  
+- Establishment year: 1960; Promoter holding: 58.31% equity; Part of TSF Group with lineage from erstwhile
