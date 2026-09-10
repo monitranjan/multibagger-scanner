@@ -1,122 +1,72 @@
 [
   {
-    "symbol": "WHEELS",
-    "company": "Wheels India Limited",
-    "industry": "Auto Ancillaries - Wheels",
-    "close": 2400.6,
-    "return_1d": 13.97,
-    "mcap_cr": 5146.57,
-    "signal": "52W Breakout",
-    "scans_count": 25
-  },
-  {
     "symbol": "CHENNPETRO",
     "company": "Chennai Petroleum Corporation Limited",
     "industry": "Refineries",
-    "close": 1604.4,
-    "return_1d": 10.06,
-    "mcap_cr": 21708.3,
+    "close": 1626.4,
+    "return_1d": 1.37,
+    "mcap_cr": 23891.35,
+    "signal": "52W Breakout",
+    "scans_count": 26
+  },
+  {
+    "symbol": "RML",
+    "company": "Rane (madras) Limited",
+    "industry": "Auto Ancillaries - Gears",
+    "close": 1408.9,
+    "return_1d": 3.27,
+    "mcap_cr": 3770.53,
+    "signal": "52W Breakout",
+    "scans_count": 26
+  },
+  {
+    "symbol": "KENNAMET",
+    "company": "Kennametal India Ltd",
+    "industry": "Castings, Forgings & Fastners",
+    "close": 5027.9,
+    "return_1d": 5.92,
+    "mcap_cr": 10432.41,
     "signal": "52W Breakout",
     "scans_count": 25
-  },
-  {
-    "symbol": "INDNIPPON",
-    "company": "India Nippon Electricals Limited",
-    "industry": "Auto Ancillaries - Engine Parts",
-    "close": 1313.3,
-    "return_1d": 17.02,
-    "mcap_cr": 2538.8,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "STLTECH",
-    "company": "Sterlite Technologies Limited",
-    "industry": "Cables - Telecom",
-    "close": 865.9,
-    "return_1d": 5.0,
-    "mcap_cr": 42381.01,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "CRAFTSMAN",
-    "company": "Craftsman Automation Ltd",
-    "industry": "Auto & Auto Ancl - CV",
-    "close": 11806.0,
-    "return_1d": 3.51,
-    "mcap_cr": 29831.75,
-    "signal": "52W Breakout",
-    "scans_count": 23
   },
   {
     "symbol": "PAISALO",
     "company": "Paisalo Digital Ltd",
     "industry": "Finance - Capital Markets - Brokers",
-    "close": 79.92,
-    "return_1d": 2.83,
-    "mcap_cr": 7068.8,
+    "close": 83.05,
+    "return_1d": 3.92,
+    "mcap_cr": 7268.9,
     "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "SBC",
-    "company": "SBC Exports Ltd",
-    "industry": "Textiles - Readymade Apparel",
-    "close": 48.68,
-    "return_1d": 4.08,
-    "mcap_cr": 2227.14,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "BIL",
-    "company": "Bhartiya International Limited",
-    "industry": "Textiles",
-    "close": 1108.2,
-    "return_1d": 18.29,
-    "mcap_cr": 1256.35,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "INDORAMA",
-    "company": "Indo Rama Synthetics (india) Limited",
-    "industry": "Textiles - Spinning",
-    "close": 86.13,
-    "return_1d": 14.87,
-    "mcap_cr": 1957.83,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "NOVARTIND",
-    "company": "Novartis India Ltd",
-    "industry": "Pharma - MNC bulk Drugs",
-    "close": 2186.4,
-    "return_1d": 20.0,
-    "mcap_cr": 4498.66,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "NAVINFLUOR",
-    "company": "Navin Fluorine International Limited",
-    "industry": "Chemicals - Flourine",
-    "close": 8775.5,
-    "return_1d": 0.51,
-    "mcap_cr": 44782.31,
-    "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 22
   },
   {
     "symbol": "KABRAEXTRU",
     "company": "Kabra Extrusion Technik Limited",
-    "industry": "industrials",
-    "close": 662.95,
-    "return_1d": 0.99,
-    "mcap_cr": 2295.79,
+    "industry": "Capital Goods - Engineering Heavy",
+    "close": 707.55,
+    "return_1d": 6.73,
+    "mcap_cr": 2318.52,
     "signal": "52W Breakout",
-    "scans_count": 0
+    "scans_count": 22
+  },
+  {
+    "symbol": "GCSL",
+    "company": "Gretex Corporate Services Ltd",
+    "industry": "Finance & Investments - Others",
+    "close": 614.8,
+    "return_1d": 2.14,
+    "mcap_cr": 1454.15,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "SSWL",
+    "company": "Steel Strips Wheels Limited",
+    "industry": "Auto Ancillaries - Wheels",
+    "close": 373.6,
+    "return_1d": 0.58,
+    "mcap_cr": 5838.47,
+    "signal": "52W Breakout",
+    "scans_count": 19
   }
 ]
