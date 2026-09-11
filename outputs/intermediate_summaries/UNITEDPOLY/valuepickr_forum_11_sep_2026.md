@@ -1,0 +1,10 @@
+- **Consensus View**: Delisting by Diageo is perceived as a negative event forcing exit from a high-quality long-term compounder, despite likely premium pricing; small investors feel disadvantaged vs. foreign promoter.  
+- **Variant View**: Delisting at a significant premium offers "good gains" and near-term capital protection; some argue waiting for official announcement is prudent given institutional holding barriers.  
+- **Event Watch**: Official delisting announcement and reverse book-building timeline; Q3FY20 volume trends (reported -2% YoY in Dec quarter) for consumption recovery signals; debt-free trajectory (<3 years per forum estimate).  
+- **Red Flag**: ED attachment of ~7% shares (ex-Mallya) may complicate or block 90% shareholder consent threshold for delisting. **Needs Verification**  
+- **Red Flag**: Consumption slowdown biting volumes (Q3FY20 worst in recent quarters per Mint). **Verified** (public news)  
+- **Milestone**: Achievement of 90% shareholder tender in delisting offer — would force remaining holders into illiquid unlisted shares with reduced disclosures. **Needs Verification** (process mechanics)  
+- **Milestone**: USL turning virtually debt-free (from ₹8,000 Cr peak) — would strengthen balance sheet but may accelerate delisting intent. **Needs Verification** (forward estimate)  
+- **Insight**: Current EV-based valuation cited as similar or cheaper than Diageo’s 2013/14 entry price for 54% stake. **Needs Verification** (valuation math not in filings)  
+- **Insight**: FII/FPI + DII holdings ~34% cited as practical hurdle to delisting success. **Needs Verification** (holding data not confirmed)  
+- **Rumour**: Delisting "news" referenced repeatedly but no official source cited in thread; community reacting to unconfirmed reports. **Rumour**
