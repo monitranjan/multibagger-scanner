@@ -1,72 +1,92 @@
 [
   {
-    "symbol": "CHENNPETRO",
-    "company": "Chennai Petroleum Corporation Limited",
-    "industry": "Refineries",
-    "close": 1626.4,
-    "return_1d": 1.37,
-    "mcap_cr": 23891.35,
+    "symbol": "BIRLACABLE",
+    "company": "Birla Cable Limited",
+    "industry": "Cables - Telecom",
+    "close": 392.35,
+    "return_1d": 4.72,
+    "mcap_cr": 1123.95,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 31
   },
   {
-    "symbol": "RML",
-    "company": "Rane (madras) Limited",
-    "industry": "Auto Ancillaries - Gears",
-    "close": 1408.9,
-    "return_1d": 3.27,
-    "mcap_cr": 3770.53,
+    "symbol": "STLTECH",
+    "company": "Sterlite Technologies Limited",
+    "industry": "Cables - Telecom",
+    "close": 897.4,
+    "return_1d": 4.99,
+    "mcap_cr": 43925.27,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 24
   },
   {
-    "symbol": "KENNAMET",
-    "company": "Kennametal India Ltd",
-    "industry": "Castings, Forgings & Fastners",
-    "close": 5027.9,
-    "return_1d": 5.92,
-    "mcap_cr": 10432.41,
+    "symbol": "LAURUSLABS",
+    "company": "Laurus Labs Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 1969.0,
+    "return_1d": 1.23,
+    "mcap_cr": 105078.54,
     "signal": "52W Breakout",
-    "scans_count": 25
+    "scans_count": 23
   },
   {
-    "symbol": "PAISALO",
-    "company": "Paisalo Digital Ltd",
-    "industry": "Finance - Capital Markets - Brokers",
-    "close": 83.05,
-    "return_1d": 3.92,
-    "mcap_cr": 7268.9,
+    "symbol": "GRANULES",
+    "company": "Granules India Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 909.3,
+    "return_1d": 1.12,
+    "mcap_cr": 22283.14,
     "signal": "52W Breakout",
-    "scans_count": 22
+    "scans_count": 23
   },
   {
     "symbol": "KABRAEXTRU",
     "company": "Kabra Extrusion Technik Limited",
     "industry": "Capital Goods - Engineering Heavy",
-    "close": 707.55,
-    "return_1d": 6.73,
-    "mcap_cr": 2318.52,
+    "close": 723.15,
+    "return_1d": 2.2,
+    "mcap_cr": 2474.5,
     "signal": "52W Breakout",
     "scans_count": 22
   },
   {
-    "symbol": "GCSL",
-    "company": "Gretex Corporate Services Ltd",
-    "industry": "Finance & Investments - Others",
-    "close": 614.8,
-    "return_1d": 2.14,
-    "mcap_cr": 1454.15,
+    "symbol": "EBGNG",
+    "company": "GNG Electronics Ltd",
+    "industry": "New age - Platform - E-Retail",
+    "close": 679.65,
+    "return_1d": 0.25,
+    "mcap_cr": 7729.41,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "WABAG",
+    "company": "Va Tech Wabag Limited",
+    "industry": "Water Treatment",
+    "close": 2277.9,
+    "return_1d": 2.99,
+    "mcap_cr": 13791.63,
     "signal": "52W Breakout",
     "scans_count": 20
   },
   {
-    "symbol": "SSWL",
-    "company": "Steel Strips Wheels Limited",
-    "industry": "Auto Ancillaries - Wheels",
-    "close": 373.6,
-    "return_1d": 0.58,
-    "mcap_cr": 5838.47,
+    "symbol": "SPECTRUM",
+    "company": "Spectrum Electrical Industries Ltd",
+    "industry": "Capital Goods - Electric General",
+    "close": 3022.5,
+    "return_1d": 5.0,
+    "mcap_cr": 4523.39,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 20
+  },
+  {
+    "symbol": "PAISALO",
+    "company": "Paisalo Digital Ltd",
+    "industry": "Finance - Capital Markets - Brokers",
+    "close": 84.23,
+    "return_1d": 1.42,
+    "mcap_cr": 7553.58,
+    "signal": "52W Breakout",
+    "scans_count": 20
   }
 ]
