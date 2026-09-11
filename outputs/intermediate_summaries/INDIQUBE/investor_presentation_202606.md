@@ -1,0 +1,54 @@
+- **Core Product Segments & Service Lines**  
+  - **IndiQube Grow**: Integrated managed workspace solution (plug-and-play offices with interiors, technology, facility management, VAS) – core revenue driver  
+  - **IndiQare**: B2B/B2C facility management, asset maintenance, plantation, catering, transportation services  
+  - **Eco**: Property renovation/upgradation via tech upgrades, amenities, green initiatives, designed interiors – landlord collaboration model  
+  - **DesignQube**: Customizable design-and-build (concept to completion, turnkey execution, maintenance) for client-owned premises  
+  - **MiQube**: Proprietary tech stack (community app, tenant platform, service delivery app, IoT device network) – 148K+ lifetime downloads, 1.5M+ FY26 transactions, 4.0 Play Store rating  
+
+- **Quantitative Metrics – Q1 FY27 (Quarter Ended June 30, 2026)**  
+  - **Revenue**: ₹428 Cr (▲37% YoY vs ₹313 Cr); Recurring ₹395 Cr (92%), One-time ₹33 Cr (8%)  
+  - **EBITDA**: ₹87 Cr (▲34% YoY), Margin 20% (vs 21% Q1 FY26)  
+  - **EBIT**: ₹55 Cr (▲59% YoY), Margin 13% (vs 11%)  
+  - **PAT**: ₹35 Cr (▲91% YoY), Margin 8% (vs 6%)  
+  - **Adjusted Cash EBIT**: ₹75 Cr (▲43% YoY), Margin 18% of revenue (stable vs 17% prior periods)  
+  - **Cash EBIT**: ₹68 Cr (▲42% YoY)  
+  - **Occupancy**: Steady-state 90% (vs 87% YoY), Overall 86% (vs 85% YoY)  
+  - **Portfolio Scale**: 137 centers (▲14% YoY), 17 cities (8 Tier I, 9 Tier II), 236K seats (▲22% YoY), 10.61 Mn sq ft AUM (▲22% YoY)  
+  - **Rent Yielding Area**: 7.84 Mn sq ft (▲21% YoY); Rent Paying Area: 8.74 Mn sq ft  
+  - **Future Pipeline**: 2.77 Mn sq ft LOI signed (not yet rent-paying)  
+  - **VAS Revenue**: ₹72 Cr (▲118% YoY), 17% of operating revenue (vs 11% Q1 FY26) – driven by DesignQube, IndiQare, Eco project-based engagements  
+  - **Client Metrics**: 855 clients PAN India; 41% multi-center clients contributing 49% revenue; avg lease duration 30–47 months  
+  - **Client Segment Revenue Mix**: GCCs 53%, Indian Enterprises 28%, Unicorns 12%, Startups 11%  
+  - **Seat Size Distribution**: 300+ seats 65%, 101–300 seats 25%, 51–100 seats 6%, 0–50 seats 4%  
+  - **Acquisition Efficiency**: Brand-led 62%, Brokerage-to-Ops Revenue 2.03%  
+  - **Supply Acquisition Mix**: 55% renovated properties (city centers/CBDs), 23% tech parks/full buildings (GCC-centric micromarkets), 20% metro-proximity hub-and-spoke  
+  - **ESG/Infra**: 82% centers <3 km from metro; 4.4 Mn sq ft green certified (35 centers), 0.96 Mn sq ft under certification (7 centers)  
+  - **Unit Economics**: Operational breakeven 55–60% occupancy; steady-state 85–90%; capex ₹1,650/sq ft recovered in ~3 years; Revenue-to-Rent ratio 2.21x  
+  - **Balance Sheet**: Net Worth ₹1,194 Cr (▲202% YoY), Net Debt -₹66 Cr (net cash), Debt-to-Equity 0.05 (vs 0.95 YoY), Gross Debt ₹278 Cr, Cash & Equivalents ₹343 Cr  
+  - **Tax Profile**: Current tax paid FY24 ₹8.4 Cr, FY25 ₹7.67 Cr, FY26 ₹21.73 Cr, Q1FY27 est. ₹8.14 Cr – confirms underlying profitability  
+  - **Ind AS 116 Impact (Non-cash)**: Interest on lease liabilities ₹116 Cr, ROU depreciation ₹148 Cr, Total ₹264 Cr vs actual lease payments ₹190 Cr  
+
+- **Future Growth Adjacencies & Strategic Levers**  
+  - **North India Acceleration**: 3.9 Lakh sq ft office supply secured on Noida Expressway  
+  - **Design & Build Pipeline**: Signed 39K sq ft project in Bengaluru for Canadian VFX/animation/creative solutions leader  
+  - **Large Enterprise Wins**: ₹52 Cr workspace deal with leading consulting/management services firm in Bangalore  
+  - **VAS Scaling**: One-time VAS (DesignQube/Eco/IndiQare projects) expected to remain recurring feature given ongoing pipeline  
+  - **Tech Monetization**: MiQube transaction volume ▲31% YoY (462K in Q1 FY27) – platform stickiness driving retention & upsell  
+  - **Capital Efficiency Focus**: Maintaining "healthy balance of scale, profitability & capital efficiency" – CEO guidance  
+  - **Asset-Liability Alignment**: 3-year cycle aligns client lock-in, landlord lock-in (avg 38 months non-cancellable), and capex payback – eliminates asset-liability mismatch  
+
+- **Revenue Mix Breakdown (Q1 FY27, IGAAP Equivalent)**  
+  - **Total Revenue**: ₹428 Cr  
+    - **Recurring Revenue (92%)**: ₹395 Cr  
+      - Core managed workspace rentals (IndiQube Grow)  
+      - Facility management & VAS recurring (IndiQare)  
+      - Maintenance, electricity, ancillary services  
+    - **One-Time Revenue (8%)**: ₹33 Cr  
+      - DesignQube design-and-build projects  
+      - Eco renovation/upgrade projects  
+      - IndiQare project-based engagements  
+      - Fit-out/capex recovery billings  
+  - **VAS Contribution**: ₹72 Cr (17% of operating revenue) – split across DesignQube, IndiQare, Eco  
+  - **Geographic Revenue Concentration**: Bangalore dominant (76 centers, 6.68M sq ft, 148K seats) → ~63% of AUM; Chennai 11%, Pune 7%, Gurugram/Noida/Hyderabad/Mumbai balance  
+  - **Client Segment Revenue**: GCCs 53%, Indian Enterprises 28%, Unicorns 12%, Startups 11%  
+  - **Acquisition Channel**: Brand-led 62%, Broker-mediated 38% (low brokerage cost 2.03% of ops revenue)
