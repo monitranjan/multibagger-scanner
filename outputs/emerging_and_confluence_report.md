@@ -1,5 +1,5 @@
 # 📊 Monit High-Conviction Confluences & Emerging Leaders Report
-Generated on **14 Sep 2026** | Premium Quantitative Watchlist Analysis
+Generated on **15 Sep 2026** | Premium Quantitative Watchlist Analysis
 
 ## 🏆 1. High-Conviction Confluences (Common Count = 3)
 These stocks are at the absolute intersection of all three major momentum dimensions:
@@ -16,38 +16,36 @@ _No triple-confluence candidates detected in today's run._
 ## 🚀 2. Emerging Multibagger Leaders (Fresh Momentum Expansion)
 These stocks show a fresh institutional footprint. They have minimal historical appearances (`<= 2` counts over the prior months) but have erupted recently (`>= 3` appearances in the last 10 days). This highlights **early stage-2 momentum expansion** before they double!
 
-Total emerging leaders: **31**
+Total emerging leaders: **29**
 
 | Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Volume & Delivery (Live) | Persistence (Last 10D) |
 |---|---|---|---|---|---|---|---|
-| 1 | `ASIANHOTNR` | Asian Hotels (north) Limited | services | ₹378.80 | 1,615.0 | 48.6% (🛡️ Strong Delivery (₹0.31 Cr) | ₹0.31 Cr) | **10/10 days** |
-| 2 | `GMMPFAUDLR` | GMM Pfaudler Ltd | industrials | ₹1,307.90 | 5,880.0 | 52.6% (🛡️ Strong Delivery (₹14.41 Cr) | ₹14.41 Cr) | **10/10 days** |
-| 3 | `PRABHA` | Prabha Energy Ltd | energy | ₹244.64 | 3,585.8 | 58.2% (🛡️ Strong Delivery (₹10.84 Cr) | ₹10.84 Cr) | **10/10 days** |
-| 4 | `SHREEJISPG` | Shreeji Shipping Global Ltd | transportation | ₹691.75 | 11,269.9 | 41.8% (⚖️ Neutral | ₹24.33 Cr) | **8/10 days** |
-| 5 | `MVGJL` | Manoj Vaibhav Gems N Jewellers Ltd | consumer discretionary | ₹197.37 | 964.1 | 55.5% (🛡️ Strong Delivery (₹2.87 Cr) | ₹2.87 Cr) | **8/10 days** |
-| 6 | `SMSPHARMA` | Sms Pharmaceuticals Limited | Pharma - API & CRAMS | ₹463.45 | 4,340.3 | 15.7% (⚠️ Speculative Churn | ₹69.65 Cr) | **7/10 days** |
-| 7 | `RADHIKAJWE` | Radhika Jeweltech Ltd | consumer discretionary | ₹83.21 | 981.9 | 29.6% (⚖️ Neutral | ₹3.42 Cr) | **7/10 days** |
-| 8 | `IONEXCHANG` | Ion Exchange (India) Ltd | realty | ₹445.70 | 6,536.9 | 34.4% (⚖️ Neutral | ₹19.34 Cr) | **7/10 days** |
-| 9 | `UNITEDPOLY` | United Polyfab Gujarat Ltd | textiles | ₹43.28 | 993.3 | 77.2% (🛡️ Strong Delivery (₹0.45 Cr) | ₹0.45 Cr) | **7/10 days** |
-| 10 | `SRHHYPOLTD` | Sree Rayalaseema Hi-strength Hypo Limited | chemicals | ₹523.80 | 899.1 | 79.4% (🛡️ Strong Delivery (₹0.74 Cr) | ₹0.74 Cr) | **7/10 days** |
-| 11 | `BLUESTONE` | Bluestone Jewellery and Lifestyle Ltd | consumer discretionary | ₹890.35 | 13,569.1 | 25.2% (⚖️ Neutral | ₹23.75 Cr) | **7/10 days** |
-| 12 | `MAZDA` | Mazda Limited | Industrials | ₹261.00 | 509.9 | N/A | **7/10 days** |
-| 13 | `PCJEWELLER` | Pc Jeweller Limited | consumer discretionary | ₹13.70 | 13,303.4 | 19.6% (⚖️ Neutral | ₹105.72 Cr) | **6/10 days** |
-| 14 | `AXISCADES` | AXISCADES Technologies Ltd | aerospace & defence | ₹1,831.80 | 7,790.8 | 41.8% (⚖️ Neutral | ₹9.20 Cr) | **6/10 days** |
-| 15 | `INDIQUBE` | Indiqube Spaces Ltd | co-working | ₹202.87 | 4,300.8 | 58.2% (🛡️ Strong Delivery (₹0.15 Cr) | ₹0.15 Cr) | **6/10 days** |
-| 16 | `SPLPETRO` | Supreme Petrochem Ltd | energy | ₹818.35 | 15,388.4 | 38.1% (⚖️ Neutral | ₹4.06 Cr) | **6/10 days** |
-| 17 | `WENDT` | Wendt (india) Limited | industrials | ₹8,812.50 | 1,762.5 | 42.6% (⚖️ Neutral | ₹9.57 Cr) | **6/10 days** |
-| 18 | `AGI` | AGI Greenpac Ltd | industrials | ₹762.65 | 4,934.1 | 41.7% (⚖️ Neutral | ₹2.32 Cr) | **6/10 days** |
-| 19 | `ANDHRAPAP` | Andhra Paper Ltd | building materials | ₹73.36 | 1,458.8 | 29.7% (⚖️ Neutral | ₹3.51 Cr) | **5/10 days** |
-| 20 | `JUBLPHARMA` | Jubilant Pharmova Ltd | healthcare | ₹1,025.20 | 16,329.5 | 55.0% (🛡️ Strong Delivery (₹11.84 Cr) | ₹11.84 Cr) | **5/10 days** |
-| 21 | `AHCL` | Anlon Healthcare Ltd | Pharmaceuticals Bulk Drugs & Formulation | ₹19.57 | 1,040.2 | 14.8% (⚠️ Speculative Churn | ₹38.62 Cr) | **5/10 days** |
-| 22 | `SESHAPAPER` | Seshasayee Paper And Boards Limited | building materials | ₹251.14 | 1,583.9 | 48.0% (🛡️ Strong Delivery (₹2.07 Cr) | ₹2.07 Cr) | **5/10 days** |
-| 23 | `HIKAL` | Hikal Limited | Healthcare | ₹234.78 | 2,798.9 | 35.4% (⚖️ Neutral | ₹6.16 Cr) | **5/10 days** |
-| 24 | `PPL` | Prakash Pipes Ltd | plastic products | ₹285.55 | 683.0 | N/A | **5/10 days** |
-| 25 | `ELECTCAST` | Electrosteel Castings Limited | Industrials | ₹79.86 | 4,815.7 | 46.1% (🛡️ Strong Delivery (₹5.38 Cr) | ₹5.38 Cr) | **4/10 days** |
-| 26 | `STLNETWORK` | STL Networks Ltd | Telecommunications - Service Provider | ₹36.60 | 1,786.4 | 59.0% (🛡️ Strong Delivery (₹11.90 Cr) | ₹11.90 Cr) | **4/10 days** |
-| 27 | `SAGILITY` | Sagility Limited | Healthcare | ₹44.41 | 21,159.6 | 38.7% (⚖️ Neutral | ₹40.10 Cr) | **4/10 days** |
-| 28 | `ARFIN` | Arfin India Limited | Basic Materials | ₹88.07 | 1,461.3 | 34.3% (⚖️ Neutral | ₹2.22 Cr) | **4/10 days** |
-| 29 | `COALINDIA` | Coal India Limited | metals & mining | ₹426.40 | 262,778.7 | 47.4% (🛡️ Strong Delivery (₹69.84 Cr) | ₹69.84 Cr) | **4/10 days** |
-| 30 | `SIGACHI` | Sigachi Industries Ltd | healthcare | ₹37.93 | 1,449.4 | 38.1% (⚖️ Neutral | ₹6.11 Cr) | **3/10 days** |
-| 31 | `GCSL` | Gretex Corporate Services Ltd | financials | ₹600.70 | 1,451.2 | 25.5% (⚖️ Neutral | ₹4.15 Cr) | **3/10 days** |
+| 1 | `PRABHA` | Prabha Energy Ltd | energy | ₹239.42 | 3,585.8 | 56.9% (🛡️ Strong Delivery (₹4.19 Cr) | ₹4.19 Cr) | **10/10 days** |
+| 2 | `GMMPFAUDLR` | GMM Pfaudler Ltd | Glass - Others | ₹1,348.00 | 5,880.0 | 41.1% (⚖️ Neutral | ₹64.13 Cr) | **10/10 days** |
+| 3 | `MVGJL` | Manoj Vaibhav Gems N Jewellers Ltd | consumer discretionary | ₹196.05 | 964.1 | 38.9% (⚖️ Neutral | ₹3.11 Cr) | **9/10 days** |
+| 4 | `SHREEJISPG` | Shreeji Shipping Global Ltd | transportation | ₹684.00 | 11,269.9 | 40.0% (⚖️ Neutral | ₹89.54 Cr) | **9/10 days** |
+| 5 | `IONEXCHANG` | Ion Exchange (India) Ltd | realty | ₹432.00 | 6,536.9 | 43.6% (⚖️ Neutral | ₹7.57 Cr) | **8/10 days** |
+| 6 | `SMSPHARMA` | Sms Pharmaceuticals Limited | healthcare | ₹410.15 | 4,340.3 | 29.8% (⚖️ Neutral | ₹52.77 Cr) | **8/10 days** |
+| 7 | `UNITEDPOLY` | United Polyfab Gujarat Ltd | textiles | ₹42.75 | 993.3 | 66.4% (🛡️ Strong Delivery (₹0.37 Cr) | ₹0.37 Cr) | **8/10 days** |
+| 8 | `BLUESTONE` | BlueStone Jewellery and Lifestyle Limited | Consumer Cyclical | ₹890.35 | 12,658.5 | 30.3% (⚖️ Neutral | ₹23.85 Cr) | **7/10 days** |
+| 9 | `SPLPETRO` | Supreme Petrochem Ltd | energy | ₹789.35 | 15,388.4 | 57.9% (🛡️ Strong Delivery (₹7.77 Cr) | ₹7.77 Cr) | **7/10 days** |
+| 10 | `INDIQUBE` | Indiqube Spaces Ltd | co-working | ₹199.43 | 4,300.8 | 69.9% (🛡️ Strong Delivery (₹0.42 Cr) | ₹0.42 Cr) | **7/10 days** |
+| 11 | `WENDT` | Wendt (india) Limited | industrials | ₹8,580.00 | 1,762.5 | 28.8% (⚖️ Neutral | ₹9.44 Cr) | **7/10 days** |
+| 12 | `SRHHYPOLTD` | Sree Rayalaseema Hi-Strength Hypo Limited | Basic Materials | ₹523.80 | 853.8 | 63.2% (🛡️ Strong Delivery (₹1.87 Cr) | ₹1.87 Cr) | **7/10 days** |
+| 13 | `RADHIKAJWE` | Radhika Jeweltech Limited | Consumer Cyclical | ₹83.21 | 891.5 | 46.5% (🛡️ Strong Delivery (₹4.65 Cr) | ₹4.65 Cr) | **7/10 days** |
+| 14 | `PCJEWELLER` | Pc Jeweller Limited | consumer discretionary | ₹12.89 | 13,303.4 | 29.6% (🛡️ Strong Delivery (₹136.19 Cr) | ₹136.19 Cr) | **7/10 days** |
+| 15 | `JUBLPHARMA` | Jubilant Pharmova Ltd | healthcare | ₹1,011.95 | 16,329.5 | 45.4% (🛡️ Strong Delivery (₹8.76 Cr) | ₹8.76 Cr) | **6/10 days** |
+| 16 | `AHCL` | Anlon Healthcare Ltd | Pharmaceuticals Bulk Drugs & Formulation | ₹20.18 | 1,040.2 | 10.8% (⚖️ Neutral | ₹35.91 Cr) | **6/10 days** |
+| 17 | `PPL` | Prakash Pipes Ltd | plastic products | ₹277.45 | 683.0 | N/A | **6/10 days** |
+| 18 | `MAZDA` | Mazda Limited | Industrials | ₹255.25 | 512.4 | N/A | **6/10 days** |
+| 19 | `AXISCADES` | AXISCADES Technologies Limited | Industrials | ₹1,831.80 | 7,306.0 | 55.6% (🔥 High Accumulation (₹16.85 Cr) | ₹16.85 Cr) | **6/10 days** |
+| 20 | `ANDHRAPAP` | Andhra Paper Ltd | building materials | ₹71.64 | 1,458.8 | 34.1% (🛡️ Strong Delivery (₹3.68 Cr) | ₹3.68 Cr) | **6/10 days** |
+| 21 | `SESHAPAPER` | Seshasayee Paper and Boards Limited | Basic Materials | ₹251.14 | 1,531.3 | 65.2% (🛡️ Strong Delivery (₹0.69 Cr) | ₹0.69 Cr) | **5/10 days** |
+| 22 | `STLNETWORK` | STL Networks Ltd | Telecommunications - Service Provider | ₹37.20 | 1,786.4 | 48.5% (🛡️ Strong Delivery (₹26.96 Cr) | ₹26.96 Cr) | **5/10 days** |
+| 23 | `HIKAL` | Hikal Limited | Healthcare | ₹224.95 | 2,616.7 | 42.2% (🔥 High Accumulation (₹7.64 Cr) | ₹7.64 Cr) | **5/10 days** |
+| 24 | `ARFIN` | Arfin India Limited | Basic Materials | ₹85.98 | 1,395.7 | 17.2% (⚖️ Neutral | ₹1.54 Cr) | **4/10 days** |
+| 25 | `COALINDIA` | Coal India Limited | Energy | ₹426.40 | 258,372.4 | 62.1% (🛡️ Strong Delivery (₹159.58 Cr) | ₹159.58 Cr) | **4/10 days** |
+| 26 | `GCSL` | Gretex Corporate Services Ltd | financials | ₹601.55 | 1,451.2 | 56.0% (🔥 High Accumulation (₹39.81 Cr) | ₹39.81 Cr) | **4/10 days** |
+| 27 | `IL&FSENGG` | Il&fs Engineering And Construction Company Limited | realty | ₹39.17 | 505.3 | N/A | **3/10 days** |
+| 28 | `SIGACHI` | Sigachi Industries Limited | Healthcare | ₹37.93 | 1,205.2 | 34.8% (⚖️ Neutral | ₹22.46 Cr) | **3/10 days** |
+| 29 | `ELECTCAST` | Electrosteel Castings Limited | Industrials | ₹77.62 | 4,650.6 | 52.9% (🛡️ Strong Delivery (₹5.43 Cr) | ₹5.43 Cr) | **3/10 days** |
