@@ -1,234 +1,242 @@
 [
   {
-    "symbol": "PRABHA",
-    "company": "Prabha Energy Ltd",
-    "industry": "energy",
-    "close": 239.42,
-    "mcap_cr": 3585.76,
+    "symbol": "GMMPFAUDLR",
+    "company": "GMM Pfaudler Ltd",
+    "industry": "industrials",
+    "close": 1335.0,
+    "mcap_cr": 6060.23,
     "persistence": 10
   },
   {
-    "symbol": "GMMPFAUDLR",
-    "company": "GMM Pfaudler Ltd",
-    "industry": "Glass - Others",
-    "close": 1348.0,
-    "mcap_cr": 5879.96,
+    "symbol": "PRABHA",
+    "company": "Prabha Energy Ltd",
+    "industry": "energy",
+    "close": 226.58,
+    "mcap_cr": 3509.25,
+    "persistence": 10
+  },
+  {
+    "symbol": "SHREEJISPG",
+    "company": "Shreeji Shipping Global Ltd",
+    "industry": "transportation",
+    "close": 690.2,
+    "mcap_cr": 11143.61,
     "persistence": 10
   },
   {
     "symbol": "MVGJL",
     "company": "Manoj Vaibhav Gems N Jewellers Ltd",
     "industry": "consumer discretionary",
-    "close": 196.05,
-    "mcap_cr": 964.1,
-    "persistence": 9
+    "close": 207.16,
+    "mcap_cr": 957.65,
+    "persistence": 10
   },
   {
-    "symbol": "SHREEJISPG",
-    "company": "Shreeji Shipping Global Ltd",
-    "industry": "transportation",
-    "close": 684.0,
-    "mcap_cr": 11269.87,
+    "symbol": "UNITEDPOLY",
+    "company": "United Polyfab Gujarat Ltd",
+    "industry": "textiles",
+    "close": 43.19,
+    "mcap_cr": 981.18,
     "persistence": 9
   },
   {
     "symbol": "IONEXCHANG",
     "company": "Ion Exchange (India) Ltd",
     "industry": "realty",
-    "close": 432.0,
-    "mcap_cr": 6536.93,
+    "close": 426.25,
+    "mcap_cr": 6336.0,
+    "persistence": 9
+  },
+  {
+    "symbol": "BLUESTONE",
+    "company": "Bluestone Jewellery and Lifestyle Ltd",
+    "industry": "consumer discretionary",
+    "close": 856.0,
+    "mcap_cr": 12627.25,
     "persistence": 8
   },
   {
     "symbol": "SMSPHARMA",
-    "company": "Sms Pharmaceuticals Limited",
-    "industry": "healthcare",
+    "company": "SMS Pharmaceuticals Limited",
+    "industry": "Healthcare",
     "close": 410.15,
-    "mcap_cr": 4340.3,
+    "mcap_cr": 3773.7086976,
     "persistence": 8
   },
   {
-    "symbol": "UNITEDPOLY",
-    "company": "United Polyfab Gujarat Ltd",
-    "industry": "textiles",
-    "close": 42.75,
-    "mcap_cr": 993.34,
+    "symbol": "PCJEWELLER",
+    "company": "Pc Jeweller Limited",
+    "industry": "consumer discretionary",
+    "close": 12.64,
+    "mcap_cr": 12516.88,
     "persistence": 8
-  },
-  {
-    "symbol": "BLUESTONE",
-    "company": "BlueStone Jewellery and Lifestyle Limited",
-    "industry": "Consumer Cyclical",
-    "close": 890.35,
-    "mcap_cr": 12658.479104,
-    "persistence": 7
-  },
-  {
-    "symbol": "SPLPETRO",
-    "company": "Supreme Petrochem Ltd",
-    "industry": "energy",
-    "close": 789.35,
-    "mcap_cr": 15388.36,
-    "persistence": 7
   },
   {
     "symbol": "INDIQUBE",
     "company": "Indiqube Spaces Ltd",
     "industry": "co-working",
-    "close": 199.43,
-    "mcap_cr": 4300.8,
-    "persistence": 7
+    "close": 200.15,
+    "mcap_cr": 4227.87,
+    "persistence": 8
   },
   {
     "symbol": "WENDT",
     "company": "Wendt (india) Limited",
     "industry": "industrials",
-    "close": 8580.0,
-    "mcap_cr": 1762.5,
-    "persistence": 7
+    "close": 8663.5,
+    "mcap_cr": 1716.0,
+    "persistence": 8
+  },
+  {
+    "symbol": "SPLPETRO",
+    "company": "Supreme Petrochem Ltd",
+    "industry": "energy",
+    "close": 792.7,
+    "mcap_cr": 14843.04,
+    "persistence": 8
   },
   {
     "symbol": "SRHHYPOLTD",
     "company": "Sree Rayalaseema Hi-Strength Hypo Limited",
     "industry": "Basic Materials",
-    "close": 523.8,
-    "mcap_cr": 853.7781248,
+    "close": 497.4,
+    "mcap_cr": 874.8908544,
     "persistence": 7
   },
   {
     "symbol": "RADHIKAJWE",
     "company": "Radhika Jeweltech Limited",
     "industry": "Consumer Cyclical",
-    "close": 83.21,
-    "mcap_cr": 891.5008512,
+    "close": 75.47,
+    "mcap_cr": 846.96704,
     "persistence": 7
   },
   {
-    "symbol": "PCJEWELLER",
-    "company": "Pc Jeweller Limited",
-    "industry": "consumer discretionary",
-    "close": 12.89,
-    "mcap_cr": 13303.43,
+    "symbol": "ANDHRAPAP",
+    "company": "Andhra Paper Ltd",
+    "industry": "building materials",
+    "close": 73.32,
+    "mcap_cr": 1424.56,
     "persistence": 7
   },
   {
     "symbol": "JUBLPHARMA",
     "company": "Jubilant Pharmova Ltd",
     "industry": "healthcare",
-    "close": 1011.95,
-    "mcap_cr": 16329.5,
-    "persistence": 6
+    "close": 1002.5,
+    "mcap_cr": 16118.45,
+    "persistence": 7
   },
   {
     "symbol": "AHCL",
     "company": "Anlon Healthcare Ltd",
-    "industry": "Pharmaceuticals Bulk Drugs & Formulation",
-    "close": 20.18,
-    "mcap_cr": 1040.17,
-    "persistence": 6
-  },
-  {
-    "symbol": "PPL",
-    "company": "Prakash Pipes Ltd",
-    "industry": "plastic products",
-    "close": 277.45,
-    "mcap_cr": 682.99,
-    "persistence": 6
+    "industry": "healthcare",
+    "close": 20.04,
+    "mcap_cr": 1072.6,
+    "persistence": 7
   },
   {
     "symbol": "MAZDA",
     "company": "Mazda Limited",
     "industry": "Industrials",
-    "close": 255.25,
-    "mcap_cr": 512.4397568,
+    "close": 255.9,
+    "mcap_cr": 502.5273856,
+    "persistence": 6
+  },
+  {
+    "symbol": "SESHAPAPER",
+    "company": "Seshasayee Paper And Boards Limited",
+    "industry": "building materials",
+    "close": 246.72,
+    "mcap_cr": 1531.29,
+    "persistence": 6
+  },
+  {
+    "symbol": "STLNETWORK",
+    "company": "STL Networks Ltd",
+    "industry": "telecom-service",
+    "close": 38.97,
+    "mcap_cr": 1815.64,
+    "persistence": 6
+  },
+  {
+    "symbol": "PPL",
+    "company": "Prakash Pipes Limited",
+    "industry": "Industrials",
+    "close": 277.45,
+    "mcap_cr": 651.2826368,
     "persistence": 6
   },
   {
     "symbol": "AXISCADES",
     "company": "AXISCADES Technologies Limited",
     "industry": "Industrials",
-    "close": 1831.8,
-    "mcap_cr": 7305.9770368,
+    "close": 1717.7,
+    "mcap_cr": 7164.7657984,
     "persistence": 6
-  },
-  {
-    "symbol": "ANDHRAPAP",
-    "company": "Andhra Paper Ltd",
-    "industry": "building materials",
-    "close": 71.64,
-    "mcap_cr": 1458.77,
-    "persistence": 6
-  },
-  {
-    "symbol": "SESHAPAPER",
-    "company": "Seshasayee Paper and Boards Limited",
-    "industry": "Basic Materials",
-    "close": 251.14,
-    "mcap_cr": 1531.2944128,
-    "persistence": 5
-  },
-  {
-    "symbol": "STLNETWORK",
-    "company": "STL Networks Ltd",
-    "industry": "Telecommunications - Service Provider",
-    "close": 37.2,
-    "mcap_cr": 1786.36,
-    "persistence": 5
   },
   {
     "symbol": "HIKAL",
     "company": "Hikal Limited",
     "industry": "Healthcare",
-    "close": 224.95,
-    "mcap_cr": 2616.68864,
+    "close": 212.22,
+    "mcap_cr": 2766.6223104,
     "persistence": 5
   },
   {
-    "symbol": "ARFIN",
-    "company": "Arfin India Limited",
-    "industry": "Basic Materials",
-    "close": 85.98,
-    "mcap_cr": 1395.6723712,
+    "symbol": "GCSL",
+    "company": "Gretex Corporate Services Ltd",
+    "industry": "financials",
+    "close": 594.75,
+    "mcap_cr": 1453.31,
+    "persistence": 5
+  },
+  {
+    "symbol": "IL&FSENGG",
+    "company": "Il&fs Engineering And Construction Company Limited",
+    "industry": "realty",
+    "close": 39.93,
+    "mcap_cr": 513.6,
     "persistence": 4
   },
   {
     "symbol": "COALINDIA",
     "company": "Coal India Limited",
     "industry": "Energy",
-    "close": 426.4,
-    "mcap_cr": 258372.4032,
+    "close": 419.25,
+    "mcap_cr": 260221.1999744,
     "persistence": 4
-  },
-  {
-    "symbol": "GCSL",
-    "company": "Gretex Corporate Services Ltd",
-    "industry": "financials",
-    "close": 601.55,
-    "mcap_cr": 1451.25,
-    "persistence": 4
-  },
-  {
-    "symbol": "IL&FSENGG",
-    "company": "Il&fs Engineering And Construction Company Limited",
-    "industry": "realty",
-    "close": 39.17,
-    "mcap_cr": 505.34,
-    "persistence": 3
   },
   {
     "symbol": "SIGACHI",
     "company": "Sigachi Industries Limited",
     "industry": "Healthcare",
-    "close": 37.93,
-    "mcap_cr": 1205.2114432,
+    "close": 31.51,
+    "mcap_cr": 1191.824384,
     "persistence": 3
   },
   {
-    "symbol": "ELECTCAST",
-    "company": "Electrosteel Castings Limited",
-    "industry": "Industrials",
-    "close": 77.62,
-    "mcap_cr": 4650.6029056,
+    "symbol": "FIVESTAR",
+    "company": "Five-Star Business Finance Ltd",
+    "industry": "financials",
+    "close": 549.4,
+    "mcap_cr": 15997.27,
+    "persistence": 3
+  },
+  {
+    "symbol": "ARFIN",
+    "company": "Arfin India Limited",
+    "industry": "Basic Materials",
+    "close": 82.72,
+    "mcap_cr": 1394.9974528,
+    "persistence": 3
+  },
+  {
+    "symbol": "MBECL",
+    "company": "Mcnally Bharat Engineering Company Limited",
+    "industry": "realty",
+    "close": 364.26,
+    "mcap_cr": 1156.4,
     "persistence": 3
   }
 ]
