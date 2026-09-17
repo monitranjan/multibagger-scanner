@@ -1,0 +1,20 @@
+{
+  "investor_presentation": {
+    "date_key": "2022",
+    "url": "https://www.jubilantpharmova.com/Uploads/image/2203imguf_Investor-Presentation-Nov-2022-002.pdf",
+    "filename": "investor_presentation_2022.md",
+    "cached_at": "2026-09-17T18:12:49.805337"
+  },
+  "annual_report": {
+    "date_key": "2026",
+    "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/73662119-bff3-405b-9a4e-a40436f94478.pdf",
+    "filename": "annual_report_2026.md",
+    "cached_at": "2026-09-17T18:14:44.833074"
+  },
+  "concall_transcript": {
+    "date_key": "2019",
+    "url": "https://www.jubilantpharmova.com/Uploads/files/71q1stanfileearnings_call_transcripts-May17-2019.pdf",
+    "filename": "concall_transcript_2019.md",
+    "cached_at": "2026-09-17T18:25:48.445760"
+  }
+}
