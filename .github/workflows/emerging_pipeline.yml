@@ -1,11 +1,12 @@
 name: Emerging Leaders Reports Pipeline
 
 on:
-  workflow_run:
-    workflows: ["Daily Multibagger Pipeline"]
-    types:
-      - completed
-  workflow_dispatch: # Allows you to trigger it manually from GitHub website with 1 click
+  # DISABLED: No longer triggered automatically after Daily Multibagger Pipeline
+  # workflow_run:
+  #   workflows: ["Daily Multibagger Pipeline"]
+  #   types:
+  #     - completed
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab if needed
 
 jobs:
   run-report-pipeline:
