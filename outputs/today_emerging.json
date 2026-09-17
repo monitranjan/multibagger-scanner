@@ -4,7 +4,7 @@
     "company": "Shreeji Shipping Global Ltd",
     "industry": "transportation",
     "close": 691.0,
-    "mcap_cr": 11244.62,
+    "mcap_cr": 11257.65,
     "persistence": 10
   },
   {
@@ -12,7 +12,7 @@
     "company": "Ion Exchange (India) Ltd",
     "industry": "realty",
     "close": 424.35,
-    "mcap_cr": 6251.66,
+    "mcap_cr": 6223.8,
     "persistence": 10
   },
   {
@@ -20,15 +20,15 @@
     "company": "United Polyfab Gujarat Ltd",
     "industry": "textiles",
     "close": 44.36,
-    "mcap_cr": 991.28,
+    "mcap_cr": 1018.13,
     "persistence": 10
   },
   {
     "symbol": "MVGJL",
     "company": "Manoj Vaibhav Gems N Jewellers Ltd",
-    "industry": "consumer discretionary",
+    "industry": "Diamond, Gems & Jewellery",
     "close": 215.37,
-    "mcap_cr": 1011.92,
+    "mcap_cr": 1052.03,
     "persistence": 10
   },
   {
@@ -36,7 +36,7 @@
     "company": "Pc Jeweller Limited",
     "industry": "consumer discretionary",
     "close": 12.35,
-    "mcap_cr": 12274.12,
+    "mcap_cr": 11992.51,
     "persistence": 9
   },
   {
@@ -44,7 +44,7 @@
     "company": "Indiqube Spaces Ltd",
     "industry": "co-working",
     "close": 202.45,
-    "mcap_cr": 4243.13,
+    "mcap_cr": 4291.89,
     "persistence": 9
   },
   {
@@ -52,7 +52,7 @@
     "company": "Supreme Petrochem Ltd",
     "industry": "energy",
     "close": 807.0,
-    "mcap_cr": 14906.04,
+    "mcap_cr": 15174.94,
     "persistence": 9
   },
   {
@@ -60,7 +60,7 @@
     "company": "Sms Pharmaceuticals Limited",
     "industry": "healthcare",
     "close": 413.75,
-    "mcap_cr": 3773.71,
+    "mcap_cr": 3874.85,
     "persistence": 9
   },
   {
@@ -68,7 +68,7 @@
     "company": "Jubilant Pharmova Ltd",
     "industry": "healthcare",
     "close": 1012.1,
-    "mcap_cr": 15967.93,
+    "mcap_cr": 16120.84,
     "persistence": 8
   },
   {
@@ -76,15 +76,15 @@
     "company": "Sree Rayalaseema Hi-strength Hypo Limited",
     "industry": "chemicals",
     "close": 517.6,
-    "mcap_cr": 874.89,
+    "mcap_cr": 888.45,
     "persistence": 8
   },
   {
     "symbol": "AHCL",
     "company": "Anlon Healthcare Ltd",
-    "industry": "healthcare",
+    "industry": "Pharmaceuticals Bulk Drugs & Formulation",
     "close": 21.84,
-    "mcap_cr": 1065.16,
+    "mcap_cr": 1160.83,
     "persistence": 8
   },
   {
@@ -92,7 +92,7 @@
     "company": "Wendt (india) Limited",
     "industry": "industrials",
     "close": 8765.0,
-    "mcap_cr": 1732.7,
+    "mcap_cr": 1753.0,
     "persistence": 8
   },
   {
@@ -108,7 +108,7 @@
     "company": "Andhra Paper Ltd",
     "industry": "building materials",
     "close": 71.88,
-    "mcap_cr": 1457.97,
+    "mcap_cr": 1429.34,
     "persistence": 8
   },
   {
@@ -116,7 +116,7 @@
     "company": "Seshasayee Paper And Boards Limited",
     "industry": "building materials",
     "close": 247.82,
-    "mcap_cr": 1556.02,
+    "mcap_cr": 1562.95,
     "persistence": 7
   },
   {
@@ -124,7 +124,7 @@
     "company": "STL Networks Ltd",
     "industry": "telecom-service",
     "close": 40.91,
-    "mcap_cr": 1902.03,
+    "mcap_cr": 1996.72,
     "persistence": 7
   },
   {
@@ -132,7 +132,7 @@
     "company": "AXISCADES Technologies Ltd",
     "industry": "aerospace & defence",
     "close": 1852.3,
-    "mcap_cr": 7164.35,
+    "mcap_cr": 7878.02,
     "persistence": 7
   },
   {
@@ -154,9 +154,9 @@
   {
     "symbol": "GCSL",
     "company": "Gretex Corporate Services Ltd",
-    "industry": "financials",
+    "industry": "Finance & Investments - Others",
     "close": 594.35,
-    "mcap_cr": 1436.88,
+    "mcap_cr": 1435.91,
     "persistence": 6
   },
   {
@@ -164,7 +164,7 @@
     "company": "Mazda Limited",
     "industry": "industrials",
     "close": 263.45,
-    "mcap_cr": 502.53,
+    "mcap_cr": 527.56,
     "persistence": 6
   },
   {
@@ -172,7 +172,7 @@
     "company": "Il&fs Engineering And Construction Company Limited",
     "industry": "realty",
     "close": 39.0,
-    "mcap_cr": 523.57,
+    "mcap_cr": 511.37,
     "persistence": 5
   },
   {
@@ -194,9 +194,9 @@
   {
     "symbol": "MBECL",
     "company": "Mcnally Bharat Engineering Company Limited",
-    "industry": "realty",
+    "industry": "Engineering - Turnkey Services",
     "close": 382.47,
-    "mcap_cr": 1214.2,
+    "mcap_cr": 1274.9,
     "persistence": 4
   },
   {
@@ -210,9 +210,9 @@
   {
     "symbol": "EMUDHRA",
     "company": "eMudhra Ltd",
-    "industry": "i.t",
+    "industry": "Services - Others",
     "close": 633.35,
-    "mcap_cr": 5319.0,
+    "mcap_cr": 5244.88,
     "persistence": 3
   },
   {
