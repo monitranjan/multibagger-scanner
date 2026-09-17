@@ -1,0 +1,8 @@
+- **Consensus View**: Expansion into new geographies is the primary rerating catalyst for MVGJL (Vaibhav Jewellers) — **Needs Verification** (based on forum thesis, not explicit company guidance)
+- **Variant View**: Current P/E of 16.6x is unjustifiably low vs industry avg 42.5x; peer-comparison implies fair value ~₹435 (25x P/E, 46% upside) — **Needs Verification** (peer set and earnings normalization assumptions unverified)
+- **Event Watch**: Geographic expansion announcements (new states/store openings beyond AP/Telangana) — **Verified** (explicitly cited as key monitorable)
+- **Red Flag**: High regional concentration (100% revenue from AP/Telangana; 16 owned + 2 franchise stores) — **Verified** (structural risk evident from disclosed store count)
+- **Red Flag**: Market share claims (AP ~5%, Telangana ~14% of *organized* market) — **Needs Verification** (source/methodology not cited; organized market definition varies)
+- **Milestone**: Successful launch & ramp-up of first showroom outside AP/Telangana — **Needs Verification** (would validate expansion thesis; no timeline disclosed)
+- **Milestone**: Sustained OPM >7% while scaling — **Needs Verification** (current 7% OPM cited; scalability of margin untested in new markets)
+- **Data Gap**: No discussion of gold price volatility hedging, inventory turnover, or working capital trends — **Verified** (absent from forum analysis; material for jewellery retail)

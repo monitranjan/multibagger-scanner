@@ -7,14 +7,14 @@
   },
   "annual_report": {
     "date_key": "2026",
-    "url": "https://www.stockscans.in/document/63e5gvftm29ux8pgq7in9xrq.pdf",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=bf6a9d32-91df-4224-a371-1876c3ba1236.pdf",
     "filename": "annual_report_2026.md",
-    "cached_at": "2026-09-07T17:09:27.985596"
+    "cached_at": "2026-09-17T15:49:56.199637"
   },
   "concall_transcript": {
-    "date_key": "202503",
-    "url": "https://www.stockscans.in/document/zo8c88u2c2b4onn8k9ct77eu.pdf",
-    "filename": "concall_transcript_202503.md",
-    "cached_at": "2026-09-07T17:09:50.321918"
+    "date_key": "202609",
+    "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=88ad2e6b-e111-4a06-bdbd-3f04ca13bc04.pdf",
+    "filename": "concall_transcript_202609.md",
+    "cached_at": "2026-09-17T15:54:09.445119"
   }
 }
