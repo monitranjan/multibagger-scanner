@@ -843,6 +843,8 @@ def calculate_oneil_relative_strength(
 
 def add_rs_rating_conditional_formatting(ws, col: int, start_row: int, end_row: int) -> None:
     """Add conditional formatting to RS Rating: >=95 green bold, >=90 light green, >=80 amber."""
+    if end_row < start_row:
+        return
     # Dark Green for >= 95
     green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
     green_font = Font(color="006100", bold=True)
@@ -1210,20 +1212,19 @@ def get_stockscans_common_stocks_data() -> dict:
     cookie = os.environ.get("STOCKSCANS_COOKIE", "")
     
     # 1. Attempt to fetch dynamically from API
+    url = "https://www.stockscans.in/api/scans/stock/saved/common-stocks"
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "cookie": cookie,
+        "origin": "https://www.stockscans.in",
+        "referer": "https://www.stockscans.in/scan-match",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/153.0.0.0 Safari/537.36"
+    }
+    payload = {"includePopular": True}
+    print(f"Attempting to fetch live StockScans common stocks from {url}...")
     try:
-        url = "https://www.stockscans.in/api/user/saved-scans/common-stocks"
-        headers = {
-            "accept": "application/json",
-            "content-type": "application/json",
-            "cookie": cookie,
-            "origin": "https://www.stockscans.in",
-            "referer": "https://www.stockscans.in/scan-match",
-            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, Gecko) Chrome/148.0.0.0 Safari/537.36"
-        }
-        payload = {"includePopular": True}
-        print("Attempting to fetch live StockScans common stocks (scan matches)...")
         r = requests.post(url, headers=headers, json=payload, timeout=20)
-        
         if r.status_code == 200:
             data = r.json()
             if "companies" in data and len(data["companies"]) > 0:
@@ -1231,22 +1232,6 @@ def get_stockscans_common_stocks_data() -> dict:
                 STOCKSCANS_STATUS["status"] = "success"
                 STOCKSCANS_STATUS["fetched_live"] = True
                 STOCKSCANS_STATUS["message"] = "Fetched live successfully"
-                
-                # Cache locally in workspace for convenience and resilience
-                try:
-                    cache_paths = [
-                        Path("scan_matched_data.json"),
-                        Path("/Users/monitranjan/.gemini/antigravity/scratch/scan_matched_data.json")
-                    ]
-                    for cp in cache_paths:
-                        try:
-                            cp.parent.mkdir(parents=True, exist_ok=True)
-                            with open(cp, "w") as f:
-                                json.dump(data, f, indent=2)
-                        except Exception:
-                            pass
-                except Exception:
-                    pass
                 return data
             else:
                 print("Live response loaded but companies list was empty.")
@@ -1261,29 +1246,10 @@ def get_stockscans_common_stocks_data() -> dict:
                 STOCKSCANS_STATUS["status"] = "failed"
                 STOCKSCANS_STATUS["message"] = f"API returned error status code: {r.status_code}"
     except Exception as e:
-        print(f"Error fetching live StockScans common stocks API: {e}")
+        print(f"Error fetching live StockScans common stocks API from {url}: {e}")
         STOCKSCANS_STATUS["status"] = "failed"
         STOCKSCANS_STATUS["message"] = f"Connection error: {str(e)}"
-        
-    # 2. Fallback to reading the local cached file
-    print("Falling back to local cached scan_matched_data.json file...")
-    paths_to_try = [
-        Path("scan_matched_data.json"),
-        Path("/Users/monitranjan/.gemini/antigravity/scratch/scan_matched_data.json")
-    ]
-    
-    for path in paths_to_try:
-        if path.exists():
-            try:
-                with open(path, "r") as f:
-                    data = json.load(f)
-                if "companies" in data:
-                    print(f"Successfully loaded {len(data.get('companies', []))} companies from fallback: {path}")
-                    return data
-            except Exception as e:
-                print(f"Error reading fallback file {path}: {e}")
-                
-    print("WARNING: No StockScans data fetched or loaded from fallback caches. Returning empty structure.")
+
     return {}
 
 
@@ -3821,10 +3787,11 @@ def write_confluence_sheet(
         
     style_basic_table(ws, 1, max_row, len(headers))
     ws.freeze_panes = "F2"
-    ws.auto_filter.ref = ws.dimensions
+    if max_row >= 2:
+        ws.auto_filter.ref = ws.dimensions
+        add_score_conditional_format(ws, 7, 2, max_row)
+        add_rs_rating_conditional_formatting(ws, 3, 2, max_row)
     ws.sheet_view.showGridLines = False
-    add_score_conditional_format(ws, 7, 2, max_row)
-    add_rs_rating_conditional_formatting(ws, 3, 2, max_row)
 
 
 def translate_score_formula(formula: str, source_row: int, target_input_cell: str) -> str:
@@ -3874,6 +3841,8 @@ def style_basic_table(ws, header_row: int, max_row: int, max_col: int, include_p
 
 
 def add_score_conditional_format(ws, col: int, start_row: int, end_row: int) -> None:
+    if end_row < start_row:
+        return
     letter = get_column_letter(col)
     ws.conditional_formatting.add(
         f"{letter}{start_row}:{letter}{end_row}",
