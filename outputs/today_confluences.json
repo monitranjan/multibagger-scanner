@@ -1,1 +1,152 @@
-[]
+[
+  {
+    "symbol": "BODALCHEM",
+    "company": "Bodal Chemicals Limited",
+    "industry": "Dyes & Pigments",
+    "close": 191.23,
+    "return_1d": 5.0,
+    "mcap_cr": 2293.82,
+    "signal": "52W Breakout",
+    "scans_count": 32
+  },
+  {
+    "symbol": "BIRLACABLE",
+    "company": "Birla Cable Limited",
+    "industry": "Cables - Telecom",
+    "close": 409.5,
+    "return_1d": 1.95,
+    "mcap_cr": 1204.95,
+    "signal": "52W Breakout",
+    "scans_count": 29
+  },
+  {
+    "symbol": "SYRMA",
+    "company": "Syrma SGS Technology Ltd",
+    "industry": "Consumer Electronics - EMS",
+    "close": 1728.9,
+    "return_1d": 6.87,
+    "mcap_cr": 31194.19,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "PAYTM",
+    "company": "One 97 Communications Ltd",
+    "industry": "E-Commerce - Platform - Utility",
+    "close": 1849.9,
+    "return_1d": 4.93,
+    "mcap_cr": 112891.41,
+    "signal": "52W Breakout",
+    "scans_count": 24
+  },
+  {
+    "symbol": "GMMPFAUDLR",
+    "company": "GMM Pfaudler Ltd",
+    "industry": "Glass - Others",
+    "close": 1467.0,
+    "return_1d": 7.6,
+    "mcap_cr": 6129.47,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "TBZ",
+    "company": "Tribhovandas Bhimji Zaveri Limited",
+    "industry": "Diamond, Gems & Jewellery",
+    "close": 603.55,
+    "return_1d": 4.99,
+    "mcap_cr": 3836.01,
+    "signal": "52W Breakout",
+    "scans_count": 23
+  },
+  {
+    "symbol": "ACMESOLAR",
+    "company": "ACME Solar Holdings Ltd",
+    "industry": "Engineering - Turnkey Services",
+    "close": 435.25,
+    "return_1d": 5.82,
+    "mcap_cr": 29073.74,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "SHILPAMED",
+    "company": "Shilpa Medicare Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 1021.1,
+    "return_1d": 6.55,
+    "mcap_cr": 18743.58,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "NEOGEN",
+    "company": "Neogen Chemicals Ltd",
+    "industry": "Speciality Chemicals",
+    "close": 2488.4,
+    "return_1d": 3.87,
+    "mcap_cr": 6559.55,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "EBGNG",
+    "company": "GNG Electronics Ltd",
+    "industry": "New age - Platform - E-Retail",
+    "close": 703.05,
+    "return_1d": 6.26,
+    "mcap_cr": 7543.57,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "SANSERA",
+    "company": "Sansera Engineering Ltd",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 4259.9,
+    "return_1d": 6.03,
+    "mcap_cr": 25070.63,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "MOREPENLAB",
+    "company": "Morepen Laboratories Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 120.9,
+    "return_1d": 0.28,
+    "mcap_cr": 6606.13,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "FILATEX",
+    "company": "Filatex India Limited",
+    "industry": "Textiles - Manmade Fibre - PFY/PSF",
+    "close": 93.83,
+    "return_1d": 3.85,
+    "mcap_cr": 4012.07,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "TALBROAUTO",
+    "company": "Talbros Automotive Components Limited",
+    "industry": "Auto Ancillaries - Axle shafts",
+    "close": 476.7,
+    "return_1d": 9.54,
+    "mcap_cr": 2686.41,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "NRBBEARING",
+    "company": "Nrb Bearing Limited",
+    "industry": "Bearings",
+    "close": 525.5,
+    "return_1d": 11.29,
+    "mcap_cr": 4576.69,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  }
+]
