@@ -1,132 +1,112 @@
 [
   {
-    "symbol": "BODALCHEM",
-    "company": "Bodal Chemicals Limited",
-    "industry": "Dyes & Pigments",
-    "close": 197.71,
-    "return_1d": 3.39,
-    "mcap_cr": 2408.43,
+    "symbol": "AVTNPL",
+    "company": "Avt Natural Products Limited",
+    "industry": "Agricultural Processing - Maize",
+    "close": 98.26,
+    "return_1d": 9.13,
+    "mcap_cr": 1371.17,
     "signal": "52W Breakout",
-    "scans_count": 31
+    "scans_count": 26
   },
   {
-    "symbol": "AEGISLOG",
-    "company": "Aegis Logistics Ltd",
-    "industry": "Logistics",
-    "close": 1486.0,
-    "return_1d": 4.99,
-    "mcap_cr": 49680.54,
+    "symbol": "GCSL",
+    "company": "Gretex Corporate Services Ltd",
+    "industry": "Finance & Investments - Others",
+    "close": 639.2,
+    "return_1d": 0.65,
+    "mcap_cr": 1588.09,
     "signal": "52W Breakout",
-    "scans_count": 29
+    "scans_count": 24
   },
   {
-    "symbol": "ACMESOLAR",
-    "company": "ACME Solar Holdings Ltd",
-    "industry": "Engineering - Turnkey Services",
-    "close": 458.1,
-    "return_1d": 5.25,
-    "mcap_cr": 30766.71,
+    "symbol": "ROSSTECH",
+    "company": "Rossell Techsys Ltd",
+    "industry": "Aerospace & Defence - Equipments",
+    "close": 1494.1,
+    "return_1d": 9.88,
+    "mcap_cr": 5125.59,
     "signal": "52W Breakout",
-    "scans_count": 23
+    "scans_count": 24
   },
   {
     "symbol": "TBZ",
     "company": "Tribhovandas Bhimji Zaveri Limited",
     "industry": "Diamond, Gems & Jewellery",
-    "close": 633.7,
-    "return_1d": 5.0,
-    "mcap_cr": 4027.53,
+    "close": 665.35,
+    "return_1d": 4.99,
+    "mcap_cr": 4228.72,
     "signal": "52W Breakout",
     "scans_count": 23
-  },
-  {
-    "symbol": "LAURUSLABS",
-    "company": "Laurus Labs Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 2017.5,
-    "return_1d": 3.25,
-    "mcap_cr": 105564.77,
-    "signal": "52W Breakout",
-    "scans_count": 22
   },
   {
     "symbol": "NRL",
     "company": "Nupur Recyclers Ltd",
     "industry": "Trading",
-    "close": 150.81,
-    "return_1d": 4.97,
-    "mcap_cr": 992.31,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "RATNAVEER",
-    "company": "Ratnaveer Precision Engineering Ltd",
-    "industry": "Stainless Steel",
-    "close": 334.55,
-    "return_1d": 11.8,
-    "mcap_cr": 2137.44,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "SHILPAMED",
-    "company": "Shilpa Medicare Limited",
-    "industry": "Pharma - API & CRAMS",
-    "close": 1070.8,
-    "return_1d": 4.87,
-    "mcap_cr": 19970.86,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "SPECTRUM",
-    "company": "Spectrum Electrical Industries Ltd",
-    "industry": "Capital Goods - Electric General",
-    "close": 3191.5,
+    "close": 158.35,
     "return_1d": 5.0,
-    "mcap_cr": 5193.91,
+    "mcap_cr": 1041.63,
     "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 22
+  },
+  {
+    "symbol": "LUMAXTECH",
+    "company": "Lumax Auto Technologies Limited",
+    "industry": "Auto Ancillaries - Diversified",
+    "close": 2116.4,
+    "return_1d": 2.3,
+    "mcap_cr": 14100.47,
+    "signal": "52W Breakout",
+    "scans_count": 22
   },
   {
     "symbol": "SANSERA",
     "company": "Sansera Engineering Ltd",
     "industry": "Auto Ancillaries - Diversified",
-    "close": 4297.0,
-    "return_1d": 0.87,
-    "mcap_cr": 26583.3,
+    "close": 4586.5,
+    "return_1d": 6.74,
+    "mcap_cr": 26814.81,
     "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 22
   },
   {
-    "symbol": "FILATEX",
-    "company": "Filatex India Limited",
-    "industry": "Textiles - Manmade Fibre - PFY/PSF",
-    "close": 102.2,
-    "return_1d": 8.92,
-    "mcap_cr": 4166.6,
+    "symbol": "PAISALO",
+    "company": "Paisalo Digital Ltd",
+    "industry": "Finance - Capital Markets - Brokers",
+    "close": 93.43,
+    "return_1d": 0.62,
+    "mcap_cr": 8444.91,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "ENGINERSIN",
+    "company": "Engineers India Limited",
+    "industry": "Infra - Engineering - General",
+    "close": 302.55,
+    "return_1d": 6.06,
+    "mcap_cr": 16032.26,
     "signal": "52W Breakout",
     "scans_count": 19
   },
   {
-    "symbol": "UNIMECH",
-    "company": "Unimech Aerospace and Manufacturing Ltd",
-    "industry": "Engineering - Heavy - General",
-    "close": 1698.4,
-    "return_1d": 6.73,
-    "mcap_cr": 8092.86,
+    "symbol": "WELSPUNLIV",
+    "company": "Welspun Living Ltd",
+    "industry": "Textiles - Home Textile",
+    "close": 221.51,
+    "return_1d": 2.61,
+    "mcap_cr": 20394.37,
     "signal": "52W Breakout",
     "scans_count": 19
   },
   {
-    "symbol": "CENTUM",
-    "company": "Centum Electronics Limited",
-    "industry": "aerospace & defence",
-    "close": 4739.2,
-    "return_1d": 9.37,
-    "mcap_cr": 6395.52,
+    "symbol": "AHCL",
+    "company": "Anlon Healthcare Ltd",
+    "industry": "Pharmaceuticals Bulk Drugs & Formulation",
+    "close": 28.86,
+    "return_1d": 9.98,
+    "mcap_cr": 1394.7,
     "signal": "52W Breakout",
-    "scans_count": 0
+    "scans_count": 19
   }
 ]
