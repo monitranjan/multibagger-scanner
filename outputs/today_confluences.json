@@ -1,41 +1,41 @@
 [
   {
-    "symbol": "AVTNPL",
-    "company": "Avt Natural Products Limited",
-    "industry": "Agricultural Processing - Maize",
-    "close": 98.26,
-    "return_1d": 9.13,
-    "mcap_cr": 1371.17,
+    "symbol": "KINGFA",
+    "company": "Kingfa Science & Technology (india) Limited",
+    "industry": "Plastics - Plastic & Plastic Products",
+    "close": 6240.5,
+    "return_1d": 1.17,
+    "mcap_cr": 8359.17,
     "signal": "52W Breakout",
-    "scans_count": 26
+    "scans_count": 25
   },
   {
-    "symbol": "GCSL",
-    "company": "Gretex Corporate Services Ltd",
-    "industry": "Finance & Investments - Others",
-    "close": 639.2,
-    "return_1d": 0.65,
-    "mcap_cr": 1588.09,
+    "symbol": "LOTUSDEV",
+    "company": "Sri Lotus Developers & Realty Ltd",
+    "industry": "Construction - Factories/Offices/Commercial",
+    "close": 224.46,
+    "return_1d": 4.97,
+    "mcap_cr": 10450.87,
     "signal": "52W Breakout",
     "scans_count": 24
   },
   {
-    "symbol": "ROSSTECH",
-    "company": "Rossell Techsys Ltd",
-    "industry": "Aerospace & Defence - Equipments",
-    "close": 1494.1,
-    "return_1d": 9.88,
-    "mcap_cr": 5125.59,
+    "symbol": "NRBBEARING",
+    "company": "Nrb Bearing Limited",
+    "industry": "Bearings",
+    "close": 541.05,
+    "return_1d": 3.95,
+    "mcap_cr": 5044.82,
     "signal": "52W Breakout",
-    "scans_count": 24
+    "scans_count": 23
   },
   {
     "symbol": "TBZ",
     "company": "Tribhovandas Bhimji Zaveri Limited",
     "industry": "Diamond, Gems & Jewellery",
-    "close": 665.35,
-    "return_1d": 4.99,
-    "mcap_cr": 4228.72,
+    "close": 692.45,
+    "return_1d": 4.07,
+    "mcap_cr": 4439.92,
     "signal": "52W Breakout",
     "scans_count": 23
   },
@@ -43,70 +43,40 @@
     "symbol": "NRL",
     "company": "Nupur Recyclers Ltd",
     "industry": "Trading",
-    "close": 158.35,
+    "close": 166.26,
     "return_1d": 5.0,
-    "mcap_cr": 1041.63,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "LUMAXTECH",
-    "company": "Lumax Auto Technologies Limited",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 2116.4,
-    "return_1d": 2.3,
-    "mcap_cr": 14100.47,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "SANSERA",
-    "company": "Sansera Engineering Ltd",
-    "industry": "Auto Ancillaries - Diversified",
-    "close": 4586.5,
-    "return_1d": 6.74,
-    "mcap_cr": 26814.81,
-    "signal": "52W Breakout",
-    "scans_count": 22
-  },
-  {
-    "symbol": "PAISALO",
-    "company": "Paisalo Digital Ltd",
-    "industry": "Finance - Capital Markets - Brokers",
-    "close": 93.43,
-    "return_1d": 0.62,
-    "mcap_cr": 8444.91,
+    "mcap_cr": 1093.71,
     "signal": "52W Breakout",
     "scans_count": 21
   },
   {
-    "symbol": "ENGINERSIN",
-    "company": "Engineers India Limited",
-    "industry": "Infra - Engineering - General",
-    "close": 302.55,
-    "return_1d": 6.06,
-    "mcap_cr": 16032.26,
+    "symbol": "LAURUSLABS",
+    "company": "Laurus Labs Limited",
+    "industry": "Pharma - API & CRAMS",
+    "close": 2034.0,
+    "return_1d": 1.37,
+    "mcap_cr": 108401.08,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 21
   },
   {
-    "symbol": "WELSPUNLIV",
-    "company": "Welspun Living Ltd",
-    "industry": "Textiles - Home Textile",
-    "close": 221.51,
-    "return_1d": 2.61,
-    "mcap_cr": 20394.37,
+    "symbol": "KABRAEXTRU",
+    "company": "Kabra Extrusion Technik Limited",
+    "industry": "Capital Goods - Engineering Heavy",
+    "close": 732.85,
+    "return_1d": 10.0,
+    "mcap_cr": 2330.07,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 21
   },
   {
-    "symbol": "AHCL",
-    "company": "Anlon Healthcare Ltd",
-    "industry": "Pharmaceuticals Bulk Drugs & Formulation",
-    "close": 28.86,
-    "return_1d": 9.98,
-    "mcap_cr": 1394.7,
+    "symbol": "GNA",
+    "company": "Gna Axles Limited",
+    "industry": "Auto & Auto Ancl - CV",
+    "close": 596.65,
+    "return_1d": 6.23,
+    "mcap_cr": 2411.21,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 21
   }
 ]

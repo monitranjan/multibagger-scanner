@@ -1,154 +1,162 @@
 [
   {
-    "symbol": "SPLPETRO",
-    "company": "Supreme Petrochem Ltd",
-    "industry": "energy",
-    "close": 864.75,
-    "mcap_cr": 16276.86,
+    "symbol": "STLNETWORK",
+    "company": "STL Networks Ltd",
+    "industry": "telecom-service",
+    "close": 49.7,
+    "mcap_cr": 2310.55,
+    "persistence": 10
+  },
+  {
+    "symbol": "GCSL",
+    "company": "Gretex Corporate Services Ltd",
+    "industry": "Finance & Investments - Others",
+    "close": 642.7,
+    "mcap_cr": 1598.34,
     "persistence": 10
   },
   {
     "symbol": "AHCL",
     "company": "Anlon Healthcare Ltd",
     "industry": "Pharmaceuticals Bulk Drugs & Formulation",
-    "close": 28.86,
-    "mcap_cr": 1394.7,
-    "persistence": 10
-  },
-  {
-    "symbol": "PCJEWELLER",
-    "company": "Pc Jeweller Limited",
-    "industry": "Diamond, Gems & Jewellery",
-    "close": 13.58,
-    "mcap_cr": 12419.77,
-    "persistence": 10
-  },
-  {
-    "symbol": "STLNETWORK",
-    "company": "STL Networks Ltd",
-    "industry": "telecom-service",
-    "close": 47.34,
-    "mcap_cr": 2200.74,
+    "close": 29.68,
+    "mcap_cr": 1533.95,
     "persistence": 10
   },
   {
     "symbol": "ANDHRAPAP",
     "company": "Andhra Paper Ltd",
     "industry": "building materials",
-    "close": 71.43,
-    "mcap_cr": 1445.44,
-    "persistence": 9
+    "close": 71.19,
+    "mcap_cr": 1420.39,
+    "persistence": 10
   },
   {
-    "symbol": "GCSL",
-    "company": "Gretex Corporate Services Ltd",
-    "industry": "Finance & Investments - Others",
-    "close": 639.2,
-    "mcap_cr": 1588.09,
+    "symbol": "IL&FSENGG",
+    "company": "Il&fs Engineering And Construction Company Limited",
+    "industry": "realty",
+    "close": 42.0,
+    "mcap_cr": 556.08,
     "persistence": 9
   },
   {
     "symbol": "SESHAPAPER",
     "company": "Seshasayee Paper And Boards Limited",
     "industry": "building materials",
-    "close": 246.94,
-    "mcap_cr": 1561.63,
+    "close": 247.95,
+    "mcap_cr": 1557.4,
     "persistence": 9
-  },
-  {
-    "symbol": "AXISCADES",
-    "company": "AXISCADES Technologies Ltd",
-    "industry": "aerospace & defence",
-    "close": 1891.1,
-    "mcap_cr": 7824.43,
-    "persistence": 8
-  },
-  {
-    "symbol": "IL&FSENGG",
-    "company": "Il&fs Engineering And Construction Company Limited",
-    "industry": "realty",
-    "close": 42.41,
-    "mcap_cr": 551.76,
-    "persistence": 8
   },
   {
     "symbol": "MBECL",
     "company": "Mcnally Bharat Engineering Company Limited",
     "industry": "Engineering - Turnkey Services",
-    "close": 430.09,
-    "mcap_cr": 1405.53,
-    "persistence": 7
-  },
-  {
-    "symbol": "INDIQUBE",
-    "company": "IndiQube Spaces Limited",
-    "industry": "Real Estate",
-    "close": 188.34,
-    "mcap_cr": 3984.707584,
-    "persistence": 7
+    "close": 438.69,
+    "mcap_cr": 1433.63,
+    "persistence": 8
   },
   {
     "symbol": "EMUDHRA",
     "company": "eMudhra Ltd",
     "industry": "Services - Others",
-    "close": 649.25,
-    "mcap_cr": 5482.14,
-    "persistence": 6
-  },
-  {
-    "symbol": "PPL",
-    "company": "Prakash Pipes Limited",
-    "industry": "Industrials",
-    "close": 270.35,
-    "mcap_cr": 654.0337152,
-    "persistence": 5
-  },
-  {
-    "symbol": "COALINDIA",
-    "company": "Coal India Limited",
-    "industry": "metals & mining",
-    "close": 428.0,
-    "mcap_cr": 255568.34,
-    "persistence": 5
+    "close": 637.8,
+    "mcap_cr": 5376.55,
+    "persistence": 7
   },
   {
     "symbol": "NPST",
     "company": "Network People Services Technologies Ltd",
-    "industry": "IT Product Companies",
-    "close": 1888.8,
-    "mcap_cr": 3733.73,
-    "persistence": 5
+    "industry": "i.t",
+    "close": 1844.7,
+    "mcap_cr": 3940.7,
+    "persistence": 6
   },
   {
     "symbol": "SHARDAMOTR",
     "company": "Sharda Motor Industries Limited",
     "industry": "auto",
-    "close": 985.75,
-    "mcap_cr": 5498.22,
-    "persistence": 3
+    "close": 971.85,
+    "mcap_cr": 5658.96,
+    "persistence": 4
   },
   {
     "symbol": "FIVESTAR",
-    "company": "Five-Star Business Finance Limited",
-    "industry": "Financial Services",
-    "close": 524.95,
-    "mcap_cr": 15493.3428224,
+    "company": "Five-Star Business Finance Ltd",
+    "industry": "financials",
+    "close": 549.7,
+    "mcap_cr": 15492.51,
+    "persistence": 4
+  },
+  {
+    "symbol": "PPL",
+    "company": "Prakash Pipes Limited",
+    "industry": "Industrials",
+    "close": 273.4,
+    "mcap_cr": 651.2826368,
+    "persistence": 4
+  },
+  {
+    "symbol": "COALINDIA",
+    "company": "Coal India Limited",
+    "industry": "Energy",
+    "close": 428.0,
+    "mcap_cr": 261638.6387968,
+    "persistence": 4
+  },
+  {
+    "symbol": "PCBL",
+    "company": "PCBL Ltd",
+    "industry": "chemicals",
+    "close": 345.45,
+    "mcap_cr": 13682.66,
     "persistence": 3
   },
   {
-    "symbol": "ASTEC",
-    "company": "Astec Lifesciences Limited",
+    "symbol": "DHARMAJ",
+    "company": "Dharmaj Crop Guard Ltd",
     "industry": "chemicals",
-    "close": 794.5,
-    "mcap_cr": 1603.14,
+    "close": 299.1,
+    "mcap_cr": 951.73,
+    "persistence": 3
+  },
+  {
+    "symbol": "SUNDROP",
+    "company": "Sundrop Brands Ltd",
+    "industry": "fmcg",
+    "close": 744.3,
+    "mcap_cr": 2798.43,
+    "persistence": 3
+  },
+  {
+    "symbol": "SHIVALIK",
+    "company": "Shivalik Rasayan Ltd",
+    "industry": "chemicals",
+    "close": 431.65,
+    "mcap_cr": 668.39,
     "persistence": 3
   },
   {
     "symbol": "SIGACHI",
     "company": "Sigachi Industries Limited",
     "industry": "Healthcare",
-    "close": 31.12,
-    "mcap_cr": 1170.7877376,
+    "close": 30.61,
+    "mcap_cr": 1198.7091456,
+    "persistence": 3
+  },
+  {
+    "symbol": "GESHIP",
+    "company": "The Great Eastern Shipping Company Limited",
+    "industry": "transportation",
+    "close": 1483.8,
+    "mcap_cr": 20872.56,
+    "persistence": 3
+  },
+  {
+    "symbol": "ASTEC",
+    "company": "Astec Lifesciences Limited",
+    "industry": "chemicals",
+    "close": 757.45,
+    "mcap_cr": 1770.37,
     "persistence": 3
   }
 ]
