@@ -3,160 +3,120 @@
     "symbol": "STLNETWORK",
     "company": "STL Networks Ltd",
     "industry": "telecom-service",
-    "close": 49.7,
-    "mcap_cr": 2310.55,
+    "close": 52.01,
+    "mcap_cr": 2425.74,
     "persistence": 10
   },
   {
     "symbol": "GCSL",
     "company": "Gretex Corporate Services Ltd",
     "industry": "Finance & Investments - Others",
-    "close": 642.7,
-    "mcap_cr": 1598.34,
-    "persistence": 10
-  },
-  {
-    "symbol": "AHCL",
-    "company": "Anlon Healthcare Ltd",
-    "industry": "Pharmaceuticals Bulk Drugs & Formulation",
-    "close": 29.68,
-    "mcap_cr": 1533.95,
-    "persistence": 10
-  },
-  {
-    "symbol": "ANDHRAPAP",
-    "company": "Andhra Paper Ltd",
-    "industry": "building materials",
-    "close": 71.19,
-    "mcap_cr": 1420.39,
+    "close": 633.3,
+    "mcap_cr": 1607.1,
     "persistence": 10
   },
   {
     "symbol": "IL&FSENGG",
     "company": "Il&fs Engineering And Construction Company Limited",
     "industry": "realty",
-    "close": 42.0,
-    "mcap_cr": 556.08,
-    "persistence": 9
-  },
-  {
-    "symbol": "SESHAPAPER",
-    "company": "Seshasayee Paper And Boards Limited",
-    "industry": "building materials",
-    "close": 247.95,
-    "mcap_cr": 1557.4,
-    "persistence": 9
+    "close": 41.52,
+    "mcap_cr": 550.71,
+    "persistence": 10
   },
   {
     "symbol": "MBECL",
     "company": "Mcnally Bharat Engineering Company Limited",
     "industry": "Engineering - Turnkey Services",
-    "close": 438.69,
-    "mcap_cr": 1433.63,
-    "persistence": 8
+    "close": 447.46,
+    "mcap_cr": 1462.3,
+    "persistence": 9
   },
   {
     "symbol": "EMUDHRA",
     "company": "eMudhra Ltd",
     "industry": "Services - Others",
-    "close": 637.8,
-    "mcap_cr": 5376.55,
-    "persistence": 7
+    "close": 659.4,
+    "mcap_cr": 5281.73,
+    "persistence": 8
   },
   {
     "symbol": "NPST",
     "company": "Network People Services Technologies Ltd",
     "industry": "i.t",
-    "close": 1844.7,
-    "mcap_cr": 3940.7,
-    "persistence": 6
+    "close": 1782.3,
+    "mcap_cr": 3848.69,
+    "persistence": 7
   },
   {
     "symbol": "SHARDAMOTR",
     "company": "Sharda Motor Industries Limited",
     "industry": "auto",
-    "close": 971.85,
-    "mcap_cr": 5658.96,
-    "persistence": 4
-  },
-  {
-    "symbol": "FIVESTAR",
-    "company": "Five-Star Business Finance Ltd",
-    "industry": "financials",
-    "close": 549.7,
-    "mcap_cr": 15492.51,
-    "persistence": 4
-  },
-  {
-    "symbol": "PPL",
-    "company": "Prakash Pipes Limited",
-    "industry": "Industrials",
-    "close": 273.4,
-    "mcap_cr": 651.2826368,
-    "persistence": 4
-  },
-  {
-    "symbol": "COALINDIA",
-    "company": "Coal India Limited",
-    "industry": "Energy",
-    "close": 428.0,
-    "mcap_cr": 261638.6387968,
-    "persistence": 4
-  },
-  {
-    "symbol": "PCBL",
-    "company": "PCBL Ltd",
-    "industry": "chemicals",
-    "close": 345.45,
-    "mcap_cr": 13682.66,
-    "persistence": 3
+    "close": 961.85,
+    "mcap_cr": 5579.17,
+    "persistence": 5
   },
   {
     "symbol": "DHARMAJ",
     "company": "Dharmaj Crop Guard Ltd",
     "industry": "chemicals",
-    "close": 299.1,
-    "mcap_cr": 951.73,
-    "persistence": 3
-  },
-  {
-    "symbol": "SUNDROP",
-    "company": "Sundrop Brands Ltd",
-    "industry": "fmcg",
-    "close": 744.3,
-    "mcap_cr": 2798.43,
-    "persistence": 3
+    "close": 300.55,
+    "mcap_cr": 1010.88,
+    "persistence": 4
   },
   {
     "symbol": "SHIVALIK",
     "company": "Shivalik Rasayan Ltd",
     "industry": "chemicals",
-    "close": 431.65,
-    "mcap_cr": 668.39,
-    "persistence": 3
-  },
-  {
-    "symbol": "SIGACHI",
-    "company": "Sigachi Industries Limited",
-    "industry": "Healthcare",
-    "close": 30.61,
-    "mcap_cr": 1198.7091456,
-    "persistence": 3
+    "close": 410.7,
+    "mcap_cr": 692.04,
+    "persistence": 4
   },
   {
     "symbol": "GESHIP",
     "company": "The Great Eastern Shipping Company Limited",
     "industry": "transportation",
-    "close": 1483.8,
-    "mcap_cr": 20872.56,
-    "persistence": 3
+    "close": 1482.6,
+    "mcap_cr": 21183.79,
+    "persistence": 4
+  },
+  {
+    "symbol": "SUNDROP",
+    "company": "Sundrop Brands Ltd",
+    "industry": "fmcg",
+    "close": 756.2,
+    "mcap_cr": 2805.78,
+    "persistence": 4
+  },
+  {
+    "symbol": "FIVESTAR",
+    "company": "Five-Star Business Finance Limited",
+    "industry": "Financial Services",
+    "close": 549.7,
+    "mcap_cr": 15493.3428224,
+    "persistence": 4
   },
   {
     "symbol": "ASTEC",
-    "company": "Astec Lifesciences Limited",
-    "industry": "chemicals",
+    "company": "Astec LifeSciences Limited",
+    "industry": "Basic Materials",
     "close": 757.45,
-    "mcap_cr": 1770.37,
+    "mcap_cr": 1623.9294464,
+    "persistence": 3
+  },
+  {
+    "symbol": "PCBL",
+    "company": "PCBL Chemical Limited",
+    "industry": "Basic Materials",
+    "close": 345.45,
+    "mcap_cr": 13322.6438656,
+    "persistence": 3
+  },
+  {
+    "symbol": "COALINDIA",
+    "company": "Coal India Limited",
+    "industry": "Energy",
+    "close": 424.55,
+    "mcap_cr": 260067.1379456,
     "persistence": 3
   }
 ]
