@@ -1,122 +1,114 @@
 [
   {
-    "symbol": "STLNETWORK",
-    "company": "STL Networks Ltd",
-    "industry": "telecom-service",
-    "close": 52.01,
-    "mcap_cr": 2425.74,
+    "symbol": "GCSL",
+    "company": "Gretex Corporate Services Ltd",
+    "industry": "Finance and Investments Others",
+    "close": 653.45,
+    "mcap_cr": 1583.59,
     "persistence": 10
   },
   {
-    "symbol": "GCSL",
-    "company": "Gretex Corporate Services Ltd",
-    "industry": "Finance & Investments - Others",
-    "close": 633.3,
-    "mcap_cr": 1607.1,
+    "symbol": "MBECL",
+    "company": "Mcnally Bharat Engineering Company Limited",
+    "industry": "Engineering Turnkey Services",
+    "close": 456.4,
+    "mcap_cr": 1491.53,
     "persistence": 10
   },
   {
     "symbol": "IL&FSENGG",
     "company": "Il&fs Engineering And Construction Company Limited",
     "industry": "realty",
-    "close": 41.52,
-    "mcap_cr": 550.71,
+    "close": 40.0,
+    "mcap_cr": 544.41,
     "persistence": 10
-  },
-  {
-    "symbol": "MBECL",
-    "company": "Mcnally Bharat Engineering Company Limited",
-    "industry": "Engineering - Turnkey Services",
-    "close": 447.46,
-    "mcap_cr": 1462.3,
-    "persistence": 9
   },
   {
     "symbol": "EMUDHRA",
     "company": "eMudhra Ltd",
-    "industry": "Services - Others",
-    "close": 659.4,
-    "mcap_cr": 5281.73,
-    "persistence": 8
+    "industry": "Services Others",
+    "close": 653.45,
+    "mcap_cr": 5460.6,
+    "persistence": 9
   },
   {
     "symbol": "NPST",
     "company": "Network People Services Technologies Ltd",
     "industry": "i.t",
-    "close": 1782.3,
-    "mcap_cr": 3848.69,
-    "persistence": 7
+    "close": 1796.3,
+    "mcap_cr": 3718.5,
+    "persistence": 8
   },
   {
     "symbol": "SHARDAMOTR",
     "company": "Sharda Motor Industries Limited",
     "industry": "auto",
-    "close": 961.85,
-    "mcap_cr": 5579.17,
+    "close": 956.35,
+    "mcap_cr": 5521.76,
+    "persistence": 6
+  },
+  {
+    "symbol": "SHIVALIK",
+    "company": "Shivalik Rasayan Ltd",
+    "industry": "chemicals",
+    "close": 408.45,
+    "mcap_cr": 658.45,
+    "persistence": 5
+  },
+  {
+    "symbol": "SUNDROP",
+    "company": "Sundrop Brands Ltd",
+    "industry": "fmcg",
+    "close": 745.75,
+    "mcap_cr": 2850.64,
     "persistence": 5
   },
   {
     "symbol": "DHARMAJ",
     "company": "Dharmaj Crop Guard Ltd",
     "industry": "chemicals",
-    "close": 300.55,
-    "mcap_cr": 1010.88,
-    "persistence": 4
-  },
-  {
-    "symbol": "SHIVALIK",
-    "company": "Shivalik Rasayan Ltd",
-    "industry": "chemicals",
-    "close": 410.7,
-    "mcap_cr": 692.04,
-    "persistence": 4
+    "close": 295.15,
+    "mcap_cr": 1015.78,
+    "persistence": 5
   },
   {
     "symbol": "GESHIP",
     "company": "The Great Eastern Shipping Company Limited",
     "industry": "transportation",
-    "close": 1482.6,
-    "mcap_cr": 21183.79,
-    "persistence": 4
-  },
-  {
-    "symbol": "SUNDROP",
-    "company": "Sundrop Brands Ltd",
-    "industry": "fmcg",
-    "close": 756.2,
-    "mcap_cr": 2805.78,
-    "persistence": 4
-  },
-  {
-    "symbol": "FIVESTAR",
-    "company": "Five-Star Business Finance Limited",
-    "industry": "Financial Services",
-    "close": 549.7,
-    "mcap_cr": 15493.3428224,
-    "persistence": 4
-  },
-  {
-    "symbol": "ASTEC",
-    "company": "Astec LifeSciences Limited",
-    "industry": "Basic Materials",
-    "close": 757.45,
-    "mcap_cr": 1623.9294464,
-    "persistence": 3
+    "close": 1497.2,
+    "mcap_cr": 21166.66,
+    "persistence": 5
   },
   {
     "symbol": "PCBL",
     "company": "PCBL Chemical Limited",
     "industry": "Basic Materials",
-    "close": 345.45,
-    "mcap_cr": 13322.6438656,
+    "close": 338.6,
+    "mcap_cr": 13361.9900416,
     "persistence": 3
   },
   {
-    "symbol": "COALINDIA",
-    "company": "Coal India Limited",
-    "industry": "Energy",
-    "close": 424.55,
-    "mcap_cr": 260067.1379456,
+    "symbol": "TEXRAIL",
+    "company": "Texmaco Rail & Engineering Limited",
+    "industry": "industrials",
+    "close": 125.67,
+    "mcap_cr": 5157.82,
+    "persistence": 3
+  },
+  {
+    "symbol": "ASTEC",
+    "company": "Astec LifeSciences Limited",
+    "industry": "Basic Materials",
+    "close": 728.8,
+    "mcap_cr": 1646.6574336,
+    "persistence": 3
+  },
+  {
+    "symbol": "TREL",
+    "company": "TransIndia Real Estate Ltd",
+    "industry": "transportation",
+    "close": 28.32,
+    "mcap_cr": 683.03,
     "persistence": 3
   }
 ]
