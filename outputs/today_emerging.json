@@ -1,114 +1,106 @@
 [
   {
-    "symbol": "MBECL",
-    "company": "Mcnally Bharat Engineering Company Limited",
-    "industry": "Engineering Turnkey Services",
-    "close": 465.52,
-    "mcap_cr": 1521.33,
-    "persistence": 10
-  },
-  {
     "symbol": "EMUDHRA",
     "company": "eMudhra Ltd",
     "industry": "Services Others",
-    "close": 649.25,
-    "mcap_cr": 5411.33,
+    "close": 627.15,
+    "mcap_cr": 5376.55,
     "persistence": 10
   },
   {
-    "symbol": "IL&FSENGG",
-    "company": "IL&FS Engineering and Construction Company Limited",
-    "industry": "Industrials",
-    "close": 40.0,
-    "mcap_cr": 505.471744,
-    "persistence": 9
+    "symbol": "MBECL",
+    "company": "Mcnally Bharat Engineering Company Limited",
+    "industry": "Engineering Turnkey Services",
+    "close": 474.83,
+    "mcap_cr": 1551.73,
+    "persistence": 10
   },
   {
     "symbol": "NPST",
     "company": "Network People Services Technologies Limited",
     "industry": "Technology",
-    "close": 1796.3,
-    "mcap_cr": 3411.1821824,
+    "close": 1635.0,
+    "mcap_cr": 3448.7365632,
     "persistence": 8
-  },
-  {
-    "symbol": "DHARMAJ",
-    "company": "Dharmaj Crop Guard Ltd",
-    "industry": "chemicals",
-    "close": 291.05,
-    "mcap_cr": 997.53,
-    "persistence": 6
-  },
-  {
-    "symbol": "SUNDROP",
-    "company": "Sundrop Brands Ltd",
-    "industry": "fmcg",
-    "close": 740.2,
-    "mcap_cr": 2811.24,
-    "persistence": 6
   },
   {
     "symbol": "SHIVALIK",
     "company": "Shivalik Rasayan Ltd",
     "industry": "chemicals",
-    "close": 407.95,
-    "mcap_cr": 654.84,
-    "persistence": 6
+    "close": 411.35,
+    "mcap_cr": 654.04,
+    "persistence": 7
   },
   {
-    "symbol": "SHARDAMOTR",
-    "company": "Sharda Motor Industries Limited",
-    "industry": "Consumer Cyclical",
-    "close": 956.35,
-    "mcap_cr": 5425.6050176,
-    "persistence": 6
+    "symbol": "SUNDROP",
+    "company": "Sundrop Brands Ltd",
+    "industry": "fmcg",
+    "close": 750.75,
+    "mcap_cr": 2790.32,
+    "persistence": 7
   },
   {
     "symbol": "GESHIP",
     "company": "The Great Eastern Shipping Company Limited",
-    "industry": "transportation",
-    "close": 1533.4,
-    "mcap_cr": 21375.1,
+    "industry": "Shipping",
+    "close": 1537.8,
+    "mcap_cr": 21891.92,
+    "persistence": 7
+  },
+  {
+    "symbol": "SHARDAMOTR",
+    "company": "Sharda Motor Industries Limited",
+    "industry": "auto",
+    "close": 971.25,
+    "mcap_cr": 5425.6,
+    "persistence": 7
+  },
+  {
+    "symbol": "DHARMAJ",
+    "company": "Dharmaj Crop Guard Limited",
+    "industry": "Basic Materials",
+    "close": 291.05,
+    "mcap_cr": 942.0996608,
     "persistence": 6
   },
   {
     "symbol": "TREL",
     "company": "TransIndia Real Estate Ltd",
     "industry": "transportation",
-    "close": 28.89,
-    "mcap_cr": 695.81,
-    "persistence": 4
+    "close": 28.4,
+    "mcap_cr": 709.81,
+    "persistence": 5
   },
   {
     "symbol": "TEXRAIL",
     "company": "Texmaco Rail & Engineering Limited",
     "industry": "industrials",
-    "close": 123.14,
-    "mcap_cr": 5113.07,
+    "close": 125.67,
+    "mcap_cr": 5010.13,
+    "persistence": 5
+  },
+  {
+    "symbol": "DELTACORP",
+    "company": "Delta Corp Limited",
+    "industry": "miscellaneous",
+    "close": 78.69,
+    "mcap_cr": 1933.31,
     "persistence": 4
   },
   {
     "symbol": "PCBL",
     "company": "PCBL Chemical Limited",
     "industry": "Basic Materials",
-    "close": 339.6,
-    "mcap_cr": 13084.598272,
-    "persistence": 3
-  },
-  {
-    "symbol": "DELTACORP",
-    "company": "Delta Corp Limited",
-    "industry": "miscellaneous",
-    "close": 72.2,
-    "mcap_cr": 2057.55,
+    "close": 332.55,
+    "mcap_cr": 13001.9721216,
     "persistence": 3
   },
   {
     "symbol": "ASTEC",
     "company": "Astec LifeSciences Limited",
     "industry": "Basic Materials",
-    "close": 739.0,
-    "mcap_cr": 1586.0496384,
+    "close": 711.8,
+    "mcap_cr": 1551.4008576,
     "persistence": 3
   }
 ]

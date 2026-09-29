@@ -1,5 +1,5 @@
 # 📊 Monit High-Conviction Confluences & Emerging Leaders Report
-Generated on **28 Sep 2026** | Premium Quantitative Watchlist Analysis
+Generated on **29 Sep 2026** | Premium Quantitative Watchlist Analysis
 
 ## 🏆 1. High-Conviction Confluences (Common Count = 3)
 These stocks are at the absolute intersection of all three major momentum dimensions:
@@ -7,44 +7,41 @@ These stocks are at the absolute intersection of all three major momentum dimens
 2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)
 3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)
 
-Total triple-confluence candidates: **13**
+Total triple-confluence candidates: **11**
 
 | Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Volume & Delivery (Live) | Active Signal | Scans Count | Deep Research Report |
 |---|---|---|---|---|---|---|---|---|---|
-| `GCSL` | Gretex Corporate Services Ltd | Finance and Investments Others | ₹667.35 | 2.13% | 1,634.0 | 40.1% (⚖️ Neutral | ₹7.31 Cr) | **52W Breakout** | **23** | _Pending separate pipeline run_ |
-| `MACPOWER` | Macpower CNC Machines Ltd | CNC Machines | ₹2,194.60 | 6.4% | 2,063.4 | 34.7% (⚖️ Neutral | ₹11.26 Cr) | **52W Breakout** | **23** | 📝 **Sent on 10-Aug-2026** |
-| `SYRMA` | Syrma SGS Technology Ltd | EMS | ₹1,746.40 | 0.8% | 33,409.8 | 34.9% (🔥 High Accumulation (₹113.22 Cr) | ₹113.22 Cr) | **52W Breakout** | **22** | 📝 **Sent on 07-Sep-2026** |
-| `KINGFA` | Kingfa Science & Technology (india) Limited | Plastics Plastic and Plastic Products | ₹6,384.00 | 2.35% | 8,452.7 | 49.3% (🛡️ Strong Delivery (₹3.34 Cr) | ₹3.34 Cr) | **52W Breakout** | **21** | _Pending separate pipeline run_ |
-| `NRBBEARING` | Nrb Bearing Limited | Bearings | ₹541.50 | 1.25% | 5,183.4 | 31.0% (⚖️ Neutral | ₹23.75 Cr) | **52W Breakout** | **20** | 📝 **Sent on 08-Jun-2026** |
-| `WELSPUNLIV` | Welspun Living Ltd | Textiles Home Textile | ₹227.95 | 1.46% | 21,226.7 | 52.2% (🛡️ Strong Delivery (₹49.52 Cr) | ₹49.52 Cr) | **52W Breakout** | **20** | 📝 **Sent on 31-Aug-2026** |
-| `MUKANDLTD` | Mukand Limited | Steel | ₹171.03 | 2.38% | 2,413.8 | 43.4% (🛡️ Strong Delivery (₹11.87 Cr) | ₹11.87 Cr) | **52W Breakout** | **20** | _Pending separate pipeline run_ |
-| `AHCL` | Anlon Healthcare Ltd | Pharma API | ₹34.66 | 10.0% | 1,674.8 | 28.2% (⚖️ Neutral | ₹23.06 Cr) | **52W Breakout** | **19** | 📝 **Sent on 17-Sep-2026** |
-| `SMCGLOBAL` | SMC Global Securities Ltd | Finance Capital Markets Brokers | ₹97.23 | 13.59% | 1,792.5 | 13.2% (⚠️ Speculative Churn | ₹34.38 Cr) | **52W Breakout** | **19** | 📝 **Sent on 27-Jul-2026** |
-| `KABRAEXTRU` | Kabra Extrusion Technik Limited | Capital Goods Engineering Heavy | ₹863.15 | 1.98% | 2,960.1 | 54.1% (🛡️ Strong Delivery (₹28.11 Cr) | ₹28.11 Cr) | **52W Breakout** | **19** | 📝 **Sent on 30-Jul-2026** |
-| `SPECTRUM` | Spectrum Electrical Industries Ltd | Capital Goods Electric General | ₹3,578.70 | 1.7% | 6,012.7 | N/A | **52W Breakout** | **18** | 📝 **Sent on 31-May-2026** |
-| `FILATEX` | Filatex India Limited | Textiles Manmade PFY and PSF | ₹110.75 | 3.56% | 4,748.8 | 47.6% (🛡️ Strong Delivery (₹28.30 Cr) | ₹28.30 Cr) | **52W Breakout** | **18** | 📝 **Sent on 17-Jun-2026** |
-| `ARTEMISMED` | Artemis Medicare Services Ltd | Hospitals | ₹365.90 | 2.29% | 5,662.6 | 21.8% (⚖️ Neutral | ₹16.71 Cr) | **52W Breakout** | **18** | 📝 **Sent on 30-Jul-2026** |
+| `SAMBHV` | Sambhv Steel Tubes Ltd | Steel Tubes and Pipes | ₹162.24 | 5.35% | 4,537.9 | 27.6% (⚖️ Neutral | ₹38.86 Cr) | **52W Breakout** | **28** | 📝 **Sent on 04-Aug-2026** |
+| `AARTIPHARM` | Aarti Pharmalabs Ltd | Pharma API | ₹972.80 | 6.43% | 8,288.1 | 40.7% (⚖️ Neutral | ₹32.16 Cr) | **52W Breakout** | **26** | 📝 **Sent on 17-Aug-2026** |
+| `MUKANDLTD` | Mukand Limited | Steel | ₹172.49 | 0.85% | 2,471.3 | 40.5% (⚖️ Neutral | ₹5.74 Cr) | **52W Breakout** | **22** | _Pending separate pipeline run_ |
+| `SYNCOMF` | Syncom Formulations (India) Ltd | Pharma Others | ₹26.18 | 17.93% | 2,086.8 | 10.1% (⚠️ Speculative Churn | ₹62.46 Cr) | **52W Breakout** | **22** | 📝 **Sent on 17-Aug-2026** |
+| `KINGFA` | Kingfa Science & Technology (india) Limited | Plastics Plastic and Plastic Products | ₹6,524.50 | 2.2% | 8,651.2 | 37.7% (⚖️ Neutral | ₹5.45 Cr) | **52W Breakout** | **21** | _Pending separate pipeline run_ |
+| `INDSWFTLAB` | Ind-swift Laboratories Limited | Pharma Formulations | ₹413.10 | 1.23% | 3,548.9 | 37.1% (⚖️ Neutral | ₹6.83 Cr) | **52W Breakout** | **20** | 📝 **Sent on 11-Aug-2026** |
+| `AHCL` | Anlon Healthcare Ltd | Pharma API | ₹36.39 | 4.99% | 1,842.2 | 62.1% (🛡️ Strong Delivery (₹21.54 Cr) | ₹21.54 Cr) | **52W Breakout** | **19** | 📝 **Sent on 17-Sep-2026** |
+| `SUNFLAG` | Sunflag Iron And Steel Company Limited | Steel Products | ₹464.30 | 3.36% | 8,095.5 | 32.9% (⚖️ Neutral | ₹33.01 Cr) | **52W Breakout** | **19** | _Pending separate pipeline run_ |
+| `LLOYDSENGG` | Lloyds Engineering Works Ltd | Capital Goods Electrical Equipment | ₹102.19 | 6.48% | 14,885.3 | 24.9% (⚖️ Neutral | ₹101.74 Cr) | **52W Breakout** | **19** | _Pending separate pipeline run_ |
+| `SPECTRUM` | Spectrum Electrical Industries Ltd | industrials | ₹3,720.90 | 3.97% | 6,115.1 | N/A | **52W Breakout** | **0** | 📝 **Sent on 31-May-2026** |
+| `RPGLIFE` | Rpg Life Sciences Limited | healthcare | ₹3,089.20 | 4.54% | 4,887.4 | 57.4% (🔥 High Accumulation (₹17.02 Cr) | ₹17.02 Cr) | **52W Breakout** | **0** | 📝 **Sent on 15-Jul-2026** |
 
 ---
 
 ## 🚀 2. Emerging Multibagger Leaders (Fresh Momentum Expansion)
 These stocks show a fresh institutional footprint. They have minimal historical appearances (`<= 2` counts over the prior months) but have erupted recently (`>= 3` appearances in the last 10 days). This highlights **early stage-2 momentum expansion** before they double!
 
-Total emerging leaders: **14**
+Total emerging leaders: **13**
 
 | Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Volume & Delivery (Live) | Persistence (Last 10D) |
 |---|---|---|---|---|---|---|---|
-| 1 | `MBECL` | Mcnally Bharat Engineering Company Limited | Engineering Turnkey Services | ₹465.52 | 1,521.3 | N/A | **10/10 days** |
-| 2 | `EMUDHRA` | eMudhra Ltd | Services Others | ₹649.25 | 5,411.3 | 26.9% (⚖️ Neutral | ₹7.83 Cr) | **10/10 days** |
-| 3 | `IL&FSENGG` | IL&FS Engineering and Construction Company Limited | Industrials | ₹40.00 | 505.5 | N/A | **9/10 days** |
-| 4 | `NPST` | Network People Services Technologies Limited | Technology | ₹1,796.30 | 3,411.2 | 52.5% (🛡️ Strong Delivery (₹9.44 Cr) | ₹9.44 Cr) | **8/10 days** |
-| 5 | `DHARMAJ` | Dharmaj Crop Guard Ltd | chemicals | ₹291.05 | 997.5 | 59.8% (🛡️ Strong Delivery (₹0.46 Cr) | ₹0.46 Cr) | **6/10 days** |
-| 6 | `SUNDROP` | Sundrop Brands Ltd | fmcg | ₹740.20 | 2,811.2 | 77.6% (🛡️ Strong Delivery (₹1.16 Cr) | ₹1.16 Cr) | **6/10 days** |
-| 7 | `SHIVALIK` | Shivalik Rasayan Ltd | chemicals | ₹407.95 | 654.8 | 43.8% (⚖️ Neutral | ₹1.45 Cr) | **6/10 days** |
-| 8 | `SHARDAMOTR` | Sharda Motor Industries Limited | Consumer Cyclical | ₹956.35 | 5,425.6 | 49.3% (🛡️ Strong Delivery (₹2.91 Cr) | ₹2.91 Cr) | **6/10 days** |
-| 9 | `GESHIP` | The Great Eastern Shipping Company Limited | transportation | ₹1,533.40 | 21,375.1 | 25.8% (⚖️ Neutral | ₹129.49 Cr) | **6/10 days** |
-| 10 | `TREL` | TransIndia Real Estate Ltd | transportation | ₹28.89 | 695.8 | 61.8% (🛡️ Strong Delivery (₹0.26 Cr) | ₹0.26 Cr) | **4/10 days** |
-| 11 | `TEXRAIL` | Texmaco Rail & Engineering Limited | industrials | ₹123.14 | 5,113.1 | 40.9% (⚖️ Neutral | ₹10.79 Cr) | **4/10 days** |
-| 12 | `PCBL` | PCBL Chemical Limited | Basic Materials | ₹339.60 | 13,084.6 | 42.0% (🛡️ Strong Delivery (₹12.63 Cr) | ₹12.63 Cr) | **3/10 days** |
-| 13 | `DELTACORP` | Delta Corp Limited | miscellaneous | ₹72.20 | 2,057.6 | 28.6% (⚖️ Neutral | ₹28.58 Cr) | **3/10 days** |
-| 14 | `ASTEC` | Astec LifeSciences Limited | Basic Materials | ₹739.00 | 1,586.0 | 41.0% (⚖️ Neutral | ₹0.81 Cr) | **3/10 days** |
+| 1 | `EMUDHRA` | eMudhra Ltd | Services Others | ₹627.15 | 5,376.6 | 32.7% (🛡️ Strong Delivery (₹10.01 Cr) | ₹10.01 Cr) | **10/10 days** |
+| 2 | `MBECL` | Mcnally Bharat Engineering Company Limited | Engineering Turnkey Services | ₹474.83 | 1,551.7 | N/A | **10/10 days** |
+| 3 | `NPST` | Network People Services Technologies Limited | Technology | ₹1,635.00 | 3,448.7 | 32.9% (⚖️ Neutral | ₹6.67 Cr) | **8/10 days** |
+| 4 | `SHIVALIK` | Shivalik Rasayan Ltd | chemicals | ₹411.35 | 654.0 | 55.1% (🛡️ Strong Delivery (₹1.52 Cr) | ₹1.52 Cr) | **7/10 days** |
+| 5 | `SUNDROP` | Sundrop Brands Ltd | fmcg | ₹750.75 | 2,790.3 | 52.1% (🛡️ Strong Delivery (₹0.92 Cr) | ₹0.92 Cr) | **7/10 days** |
+| 6 | `GESHIP` | The Great Eastern Shipping Company Limited | Shipping | ₹1,537.80 | 21,891.9 | 32.9% (⚖️ Neutral | ₹114.55 Cr) | **7/10 days** |
+| 7 | `SHARDAMOTR` | Sharda Motor Industries Limited | auto | ₹971.25 | 5,425.6 | 55.3% (🛡️ Strong Delivery (₹2.72 Cr) | ₹2.72 Cr) | **7/10 days** |
+| 8 | `DHARMAJ` | Dharmaj Crop Guard Limited | Basic Materials | ₹291.05 | 942.1 | 62.0% (🛡️ Strong Delivery (₹1.36 Cr) | ₹1.36 Cr) | **6/10 days** |
+| 9 | `TREL` | TransIndia Real Estate Ltd | transportation | ₹28.40 | 709.8 | 54.3% (🛡️ Strong Delivery (₹0.17 Cr) | ₹0.17 Cr) | **5/10 days** |
+| 10 | `TEXRAIL` | Texmaco Rail & Engineering Limited | industrials | ₹125.67 | 5,010.1 | 34.9% (⚖️ Neutral | ₹13.42 Cr) | **5/10 days** |
+| 11 | `DELTACORP` | Delta Corp Limited | miscellaneous | ₹78.69 | 1,933.3 | 28.2% (⚖️ Neutral | ₹27.80 Cr) | **4/10 days** |
+| 12 | `PCBL` | PCBL Chemical Limited | Basic Materials | ₹332.55 | 13,002.0 | 43.2% (⚖️ Neutral | ₹9.59 Cr) | **3/10 days** |
+| 13 | `ASTEC` | Astec LifeSciences Limited | Basic Materials | ₹711.80 | 1,551.4 | 40.7% (⚖️ Neutral | ₹0.86 Cr) | **3/10 days** |
