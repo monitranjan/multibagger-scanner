@@ -5,19 +5,9 @@
     "industry": "Diamond Gems and Jewellery",
     "close": 1874.0,
     "return_1d": 4.76,
-    "mcap_cr": 4083.46,
+    "mcap_cr": 4277.95,
     "signal": "52W Breakout",
-    "scans_count": 32
-  },
-  {
-    "symbol": "CUPID",
-    "company": "Cupid Limited",
-    "industry": "Contraceptives and Protectives",
-    "close": 312.5,
-    "return_1d": 0.27,
-    "mcap_cr": 41906.35,
-    "signal": "52W Breakout",
-    "scans_count": 25
+    "scans_count": 28
   },
   {
     "symbol": "ONEPOINT",
@@ -25,69 +15,19 @@
     "industry": "IT Enabled Services",
     "close": 74.37,
     "return_1d": 1.34,
-    "mcap_cr": 1929.69,
-    "signal": "52W Breakout",
-    "scans_count": 25
-  },
-  {
-    "symbol": "SBC",
-    "company": "SBC Exports Ltd",
-    "industry": "Textiles Readymade Apparel",
-    "close": 58.54,
-    "return_1d": 0.43,
-    "mcap_cr": 2775.71,
-    "signal": "52W Breakout",
-    "scans_count": 24
-  },
-  {
-    "symbol": "GCSL",
-    "company": "Gretex Corporate Services Ltd",
-    "industry": "Finance and Investments Others",
-    "close": 679.9,
-    "return_1d": 0.6,
-    "mcap_cr": 1689.99,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "LOTUSDEV",
-    "company": "Sri Lotus Developers & Realty Ltd",
-    "industry": "Construction Factories and Offices and Commercial",
-    "close": 230.07,
-    "return_1d": 2.47,
-    "mcap_cr": 10973.31,
+    "mcap_cr": 1955.46,
     "signal": "52W Breakout",
     "scans_count": 22
   },
   {
-    "symbol": "RAMRAT",
-    "company": "Ram Ratna Wires Ltd",
-    "industry": "Copper Wires",
-    "close": 616.55,
-    "return_1d": 5.86,
-    "mcap_cr": 5436.65,
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives and Protectives",
+    "close": 312.5,
+    "return_1d": 0.27,
+    "mcap_cr": 42020.65,
     "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "KINGFA",
-    "company": "Kingfa Science & Technology (india) Limited",
-    "industry": "Plastics Plastic and Plastic Products",
-    "close": 6586.5,
-    "return_1d": 1.6,
-    "mcap_cr": 8784.68,
-    "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "WELSPUNLIV",
-    "company": "Welspun Living Ltd",
-    "industry": "Textiles Home Textile",
-    "close": 239.17,
-    "return_1d": 5.21,
-    "mcap_cr": 21477.06,
-    "signal": "52W Breakout",
-    "scans_count": 21
+    "scans_count": 20
   },
   {
     "symbol": "AXISCADES",
@@ -95,49 +35,19 @@
     "industry": "Aerospace and Defence Equipment",
     "close": 2307.3,
     "return_1d": 3.41,
-    "mcap_cr": 9489.51,
+    "mcap_cr": 9813.18,
     "signal": "52W Breakout",
     "scans_count": 20
   },
   {
-    "symbol": "VALIANTORG",
-    "company": "Valiant Organics Ltd",
-    "industry": "Chemicals Organic",
-    "close": 477.15,
-    "return_1d": 4.85,
-    "mcap_cr": 1275.86,
+    "symbol": "LOTUSDEV",
+    "company": "Sri Lotus Developers & Realty Ltd",
+    "industry": "Construction Factories and Offices and Commercial",
+    "close": 230.07,
+    "return_1d": 2.47,
+    "mcap_cr": 11244.07,
     "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "RATNAVEER",
-    "company": "Ratnaveer Precision Engineering Ltd",
-    "industry": "Stainless Steel",
-    "close": 345.45,
-    "return_1d": 4.44,
-    "mcap_cr": 2775.86,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "MOREPENLAB",
-    "company": "Morepen Laboratories Limited",
-    "industry": "Pharma API",
-    "close": 133.72,
-    "return_1d": 6.14,
-    "mcap_cr": 6903.67,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "SPECTRUM",
-    "company": "Spectrum Electrical Industries Ltd",
-    "industry": "Capital Goods Electric General",
-    "close": 3853.4,
-    "return_1d": 0.19,
-    "mcap_cr": 6572.01,
-    "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 18
   },
   {
     "symbol": "DYNAMATECH",
@@ -145,9 +55,29 @@
     "industry": "Aerospace and Defence Equipment",
     "close": 13756.0,
     "return_1d": 1.07,
-    "mcap_cr": 9243.83,
+    "mcap_cr": 9342.31,
     "signal": "52W Breakout",
-    "scans_count": 19
+    "scans_count": 18
+  },
+  {
+    "symbol": "WELSPUNLIV",
+    "company": "Welspun Living Ltd",
+    "industry": "Textiles Home Textile",
+    "close": 239.17,
+    "return_1d": 5.21,
+    "mcap_cr": 22595.65,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "SBC",
+    "company": "SBC Exports Ltd",
+    "industry": "Textiles Readymade Apparel",
+    "close": 58.54,
+    "return_1d": 0.43,
+    "mcap_cr": 2787.62,
+    "signal": "52W Breakout",
+    "scans_count": 18
   },
   {
     "symbol": "SMCGLOBAL",
@@ -155,8 +85,48 @@
     "industry": "Finance Capital Markets Brokers",
     "close": 99.06,
     "return_1d": 4.85,
-    "mcap_cr": 1978.41,
+    "mcap_cr": 2074.32,
     "signal": "52W Breakout",
-    "scans_count": 18
+    "scans_count": 17
+  },
+  {
+    "symbol": "RATNAVEER",
+    "company": "Ratnaveer Precision Engineering Ltd",
+    "industry": "Stainless Steel",
+    "close": 345.45,
+    "return_1d": 4.44,
+    "mcap_cr": 2899.24,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "KINGFA",
+    "company": "Kingfa Science & Technology (india) Limited",
+    "industry": "Plastics Plastic and Plastic Products",
+    "close": 6586.5,
+    "return_1d": 1.6,
+    "mcap_cr": 8925.62,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  },
+  {
+    "symbol": "SPECTRUM",
+    "company": "Spectrum Electrical Industries Ltd",
+    "industry": "Capital Goods Electric General",
+    "close": 3853.4,
+    "return_1d": 0.19,
+    "mcap_cr": 6584.48,
+    "signal": "52W Breakout",
+    "scans_count": 15
+  },
+  {
+    "symbol": "SIGMAADV",
+    "company": "Sigma Advanced System Ltd",
+    "industry": "Aerospace and Defence Equipment",
+    "close": 1076.9,
+    "return_1d": 4.99,
+    "mcap_cr": 20406.84,
+    "signal": "52W Breakout",
+    "scans_count": 15
   }
 ]

@@ -1,42 +1,42 @@
 [
   {
-    "symbol": "SUNDROP",
-    "company": "Sundrop Brands Ltd",
-    "industry": "fmcg",
-    "close": 753.15,
-    "mcap_cr": 2809.17,
-    "persistence": 9
-  },
-  {
     "symbol": "SHIVALIK",
     "company": "Shivalik Rasayan Ltd",
     "industry": "chemicals",
     "close": 394.05,
-    "mcap_cr": 646.83,
-    "persistence": 9
+    "mcap_cr": 631.76,
+    "persistence": 10
+  },
+  {
+    "symbol": "SUNDROP",
+    "company": "Sundrop Brands Ltd",
+    "industry": "FMCG Foods",
+    "close": 753.15,
+    "mcap_cr": 2839.14,
+    "persistence": 10
   },
   {
     "symbol": "GESHIP",
     "company": "The Great Eastern Shipping Company Limited",
-    "industry": "Shipping",
+    "industry": "transportation",
     "close": 1530.6,
-    "mcap_cr": 22271.68,
-    "persistence": 9
-  },
-  {
-    "symbol": "SHARDAMOTR",
-    "company": "Sharda Motor Industries Limited",
-    "industry": "Consumer Cyclical",
-    "close": 956.95,
-    "mcap_cr": 5332.027392,
-    "persistence": 8
+    "mcap_cr": 21851.94,
+    "persistence": 10
   },
   {
     "symbol": "TEXRAIL",
     "company": "Texmaco Rail & Engineering Limited",
     "industry": "industrials",
     "close": 126.86,
-    "mcap_cr": 5359.63,
+    "mcap_cr": 5161.48,
+    "persistence": 8
+  },
+  {
+    "symbol": "SHARDAMOTR",
+    "company": "Sharda Motor Industries Limited",
+    "industry": "Consumer Cyclical",
+    "close": 956.95,
+    "mcap_cr": 5358.1508608,
     "persistence": 7
   },
   {
@@ -44,7 +44,15 @@
     "company": "Delta Corp Limited",
     "industry": "miscellaneous",
     "close": 73.48,
-    "mcap_cr": 2155.83,
+    "mcap_cr": 1967.58,
+    "persistence": 7
+  },
+  {
+    "symbol": "DHARMAJ",
+    "company": "Dharmaj Crop Guard Limited",
+    "industry": "Basic Materials",
+    "close": 264.35,
+    "mcap_cr": 896.4732928,
     "persistence": 6
   },
   {
@@ -56,43 +64,27 @@
     "persistence": 6
   },
   {
-    "symbol": "DHARMAJ",
-    "company": "Dharmaj Crop Guard Limited",
-    "industry": "Basic Materials",
-    "close": 264.35,
-    "mcap_cr": 904.5846016,
-    "persistence": 6
-  },
-  {
-    "symbol": "NPST",
-    "company": "Network People Services Technologies Limited",
-    "industry": "Technology",
-    "close": 1764.8,
-    "mcap_cr": 3685.5373824,
-    "persistence": 6
-  },
-  {
-    "symbol": "TREL",
-    "company": "Transindia Real Estate Limited",
-    "industry": "Real Estate",
-    "close": 28.89,
-    "mcap_cr": 670.5031168,
-    "persistence": 5
-  },
-  {
     "symbol": "SATIA",
     "company": "Satia Industries Ltd",
     "industry": "building materials",
     "close": 68.34,
-    "mcap_cr": 697.0,
-    "persistence": 4
+    "mcap_cr": 683.4,
+    "persistence": 5
   },
   {
     "symbol": "SUNTV",
     "company": "Sun Tv Network Limited",
     "industry": "media",
     "close": 599.9,
-    "mcap_cr": 23842.12,
+    "mcap_cr": 23641.14,
+    "persistence": 4
+  },
+  {
+    "symbol": "ALICON",
+    "company": "Alicon Castalloy Limited",
+    "industry": "castings, forgings & fasteners",
+    "close": 871.95,
+    "mcap_cr": 1431.03,
     "persistence": 3
   },
   {
@@ -100,7 +92,7 @@
     "company": "Man Infraconstruction Limited",
     "industry": "Industrials",
     "close": 126.86,
-    "mcap_cr": 4931.4971648,
+    "mcap_cr": 4947.3662976,
     "persistence": 3
   },
   {
@@ -108,7 +100,15 @@
     "company": "PCBL Chemical Limited",
     "industry": "Basic Materials",
     "close": 331.1,
-    "mcap_cr": 12649.8226176,
+    "mcap_cr": 12636.0510464,
+    "persistence": 3
+  },
+  {
+    "symbol": "SHRINGARMS",
+    "company": "Shringar House of Mangalsutra Ltd",
+    "industry": "consumer discretionary",
+    "close": 221.31,
+    "mcap_cr": 2134.14,
     "persistence": 3
   }
 ]
