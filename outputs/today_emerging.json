@@ -1,114 +1,106 @@
 [
   {
-    "symbol": "SHIVALIK",
-    "company": "Shivalik Rasayan Ltd",
-    "industry": "chemicals",
-    "close": 394.05,
-    "mcap_cr": 631.76,
+    "symbol": "GESHIP",
+    "company": "The Great Eastern Shipping Company Limited",
+    "industry": "transportation",
+    "close": 1559.3,
+    "mcap_cr": 21851.94,
     "persistence": 10
   },
   {
     "symbol": "SUNDROP",
     "company": "Sundrop Brands Ltd",
     "industry": "FMCG Foods",
-    "close": 753.15,
+    "close": 748.6,
     "mcap_cr": 2839.14,
     "persistence": 10
   },
   {
-    "symbol": "GESHIP",
-    "company": "The Great Eastern Shipping Company Limited",
-    "industry": "transportation",
-    "close": 1530.6,
-    "mcap_cr": 21851.94,
-    "persistence": 10
-  },
-  {
-    "symbol": "TEXRAIL",
-    "company": "Texmaco Rail & Engineering Limited",
-    "industry": "industrials",
-    "close": 126.86,
-    "mcap_cr": 5161.48,
-    "persistence": 8
-  },
-  {
-    "symbol": "SHARDAMOTR",
-    "company": "Sharda Motor Industries Limited",
-    "industry": "Consumer Cyclical",
-    "close": 956.95,
-    "mcap_cr": 5358.1508608,
-    "persistence": 7
+    "symbol": "SHIVALIK",
+    "company": "Shivalik Rasayan Limited",
+    "industry": "Basic Materials",
+    "close": 394.05,
+    "mcap_cr": 601.6946176,
+    "persistence": 9
   },
   {
     "symbol": "DELTACORP",
     "company": "Delta Corp Limited",
-    "industry": "miscellaneous",
-    "close": 73.48,
+    "industry": "Miscellaneous",
+    "close": 85.43,
     "mcap_cr": 1967.58,
-    "persistence": 7
+    "persistence": 8
   },
   {
-    "symbol": "DHARMAJ",
-    "company": "Dharmaj Crop Guard Limited",
-    "industry": "Basic Materials",
-    "close": 264.35,
-    "mcap_cr": 896.4732928,
-    "persistence": 6
-  },
-  {
-    "symbol": "BANDHANBNK",
-    "company": "Bandhan Bank Limited",
-    "industry": "Financial Services",
-    "close": 178.23,
-    "mcap_cr": 28356.1951232,
-    "persistence": 6
+    "symbol": "TEXRAIL",
+    "company": "Texmaco Rail & Engineering Limited",
+    "industry": "Industrials",
+    "close": 126.86,
+    "mcap_cr": 4767.6391424,
+    "persistence": 8
   },
   {
     "symbol": "SATIA",
     "company": "Satia Industries Ltd",
     "industry": "building materials",
-    "close": 68.34,
+    "close": 68.51,
     "mcap_cr": 683.4,
+    "persistence": 6
+  },
+  {
+    "symbol": "DHARMAJ",
+    "company": "Dharmaj Crop Guard Limited",
+    "industry": "Basic Materials",
+    "close": 267.65,
+    "mcap_cr": 895.6283904,
+    "persistence": 5
+  },
+  {
+    "symbol": "BANDHANBNK",
+    "company": "Bandhan Bank Limited",
+    "industry": "Financial Services",
+    "close": 176.0,
+    "mcap_cr": 27110.7784704,
     "persistence": 5
   },
   {
     "symbol": "SUNTV",
     "company": "Sun Tv Network Limited",
     "industry": "media",
-    "close": 599.9,
+    "close": 626.85,
     "mcap_cr": 23641.14,
-    "persistence": 4
+    "persistence": 5
   },
   {
     "symbol": "ALICON",
     "company": "Alicon Castalloy Limited",
     "industry": "castings, forgings & fasteners",
-    "close": 871.95,
+    "close": 848.95,
     "mcap_cr": 1431.03,
+    "persistence": 4
+  },
+  {
+    "symbol": "SHRINGARMS",
+    "company": "Shringar House of Mangalsutra Limited",
+    "industry": "Consumer Cyclical",
+    "close": 221.31,
+    "mcap_cr": 2115.334144,
+    "persistence": 3
+  },
+  {
+    "symbol": "ISGEC",
+    "company": "ISGEC Heavy Engineering  Ltd",
+    "industry": "realty",
+    "close": 899.3,
+    "mcap_cr": 6762.51,
     "persistence": 3
   },
   {
     "symbol": "MANINFRA",
     "company": "Man Infraconstruction Limited",
     "industry": "Industrials",
-    "close": 126.86,
-    "mcap_cr": 4947.3662976,
-    "persistence": 3
-  },
-  {
-    "symbol": "PCBL",
-    "company": "PCBL Chemical Limited",
-    "industry": "Basic Materials",
-    "close": 331.1,
-    "mcap_cr": 12636.0510464,
-    "persistence": 3
-  },
-  {
-    "symbol": "SHRINGARMS",
-    "company": "Shringar House of Mangalsutra Ltd",
-    "industry": "consumer discretionary",
-    "close": 221.31,
-    "mcap_cr": 2134.14,
+    "close": 124.3,
+    "mcap_cr": 4908.3908096,
     "persistence": 3
   }
 ]
