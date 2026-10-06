@@ -1,1 +1,152 @@
-[]
+[
+  {
+    "symbol": "DPABHUSHAN",
+    "company": "D.P. Abhushan Ltd",
+    "industry": "Diamond Gems and Jewellery",
+    "close": 2174.0,
+    "return_1d": 2.04,
+    "mcap_cr": 4863.49,
+    "signal": "52W Breakout",
+    "scans_count": 28
+  },
+  {
+    "symbol": "CUPID",
+    "company": "Cupid Limited",
+    "industry": "Contraceptives and Protectives",
+    "close": 324.2,
+    "return_1d": 4.55,
+    "mcap_cr": 41697.93,
+    "signal": "52W Breakout",
+    "scans_count": 25
+  },
+  {
+    "symbol": "BHEL",
+    "company": "Bharat Heavy Electricals Limited",
+    "industry": "Capital Goods Engineering Heavy",
+    "close": 452.0,
+    "return_1d": 5.36,
+    "mcap_cr": 149380.52,
+    "signal": "52W Breakout",
+    "scans_count": 22
+  },
+  {
+    "symbol": "SHANTIGOLD",
+    "company": "Shanti Gold International Ltd",
+    "industry": "Diamond Gems and Jewellery",
+    "close": 336.65,
+    "return_1d": 6.33,
+    "mcap_cr": 2429.57,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "THELEELA",
+    "company": "Leela Palaces Hotels & Resorts Ltd",
+    "industry": "Hotels",
+    "close": 582.7,
+    "return_1d": 0.88,
+    "mcap_cr": 19289.41,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "AETHER",
+    "company": "Aether Industries Ltd",
+    "industry": "Specialty Chemicals",
+    "close": 1799.8,
+    "return_1d": 8.36,
+    "mcap_cr": 22043.56,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "KINGFA",
+    "company": "Kingfa Science & Technology (india) Limited",
+    "industry": "Plastics Plastic and Plastic Products",
+    "close": 6932.0,
+    "return_1d": 3.94,
+    "mcap_cr": 9037.42,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "LOTUSDEV",
+    "company": "Sri Lotus Developers & Realty Ltd",
+    "industry": "Construction Factories and Offices and Commercial",
+    "close": 244.73,
+    "return_1d": 2.88,
+    "mcap_cr": 11626.25,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "OCCLLTD",
+    "company": "OCCL Ltd",
+    "industry": "Chemicals Organic",
+    "close": 207.59,
+    "return_1d": 4.95,
+    "mcap_cr": 987.97,
+    "signal": "52W Breakout",
+    "scans_count": 20
+  },
+  {
+    "symbol": "LAURUSLABS",
+    "company": "Laurus Labs Limited",
+    "industry": "Pharma API",
+    "close": 2050.0,
+    "return_1d": 3.99,
+    "mcap_cr": 106504.8,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "KMEW",
+    "company": "Knowledge Marine & Engineering Works Ltd",
+    "industry": "Shipping",
+    "close": 3202.3,
+    "return_1d": 7.01,
+    "mcap_cr": 7314.9,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "HFCL",
+    "company": "HFCL Ltd",
+    "industry": "Telecommunications Equipment",
+    "close": 262.78,
+    "return_1d": 5.0,
+    "mcap_cr": 38306.39,
+    "signal": "52W Breakout",
+    "scans_count": 19
+  },
+  {
+    "symbol": "DYNAMATECH",
+    "company": "Dynamatic Technologies Limited",
+    "industry": "Aerospace and Defence Equipment",
+    "close": 14279.0,
+    "return_1d": 0.2,
+    "mcap_cr": 9678.49,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "TATVA",
+    "company": "Tatva Chintan Pharma Chem Ltd",
+    "industry": "Specialty Chemicals",
+    "close": 1877.4,
+    "return_1d": 4.36,
+    "mcap_cr": 4208.23,
+    "signal": "52W Breakout",
+    "scans_count": 18
+  },
+  {
+    "symbol": "UNIMECH",
+    "company": "Unimech Aerospace and Manufacturing Ltd",
+    "industry": "Engineering Heavy General",
+    "close": 1873.1,
+    "return_1d": 1.52,
+    "mcap_cr": 9383.6,
+    "signal": "52W Breakout",
+    "scans_count": 17
+  }
+]

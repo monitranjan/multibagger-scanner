@@ -1,106 +1,114 @@
 [
   {
-    "symbol": "GESHIP",
-    "company": "The Great Eastern Shipping Company Limited",
-    "industry": "transportation",
-    "close": 1559.3,
-    "mcap_cr": 21851.94,
-    "persistence": 10
-  },
-  {
     "symbol": "SUNDROP",
     "company": "Sundrop Brands Ltd",
-    "industry": "FMCG Foods",
-    "close": 748.6,
-    "mcap_cr": 2839.14,
+    "industry": "fmcg",
+    "close": 746.8,
+    "mcap_cr": 2821.99,
     "persistence": 10
-  },
-  {
-    "symbol": "SHIVALIK",
-    "company": "Shivalik Rasayan Limited",
-    "industry": "Basic Materials",
-    "close": 394.05,
-    "mcap_cr": 601.6946176,
-    "persistence": 9
   },
   {
     "symbol": "DELTACORP",
     "company": "Delta Corp Limited",
     "industry": "Miscellaneous",
-    "close": 85.43,
-    "mcap_cr": 1967.58,
-    "persistence": 8
+    "close": 84.34,
+    "mcap_cr": 2287.57,
+    "persistence": 9
+  },
+  {
+    "symbol": "SHIVALIK",
+    "company": "Shivalik Rasayan Ltd",
+    "industry": "chemicals",
+    "close": 386.25,
+    "mcap_cr": 601.69,
+    "persistence": 9
   },
   {
     "symbol": "TEXRAIL",
     "company": "Texmaco Rail & Engineering Limited",
     "industry": "Industrials",
-    "close": 126.86,
-    "mcap_cr": 4767.6391424,
+    "close": 117.18,
+    "mcap_cr": 4775.776256,
     "persistence": 8
   },
   {
     "symbol": "SATIA",
     "company": "Satia Industries Ltd",
     "industry": "building materials",
-    "close": 68.51,
-    "mcap_cr": 683.4,
-    "persistence": 6
-  },
-  {
-    "symbol": "DHARMAJ",
-    "company": "Dharmaj Crop Guard Limited",
-    "industry": "Basic Materials",
-    "close": 267.65,
-    "mcap_cr": 895.6283904,
-    "persistence": 5
-  },
-  {
-    "symbol": "BANDHANBNK",
-    "company": "Bandhan Bank Limited",
-    "industry": "Financial Services",
-    "close": 176.0,
-    "mcap_cr": 27110.7784704,
-    "persistence": 5
+    "close": 69.26,
+    "mcap_cr": 685.1,
+    "persistence": 7
   },
   {
     "symbol": "SUNTV",
     "company": "Sun Tv Network Limited",
     "industry": "media",
-    "close": 626.85,
-    "mcap_cr": 23641.14,
-    "persistence": 5
+    "close": 632.1,
+    "mcap_cr": 24703.19,
+    "persistence": 6
   },
   {
     "symbol": "ALICON",
     "company": "Alicon Castalloy Limited",
     "industry": "castings, forgings & fasteners",
-    "close": 848.95,
-    "mcap_cr": 1431.03,
-    "persistence": 4
-  },
-  {
-    "symbol": "SHRINGARMS",
-    "company": "Shringar House of Mangalsutra Limited",
-    "industry": "Consumer Cyclical",
-    "close": 221.31,
-    "mcap_cr": 2115.334144,
-    "persistence": 3
+    "close": 866.9,
+    "mcap_cr": 1393.28,
+    "persistence": 5
   },
   {
     "symbol": "ISGEC",
     "company": "ISGEC Heavy Engineering  Ltd",
     "industry": "realty",
-    "close": 899.3,
-    "mcap_cr": 6762.51,
+    "close": 905.0,
+    "mcap_cr": 6612.51,
+    "persistence": 4
+  },
+  {
+    "symbol": "SHRINGARMS",
+    "company": "Shringar House of Mangalsutra Ltd",
+    "industry": "consumer discretionary",
+    "close": 223.32,
+    "mcap_cr": 2115.33,
+    "persistence": 4
+  },
+  {
+    "symbol": "DHARMAJ",
+    "company": "Dharmaj Crop Guard Limited",
+    "industry": "Basic Materials",
+    "close": 265.0,
+    "mcap_cr": 900.8668672,
+    "persistence": 4
+  },
+  {
+    "symbol": "BANDHANBNK",
+    "company": "Bandhan Bank Limited",
+    "industry": "Financial Services",
+    "close": 168.27,
+    "mcap_cr": 26446.9839872,
+    "persistence": 4
+  },
+  {
+    "symbol": "SUDARSCHEM",
+    "company": "Sudarshan Chemical Industries Limited",
+    "industry": "chemicals",
+    "close": 1238.6,
+    "mcap_cr": 9664.9,
+    "persistence": 3
+  },
+  {
+    "symbol": "URBANCO",
+    "company": "Urban Company Ltd",
+    "industry": "i.t",
+    "close": 173.54,
+    "mcap_cr": 24611.66,
     "persistence": 3
   },
   {
     "symbol": "MANINFRA",
     "company": "Man Infraconstruction Limited",
     "industry": "Industrials",
-    "close": 124.3,
-    "mcap_cr": 4908.3908096,
+    "close": 123.78,
+    "mcap_cr": 4885.1288064,
     "persistence": 3
   }
 ]
