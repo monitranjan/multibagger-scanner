@@ -1,5 +1,5 @@
 # 📊 Monit High-Conviction Confluences & Emerging Leaders Report
-Generated on **06 Oct 2026** | Premium Quantitative Watchlist Analysis
+Generated on **07 Oct 2026** | Premium Quantitative Watchlist Analysis
 
 ## 🏆 1. High-Conviction Confluences (Common Count = 3)
 These stocks are at the absolute intersection of all three major momentum dimensions:
@@ -7,46 +7,46 @@ These stocks are at the absolute intersection of all three major momentum dimens
 2. **Active scanner signals** (fresh EMA Crossovers, 52W Breakouts, or ATH Momentum)
 3. **StockScans scan matches** (bullish volume/strength consensus across multiple other watchlists)
 
-Total triple-confluence candidates: **15**
+Total triple-confluence candidates: **18**
 
 | Symbol | Company Name | Industry | Close (₹) | 1D Ret (%) | Mcap (Cr) | Volume & Delivery (Live) | Active Signal | Scans Count | Deep Research Report |
 |---|---|---|---|---|---|---|---|---|---|
-| `DPABHUSHAN` | D.P. Abhushan Ltd | Diamond Gems and Jewellery | ₹2,174.00 | 2.04% | 4,863.5 | 31.7% (🔥 High Accumulation (₹36.54 Cr) | ₹36.54 Cr) | **52W Breakout** | **28** | 📝 **Sent on 22-Jul-2026** |
-| `CUPID` | Cupid Limited | Contraceptives and Protectives | ₹324.20 | 4.55% | 41,697.9 | 19.4% (⚖️ Neutral | ₹152.16 Cr) | **52W Breakout** | **25** | 📝 **Sent on 01-Jul-2026** |
-| `BHEL` | Bharat Heavy Electricals Limited | Capital Goods Engineering Heavy | ₹452.00 | 5.36% | 149,380.5 | 30.3% (⚖️ Neutral | ₹312.98 Cr) | **52W Breakout** | **22** | 📝 **Sent on 31-Aug-2026** |
-| `SHANTIGOLD` | Shanti Gold International Ltd | Diamond Gems and Jewellery | ₹336.65 | 6.33% | 2,429.6 | 24.6% (⚖️ Neutral | ₹37.67 Cr) | **52W Breakout** | **21** | 📝 **Sent on 21-Aug-2026** |
-| `THELEELA` | Leela Palaces Hotels & Resorts Ltd | Hotels | ₹582.70 | 0.88% | 19,289.4 | 65.7% (🔥 High Accumulation (₹19.69 Cr) | ₹19.69 Cr) | **52W Breakout** | **21** | 📝 **Sent on 19-Aug-2026** |
-| `AETHER` | Aether Industries Ltd | Specialty Chemicals | ₹1,799.80 | 8.36% | 22,043.6 | 28.5% (⚖️ Neutral | ₹74.72 Cr) | **52W Breakout** | **21** | 📝 **Sent on 06-Aug-2026** |
-| `KINGFA` | Kingfa Science & Technology (india) Limited | Plastics Plastic and Plastic Products | ₹6,932.00 | 3.94% | 9,037.4 | 41.8% (⚖️ Neutral | ₹7.12 Cr) | **52W Breakout** | **20** | _Pending separate pipeline run_ |
-| `LOTUSDEV` | Sri Lotus Developers & Realty Ltd | Construction Factories and Offices and Commercial | ₹244.73 | 2.88% | 11,626.2 | N/A | **52W Breakout** | **20** | 📝 **Sent on 07-Sep-2026** |
-| `OCCLLTD` | OCCL Ltd | Chemicals Organic | ₹207.59 | 4.95% | 988.0 | N/A | **52W Breakout** | **20** | 📝 **Sent on 10-Jun-2026** |
-| `LAURUSLABS` | Laurus Labs Limited | Pharma API | ₹2,050.00 | 3.99% | 106,504.8 | 57.8% (🔥 High Accumulation (₹260.51 Cr) | ₹260.51 Cr) | **52W Breakout** | **19** | 📝 **Sent on 26-Aug-2026** |
-| `KMEW` | Knowledge Marine & Engineering Works Ltd | Shipping | ₹3,202.30 | 7.01% | 7,314.9 | 37.3% (⚖️ Neutral | ₹32.10 Cr) | **52W Breakout** | **19** | 📝 **Sent on 03-Sep-2026** |
-| `HFCL` | HFCL Ltd | Telecommunications Equipment | ₹262.78 | 5.0% | 38,306.4 | 47.7% (🛡️ Strong Delivery (₹183.87 Cr) | ₹183.87 Cr) | **52W Breakout** | **19** | 📝 **Sent on 18-Aug-2026** |
-| `DYNAMATECH` | Dynamatic Technologies Limited | Aerospace and Defence Equipment | ₹14,279.00 | 0.2% | 9,678.5 | 42.2% (⚖️ Neutral | ₹15.52 Cr) | **52W Breakout** | **18** | 📝 **Sent on 12-Aug-2026** |
-| `TATVA` | Tatva Chintan Pharma Chem Ltd | Specialty Chemicals | ₹1,877.40 | 4.36% | 4,208.2 | 51.1% (🔥 High Accumulation (₹12.73 Cr) | ₹12.73 Cr) | **52W Breakout** | **18** | 📝 **Sent on 20-Jul-2026** |
-| `UNIMECH` | Unimech Aerospace and Manufacturing Ltd | Engineering Heavy General | ₹1,873.10 | 1.52% | 9,383.6 | 37.1% (⚖️ Neutral | ₹19.99 Cr) | **52W Breakout** | **17** | 📝 **Sent on 12-Jun-2026** |
+| `CUPID` | Cupid Limited | Contraceptives and Protectives | ₹343.95 | 6.09% | 43,593.9 | 26.6% (⚖️ Neutral | ₹378.36 Cr) | **52W Breakout** | **23** | 📝 **Sent on 01-Jul-2026** |
+| `GANDHAR` | Gandhar Oil Refinery (India) Ltd | Refineries | ₹299.20 | 5.91% | 2,765.1 | 45.0% (⚖️ Neutral | ₹26.60 Cr) | **52W Breakout** | **23** | 📝 **Sent on 23-Jul-2026** |
+| `TFCILTD` | Tourism Finance Corporation Of India Limited | Finance PSU Lending | ₹152.24 | 8.24% | 6,511.8 | 27.7% (⚖️ Neutral | ₹83.53 Cr) | **52W Breakout** | **22** | 📝 **Sent on 19-Aug-2026** |
+| `KINGFA` | Kingfa Science & Technology (india) Limited | Plastics Plastic and Plastic Products | ₹6,932.50 | 0.01% | 9,393.8 | 45.5% (🛡️ Strong Delivery (₹2.90 Cr) | ₹2.90 Cr) | **52W Breakout** | **21** | _Pending separate pipeline run_ |
+| `SUNFLAG` | Sunflag Iron And Steel Company Limited | Steel Products | ₹474.40 | 3.34% | 8,273.0 | 59.8% (🛡️ Strong Delivery (₹23.54 Cr) | ₹23.54 Cr) | **52W Breakout** | **21** | _Pending separate pipeline run_ |
+| `KMEW` | Knowledge Marine & Engineering Works Ltd | Shipping | ₹3,214.00 | 0.37% | 7,827.7 | 39.0% (⚖️ Neutral | ₹11.60 Cr) | **52W Breakout** | **20** | 📝 **Sent on 03-Sep-2026** |
+| `OCCLLTD` | OCCL Ltd | Chemicals Organic | ₹217.30 | 4.68% | 1,036.9 | N/A | **52W Breakout** | **20** | 📝 **Sent on 10-Jun-2026** |
+| `IBULLSLTD` | Indiabulls Limited | Diversified | ₹32.49 | 4.98% | 7,209.9 | 58.5% (🛡️ Strong Delivery (₹42.17 Cr) | ₹42.17 Cr) | **52W Breakout** | **20** | 📝 **Sent on 01-Jun-2026** |
+| `THELEELA` | Leela Palaces Hotels & Resorts Ltd | Hotels | ₹602.45 | 3.39% | 19,459.7 | 42.0% (⚖️ Neutral | ₹15.87 Cr) | **52W Breakout** | **20** | 📝 **Sent on 19-Aug-2026** |
+| `TATVA` | Tatva Chintan Pharma Chem Ltd | Specialty Chemicals | ₹1,991.20 | 6.06% | 4,391.6 | 35.3% (⚖️ Neutral | ₹19.59 Cr) | **52W Breakout** | **19** | 📝 **Sent on 20-Jul-2026** |
+| `EBGNG` | GNG Electronics Ltd | New age Platform E Retail | ₹731.35 | 6.74% | 7,811.5 | 41.5% (⚖️ Neutral | ₹34.31 Cr) | **52W Breakout** | **19** | 📝 **Sent on 13-Aug-2026** |
+| `LAURUSLABS` | Laurus Labs Limited | Pharma API | ₹2,052.80 | 0.14% | 110,751.2 | 44.5% (⚖️ Neutral | ₹137.11 Cr) | **52W Breakout** | **18** | 📝 **Sent on 26-Aug-2026** |
+| `FINCABLES` | Finolex Cables Limited | Cables Telecom | ₹1,483.50 | 0.64% | 22,543.3 | 37.1% (⚖️ Neutral | ₹22.53 Cr) | **52W Breakout** | **18** | _Pending separate pipeline run_ |
+| `PRECWIRE` | Precision Wires India Limited | Copper Wires | ₹516.60 | 0.28% | 9,417.4 | 41.5% (⚖️ Neutral | ₹9.77 Cr) | **52W Breakout** | **18** | 📝 **Sent on 13-Aug-2026** |
+| `JAMNAAUTO` | Jamna Auto Industries Limited | Auto Springs | ₹151.77 | 5.24% | 5,765.3 | 29.5% (⚖️ Neutral | ₹55.14 Cr) | **52W Breakout** | **18** | _Pending separate pipeline run_ |
+| `GLAND` | Gland Pharma Ltd | Pharma Formulations | ₹3,150.60 | 4.81% | 49,588.5 | 42.0% (⚖️ Neutral | ₹177.63 Cr) | **52W Breakout** | **17** | 📝 **Sent on 29-Jun-2026** |
+| `HFCL` | HFCL Ltd | Telecommunications Equipment | ₹271.90 | 3.47% | 40,221.2 | 47.7% (🛡️ Strong Delivery (₹183.87 Cr) | ₹183.87 Cr) | **52W Breakout** | **17** | 📝 **Sent on 18-Aug-2026** |
+| `AVADHSUGAR` | Avadh Sugar & Energy | fmcg | ₹937.55 | 7.36% | 1,748.2 | 24.2% (⚖️ Neutral | ₹12.91 Cr) | **52W Breakout** | **0** | _Pending separate pipeline run_ |
 
 ---
 
 ## 🚀 2. Emerging Multibagger Leaders (Fresh Momentum Expansion)
 These stocks show a fresh institutional footprint. They have minimal historical appearances (`<= 2` counts over the prior months) but have erupted recently (`>= 3` appearances in the last 10 days). This highlights **early stage-2 momentum expansion** before they double!
 
-Total emerging leaders: **14**
+Total emerging leaders: **11**
 
 | Rank | Symbol | Company Name | Industry | Close (₹) | Mcap (Cr) | Volume & Delivery (Live) | Persistence (Last 10D) |
 |---|---|---|---|---|---|---|---|
-| 1 | `SUNDROP` | Sundrop Brands Ltd | fmcg | ₹746.80 | 2,822.0 | 52.9% (🛡️ Strong Delivery (₹1.11 Cr) | ₹1.11 Cr) | **10/10 days** |
-| 2 | `DELTACORP` | Delta Corp Limited | Miscellaneous | ₹84.34 | 2,287.6 | 9.4% (⚖️ Neutral | ₹48.60 Cr) | **9/10 days** |
-| 3 | `SHIVALIK` | Shivalik Rasayan Ltd | chemicals | ₹386.25 | 601.7 | 43.9% (⚖️ Neutral | ₹1.33 Cr) | **9/10 days** |
-| 4 | `TEXRAIL` | Texmaco Rail & Engineering Limited | Industrials | ₹117.18 | 4,775.8 | 38.0% (⚖️ Neutral | ₹9.19 Cr) | **8/10 days** |
-| 5 | `SATIA` | Satia Industries Ltd | building materials | ₹69.26 | 685.1 | 62.7% (🛡️ Strong Delivery (₹0.35 Cr) | ₹0.35 Cr) | **7/10 days** |
-| 6 | `SUNTV` | Sun Tv Network Limited | media | ₹632.10 | 24,703.2 | 21.9% (⚖️ Neutral | ₹19.96 Cr) | **6/10 days** |
-| 7 | `ALICON` | Alicon Castalloy Limited | castings, forgings & fasteners | ₹866.90 | 1,393.3 | 37.2% (⚖️ Neutral | ₹1.92 Cr) | **5/10 days** |
-| 8 | `ISGEC` | ISGEC Heavy Engineering  Ltd | realty | ₹905.00 | 6,612.5 | 41.8% (⚖️ Neutral | ₹1.99 Cr) | **4/10 days** |
-| 9 | `SHRINGARMS` | Shringar House of Mangalsutra Ltd | consumer discretionary | ₹223.32 | 2,115.3 | 35.9% (⚖️ Neutral | ₹9.19 Cr) | **4/10 days** |
-| 10 | `DHARMAJ` | Dharmaj Crop Guard Limited | Basic Materials | ₹265.00 | 900.9 | 72.6% (🛡️ Strong Delivery (₹1.04 Cr) | ₹1.04 Cr) | **4/10 days** |
-| 11 | `BANDHANBNK` | Bandhan Bank Limited | Financial Services | ₹168.27 | 26,447.0 | 44.1% (🛡️ Strong Delivery (₹88.03 Cr) | ₹88.03 Cr) | **4/10 days** |
-| 12 | `SUDARSCHEM` | Sudarshan Chemical Industries Limited | chemicals | ₹1,238.60 | 9,664.9 | 46.8% (🛡️ Strong Delivery (₹5.07 Cr) | ₹5.07 Cr) | **3/10 days** |
-| 13 | `URBANCO` | Urban Company Ltd | i.t | ₹173.54 | 24,611.7 | 16.8% (⚠️ Speculative Churn | ₹70.01 Cr) | **3/10 days** |
-| 14 | `MANINFRA` | Man Infraconstruction Limited | Industrials | ₹123.78 | 4,885.1 | 39.7% (🛡️ Strong Delivery (₹5.62 Cr) | ₹5.62 Cr) | **3/10 days** |
+| 1 | `DELTACORP` | Delta Corp Limited | Miscellaneous | ₹82.37 | 2,258.4 | 17.1% (⚖️ Neutral | ₹19.04 Cr) | **10/10 days** |
+| 2 | `SATIA` | Satia Industries Ltd | building materials | ₹69.00 | 692.6 | 56.0% (🛡️ Strong Delivery (₹0.38 Cr) | ₹0.38 Cr) | **8/10 days** |
+| 3 | `TEXRAIL` | Texmaco Rail & Engineering Limited | Industrials | ₹117.38 | 4,668.4 | 43.0% (⚖️ Neutral | ₹9.91 Cr) | **7/10 days** |
+| 4 | `SUNTV` | Sun Tv Network Limited | Entertainment and Media | ₹636.50 | 24,910.1 | 21.1% (⚖️ Neutral | ₹15.50 Cr) | **7/10 days** |
+| 5 | `ALICON` | Alicon Castalloy Limited | Castings Forgings and Fasteners | ₹901.40 | 1,422.7 | 43.5% (🛡️ Strong Delivery (₹5.15 Cr) | ₹5.15 Cr) | **6/10 days** |
+| 6 | `ISGEC` | ISGEC Heavy Engineering  Ltd | realty | ₹901.75 | 6,654.4 | 62.3% (🛡️ Strong Delivery (₹4.13 Cr) | ₹4.13 Cr) | **5/10 days** |
+| 7 | `SHRINGARMS` | Shringar House of Mangalsutra Limited | Consumer Cyclical | ₹223.32 | 2,131.4 | 26.6% (⚖️ Neutral | ₹2.21 Cr) | **4/10 days** |
+| 8 | `PATELRMART` | Patel Retail Ltd | consumer discretionary | ₹227.86 | 758.2 | 41.0% (⚖️ Neutral | ₹2.19 Cr) | **3/10 days** |
+| 9 | `SUDARSCHEM` | Sudarshan Chemical Industries Limited | Basic Materials | ₹1,238.60 | 9,765.8 | 38.6% (⚖️ Neutral | ₹30.20 Cr) | **3/10 days** |
+| 10 | `AMANTA` | Amanta Healthcare Ltd | healthcare | ₹207.08 | 767.6 | N/A | **3/10 days** |
+| 11 | `MANINFRA` | Man Infraconstruction Limited | Industrials | ₹123.24 | 4,853.5 | 48.3% (🛡️ Strong Delivery (₹4.52 Cr) | ₹4.52 Cr) | **3/10 days** |

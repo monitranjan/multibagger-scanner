@@ -1,114 +1,90 @@
 [
   {
-    "symbol": "SUNDROP",
-    "company": "Sundrop Brands Ltd",
-    "industry": "fmcg",
-    "close": 746.8,
-    "mcap_cr": 2821.99,
-    "persistence": 10
-  },
-  {
     "symbol": "DELTACORP",
     "company": "Delta Corp Limited",
     "industry": "Miscellaneous",
-    "close": 84.34,
-    "mcap_cr": 2287.57,
-    "persistence": 9
-  },
-  {
-    "symbol": "SHIVALIK",
-    "company": "Shivalik Rasayan Ltd",
-    "industry": "chemicals",
-    "close": 386.25,
-    "mcap_cr": 601.69,
-    "persistence": 9
-  },
-  {
-    "symbol": "TEXRAIL",
-    "company": "Texmaco Rail & Engineering Limited",
-    "industry": "Industrials",
-    "close": 117.18,
-    "mcap_cr": 4775.776256,
-    "persistence": 8
+    "close": 82.37,
+    "mcap_cr": 2258.38,
+    "persistence": 10
   },
   {
     "symbol": "SATIA",
     "company": "Satia Industries Ltd",
     "industry": "building materials",
-    "close": 69.26,
-    "mcap_cr": 685.1,
+    "close": 69.0,
+    "mcap_cr": 692.6,
+    "persistence": 8
+  },
+  {
+    "symbol": "TEXRAIL",
+    "company": "Texmaco Rail & Engineering Limited",
+    "industry": "Industrials",
+    "close": 117.38,
+    "mcap_cr": 4668.3639808,
     "persistence": 7
   },
   {
     "symbol": "SUNTV",
     "company": "Sun Tv Network Limited",
-    "industry": "media",
-    "close": 632.1,
-    "mcap_cr": 24703.19,
-    "persistence": 6
+    "industry": "Entertainment and Media",
+    "close": 636.5,
+    "mcap_cr": 24910.09,
+    "persistence": 7
   },
   {
     "symbol": "ALICON",
     "company": "Alicon Castalloy Limited",
-    "industry": "castings, forgings & fasteners",
-    "close": 866.9,
-    "mcap_cr": 1393.28,
-    "persistence": 5
+    "industry": "Castings Forgings and Fasteners",
+    "close": 901.4,
+    "mcap_cr": 1422.74,
+    "persistence": 6
   },
   {
     "symbol": "ISGEC",
     "company": "ISGEC Heavy Engineering  Ltd",
     "industry": "realty",
-    "close": 905.0,
-    "mcap_cr": 6612.51,
-    "persistence": 4
+    "close": 901.75,
+    "mcap_cr": 6654.42,
+    "persistence": 5
   },
   {
     "symbol": "SHRINGARMS",
-    "company": "Shringar House of Mangalsutra Ltd",
-    "industry": "consumer discretionary",
+    "company": "Shringar House of Mangalsutra Limited",
+    "industry": "Consumer Cyclical",
     "close": 223.32,
-    "mcap_cr": 2115.33,
+    "mcap_cr": 2131.4381824,
     "persistence": 4
   },
   {
-    "symbol": "DHARMAJ",
-    "company": "Dharmaj Crop Guard Limited",
-    "industry": "Basic Materials",
-    "close": 265.0,
-    "mcap_cr": 900.8668672,
-    "persistence": 4
-  },
-  {
-    "symbol": "BANDHANBNK",
-    "company": "Bandhan Bank Limited",
-    "industry": "Financial Services",
-    "close": 168.27,
-    "mcap_cr": 26446.9839872,
-    "persistence": 4
+    "symbol": "PATELRMART",
+    "company": "Patel Retail Ltd",
+    "industry": "consumer discretionary",
+    "close": 227.86,
+    "mcap_cr": 758.23,
+    "persistence": 3
   },
   {
     "symbol": "SUDARSCHEM",
     "company": "Sudarshan Chemical Industries Limited",
-    "industry": "chemicals",
+    "industry": "Basic Materials",
     "close": 1238.6,
-    "mcap_cr": 9664.9,
+    "mcap_cr": 9765.8036224,
     "persistence": 3
   },
   {
-    "symbol": "URBANCO",
-    "company": "Urban Company Ltd",
-    "industry": "i.t",
-    "close": 173.54,
-    "mcap_cr": 24611.66,
+    "symbol": "AMANTA",
+    "company": "Amanta Healthcare Ltd",
+    "industry": "healthcare",
+    "close": 207.08,
+    "mcap_cr": 767.58,
     "persistence": 3
   },
   {
     "symbol": "MANINFRA",
     "company": "Man Infraconstruction Limited",
     "industry": "Industrials",
-    "close": 123.78,
-    "mcap_cr": 4885.1288064,
+    "close": 123.24,
+    "mcap_cr": 4853.5257088,
     "persistence": 3
   }
 ]
