@@ -1,31 +1,41 @@
 [
   {
+    "symbol": "SKYGOLD",
+    "company": "Sky Gold Ltd",
+    "industry": "Diamond Gems and Jewellery",
+    "close": 884.5,
+    "return_1d": 0.86,
+    "mcap_cr": 13581.67,
+    "signal": "52W Breakout",
+    "scans_count": 29
+  },
+  {
+    "symbol": "DPABHUSHAN",
+    "company": "D.P. Abhushan Ltd",
+    "industry": "Diamond Gems and Jewellery",
+    "close": 2258.9,
+    "return_1d": -0.17,
+    "mcap_cr": 5165.27,
+    "signal": "ATH Momentum",
+    "scans_count": 29
+  },
+  {
+    "symbol": "ONEPOINT",
+    "company": "One Point One Solutions Ltd",
+    "industry": "IT Enabled Services",
+    "close": 78.45,
+    "return_1d": -0.41,
+    "mcap_cr": 2071.15,
+    "signal": "ATH Momentum",
+    "scans_count": 22
+  },
+  {
     "symbol": "CUPID",
     "company": "Cupid Limited",
     "industry": "Contraceptives and Protectives",
-    "close": 343.95,
-    "return_1d": 6.09,
-    "mcap_cr": 43593.9,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "GANDHAR",
-    "company": "Gandhar Oil Refinery (India) Ltd",
-    "industry": "Refineries",
-    "close": 299.2,
-    "return_1d": 5.91,
-    "mcap_cr": 2765.1,
-    "signal": "52W Breakout",
-    "scans_count": 23
-  },
-  {
-    "symbol": "TFCILTD",
-    "company": "Tourism Finance Corporation Of India Limited",
-    "industry": "Finance PSU Lending",
-    "close": 152.24,
-    "return_1d": 8.24,
-    "mcap_cr": 6511.77,
+    "close": 356.65,
+    "return_1d": 3.69,
+    "mcap_cr": 46249.6,
     "signal": "52W Breakout",
     "scans_count": 22
   },
@@ -33,150 +43,110 @@
     "symbol": "KINGFA",
     "company": "Kingfa Science & Technology (india) Limited",
     "industry": "Plastics Plastic and Plastic Products",
-    "close": 6932.5,
-    "return_1d": 0.01,
-    "mcap_cr": 9393.82,
-    "signal": "52W Breakout",
-    "scans_count": 21
+    "close": 6804.0,
+    "return_1d": -1.85,
+    "mcap_cr": 9394.49,
+    "signal": "ATH Momentum",
+    "scans_count": 22
   },
   {
-    "symbol": "SUNFLAG",
-    "company": "Sunflag Iron And Steel Company Limited",
-    "industry": "Steel Products",
-    "close": 474.4,
-    "return_1d": 3.34,
-    "mcap_cr": 8272.97,
+    "symbol": "SBC",
+    "company": "SBC Exports Ltd",
+    "industry": "Textiles Readymade Apparel",
+    "close": 63.21,
+    "return_1d": 2.33,
+    "mcap_cr": 2941.43,
     "signal": "52W Breakout",
-    "scans_count": 21
-  },
-  {
-    "symbol": "KMEW",
-    "company": "Knowledge Marine & Engineering Works Ltd",
-    "industry": "Shipping",
-    "close": 3214.0,
-    "return_1d": 0.37,
-    "mcap_cr": 7827.74,
-    "signal": "52W Breakout",
-    "scans_count": 20
-  },
-  {
-    "symbol": "OCCLLTD",
-    "company": "OCCL Ltd",
-    "industry": "Chemicals Organic",
-    "close": 217.3,
-    "return_1d": 4.68,
-    "mcap_cr": 1036.92,
-    "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 22
   },
   {
     "symbol": "IBULLSLTD",
     "company": "Indiabulls Limited",
     "industry": "Diversified",
-    "close": 32.49,
-    "return_1d": 4.98,
-    "mcap_cr": 7209.94,
+    "close": 34.88,
+    "return_1d": 7.36,
+    "mcap_cr": 7568.69,
     "signal": "52W Breakout",
-    "scans_count": 20
+    "scans_count": 22
   },
   {
     "symbol": "THELEELA",
     "company": "Leela Palaces Hotels & Resorts Ltd",
     "industry": "Hotels",
-    "close": 602.45,
-    "return_1d": 3.39,
-    "mcap_cr": 19459.73,
-    "signal": "52W Breakout",
-    "scans_count": 20
+    "close": 586.95,
+    "return_1d": -2.57,
+    "mcap_cr": 20119.29,
+    "signal": "ATH Momentum",
+    "scans_count": 21
   },
   {
-    "symbol": "TATVA",
-    "company": "Tatva Chintan Pharma Chem Ltd",
+    "symbol": "SHANTIGOLD",
+    "company": "Shanti Gold International Ltd",
+    "industry": "Diamond Gems and Jewellery",
+    "close": 350.65,
+    "return_1d": 2.81,
+    "mcap_cr": 2617.2,
+    "signal": "52W Breakout",
+    "scans_count": 21
+  },
+  {
+    "symbol": "GANDHAR",
+    "company": "Gandhar Oil Refinery (India) Ltd",
+    "industry": "Refineries",
+    "close": 296.45,
+    "return_1d": -0.92,
+    "mcap_cr": 2928.56,
+    "signal": "ATH Momentum",
+    "scans_count": 21
+  },
+  {
+    "symbol": "AETHER",
+    "company": "Aether Industries Ltd",
     "industry": "Specialty Chemicals",
-    "close": 1991.2,
-    "return_1d": 6.06,
-    "mcap_cr": 4391.62,
+    "close": 1744.1,
+    "return_1d": -2.43,
+    "mcap_cr": 23723.7,
+    "signal": "ATH Momentum",
+    "scans_count": 19
+  },
+  {
+    "symbol": "KMEW",
+    "company": "Knowledge Marine & Engineering Works Ltd",
+    "industry": "Shipping",
+    "close": 3256.7,
+    "return_1d": 1.33,
+    "mcap_cr": 7856.34,
     "signal": "52W Breakout",
     "scans_count": 19
   },
   {
-    "symbol": "EBGNG",
-    "company": "GNG Electronics Ltd",
-    "industry": "New age Platform E Retail",
-    "close": 731.35,
-    "return_1d": 6.74,
-    "mcap_cr": 7811.5,
-    "signal": "52W Breakout",
-    "scans_count": 19
-  },
-  {
-    "symbol": "LAURUSLABS",
-    "company": "Laurus Labs Limited",
-    "industry": "Pharma API",
-    "close": 2052.8,
-    "return_1d": 0.14,
-    "mcap_cr": 110751.16,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "FINCABLES",
-    "company": "Finolex Cables Limited",
+    "symbol": "STLTECH",
+    "company": "Sterlite Technologies Limited",
     "industry": "Cables Telecom",
-    "close": 1483.5,
-    "return_1d": 0.64,
-    "mcap_cr": 22543.26,
-    "signal": "52W Breakout",
-    "scans_count": 18
-  },
-  {
-    "symbol": "PRECWIRE",
-    "company": "Precision Wires India Limited",
-    "industry": "Copper Wires",
-    "close": 516.6,
-    "return_1d": 0.28,
-    "mcap_cr": 9417.35,
-    "signal": "52W Breakout",
-    "scans_count": 18
+    "close": 1011.55,
+    "return_1d": -0.52,
+    "mcap_cr": 52252.96,
+    "signal": "ATH Momentum",
+    "scans_count": 19
   },
   {
     "symbol": "JAMNAAUTO",
     "company": "Jamna Auto Industries Limited",
     "industry": "Auto Springs",
-    "close": 151.77,
-    "return_1d": 5.24,
-    "mcap_cr": 5765.32,
-    "signal": "52W Breakout",
+    "close": 147.95,
+    "return_1d": -2.52,
+    "mcap_cr": 6067.56,
+    "signal": "ATH Momentum",
     "scans_count": 18
   },
   {
-    "symbol": "GLAND",
-    "company": "Gland Pharma Ltd",
-    "industry": "Pharma Formulations",
-    "close": 3150.6,
-    "return_1d": 4.81,
-    "mcap_cr": 49588.53,
+    "symbol": "GCSL",
+    "company": "Gretex Corporate Services Ltd",
+    "industry": "Finance and Investments Others",
+    "close": 697.75,
+    "return_1d": 1.17,
+    "mcap_cr": 1724.62,
     "signal": "52W Breakout",
-    "scans_count": 17
-  },
-  {
-    "symbol": "HFCL",
-    "company": "HFCL Ltd",
-    "industry": "Telecommunications Equipment",
-    "close": 271.9,
-    "return_1d": 3.47,
-    "mcap_cr": 40221.17,
-    "signal": "52W Breakout",
-    "scans_count": 17
-  },
-  {
-    "symbol": "AVADHSUGAR",
-    "company": "Avadh Sugar & Energy",
-    "industry": "fmcg",
-    "close": 937.55,
-    "return_1d": 7.36,
-    "mcap_cr": 1748.21,
-    "signal": "52W Breakout",
-    "scans_count": 0
+    "scans_count": 15
   }
 ]
