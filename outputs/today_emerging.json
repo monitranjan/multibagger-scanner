@@ -1,17 +1,9 @@
 [
   {
-    "symbol": "SATIA",
-    "company": "Satia Industries Ltd",
-    "industry": "building materials",
-    "close": 69.47,
-    "mcap_cr": 694.7,
-    "persistence": 10
-  },
-  {
     "symbol": "SUNTV",
     "company": "Sun Tv Network Limited",
-    "industry": "media",
-    "close": 628.8,
+    "industry": "Entertainment and Media",
+    "close": 636.05,
     "mcap_cr": 24780.04,
     "persistence": 10
   },
@@ -19,120 +11,144 @@
     "symbol": "ALICON",
     "company": "Alicon Castalloy Limited",
     "industry": "castings, forgings & fasteners",
-    "close": 862.25,
+    "close": 865.8,
     "mcap_cr": 1415.11,
-    "persistence": 9
+    "persistence": 10
   },
   {
     "symbol": "ISGEC",
     "company": "ISGEC Heavy Engineering  Ltd",
     "industry": "realty",
-    "close": 905.55,
+    "close": 912.45,
     "mcap_cr": 6658.46,
-    "persistence": 8
+    "persistence": 9
+  },
+  {
+    "symbol": "SATIA",
+    "company": "Satia Industries Limited",
+    "industry": "Basic Materials",
+    "close": 69.47,
+    "mcap_cr": 679.7000192,
+    "persistence": 9
   },
   {
     "symbol": "ADFFOODS",
-    "company": "Adf Foods Limited",
-    "industry": "fmcg",
+    "company": "ADF Foods Limited",
+    "industry": "Consumer Defensive",
     "close": 288.4,
-    "mcap_cr": 3168.47,
+    "mcap_cr": 3088.8148992,
     "persistence": 8
   },
   {
     "symbol": "PATELRMART",
     "company": "Patel Retail Ltd",
     "industry": "consumer discretionary",
-    "close": 245.46,
+    "close": 240.3,
     "mcap_cr": 819.85,
+    "persistence": 7
+  },
+  {
+    "symbol": "MOBIKWIK",
+    "company": "One Mobikwik Systems Ltd",
+    "industry": "i.t",
+    "close": 244.47,
+    "mcap_cr": 1895.91,
     "persistence": 6
   },
   {
     "symbol": "PARAGMILK",
     "company": "Parag Milk Foods Limited",
     "industry": "fmcg",
-    "close": 305.85,
+    "close": 301.8,
     "mcap_cr": 3841.77,
-    "persistence": 5
+    "persistence": 6
   },
   {
-    "symbol": "MOBIKWIK",
-    "company": "One Mobikwik Systems Ltd",
-    "industry": "i.t",
-    "close": 240.76,
-    "mcap_cr": 1895.91,
-    "persistence": 5
+    "symbol": "GPTINFRA",
+    "company": "Gpt Infraprojects Limited",
+    "industry": "realty",
+    "close": 121.99,
+    "mcap_cr": 1522.31,
+    "persistence": 6
   },
   {
     "symbol": "SHRINGARMS",
     "company": "Shringar House of Mangalsutra Ltd",
     "industry": "Diamond Gems and Jewellery",
-    "close": 265.35,
+    "close": 310.85,
     "mcap_cr": 2558.83,
-    "persistence": 5
-  },
-  {
-    "symbol": "GPTINFRA",
-    "company": "GPT Infraprojects Limited",
-    "industry": "Industrials",
-    "close": 121.88,
-    "mcap_cr": 1522.3143424,
-    "persistence": 5
+    "persistence": 6
   },
   {
     "symbol": "MAYURUNIQ",
     "company": "Mayur Uniquoters Ltd",
     "industry": "consumer discretionary",
-    "close": 806.1,
+    "close": 783.95,
     "mcap_cr": 3502.71,
-    "persistence": 4
-  },
-  {
-    "symbol": "NELCAST",
-    "company": "Nelcast Limited",
-    "industry": "castings, forgings & fasteners",
-    "close": 139.11,
-    "mcap_cr": 1210.27,
-    "persistence": 4
+    "persistence": 5
   },
   {
     "symbol": "ATLANTAELE",
     "company": "Atlanta Electricals Ltd",
-    "industry": "Capital Goods Transformers",
-    "close": 1846.0,
+    "industry": "industrials",
+    "close": 1852.0,
     "mcap_cr": 14195.12,
+    "persistence": 5
+  },
+  {
+    "symbol": "NELCAST",
+    "company": "Nelcast Limited",
+    "industry": "Industrials",
+    "close": 139.11,
+    "mcap_cr": 1195.8490112,
     "persistence": 4
   },
   {
-    "symbol": "AMANTA",
-    "company": "Amanta Healthcare Limited",
-    "industry": "Healthcare",
-    "close": 187.42,
-    "mcap_cr": 707.5484672,
+    "symbol": "ARIHANTCAP",
+    "company": "Arihant Capital Markets Ltd",
+    "industry": "financials",
+    "close": 96.31,
+    "mcap_cr": 1059.19,
     "persistence": 4
   },
   {
     "symbol": "BBOX",
     "company": "Black Box Ltd",
     "industry": "i.t",
-    "close": 924.6,
+    "close": 921.85,
     "mcap_cr": 16420.82,
+    "persistence": 4
+  },
+  {
+    "symbol": "AMANTA",
+    "company": "Amanta Healthcare Limited",
+    "industry": "Healthcare",
+    "close": 182.22,
+    "mcap_cr": 681.455104,
+    "persistence": 4
+  },
+  {
+    "symbol": "BLKASHYAP",
+    "company": "B. L. Kashyap And Sons Limited",
+    "industry": "Construction Civil and Turnkey",
+    "close": 61.34,
+    "mcap_cr": 1285.46,
+    "persistence": 3
+  },
+  {
+    "symbol": "WESTLIFE",
+    "company": "Westlife Foodworld Ltd",
+    "industry": "consumer discretionary",
+    "close": 595.35,
+    "mcap_cr": 9151.89,
     "persistence": 3
   },
   {
     "symbol": "SUDARSCHEM",
     "company": "Sudarshan Chemical Industries Limited",
     "industry": "Basic Materials",
-    "close": 1166.8,
-    "mcap_cr": 9163.104256,
-    "persistence": 3
-  },
-  {
-    "symbol": "ARIHANTCAP",
-    "company": "Arihant Capital Markets Ltd",
-    "industry": "financials",
-    "close": 96.63,
-    "mcap_cr": 1059.19,
+    "close": 1150.9,
+    "mcap_cr": 9142.4038912,
     "persistence": 3
   }
 ]
