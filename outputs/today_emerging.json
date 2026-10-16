@@ -1,154 +1,162 @@
 [
   {
-    "symbol": "ALICON",
-    "company": "Alicon Castalloy Limited",
-    "industry": "castings, forgings & fasteners",
-    "close": 863.8,
-    "mcap_cr": 1415.19,
-    "persistence": 10
-  },
-  {
     "symbol": "ISGEC",
     "company": "ISGEC Heavy Engineering  Ltd",
     "industry": "realty",
-    "close": 918.05,
-    "mcap_cr": 6818.76,
+    "close": 899.75,
+    "mcap_cr": 6750.38,
     "persistence": 10
   },
   {
     "symbol": "PATELRMART",
     "company": "Patel Retail Ltd",
     "industry": "consumer discretionary",
-    "close": 236.58,
-    "mcap_cr": 806.99,
-    "persistence": 9
+    "close": 236.45,
+    "mcap_cr": 790.19,
+    "persistence": 10
   },
   {
     "symbol": "GPTINFRA",
     "company": "Gpt Infraprojects Limited",
     "industry": "realty",
-    "close": 124.76,
-    "mcap_cr": 1581.2,
+    "close": 125.6,
+    "mcap_cr": 1576.52,
+    "persistence": 9
+  },
+  {
+    "symbol": "MAYURUNIQ",
+    "company": "Mayur Uniquoters Ltd",
+    "industry": "consumer discretionary",
+    "close": 794.2,
+    "mcap_cr": 3435.58,
     "persistence": 8
   },
   {
-    "symbol": "ADFFOODS",
-    "company": "ADF Foods Limited",
-    "industry": "Consumer Defensive",
-    "close": 283.2,
-    "mcap_cr": 3027.8406144,
-    "persistence": 8
+    "symbol": "ARIHANTCAP",
+    "company": "Arihant Capital Markets Ltd",
+    "industry": "financials",
+    "close": 97.31,
+    "mcap_cr": 1088.56,
+    "persistence": 7
   },
   {
     "symbol": "PARAGMILK",
     "company": "Parag Milk Foods Limited",
     "industry": "Consumer Defensive",
-    "close": 305.5,
-    "mcap_cr": 3699.1504384,
-    "persistence": 7
-  },
-  {
-    "symbol": "MAYURUNIQ",
-    "company": "Mayur Uniquoters Ltd",
-    "industry": "Plastics Plastic and Plastic Products",
-    "close": 790.65,
-    "mcap_cr": 3493.15,
+    "close": 295.9,
+    "mcap_cr": 3454.124032,
     "persistence": 7
   },
   {
     "symbol": "MOBIKWIK",
     "company": "One MobiKwik Systems Limited",
     "industry": "Technology",
-    "close": 242.23,
-    "mcap_cr": 1822.833664,
+    "close": 231.48,
+    "mcap_cr": 1800.1547264,
     "persistence": 7
   },
   {
-    "symbol": "ARIHANTCAP",
-    "company": "Arihant Capital Markets Ltd",
-    "industry": "financials",
-    "close": 99.31,
-    "mcap_cr": 1080.89,
+    "symbol": "BLKASHYAP",
+    "company": "B. L. Kashyap And Sons Limited",
+    "industry": "realty",
+    "close": 58.54,
+    "mcap_cr": 1325.14,
     "persistence": 6
   },
   {
-    "symbol": "SHRINGARMS",
-    "company": "Shringar House of Mangalsutra Ltd",
-    "industry": "Diamond Gems and Jewellery",
-    "close": 297.42,
-    "mcap_cr": 3064.03,
+    "symbol": "BBOX",
+    "company": "Black Box Ltd",
+    "industry": "i.t",
+    "close": 907.25,
+    "mcap_cr": 15632.28,
     "persistence": 6
   },
   {
     "symbol": "ATLANTAELE",
     "company": "Atlanta Electricals Limited",
     "industry": "Industrials",
-    "close": 1802.2,
-    "mcap_cr": 13159.3199616,
+    "close": 1711.3,
+    "mcap_cr": 13035.5150848,
     "persistence": 5
   },
   {
-    "symbol": "BLKASHYAP",
-    "company": "B. L. Kashyap And Sons Limited",
-    "industry": "realty",
-    "close": 58.78,
-    "mcap_cr": 1352.19,
+    "symbol": "BMWVENTLTD",
+    "company": "BMW Ventures Ltd",
+    "industry": "services",
+    "close": 71.38,
+    "mcap_cr": 618.02,
     "persistence": 5
   },
   {
-    "symbol": "BBOX",
-    "company": "Black Box Limited",
-    "industry": "Technology",
-    "close": 935.8,
-    "mcap_cr": 15632.2824192,
-    "persistence": 5
+    "symbol": "AXISBANK",
+    "company": "Axis Bank Limited",
+    "industry": "bank",
+    "close": 1290.0,
+    "mcap_cr": 401043.24,
+    "persistence": 4
+  },
+  {
+    "symbol": "RAJRILTD",
+    "company": "Raj Rayon Industries Ltd",
+    "industry": "textiles",
+    "close": 22.51,
+    "mcap_cr": 1276.77,
+    "persistence": 4
   },
   {
     "symbol": "AMANTA",
     "company": "Amanta Healthcare Limited",
     "industry": "Healthcare",
-    "close": 184.27,
-    "mcap_cr": 732.0497664,
-    "persistence": 4
-  },
-  {
-    "symbol": "WESTLIFE",
-    "company": "Westlife Foodworld Limited",
-    "industry": "Consumer Cyclical",
-    "close": 589.45,
-    "mcap_cr": 8903.1753728,
+    "close": 188.53,
+    "mcap_cr": 712.1691648,
     "persistence": 4
   },
   {
     "symbol": "NELCAST",
     "company": "Nelcast Limited",
     "industry": "Industrials",
-    "close": 134.22,
-    "mcap_cr": 1135.2144896,
+    "close": 130.12,
+    "mcap_cr": 1185.3796352,
     "persistence": 4
   },
   {
-    "symbol": "BMWVENTLTD",
-    "company": "BMW Ventures Ltd",
-    "industry": "services",
-    "close": 71.27,
-    "mcap_cr": 567.81,
+    "symbol": "WESTLIFE",
+    "company": "Westlife Foodworld Limited",
+    "industry": "Consumer Cyclical",
+    "close": 573.6,
+    "mcap_cr": 8989.3208064,
     "persistence": 4
   },
   {
-    "symbol": "AXISBANK",
-    "company": "Axis Bank Limited",
-    "industry": "bank",
-    "close": 1288.0,
-    "mcap_cr": 393757.2,
+    "symbol": "ADVANCE",
+    "company": "Advance Agrolife Ltd",
+    "industry": "chemicals",
+    "close": 158.08,
+    "mcap_cr": 1018.48,
     "persistence": 3
   },
   {
-    "symbol": "RAJRILTD",
-    "company": "Raj Rayon Industries Ltd",
-    "industry": "textiles",
-    "close": 22.96,
-    "mcap_cr": 1251.74,
+    "symbol": "SGMART",
+    "company": "SG Mart Ltd",
+    "industry": "services",
+    "close": 798.2,
+    "mcap_cr": 9519.88,
+    "persistence": 3
+  },
+  {
+    "symbol": "HINDCOMPOS",
+    "company": "Hindustan Composites Limited",
+    "industry": "miscellaneous",
+    "close": 443.25,
+    "mcap_cr": 706.25,
+    "persistence": 3
+  },
+  {
+    "symbol": "SEJALLTD",
+    "company": "Sejal Glass Ltd",
+    "industry": "building materials",
+    "close": 870.35,
+    "mcap_cr": 1101.41,
     "persistence": 3
   }
 ]
